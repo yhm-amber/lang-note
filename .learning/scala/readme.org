@@ -1,6 +1,6 @@
 - [[https://scastie.scala-lang.org/][Scastie - scala-lang.org]]
   
-  [[https://github.com/scalacenter/scastie.git][gh scalacenter/scastie]]
+  ([[https://github.com/scalacenter/scastie.git][gh scalacenter/scastie]])
   
 - [[https://scalafiddle.io/][scalafiddle.io]]
 
