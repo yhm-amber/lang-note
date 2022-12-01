@@ -1,3 +1,6 @@
 - [[https://ide.wy-lang.org/][文言 Wenyan Online IDE]]
 
-- [[https://wy-lang.org/][wy-lang.org website]]
+----
+
+- [[https://wy-lang.org/][网站]]
+- [[https://github.com/wenyan-lang][码仓]]
