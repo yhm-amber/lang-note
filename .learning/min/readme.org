@@ -1,0 +1,28 @@
+
+...
+
+----
+
+#+BEGIN_QUOTE
+
+/min/ is a functional, concatenative programming language with a minimalist syntax, a small but practical standard library, and an advanced REPL. All packed in a single file.
+
+*** Features
+
+- Entirely written in [[https://nim-lang.org/][Nim]]. It can be easily embedded in other Nim programs.
+- Follows the *functional* and *concatenative* programming paradigms.
+- Provides a wide range of *combinators* for advanced stack manipulation and dequoting.
+- Provides a *minimal set of data types*: integer, floats, strings, booleans, dictionaries, and quotations (lists).
+- *Homoiconic*, code can be accessed as data.
+- Includes an *advanced REPL* with auto-completion and history management.
+- Provides a lightweight *module system*.
+- Provides *sigils* as syntactic sugar to access environment variables, quoting, defining and binding data, etc.
+- Includes a small but useful *standard library* for practical tasks.
+- Self-contained, statically compiled into single file.
+
+/Don't need all of these features? If you are looking for something even smaller and more bare-bones, check out mn, min's even more minimalist little brother./
+
+#+END_QUOTE
+
+- [[https://min-lang.org/][min language - Welcome to the min programming language]]
+- [[https://concatenative.org/wiki/view/min][min | concatenative.org]]
