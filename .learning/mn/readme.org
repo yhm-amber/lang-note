@@ -1,0 +1,30 @@
+
+- 
+
+----
+
+#+BEGIN_QUOTE
+
+mn is a concatenative, fully-homoiconic, functional, interpreted programming language.
+
+This basically means that:
+
+- It is based on a somewhat obscure and slightly unintuitive programming paradigm, think of [[http://www.forth.org/][Forth]], [[http://factorcode.org/][Factor]] and [[http://www.kevinalbrecht.com/code/joy-mirror/][Joy]] but with parentheses for an extra [[https://common-lisp.net/][Lisp]]y flavor.
+- Programs written in mn are actually written using quotations, i.e. lists.
+- It comes with map, filter, find, and loads of other functional goodies.
+- It is probably slower than the average production-ready programming language.
+
+mn is [[https://min-lang.org/][min]]’s little brother. When I started implementing min, I wanted to create a small but practical programming language you could use for shell scripting and perform common tasks. As more feature requests piled in, I noticed it slowly became more and more comprehensive and batteries-included: I slowly swapped small, less-unknown and somewhat quirky libraries used for regular expressions, compression etc. with more complete and well-known ones, added HTTPS support (and OpenSSL), improved runtime checks when creating symbols, enhanced the type system, and so on. While min can now be used on its own to create quite complex programs, it became less minimal than originally intended.
+
+I tried to add compilation variants to reduce the modules to include but that made it more difficult to maintain and still included complex constructs like dictionaries and the full type system, so one day I decided to… fork it! And that’s how mn was born.
+
+Is mn the successor of min? No! As I said, it is min’s little brother, and it has its own (somewhat more minimalist) life. If you want to create a quick script to glue some shell commands together, then mn is definitely the fastest way to do so. If you want to use the concatenative paradigm to create more complex applications, then min comes with a much bigger toolbox.
+
+
+
+#+END_QUOTE
+
+- [[https://h3rald.com/mn/][mn - H3RALD]]
+- [[https://github.com/h3rald/mn.git][gh h3rald/mn]]
+- [[https://concatenative.org/wiki/view/mn][mn | concatenative.org]]
+
