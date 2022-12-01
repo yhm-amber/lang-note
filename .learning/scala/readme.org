@@ -44,8 +44,6 @@ Scala Center :
 
 *** On Line
 
-在线编译解释
-
 **** Metals
 
 Language Server
