@@ -7,6 +7,7 @@ Scala :
 
 - [[https://scala-lang.org/][scala-lang.org]]
 - [[https://docs.scala-lang.org/][Docs - scala-lang.org]]
+- [[https://www.scala-sbt.org/][sbt - The interactive build tool]]
 
 Scala 2 :
 
@@ -26,6 +27,36 @@ Scala.js :
 
 Scala Center :
 
-- [[https://scala.epfl.ch/][Scala Center at EPFL]]
+- [[https://scala.epfl.ch/][Scala Center at EPFL (scalacenter.github.io)]]
 - [[https://scastie.scala-lang.org/][Scastie]]
 - [[https://github.com/scalacenter/scastie.git][gh scalacenter/scastie]]
+- [[https://scalameta.org/][Scalameta · Library to read, analyze, transform and generate Scala programs]]
+
+-----
+
+*** Build Tool
+
+**** sbt
+
+- [[https://www.scala-sbt.org/][sbt - The interactive build tool]]
+
+**** ivy
+
+*** On Line
+
+在线编译解释
+
+**** Metals
+
+Language Server
+
+- [[https://scalameta.org/metals/][Metals | Metals]]
+- [[https://scalameta.org/metals/docs][Text Editors | Metals]]
+- [[https://github.com/scalameta/metals.git][gh scalameta/metals]]
+
+**** Scalafix
+
+- [[https://scalacenter.github.io/scalafix/][Scalafix · Refactoring and linting tool for Scala]]
+- [[https://github.com/scalacenter/scalafix.git][gh scalacenter/scalafix]]
+
+
