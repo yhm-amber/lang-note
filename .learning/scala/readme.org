@@ -1,0 +1,19 @@
+- [[https://scastie.scala-lang.org/][Scastie - scala-lang.org]]
+- [[https://scalafiddle.io/][scalafiddle.io]]
+
+----
+
+Scala :
+
+- [[https://scala-lang.org/][scala-lang.org]]
+- [[https://docs.scala-lang.org/][Docs - scala-lang.org]]
+
+Scala 2 :
+
+- [[https://github.com/scala/scala.git][gh scala/scala]]
+
+Scala 3 (Dotty) :
+
+- [[https://github.com/lampepfl/dotty.git][gh lampepfl/dotty]]
+- [[https://dotty.epfl.ch/][Scala 3 / Dotty]]
+- [[https://docs.scala-lang.org/scala3/guides/migration/compatibility-intro.html][Migrate to Scala 3]]
