@@ -17,3 +17,9 @@ Scala 3 (Dotty) :
 - [[https://github.com/lampepfl/dotty.git][gh lampepfl/dotty]]
 - [[https://dotty.epfl.ch/][Scala 3 / Dotty]]
 - [[https://docs.scala-lang.org/scala3/guides/migration/compatibility-intro.html][Migrate to Scala 3]]
+
+Scala.js :
+
+- [[https://scala-js.org/][scala-js.org]]
+- [[https://github.com/scala-js/scala-js.git][gh scala-js/scala-js]]
+- [[https://scribble.ninja/][Try Scala.js in the browser]]
