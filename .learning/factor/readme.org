@@ -1,3 +1,7 @@
 
 - [[https://factor-playground.herokuapp.com/][factor playground]]
 - [[https://github.com/viniesposito/factor-playground.git][gh viniesposito/factor-playground]]
+
+----
+
+- [[https://concatenative.org/wiki/view/Factor/Learning][Factor Learning - concatenative.org]]
