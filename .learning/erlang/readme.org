@@ -1,0 +1,6 @@
+- [[https://tryerlang.org/][Try Erlang]]
+
+----
+
+- [[https://www.erlang.org/][Erlang/OTP]]
+- [[https://github.com/erlang/otp][gh erlang/otp]]
