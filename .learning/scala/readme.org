@@ -1,7 +1,4 @@
 - [[https://scastie.scala-lang.org/][Scastie - scala-lang.org]]
-  
-  ([[https://github.com/scalacenter/scastie.git][gh scalacenter/scastie]])
-  
 - [[https://scalafiddle.io/][scalafiddle.io]]
 
 ----
@@ -26,3 +23,9 @@ Scala.js :
 - [[https://scala-js.org/][scala-js.org]]
 - [[https://github.com/scala-js/scala-js.git][gh scala-js/scala-js]]
 - [[https://scribble.ninja/][Try Scala.js in the browser]]
+
+Scala Center :
+
+- [[https://scala.epfl.ch/][Scala Center at EPFL]]
+- [[https://scastie.scala-lang.org/][Scastie]]
+- [[https://github.com/scalacenter/scastie.git][gh scalacenter/scastie]]
