@@ -1,0 +1,9 @@
+这个是基于 Python 做的的一个 Lisp 方言。
+
+-----
+
+- [[https://hylang.github.io/hy-interpreter/][hylang.github.io/hy-interpreter]]
+
+----
+
+- [[https://docs.hylang.org/][The Hy Manual]]
