@@ -4,4 +4,6 @@
 
 ----
 
-- [[https://concatenative.org/wiki/view/Factor/Learning][Factor Learning - concatenative.org]]
+- [[https://factorcode.org/][Factor programming language]]
+- [[https://concatenative.org/wiki/view/Factor][Factor - concatenative.org]]
+
