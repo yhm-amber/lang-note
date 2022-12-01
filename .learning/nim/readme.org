@@ -1,6 +1,7 @@
 
-- 
+- [[https://play.nim-lang.org/][Nim playground]]
 
 ----
 
 - [[https://nim-lang.org/][Nim Programming Language]]
+- [[https://github.com/nim-lang/Nim.git][gh nim-lang/Nim]]
