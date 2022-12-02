@@ -7,3 +7,9 @@
 
 - [[https://onecompiler.com/][OneCompiler]]
 
+-----
+
+#+BEGIN_SRC nu
+ls | where type == dir | each {|d| cd $d ; mkdir  }
+#+END_SRC
+
