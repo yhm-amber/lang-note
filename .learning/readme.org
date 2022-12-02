@@ -9,12 +9,11 @@
 
 -----
 
-#+BEGIN_SRC nu
+#+BEGIN_SRC nushell
 ls | where type == dir |
     each
     { |d|
-        cd $d ;
-        mkdir features-taste ideas-act ;
+        cd $d ; mkdir features-taste ideas-act ;
         ls | where type == dir |
             each { |d| echo "- \n\n----\n\n- \n- \n\n" | save $d/readme.org }
     }
