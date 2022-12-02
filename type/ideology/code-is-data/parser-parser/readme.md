@@ -30,4 +30,4 @@
 ('list ('kv a 1) ('kv b 2) ) ;; then we just need a parser just trans it be: `((a 1) (b 2) (c 3) (d 4)) | parse list kv`
 ~~~
 
-然后，这将成为进一步实现语法糖效果的基石。（即再实现一个解释器并告诉它把特定括号理解为以特定 `symbol` 开头的 S 表达式。）
+然后，这将成为进一步实现语法糖效果的基石。（即，再实现一个解释器，而它只需要做到把特定括号转换为以特定 `symbol` 开头的 S 表达式就好。）
