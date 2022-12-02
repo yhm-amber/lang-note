@@ -2,7 +2,7 @@
 
 -----
 
-#+BEGIN_SRC nu
+#+BEGIN_SRC nushell
 ls | where type == dir |
     each
     { |d|
