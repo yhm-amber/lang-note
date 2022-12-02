@@ -10,6 +10,13 @@
 -----
 
 #+BEGIN_SRC nu
-ls | where type == dir | each {|d| cd $d ; mkdir  }
+ls | where type == dir |
+    each
+    { |d|
+        cd $d ;
+        mkdir features-taste ideas-act ;
+        ls | where type == dir |
+            each { |d| echo "- \n\n----\n\n- \n- \n\n" | save $d/readme.org }
+    }
 #+END_SRC
 
