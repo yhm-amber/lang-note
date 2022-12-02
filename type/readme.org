@@ -6,8 +6,7 @@
 ls | where type == dir |
     each
     { |d|
-        cd $d ;
-        mkdir trans cases ;
+        cd $d ; mkdir trans cases ;
         ls | where type == dir |
             each { |d| echo "- \n\n----\n\n- \n- \n\n" | save $d/readme.org }
     }
