@@ -1,2 +1,8 @@
 
 - [[https://playground.functional-rewire.com/][Elixir Playground]]
+
+----
+
+- [[https://elixir-lang.org/getting-started][入门]]
+- [[https://elixir-lang.org/getting-started/mix-otp][Mix 与 OTP]]
+- [[https://elixir-lang.org/getting-started/meta][元编程]]
