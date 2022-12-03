@@ -6,3 +6,6 @@
 - [[https://elixir-lang.org/getting-started][入门]]
 - [[https://elixir-lang.org/getting-started/mix-otp][Mix 与 OTP]]
 - [[https://elixir-lang.org/getting-started/meta][元编程]]
+
+- [[https://github.com/elixir-lang/elixir-lang.github.com.git][gh elixir-lang/elixir-lang.github.com]]
+- [p[https://github.com/elixir-lang/elixir.git][gh elixir-lang/elixir]]
