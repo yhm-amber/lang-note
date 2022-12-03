@@ -3,4 +3,4 @@
 ----
 
 - [[https://www.erlang.org/][Erlang/OTP]]
-- [[https://github.com/erlang/otp][gh erlang/otp]]
+- [[https://github.com/erlang/otp.git][gh erlang/otp]]
