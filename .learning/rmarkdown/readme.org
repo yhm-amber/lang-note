@@ -1,0 +1,12 @@
+
+
+----
+
+- site: [[https://rmarkdown.rstudio.com/][rmarkdown.rstudio.com]]
+- build-tool: [[https://bookdown.org/][bookdown.org]]
+
+- knows-from: [[https://github.com/xuxiaodong/usingcli-book.git][gh xuxiaodong/usingcli-book]]  
+
+
+- repo: [[https://github.com/rstudio/rmarkdown.git][gh rstudio/rmarkdown]]
+- build-tool-repo: [[https://github.com/rstudio/bookdown.git][gh rstudio/bookdown]]
