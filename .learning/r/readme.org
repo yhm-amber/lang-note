@@ -1,1 +1,8 @@
 
+
+----
+
+- site: [[https://r-project.org/][r-project.org]]
+
+- tool-repo: [[https://github.com/rstudio/rstudio.git][gh rstudio/rstudio]]
+- tool-site: [[https://posit.co/products/open-source/rstudio/][RStudio is now Posit]]
