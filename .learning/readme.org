@@ -21,4 +21,4 @@ ls | where type == dir |
 
 -----
 
-（可以在各语言简介来头附上 ycomb 的实现以及参考来源（如有）。当然，也可以不附。）
+（可以在各语言简介来头附上 ycomb 的实现以及参考来源（如有）。当然，也可以不附。[[https://rosettacode.org/wiki/Y_combinator][一般是这个来源]]。）
