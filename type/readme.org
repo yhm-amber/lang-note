@@ -6,8 +6,8 @@
 (ls | where type == dir |
     each
     { |d|
-        (cd $d.name ; mkdir trans cases ;
+        cd $d.name ; mkdir trans cases ;
         ls | where type == dir |
-            each { |x| cd $x.name ; echo "- \n\n----\n\n- \n- \n\n" | save readme.org })
+            each { |x| cd $x.name ; echo "- \n\n----\n\n- \n- \n\n" | save readme.org }
     })
 #+END_SRC
