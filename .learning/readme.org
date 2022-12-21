@@ -10,14 +10,14 @@
 -----
 
 #+BEGIN_SRC nushell
-def save-new [p: string] { if ($p | path exists) {$in | null} else {$in | save $p} }
+def save-new [p: string] { if ($p | path exists) {$in | null} else {$in | save $p ; $p | path expand | path relative-to (../../..)} }
 (ls | where type == dir |
     each
     { |d|
         cd $d.name ; mkdir features-taste ideas-act ;
         ls | where type == dir |
-            each { |x| cd $x.name ; echo "- \n\n----\n\n- \n- \n\n" | save-new readme.org ; cd .. ; ls $x.name }
-    })
+            each { |x| cd $x.name ; echo "- \n\n----\n\n- \n- \n\n" | save-new readme.org }
+    } | flatten)
 #+END_SRC
 
 -----
