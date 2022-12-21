@@ -13,9 +13,9 @@
 ls | where type == dir |
     each
     { |d|
-        cd $d ; mkdir features-taste ideas-act ;
+        cd $d.name ; mkdir features-taste ideas-act ;
         ls | where type == dir |
-            each { |x| echo "- \n\n----\n\n- \n- \n\n" | save $"($x)/readme.org" }
+            each { |x| echo "- \n\n----\n\n- \n- \n\n" | save $x.name/readme.org }
     }
 #+END_SRC
 
