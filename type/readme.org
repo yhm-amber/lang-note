@@ -3,11 +3,11 @@
 -----
 
 #+BEGIN_SRC nushell
-ls | where type == dir |
+(ls | where type == dir |
     each
     { |d|
         cd $d.name ; mkdir trans cases ;
-        ls | where type == dir |
-            each { |x| echo "- \n\n----\n\n- \n- \n\n" | save $"($x.name)/readme.org" }
-    }
+        (ls | where type == dir |
+            each { |x| echo "- \n\n----\n\n- \n- \n\n" | save $"($x.name)/readme.org" })
+    })
 #+END_SRC
