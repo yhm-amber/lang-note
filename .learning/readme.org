@@ -16,7 +16,7 @@ def save-new [p: string] { if ($p | path exists) {$in | null} else { $in | save 
     { |d|
         cd $d.name ; mkdir features-taste ideas-act ;
         ls | where type == dir |
-            each { |x| cd $x.name ; echo "- \n\n----\n\n- \n- \n\n" | save-new readme.org }
+            each { |x| echo "- \n\n----\n\n- \n- \n\n" | save-new $"($x.name)/readme.org" }
     } | flatten)
 #+END_SRC
 
