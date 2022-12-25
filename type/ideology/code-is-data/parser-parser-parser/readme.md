@@ -62,7 +62,7 @@
 
 再就比如， [`rulex`][rulex-play] 和 `regex` 两种文本匹配规则的描述语言。
 
-参考 [本 repo 的 `.learning/rulex`](../../../../.learning/rulex) 或者 [pomsky 简介页面][pomsky-intro] 中的对比可见，左边没有过度依赖符号表达含义的会好理解一点。
+参考 [`.learning/rulex in this-repo`](../../../../.learning/rulex) 或者 [pomsky 简介页面][pomsky-intro] 中的对比可见，左边没有过度依赖符号表达含义的会好理解一点。
 
 这主要是因为 `regex` 对标点符号的依赖过度了，并且显然是缺乏整体观感设计的，因而用起来总是更会让人眼花缭乱、而不是把逻辑表达清晰。
 
