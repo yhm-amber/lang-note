@@ -27,18 +27,21 @@
 
 还有一个例子：
 
-- 用 D2 绘制圆柱体：
+- 用 [D2][d2-play] 绘制圆柱体：
   
   ~~~ d2
   A: Christmas {shape: cylinder}
   ~~~
   
-- 用 Mermaid 绘制圆柱体：
+- 用 [Mermaid][mermaid-live] 绘制圆柱体：
   
   ~~~ Mermaid
   A[(Christmas)]
   ~~~
   
+
+[d2-play]: https://play.d2lang.com/
+[mermaid-live]: https://mermaid.live/
 
 
 ## unite
