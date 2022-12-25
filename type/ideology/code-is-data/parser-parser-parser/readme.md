@@ -27,7 +27,7 @@
 
 还有一个例子：
 
-- 用 DD 绘制圆柱体：
+- 用 D2 绘制圆柱体：
   
   ~~~ d2
   A: Christmas {shape: cylinder}
