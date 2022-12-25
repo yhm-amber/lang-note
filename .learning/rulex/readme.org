@@ -19,3 +19,83 @@
 
 - site (after rename): [[https://pomsky-lang.org/][Pomsky - Home]]
 - repo (at renaming): [[https://github.com/rulex-rs/pomsky.git][gh rulex-rs/pomsky]]
+
+-----
+
+- need: [[https://pomsky-lang.org/docs/get-started/enable-unicode/][enable unicode]]
+- get: [[https://pomsky-lang.org/docs/get-started/quick-start/][play | install cli/macro/wasm on rust/nodejs]]
+
+#+BEGIN_QUOTE
+Install the CLI with
+
+#+BEGIN_SRC sh
+cargo install pomsky-bin
+#+END_SRC
+
+#+END_QUOTE
+
+#+BEGIN_QUOTE
+On the left are pomsky expressions, on the right are the equivalent regexes:
+
+#+BEGIN_SRC py -n
+# String
+'hello world'                 # hello world
+
+# Greedy repetition
+'hello'{1,5}                  # (?:hello){1,5}
+'hello'*                      # (?:hello)*
+'hello'+                      # (?:hello)+
+
+# Lazy repetition
+'hello'{1,5} lazy             # (?:hello){1,5}?
+'hello'* lazy                 # (?:hello)*?
+'hello'+ lazy                 # (?:hello)+?
+
+# Alternation
+'hello' | 'world'             # hello|world
+
+# Character classes
+['aeiou']                     # [aeiou]
+['p'-'s']                     # [p-s]
+
+# Named character classes
+[word] [space] [n]            # \w\s\n
+
+# Combined
+[w 'a' 't'-'z' U+15]          # [\wat-z\x15]
+
+# Negated character classes
+!['a' 't'-'z']                # [^at-z]
+
+# Unicode
+[Greek] U+30F Grapheme        # \p{Greek}\u030F\X
+
+# Anchors, boundaries
+^ $                           # ^$
+% 'hello' !%                  # \bhello\B
+
+# Non-capturing groups
+'terri' ('fic' | 'ble')       # terri(?:fic|ble)
+
+# Capturing groups
+:('test')                     # (test)
+:name('test')                 # (?P<name>test)
+
+# Lookahead/lookbehind
+(>> 'foo' | 'bar')            # (?=foo|bar)
+(<< 'foo' | 'bar')            # (?<=foo|bar)
+(!>> 'foo' | 'bar')           # (?!foo|bar)
+(!<< 'foo' | 'bar')           # (?<!foo|bar)
+
+# Backreferences
+:('test') ::1                 # (test)\1
+:name('test') ::name          # (?P<name>test)\1
+
+# Ranges
+range '0'-'999'               # 0|[1-9][0-9]{0,2}
+range '0'-'255'               # 0|1[0-9]{0,2}|2(?:[0-4][0-9]?|5[0-5]?|[6-9])?|[3-9][0-9]?
+
+# Inline regex
+[\w[^abg]]                    # [\w[^abg]]
+#+END_SRC
+#+END_QUOTE
