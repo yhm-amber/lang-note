@@ -30,13 +30,13 @@
 - 用 [D2][d2-play] 绘制圆柱体：
   
   ~~~ d2
-  A: Christmas {shape: cylinder}
+  A: 圆柱体一号 {shape: cylinder}
   ~~~
   
 - 用 [Mermaid][mermaid-live] 绘制圆柱体：
   
   ~~~ Mermaid
-  A[(Christmas)]
+  A[(圆柱体一号)]
   ~~~
   
 
