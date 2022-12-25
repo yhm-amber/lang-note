@@ -1,0 +1,7 @@
+
+- https://mermaid.live/
+
+----
+
+- [[https://github.com/mermaid-js/mermaid.git][gh mermaid-js/mermaid]]
+- [[https://mermaid.js.org/][mermaid.js.org]]
