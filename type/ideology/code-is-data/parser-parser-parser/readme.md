@@ -48,9 +48,10 @@
 
 还有就是， `org-mode` 和 `markdown` 两种用来写文档的语言，论灵活性当然是前者，而且在比如大片引用的时候前者就会很方便。但后者就能够在大部分时候都能用着方便，缺陷的部分也只是增加扩展语法的支持就好了（当然了标准统一会是个问题）。
 
-再就比如， `rulex` 和 `regex` 两种文本匹配规则的描述语言，参考 [`.learning/rulex`](../../../../.learning/rulex)或者 [pomsky 简介页面][pomsky-intro] 中的对比可见，左边没有过度依赖符号表达含义的会好理解一点。这主要是因为 `regex` 对标点符号的依赖过度了，并且显然是缺乏整体观感设计的，因而用起来总是更会让人眼花缭乱、而不是把逻辑表达清晰。
+再就比如， [`rulex`][rulex-play] 和 `regex` 两种文本匹配规则的描述语言，参考 [`.learning/rulex`](../../../../.learning/rulex)或者 [pomsky 简介页面][pomsky-intro] 中的对比可见，左边没有过度依赖符号表达含义的会好理解一点。这主要是因为 `regex` 对标点符号的依赖过度了，并且显然是缺乏整体观感设计的，因而用起来总是更会让人眼花缭乱、而不是把逻辑表达清晰。
 
 [pomsky-intro]: https://pomsky-lang.org/docs/get-started/introduction/#summary
+[rulex-play]: https://rulex-rs.github.io/playground
 
 ## unite
 
