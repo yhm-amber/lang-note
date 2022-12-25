@@ -1,0 +1,11 @@
+
+
+
+----
+
+- repo: [[https://github.com/rulex-rs/rulex.git][gh rulex-rs/rulex]]
+- site: [[https://rulex-rs.github.io][rulex-rs.github.io]]
+
+- event: [[https://rulex-rs.github.io/blog/renaming-rulex/][rename rulex to pomsky]]
+- renaming: [[https://github.com/rulex-rs/pomsky/issues/40][gh rulex-rs/pomsky #40]]
+- chg: ~rulex-rs.github.io~ 👉 ~pomsky-lang.org~
