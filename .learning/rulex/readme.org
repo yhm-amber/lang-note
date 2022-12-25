@@ -1,5 +1,6 @@
 
-
+- playground: [[https://rulex-rs.github.io/playground][rulex playground]]
+- playground (after rename): [[https://playground.pomsky-lang.org][pomsky-lang playground]]
 
 ----
 
