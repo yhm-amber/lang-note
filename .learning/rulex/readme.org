@@ -25,6 +25,8 @@
 - need: [[https://pomsky-lang.org/docs/get-started/enable-unicode/][enable unicode]]
 - get: [[https://pomsky-lang.org/docs/get-started/quick-start/][play | install cli/macro/wasm on rust/nodejs]]
 
+install:
+
 #+BEGIN_QUOTE
 Install the CLI with
 
@@ -34,7 +36,11 @@ cargo install pomsky-bin
 
 #+END_QUOTE
 
+intro:
+
 #+BEGIN_QUOTE
+** Examples
+
 On the left are pomsky expressions, on the right are the equivalent regexes:
 
 #+BEGIN_SRC py -n
@@ -98,4 +104,14 @@ range '0'-'255'               # 0|1[0-9]{0,2}|2(?:[0-4][0-9]?|5[0-5]?|[6-9])?|[3
 # Inline regex
 [\w[^abg]]                    # [\w[^abg]]
 #+END_SRC
+
+** Variables
+
+#+BEGIN_SRC rust -n
+let operator = '+' | '-' | '*' | '/';
+let number = '-'? [digit]+;
+
+number (operator number)*
+#+END_SRC
+
 #+END_QUOTE
