@@ -4,9 +4,18 @@
 
 ----
 
+.
+
 - repo: [[https://github.com/rulex-rs/rulex.git][gh rulex-rs/rulex]]
 - site: [[https://rulex-rs.github.io][rulex-rs.github.io]]
 
-- event: [[https://rulex-rs.github.io/blog/renaming-rulex/][rename rulex to pomsky]]
-- renaming: [[https://github.com/rulex-rs/pomsky/issues/40][gh rulex-rs/pomsky #40]]
-- chg: ~rulex-rs.github.io~ 👉 ~pomsky-lang.org~
+.
+
+- event: [[https://rulex-rs.github.io/blog/renaming-rulex/][Renaming Rulex - Pomsky]]
+- event (after rename): [[https://pomsky-lang.org/blog/renaming-rulex][Renaming Rulex - Pomsky]]
+- renaming process: [[https://github.com/rulex-rs/pomsky/issues/40][gh rulex-rs/pomsky #40]]
+
+.
+
+- site (after rename): [[https://pomsky-lang.org/][Pomsky - Home]]
+- repo (at renaming): [[https://github.com/rulex-rs/pomsky.git][gh rulex-rs/pomsky]]
