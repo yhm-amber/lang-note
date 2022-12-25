@@ -3,6 +3,6 @@
 
 ----
 
-- [https://github.com/terrastruct/d2.git][gh terrastruct/d2]
-- [https://d2lang.com/][d2lang.com]
+- [[https://github.com/terrastruct/d2.git][gh terrastruct/d2]]
+- [[https://d2lang.com/][d2lang.com]]
 
