@@ -30,6 +30,6 @@ interpret:
 - language 就其本质而言即是 interface 而一个它的 parser 即是一个它的现世存在 (implement) (在场) 方案 (scheme) 。
 - language 的一个 parser 可以由本 language 经过 trans 而成 (这种情况就叫自举了) 也可以由别的随意任何 language 转换 (编译或者解释) 而成。
 - parser 可以由什么 language trans 而成只与该 language 的能力有关 (其中包括了这个 parser 要成功运作的所有 platform 层的能力因为这些 platform 层是具体什么样是被 trans 为此 parser 的 language 有所限定的) 。
-- parser 有时只能基于 trans 成它的那个 language 运作 (即只能以该 language 为其 platform 来运作) 这与该 language 的设计本身有关——而不代表 trans 成它的 language 限制了这个 parser 的设计。
+- parser 有时只能基于 trans 成它的那个 language 运作 (即只能以该 language 为其 platform (有时还会增加少量的同一层别的种类的 platform 的支持) 来运作) 这与该 language 的设计本身有关——而不代表 trans 成它的 language 限制了这个 parser 的设计。
 
 
