@@ -4,4 +4,4 @@
 ----
 
 - [[https://nushell.sh/][Nushell - A new type of shell.]]
-- [[https://github.com/nushell/nushell.git][gh nushell/nushell]]
+- [[https://github.com/nushell/nushell.git][nushell/nushell | GitHub]]
