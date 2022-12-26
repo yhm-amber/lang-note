@@ -1,6 +1,6 @@
 
 - [[https://factor-playground.herokuapp.com/][factor playground]]
-- [[https://github.com/viniesposito/factor-playground.git][gh viniesposito/factor-playground]]
+- [[https://github.com/viniesposito/factor-playground.git][viniesposito/factor-playground | GitHub]]
 
 ----
 
