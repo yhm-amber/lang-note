@@ -2,5 +2,5 @@
 
 ----
 
-- [[https://www.erlang.org/][Erlang/OTP]]
+- [[https://www.erlang.org/][index | Erlang/OTP]]
 - [[https://github.com/erlang/otp.git][erlang/otp | GitHub]]
