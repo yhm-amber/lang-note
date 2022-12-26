@@ -1,7 +1,7 @@
 
-- https://mermaid.live/
+- [[https://mermaid.live/][Playground | Mermaid Live Editor]]
 
 ----
 
-- [[https://github.com/mermaid-js/mermaid.git][gh mermaid-js/mermaid]]
-- [[https://mermaid.js.org/][mermaid.js.org]]
+- [[https://github.com/mermaid-js/mermaid.git][mermaid-js/mermaid | GitHub]]
+- [[https://mermaid.js.org/][Mermaid | Diagramming and charting tool]]
