@@ -3,6 +3,8 @@
 
 platform: =rust= =python=
 
+- repo: [[https://github.com/pola-rs/polars.git][pola-rs/polars | GitHub]]
+
 tools:
 
-- [[https://github.com/mithril-security/bastionlab.git][gh mithril-security/bastionlab]]
+- [[https://github.com/mithril-security/bastionlab.git][mithril-security/bastionlab | GitHub]]
