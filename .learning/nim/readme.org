@@ -4,4 +4,4 @@
 ----
 
 - [[https://nim-lang.org/][Nim Programming Language]]
-- [[https://github.com/nim-lang/Nim.git][gh nim-lang/Nim]]
+- [[https://github.com/nim-lang/Nim.git][nim-lang/Nim | GitHub]]
