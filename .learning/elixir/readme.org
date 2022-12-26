@@ -7,5 +7,5 @@
 - [[https://elixir-lang.org/getting-started/mix-otp][Mix 与 OTP]]
 - [[https://elixir-lang.org/getting-started/meta][元编程]]
 
-- [[https://github.com/elixir-lang/elixir-lang.github.com.git][gh elixir-lang/elixir-lang.github.com]]
-- [[https://github.com/elixir-lang/elixir.git][gh elixir-lang/elixir]]
+- [[https://github.com/elixir-lang/elixir-lang.github.com.git][elixir-lang/elixir-lang.github.com | GitHub]]
+- [[https://github.com/elixir-lang/elixir.git][elixir-lang/elixir | GitHub]]
