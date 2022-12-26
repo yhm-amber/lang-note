@@ -24,7 +24,7 @@ Is mn the successor of min? No! As I said, it is min’s little brother, and it 
 
 #+END_QUOTE
 
-- [[https://h3rald.com/mn/][mn - H3RALD]]
-- [[https://github.com/h3rald/mn.git][gh h3rald/mn]]
+- [[https://h3rald.com/mn/][mn | H3RALD]]
+- [[https://github.com/h3rald/mn.git][h3rald/mn | GitHub]]
 - [[https://concatenative.org/wiki/view/mn][mn | concatenative.org]]
 
