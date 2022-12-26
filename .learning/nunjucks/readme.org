@@ -4,5 +4,5 @@
 
 ----
 
-- repo: [[https://github.com/mozilla/nunjucks.git][gh mozilla/nunjucks]]
+- repo: [[https://github.com/mozilla/nunjucks.git][mozilla/nunjucks | GitHub]]
 - site: [[https://mozilla.github.io/nunjucks/][Nunjunks | Mozilla]]
