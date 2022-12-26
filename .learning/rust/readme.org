@@ -1,4 +1,4 @@
 
 
-- [[https://play.rust-lang.org/][play.rust-lang.org]]
+- [[https://play.rust-lang.org/][Rust Playground]]
 
