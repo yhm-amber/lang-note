@@ -1,1 +1,1 @@
-platform: `rust` `python`
+platform: =rust= =python=
