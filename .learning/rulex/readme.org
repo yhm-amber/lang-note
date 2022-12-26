@@ -1,29 +1,29 @@
 
-- playground: [[https://rulex-rs.github.io/playground][rulex playground]]
-- playground (after rename): [[https://playground.pomsky-lang.org][pomsky-lang playground]]
+- playground: [[https://rulex-rs.github.io/playground][Rulex Playground]]
+- playground (after rename): [[https://playground.pomsky-lang.org][pomsky-lang Playground]]
 
 ----
 
 .
 
 - repo: [[https://github.com/rulex-rs/rulex.git][rulex-rs/rulex | GitHub]]
-- site: [[https://rulex-rs.github.io][rulex-rs.github.io]]
+- site: [[https://rulex-rs.github.io][Home | Rulex]]
 
 .
 
-- event: [[https://rulex-rs.github.io/blog/renaming-rulex/][Renaming Rulex - Pomsky]]
-- event (after rename): [[https://pomsky-lang.org/blog/renaming-rulex][Renaming Rulex - Pomsky]]
+- event: [[https://rulex-rs.github.io/blog/renaming-rulex/][Renaming Rulex | Pomsky]]
+- event (after rename): [[https://pomsky-lang.org/blog/renaming-rulex][Renaming Rulex | Pomsky]]
 - renaming process: [[https://github.com/rulex-rs/pomsky/issues/40][rulex-rs/pomsky : issue 40 | GitHub]]
 
 .
 
-- site (after rename): [[https://pomsky-lang.org/][Pomsky - Home]]
+- site (after rename): [[https://pomsky-lang.org/][Home | Pomsky]]
 - repo (at renaming): [[https://github.com/rulex-rs/pomsky.git][rulex-rs/pomsky | GitHub]]
 
 -----
 
-- need: [[https://pomsky-lang.org/docs/get-started/enable-unicode/][enable unicode]]
-- get: [[https://pomsky-lang.org/docs/get-started/quick-start/][play | install cli/macro/wasm on rust/nodejs]]
+- need: [[https://pomsky-lang.org/docs/get-started/enable-unicode/][Enable Unicode Support | Pomsky]]
+- get: [[https://pomsky-lang.org/docs/get-started/quick-start/][Quick Start - play, install cli/macro/wasm on rust/nodejs | Pomsky]]
 
 install:
 
