@@ -1,4 +1,4 @@
-- [[https://tryerlang.org/][Try Erlang]]
+- [[https://tryerlang.org/][Playground | Try Erlang]]
 
 ----
 
