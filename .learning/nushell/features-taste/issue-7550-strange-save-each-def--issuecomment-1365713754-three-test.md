@@ -1,3 +1,8 @@
+[link]: https://github.com/nushell/nushell/issues/7550#issuecomment-1365713754
+
+link: [Some strange behave around `save`, `def` and `each` . · Issue #7550 · nushell/nushell][link]
+
+--------
 
 For this define:
 
@@ -462,7 +467,7 @@ zzzz&&&
 
 So, the aim in ***Test 02*** has been done ... 😀
 
-<!-- *(In my impression, on old version `0.72.0` the `save` will overwrite file in default ... So, thanks for the capability grow for `save` .)* -->
+<!-- *(In my impression, on old version `0.72.1` the `save` will overwrite file in default ... So, thanks for the capability grow for `save` .)* -->
 
 *just unperfect: **the strange behave** still exist. 😑*
 
