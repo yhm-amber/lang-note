@@ -4,12 +4,12 @@ def save-new [path: string] { if ($p | path exists) { $in | null } else { $in | 
 
 def save-new [path: string] { 
     
-    if ($p | path exists) { 
+    if ($path | path exists) { 
         
         $in | null ; } else { 
         
         $in | save ($path | path expand) ; 
-        (ls $p).name.0 | 
+        (ls $path).name.0 | 
             path expand | 
             path relative-to ('../../..' | path expand) ; 
         } ; 
@@ -37,7 +37,7 @@ mkdir a b c d e f ; ls | where type == dir |
             each { |dd| 
                 
                 cd $dd.name ; 
-                '::::::::::' | save-new filefoo ; } ; 
+                '::::::::::::' | save-new filefoo ; } ; 
         
         } | flatten ; 
 
@@ -46,4 +46,54 @@ mkdir a b c d e f ; ls | where type == dir |
 ls | 
  each {|d| ls ($d.name) } | flatten | 
  each {|d| ls ($d.name) } | flatten ; 
+
+# better define:
+
+def str-repeat [ 
+    
+    str: string 
+    --repeat (-n): int = 1 
+    --join (-j): string = ''] { 
+    
+    0..($repeat) |
+        where {|x| $x > 0} | 
+        each { $str } | 
+        str join $join ; 
+    
+    } ; 
+
+alias get-separator = (
+    
+    '~' | path expand | 
+        str replace ('~' | path expand | path dirname) '' -sa | 
+        str replace ('~' | path expand | path basename) '' -sa ) ; 
+
+def show-prepath [ 
+    
+    path: string 
+    --prepath (-r): int = 3 ] { 
+    
+    let sp = (get-separator) ; 
+    
+    (ls ($path | path expand) ).name | 
+        path relative-to ( 
+            [ 
+                ( $path | path dirname ) , 
+                ( str-repeat '..' -n $prepath --join $sp ) , 
+            ] | 
+                str join $sp | 
+                path expand ) ; 
+    
+    } ; 
+
+def save-new [path: string] { 
+    
+    if ($path | path exists) { 
+        
+        $in | null ; } else { 
+        
+        $in | save ($path | path expand) ; 
+        (show-prepath $path -r 3).0 } ; 
+    
+    } ; 
 
