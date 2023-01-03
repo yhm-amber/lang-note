@@ -10,7 +10,7 @@ def save-new [p: string] {
         
         $in | null } else { 
         
-        $in | save $p ; 
+        $in | save ($p | path expand) ; 
         
         (ls $p).name.0 | 
             path expand | 
