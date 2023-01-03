@@ -1,21 +1,17 @@
 
-def save-new [p: string] { def msg [p: string] { (ls $p).name.0 | path expand | path relative-to ('../../..' | path expand) } ; if ($p | path exists) {$in | null} else  {$in | save $p ; msg $p} }
+def save-new [path: string] { if ($p | path exists) { $in | null } else { $in | save ($path | path expand) ; (ls $p).name.0 | path expand | path relative-to ('../../..' | path expand) ; } ; } ;
 
 
-def save-new [p: string] {
+def save-new [path: string] { 
     
-    if ( 
+    if ($p | path exists) { 
         
-        $p | path exists ) { 
+        $in | null ; } else { 
         
-        $in | null } else { 
-        
-        $in | save ($p | path expand) ; 
-        
+        $in | save ($path | path expand) ; 
         (ls $p).name.0 | 
             path expand | 
             path relative-to ('../../..' | path expand) ; 
-        
         } ; 
     
     } ;
