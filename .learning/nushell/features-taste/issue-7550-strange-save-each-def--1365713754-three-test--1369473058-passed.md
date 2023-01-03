@@ -518,7 +518,7 @@ def save-new [path: string] {
     
     if ($p | path exists) { 
         
-        $in | null ; } else { 
+        $in | null } else { 
         
         $in | save ($path | path expand) ; 
         (ls $p).name.0 | 
@@ -529,7 +529,7 @@ def save-new [path: string] {
 Then, run: 
 
 ~~~ sh
-mkdir a b c d e f ; ls | where type == dir | 
+mkdir gg a b c d e f ; ls | where type == dir | 
     each { |d| 
         
         cd $d.name ; mkdir aa bb cc dd ; 
@@ -677,7 +677,6 @@ ls |
 :::                 '::::::::::' | save-new foo ; } ; 
 :::         
 :::         } | flatten ; 
-~~~
 ╭───┬─────────────────╮
 │ 0 │ test\gg\aa\foo  │
 │ 1 │ test\gg\bb\foo  │
@@ -688,7 +687,7 @@ ls |
 │ 6 │ test\kkk\cc\foo │
 │ 7 │ test\kkk\dd\foo │
 ╰───┴─────────────────╯
-ls | 
+〉ls | 
 :::  each {|d| ls ($d.name) } | flatten | 
 :::  each {|d| ls ($d.name) } | flatten ; 
 ╭────┬──────────────┬──────┬──────┬────────────────╮
@@ -779,4 +778,3 @@ ls |
 So, test in [`7550#issuecomment-1365713754`](https://github.com/nushell/nushell/issues/7550#issuecomment-1365713754) is passed.
 
 </details>
-
