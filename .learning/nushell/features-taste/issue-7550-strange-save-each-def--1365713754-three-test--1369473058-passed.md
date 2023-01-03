@@ -1,4 +1,4 @@
-link: [Some strange behave around `save`, `def` and `each` . · Issue #7550 · nushell/nushell][link]
+[Some strange behave around `save`, `def` and `each` . · Issue #7550 · nushell/nushell][link]
 
 --------
 
