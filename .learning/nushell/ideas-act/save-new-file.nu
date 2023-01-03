@@ -37,7 +37,7 @@ mkdir a b c d e f ; ls | where type == dir |
             each { |dd| 
                 
                 cd $dd.name ; 
-                '::::::::::' | save-new foobb ; } ; 
+                '::::::::::' | save-new filefoo ; } ; 
         
         } | flatten ; 
 
