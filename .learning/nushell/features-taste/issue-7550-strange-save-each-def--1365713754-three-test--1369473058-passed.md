@@ -779,7 +779,7 @@ ls |
 
 
 - [x] add new file at correct path
-- [x] old file won't br overwrite or err sth.
+- [x] old file won't be overwrite or err sth.
 
 So, test in [`7550#issuecomment-1365713754`](https://github.com/nushell/nushell/issues/7550#issuecomment-1365713754) is passed.
 
