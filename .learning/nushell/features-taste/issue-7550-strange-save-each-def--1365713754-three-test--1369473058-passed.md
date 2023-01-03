@@ -518,7 +518,7 @@ def save-new [path: string] {
     
     if ($p | path exists) { 
         
-        $in | null } else { 
+        $in | null ; } else { 
         
         $in | save ($path | path expand) ; 
         (ls $p).name.0 | 
