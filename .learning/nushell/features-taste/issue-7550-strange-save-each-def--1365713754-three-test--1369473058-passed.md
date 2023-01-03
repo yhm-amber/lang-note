@@ -1,12 +1,15 @@
-[link]: https://github.com/nushell/nushell/issues/7550#issuecomment-1365713754
+link: [Some strange behave around `save`, `def` and `each` . · Issue #7550 · nushell/nushell][link]
+
+--------
+
+[link]: https://github.com/nushell/nushell/issues/7550
+[link-test]: https://github.com/nushell/nushell/issues/7550#issuecomment-1365713754
 [link-teach]: https://github.com/nushell/nushell/issues/7550#issuecomment-1368862933
 [link-pass]: https://github.com/nushell/nushell/issues/7550#issuecomment-1369473058
 
 ## `0`
 
-link: [Some strange behave around `save`, `def` and `each` . · Issue #7550 · nushell/nushell][link]
-
---------
+[issuecomment-1365713754][link-test]
 
 For this define:
 
