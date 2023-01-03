@@ -773,6 +773,8 @@ ls |
 │  # │     name     │ type │ size │    modified    │
 ╰────┴──────────────┴──────┴──────┴────────────────╯
 〉
+~~~
+
 </details>
 
 So, test in [`7550#issuecomment-1365713754`](https://github.com/nushell/nushell/issues/7550#issuecomment-1365713754) is passed.
