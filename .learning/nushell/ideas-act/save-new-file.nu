@@ -27,4 +27,23 @@ def save-new [path: string] {
 ### 所以这样更赚 。
 ### 
 
+# use:
+
+mkdir a b c d e f ; ls | where type == dir | 
+    each { |d| 
+        
+        cd $d.name ; mkdir aa bb cc dd ; 
+        ls | where type == dir | 
+            each { |dd| 
+                
+                cd $dd.name ; 
+                '::::::::::' | save-new foobb ; } ; 
+        
+        } | flatten ; 
+
+# look:
+
+ls | 
+ each {|d| ls ($d.name) } | flatten | 
+ each {|d| ls ($d.name) } | flatten ; 
 
