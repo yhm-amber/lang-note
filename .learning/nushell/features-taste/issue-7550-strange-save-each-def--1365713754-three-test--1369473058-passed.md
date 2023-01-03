@@ -516,12 +516,12 @@ You're right, `($filename | path expand)` is good ✔ .
 ~~~ sh
 def save-new [path: string] {
     
-    if ($p | path exists) { 
+    if ($path | path exists) { 
         
         $in | null } else { 
         
         $in | save ($path | path expand) ; 
-        (ls $p).name.0 | 
+        (ls $path).name.0 | 
             path expand | 
             path relative-to ('../../..' | path expand) ; } ; } ;
 ~~~
