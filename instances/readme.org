@@ -1,3 +1,8 @@
+
+Instances in =lang-note= means note about every many Languages.
+
+The instance =_= is [[./_][a template]] for every others' note.
+
 #+BEGIN_SRC nushell
 
 
