@@ -1,7 +1,7 @@
 
-[site]: 
-[docs]: 
-[repo]: 
+[site]: ...
+[docs]: ...
+[repo]: ...
 
 
 | Type | Name | Source Code Repository | Ident |
