@@ -7,6 +7,6 @@
 
 
 
-| Type | Name | Repo | Ident |
-| ---- | ---- | ---- | ----- |
+| Type | Name | Source Repository | Ident |
+| ---- | ---- | ----------------- | ----- |
 | Language | [API Blueprint][site] | [`apiaryio/api-blueprint.git`][repo] | [`apib`][docs] |
