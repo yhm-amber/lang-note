@@ -5,7 +5,7 @@ Instances in =lang-note= means note about every many Languages.
 
 -----
 
-The instance =_= is [[./_][a template]] for every others' notes.
+The instance =_= is [[./_][a template]] ([[https://raw.githubusercontent.com/yhm-amber/lang-note/main/instances/_/readme.md][Raw]]) for every others' notes.
 
 #+BEGIN_SRC nushell
 
