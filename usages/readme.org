@@ -1,1 +1,1 @@
-用例以及其需用到的 [Instances](../instances) 。
+用例以及其需用到的 [[../instances][Instances]] 。
