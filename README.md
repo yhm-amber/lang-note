@@ -3,6 +3,9 @@
 lang note . 🥱🚰
 ~~~
 
+- [实例](./instances)
+- [使用](./usages)
+
 ----
 
 behavior: 
