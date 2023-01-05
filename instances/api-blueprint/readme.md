@@ -9,4 +9,4 @@
 
 | Type | Name | Source Code Repository | Ident |
 | ---- | ---- | ---------------------- | ----- |
-| Language | [API Blueprint][site] | [`apiaryio/api-blueprint.git`][repo] | [`apib`][docs] |
+| Language | [API Blueprint][site] - [📜][docs] | [`apiaryio/api-blueprint.git`][repo] | `apib` |
