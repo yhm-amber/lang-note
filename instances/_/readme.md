@@ -6,7 +6,7 @@
 
 | Type | Name | Source Code Repository | Ident |
 | ---- | ---- | ---------------------- | ----- |
-| Language | [{{ Name }}][site] | [`{{ namespace }}/{{ repo }}.git`][repo] | [`{{ ident }}`][docs] |
+| Language | [{{Name}}][site] - [📜][docs] | [`{{ns}}/{{repo}}.git`][repo] | `{{ident0}}` `{{ident1}}` `...` |
 | ... | ... | `...` | `...` |
 
 ...
