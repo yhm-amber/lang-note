@@ -14,3 +14,10 @@
 - 段落： `<p> </p>`
 - 表格： `<table> </table>`
 
+## 属性
+
+交互性
+
+- 是否可编辑： `contenteditable` `=true` `=false`
+
+
