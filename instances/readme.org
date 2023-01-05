@@ -1,6 +1,10 @@
 
 Instances in =lang-note= means note about every many Languages.
 
+想从用例开始索引请进入 [[../usages][Usages]] 目录。
+
+-----
+
 The instance =_= is [[./_][a template]] for every others' notes.
 
 #+BEGIN_SRC nushell
