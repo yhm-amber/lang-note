@@ -1,8 +1,15 @@
-[ref]: https://developer.aliyun.com/article/229322
 
 ref by: 
 
-- [为什么我们放弃了 Erlang 技术栈][ref]
+[ref-moban]: https://www.moban555.com/article/501024.html
+[ref-dmjl]: https://www.daimajiaoliu.com/daima/479befd42900404
+[ref-alidev]: https://developer.aliyun.com/article/229322
+[ref-kaledl]: https://kaledl.com/article/227076.html
+
+- [为什么我们放弃了 Erlang 技术栈 | 三默网][ref-moban]
+- [为什么我们放弃了 Erlang 技术栈 | 代码交流][ref-dmjl]
+- [为什么我们放弃了 Erlang 技术栈 | 阿里云开发者社区][ref-alidev]
+- [为什么我们放弃了 Erlang 技术栈 | 卡了网][ref-kaledl]
 
 ----
 
