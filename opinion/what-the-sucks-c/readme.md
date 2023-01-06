@@ -1,4 +1,11 @@
-这玩意儿 (C Language) 难以理解的原因， (一方面) 在于符号含义的设计：星号在左边和右边含义不同。
+
+[lnk]: https://www.zhihu.com/question/24466000/answer/2832939897
+
+-----
+
+这玩意儿 (C Language) 难以理解的原因， (一方面) 在于符号含义的设计：
+
+- ***星号在左边和右边含义不同*** 。
 
 ~~~ c
 &j ; // means: j.point, and type(j.point) is Point<TypeOfJ>
