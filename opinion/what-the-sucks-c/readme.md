@@ -1,7 +1,9 @@
 
 [lnk]: https://www.zhihu.com/question/24466000/answer/2832939897
 
-using at: [lnk][lnk]
+using at: 
+
+- [C 语言指针怎么理解？ - 果实下落 | 知乎][lnk]
 
 -----
 
