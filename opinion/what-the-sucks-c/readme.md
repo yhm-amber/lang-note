@@ -1,6 +1,8 @@
 
 [lnk]: https://www.zhihu.com/question/24466000/answer/2832939897
 
+[lnk][lnk]
+
 -----
 
 这玩意儿 (C Language) 难以理解的原因， (一方面) 在于符号含义的设计：
