@@ -1,6 +1,8 @@
 [ref]: https://developer.aliyun.com/article/229322
 
-原文：[为什么我们放弃了 Erlang 技术栈][ref]
+ref by: 
+
+- [为什么我们放弃了 Erlang 技术栈][ref]
 
 ----
 
