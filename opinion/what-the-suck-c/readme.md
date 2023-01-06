@@ -30,7 +30,7 @@ int *i = &j ;
 
 // at ='s left, * means type Point<T>
 // at ='s right, * means getValue() method for Point<T> type things
-
+// hmm.. , such different. :/
 
 // ----------
 // other terrible things: 
