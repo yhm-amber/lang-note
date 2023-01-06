@@ -6,10 +6,10 @@ ref by:
 [ref-alidev]: https://developer.aliyun.com/article/229322
 [ref-kaledl]: https://kaledl.com/article/227076.html
 
-- [为什么我们放弃了 Erlang 技术栈 | 三默网][ref-moban]
-- [为什么我们放弃了 Erlang 技术栈 | 代码交流][ref-dmjl]
-- [为什么我们放弃了 Erlang 技术栈 | 阿里云开发者社区][ref-alidev]
-- [为什么我们放弃了 Erlang 技术栈 | 卡了网][ref-kaledl]
+- [三默网][ref-moban]
+- [代码交流][ref-dmjl]
+- [阿里云开发者社区][ref-alidev]
+- [卡了网][ref-kaledl]
 
 ----
 
