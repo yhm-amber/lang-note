@@ -1,4 +1,6 @@
 
+如何结构 (复用) 你那有趣的代码。
+
 ## Prefer Composition Over Inheritance
 
 组合好过继承。
