@@ -5,7 +5,7 @@ Instances in =lang-note= means note about every many Languages.
 
 -----
 
-- [[OneFetch - ASCII Lang Icon][https://onefetch.dev]]
+- [[https://onefetch.dev][OneFetch - ASCII Lang Icon]]
 
 -----
 
