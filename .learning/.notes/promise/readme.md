@@ -44,4 +44,6 @@ points:
   此时就只能用 `try-catch-finally` 块
   的关键字和语法才能做得到了。
   
+  另外还有 `await {then: ()=>{} }` 这样的形式。
+  
 - ...
