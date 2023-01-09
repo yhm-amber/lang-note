@@ -19,11 +19,9 @@ points:
     只能写在特殊的函数里，即 generator 函数。
     
     具体的写法就是声明函数的关键字是 `function*` ，
-    
     比一般的多了个星号。
     
     对它的调用也是取得一个有着 `.next()` 方法的对象，
-    
     然后调用这个方法才能一个一个取得「产出」的值。
     
   - 如在 Lua 里
@@ -31,8 +29,7 @@ points:
     用了它的函数须进入特定的结构里。
     
     即须要 `coroutine.create(functionname)` 取得一个对象，
-    
-    然后 `coroutine.resume(这个对象)` ，
+    然后 `coroutine.resume(这个对象)` 。
     
     这对应于 JS 里的 `gen().next()` 。
     
