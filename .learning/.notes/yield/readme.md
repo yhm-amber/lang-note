@@ -1,4 +1,11 @@
 
+lang: 
+
+- js
+- py
+- lua
+- ...
+
 points: 
 
 - 这是一种特殊的 `return` 。含义是「产出」，「产出」后还可以从中断（执行产出）的位置继续执行。
@@ -40,8 +47,6 @@ points:
   
 - ...
 
-lang: 
+promise: 
 
-- js
-- py
-- lua
+- ...
