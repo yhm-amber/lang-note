@@ -52,7 +52,13 @@ more:
 
 - `await`
   
-  在 Python 里， `yield from` 几乎可以
-  完全替换为 `await` 使用。当然，函数体做了
-  这样调用的函数声明要增加 `async` 标注，
-   `__iter__` 也要改为 `__await__` 。
+  - 在 Python 里
+    
+    关键字 `yield from` 几乎可以等效地
+    替换为 `await` 来用。当然，函数体做了
+    这样调用的函数声明要增加 `async` 标注，
+    相应的 `__iter__` 部分也要改为 `__await__` 。
+    
+  - ...
+  
+- ...
