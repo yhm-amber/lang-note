@@ -48,3 +48,11 @@ points:
   
 - ...
 
+more: 
+
+- `await`
+  
+  在 Python 里， `yield from` 几乎可以
+  完全替换为 `await` 使用。当然，函数体做了
+  这样调用的函数声明要增加 `async` 标注，
+   `__iter__` 也要改为 `__await__` 。
