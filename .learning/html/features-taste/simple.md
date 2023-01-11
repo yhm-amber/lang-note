@@ -7,6 +7,7 @@
 - 加粗： `<strong> </strong>`
 - 代码： `<code> </code>`
 - 链接： `<a href="..."> </a>`
+- 上标： `<sup> </sup>`
 
 文本骨架
 
