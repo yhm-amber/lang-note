@@ -2,7 +2,9 @@
 
 ### 文本
 
-#### 文本
+#### *文字*
+
+*letters*
 
 ##### 加粗
 
@@ -28,9 +30,9 @@ words `eq words` words
 words ~~deleted words~~ words
 ~~~~~
 
-#### 块
+#### *块*
 
-block
+*block*
 
 ##### 代码段
 
@@ -108,9 +110,9 @@ words words ...
 
 ### 结构
 
-#### 段落
+#### *段落*
 
-paragraph
+*paragraph*
 
 ##### 换行
 
@@ -172,9 +174,9 @@ yoyoyo!
 渲染后的内容一样来阅读。
 ~~~~~
 
-#### 列表
+#### *列表*
 
-list
+*list*
 
 ##### 无序列表
 
@@ -240,4 +242,8 @@ more line per:
     
 
 ~~~~~
+
+#### *表格*
+
+*table*
 
