@@ -2,6 +2,32 @@
 
 ### 文本
 
+#### 文本
+
+##### 加粗
+
+~~~~~ markdown
+words **b words** words
+~~~~~
+
+##### 倾斜
+
+~~~~~ markdown
+words *it words* words
+~~~~~
+
+##### 等宽
+
+~~~~~ markdown
+words `eq words` words
+~~~~~
+
+##### 删除线
+
+~~~~~ markdown
+words ~~deleted words~~ words
+~~~~~
+
 #### 块
 
 block
