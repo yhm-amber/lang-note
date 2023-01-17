@@ -57,7 +57,7 @@ words words ...
 ~~~~~
 
 ~~~~~ markdown
-这是 yanknote 的特有扩展写法：
+下面是 yanknote 的特有扩展写法：
 
 :::: tip 可选的标题
 冒号个数可以是三个以上任意个，
