@@ -46,16 +46,18 @@ words words ...
 ##### 贴士
 
 ~~~~~ markdown
-这个写法只适用于部分渲染 (github) ：
-
 > **Note**
 > 
 > words `code` words
 > 
 
-还可以用 `Warning` 或 `Error` 。
+还有 `Warning` 和 `Error` 也可得到渲染
 
-这个写法只适用于部分渲染 (yanknote) ：
+这个写法只适用于部分渲染引擎 (github) 。
+~~~~~
+
+~~~~~ markdown
+这是 yanknote 的特有扩展写法：
 
 :::: tip 可选的标题
 冒号个数可以是三个以上任意个，
@@ -72,9 +74,9 @@ words words ...
 - 详情 `details`
 - 标签组 `group` 和标签 `group-item` 嵌套其中
 - 分列 `row` 和列 `col` 嵌套其中
+
+更多见 [https://yank-note.vercel.app] 的特色功能说明。
 ::::
-
-
 ~~~~~
 
 
