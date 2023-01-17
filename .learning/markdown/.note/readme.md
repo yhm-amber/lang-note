@@ -51,7 +51,7 @@ words words ...
 > words `code` words
 > 
 
-还有 `Warning` 和 `Error` 也可得到渲染
+其中 `Note` 还可换成 `Warning` 或 `Error` 。
 
 这个写法只适用于部分渲染引擎 (github) 。
 ~~~~~
@@ -63,7 +63,7 @@ words words ...
 冒号个数可以是三个以上任意个，
 可以嵌套。
 
-种类还可以是：
+其中表贴士的 `tip` 还可换成：
 
 - 警告 `warning`
 - 危险 `danger`
