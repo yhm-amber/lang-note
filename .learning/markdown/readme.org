@@ -1,1 +1,6 @@
 
+----
+
+- [[https://markdownguide.org][Markdown Guide]]
+- [[https://markdownguide.org/basic-syntax][Basic Syntax | Markdown Guide]]
+
