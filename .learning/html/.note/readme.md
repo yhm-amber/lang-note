@@ -15,6 +15,10 @@
 - 段落： `<p> </p>`
 - 表格： `<table> </table>`
 
+交互
+
+- 按钮： `<button onclick="fun()"> </button>`
+
 ## 属性
 
 交互性
