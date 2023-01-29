@@ -1,6 +1,6 @@
 version: 19
 jobs:
-- name: pusher all-branch
+- name: pusher all-branch commit
   steps:
   - !PushRepository
     name: force to yhm-amber/lang-note
