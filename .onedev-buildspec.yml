@@ -1,0 +1,37 @@
+version: 19
+jobs:
+- name: pusher all-branch
+  steps:
+  - !PushRepository
+    name: to yhm-amber/lang-note
+    remoteUrl: https://github.com/yhm-amber/lang-note.git
+    userName: yhm-amber
+    passwordSecret: yhm-amber
+    withLfs: true
+    force: true
+    condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
+  triggers:
+  - !BranchUpdateTrigger
+    projects: yhm-ypa/lang-note
+  retryCondition: never
+  maxRetries: 3
+  retryDelay: 30
+  timeout: 3600
+- name: puller all-branch
+  steps:
+  - !PullRepository
+    name: from yhm-amber/lang-note
+    remoteUrl: https://github.com/yhm-amber/lang-note.git
+    syncToChildProject: false
+    refs: refs/heads/* refs/tags/*
+    withLfs: true
+    force: false
+    condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
+  triggers:
+  - !ScheduleTrigger
+    cronExpression: 10 20 3 * * ?
+    projects: yhm-ypa/lang-note
+  retryCondition: never
+  maxRetries: 3
+  retryDelay: 30
+  timeout: 3600
