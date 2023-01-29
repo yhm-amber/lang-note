@@ -3,7 +3,7 @@ jobs:
 - name: pusher all-branch
   steps:
   - !PushRepository
-    name: to yhm-amber/lang-note
+    name: force to yhm-amber/lang-note
     remoteUrl: https://github.com/yhm-amber/lang-note.git
     userName: yhm-amber
     passwordSecret: yhm-amber
