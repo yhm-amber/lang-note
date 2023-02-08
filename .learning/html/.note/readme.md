@@ -6,6 +6,22 @@
   - [HTML](https://developer.mozilla.org//docs/Learn/Getting_started_with_the_web/HTML_basics)
   - [CSS](https://developer.mozilla.org//docs/Learn/Getting_started_with_the_web/CSS_basics)
   - [JavaScript](https://developer.mozilla.org//docs/Learn/Getting_started_with_the_web/JavaScript_basics)
+  
+- 详细
+  
+  - [HTML](https://developer.mozilla.org//docs/Learn/HTML)
+  - [CSS](https://developer.mozilla.org//docs/Learn/CSS)
+  - [JavaScript](https://developer.mozilla.org//docs/Learn/JavaScript)
+  
+- 文档
+  
+  - [HTML](https://developer.mozilla.org//docs/Web/HTML)
+  - [CSS](https://developer.mozilla.org//docs/Web/CSS)
+  - [JavaScript](https://developer.mozilla.org//docs/Web/JavaScript)
+  - [HTTP](https://developer.mozilla.org//docs/Web/HTTP)
+  - [MathML](https://developer.mozilla.org//docs/Web/MathML)
+  - [SVG](https://developer.mozilla.org//docs/Web/SVG)
+  
 
 ## 标签
 
