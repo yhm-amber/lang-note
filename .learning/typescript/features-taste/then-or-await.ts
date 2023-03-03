@@ -82,7 +82,7 @@ const pick_webhtml =
                     )
                     .then(t => (new DOMParser()).parseFromString(t,"text/html"))
                     .then(document => msg.picker(document,msg.per_path) )
-                    .catch(err => `<!-- [FAILED]: job on 'https://${msg.main_hostpath}/${msg.per_path}' failed: ${err} -->`)
+                    .catch(err => `<!-- [FAILED] :pick_perhtml: job on 'https://${msg.main_hostpath}/${msg.per_path}' failed: ${err} -->`)
         
         return fetch(`https://${webmessage.sitehost}/${webmessage.mainpath}`)
             .then
