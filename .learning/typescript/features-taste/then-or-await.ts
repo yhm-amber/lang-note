@@ -65,4 +65,43 @@ const pick_webhtml =
         const result = htmparts.reduce((x,y) => x+y) ;
         return result ;
     } ;
-      
+
+// but i need this ...
+
+const pick_webhtml =
+    (webmessage: {sitehost: string, mainpath: string, picker: (d: Document, p: string) => string })
+    : Promise<string> => 
+    {
+        const pick_perhtml =
+            (msg: {per_path: string, main_hostpath: string, picker: (d: Document, p: string) => string})
+            : Promise<string> =>
+                fetch(`https://${msg.main_hostpath}/${msg.per_path}`)
+                    .then
+                    ( response => response.text()
+                    , reject => `<!-- [ERROR] :pick_perhtml: fetch 'https://${msg.main_hostpath}/${msg.per_path}' got reject: ${reject} -->`
+                    )
+                    .then(t => (new DOMParser()).parseFromString(t,"text/html"))
+                    .then(document => msg.picker(document,msg.per_path) )
+                    .catch(err => `<!-- [FAILED]: job on 'https://${msg.main_hostpath}/${msg.per_path}' failed: ${err} -->`)
+        
+        return fetch(`https://${webmessage.sitehost}/${webmessage.mainpath}`)
+            .then
+            ( response => response.text()
+            , reject => `<!-- [ERROR] :pick_webhtml: fetch 'https://${webmessage.sitehost}/${webmessage.mainpath}' got reject: ${reject} -->` 
+            )
+            .then(t => (new DOMParser()).parseFromString(t,"text/html"))
+            .then
+            ( htmldom => 
+                Array.from( htmldom.getElementsByClassName("reference internal") )
+                    .map(elem => `${webmessage.mainpath}/${elem.getAttribute("href") ?? ""}`)
+                    .map(pathper => {return {per_path: pathper, main_hostpath: `${webmessage.sitehost}/${webmessage.mainpath}`, picker: webmessage.picker}})
+                    .map(msgper => pick_perhtml(msgper))
+            )
+            .then(htmparts_promising => Promise.all(htmparts_promising) )
+            .then(htmparts => htmparts.reduce((x,y) => x+y))
+            .catch(err => `<!-- [FAILED] :pick_webhtml: job on 'https://${webmessage.sitehost}/${webmessage.mainpath}' failed: ${err} -->`)
+    } ;
+
+// 🙃
+
+
