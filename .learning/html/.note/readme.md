@@ -30,14 +30,19 @@
 - 文本区分(默认效果倾斜)： `<i> </i>`
 - 文本区分(默认效果加粗)： `<b> </b>`
 - 代码： `<code> </code>`
+- 等宽： `<tt> </tt>` (已弃用)
 - 链接： `<a href="..."> </a>`
 - 上标： `<sup> </sup>`
+- 键符： `<kbd> </kbd>`
+- 变量： `<var> </var>`
+- 样本： `<samp> </samp>`
 
 文本骨架
 
 - 区域： `<div> </div>`
 - 段落： `<p> </p>`
 - 表格： `<table> </table>`
+- 代码： `<pre> ... </pre>`
 
 渲染逻辑
 
@@ -47,6 +52,7 @@
 交互
 
 - 按钮： `<button onclick="fun()"> </button>`
+- 输出： `<output name="returned val" for="val1 val2 ..."> default value </output>`
 
 ## 属性
 
