@@ -2,7 +2,7 @@
 ## 
 
 # :-1
-quote [(:do, (IO.puts "aa";IO.puts "bb";) )] ## quote [(:do, (IO.puts "aa";IO.puts "bb";) )]
+quote [(:do, (IO.puts "aa";IO.puts "bb";) )] ## quote( [(:do, (IO.puts "aa";IO.puts "bb";) )] )
 
 # :0
 quote [do: (IO.puts "aa";IO.puts "bb";)] ## quote( [do: (IO.puts "aa";IO.puts "bb";)] )
