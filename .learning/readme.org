@@ -6,7 +6,7 @@
 多语言（数据库）在线解释网站：
 
 - [[https://gcc.godbolt.org][Compiler Explorer]]
-- [[https://ideone.com][Ideone.com - Online Compiler and IDE >> C/C++, Java, PHP, Python, Perl and 70+ other compilers and interpreters]]
+- [[https://ideone.com][Ideone.com - Online Compiler and IDE >> 70+ compilers and interpreters]]
 - [[https://onecompiler.com/][OneCompiler - Write, run and share code online - Free online compiler with 60+ languages and databases]]
 - [[https://codepen.io][CodePen - Online Code Editor and Front End Web Developer Community]]
 
