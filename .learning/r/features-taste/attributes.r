@@ -50,3 +50,12 @@ typeof (as.POSIXct ("1991-01-01")) ; # [1] "double"
 class (as.POSIXct ("1991-01-01")) ; # [1] "POSIXct" "POSIXt" 
 attr (as.POSIXct ("1991-01-01"), "class") ; # [1] "POSIXct" "POSIXt" 
 attr (as.POSIXct ("1991-01-01"), "typeof") ; # NULL
+
+as.POSIXct ("1991-01-01") ; # [1] "1991-01-01 UTC"
+attributes (as.POSIXct ("1991-01-01")) ;
+## $class
+## [1] "POSIXct" "POSIXt" 
+## 
+## $tzone
+## [1] ""
+## 
