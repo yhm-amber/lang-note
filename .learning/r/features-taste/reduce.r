@@ -1,5 +1,7 @@
 duplicated (c(1,1)) ; # [1] FALSE TRUE
 
+unique (c(1,2,3,2)) ; # [1] 1 2 3
+
 ### R 检查一个元素是否是重复出现的 duplicated(xs) 的效果，应该是相当于
 ### 
 ### xs 
