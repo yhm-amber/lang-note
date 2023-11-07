@@ -72,29 +72,3 @@ as.character (c(FALSE, TRUE)) ; # [1] "FALSE" "TRUE"
 
 TRUE + 10 ; # [1] 11
 paste("abc", 1) ; # [1] "abc 1"
-
-attributes (NA) ; # NULL
-attributes (1L) ; # NULL
-attributes (2) ; # NULL
-attributes (c(9,0)) ; # NULL
-
-attributes (table (12)) ;
-## $dim
-## [1] 1
-## 
-## $dimnames
-## $dimnames[[1]]
-## [1] "12"
-## 
-## 
-## $class
-## [1] "table"
-## 
-
-attributes (list("a", 1L, 1.5)) ; # NULL
-
-(function (x) { attributes (x) <- NULL ; x }) (table (12)) ; # [1] 1
-(function (x) { attributes (x) <- NULL ; x }) (table (c (1L,2L,3L))) ; # [1] 1 1 1
-(function (x) { attributes (x) <- NULL ; x }) (table (c (1L,2L,1L))) ; # [1] 2 1
-
-
