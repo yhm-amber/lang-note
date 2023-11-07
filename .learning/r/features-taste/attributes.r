@@ -44,3 +44,9 @@ matrix(1:12, nrow=3, ncol=4) ;
 
 attr (matrix(1:12, nrow=3, ncol=4), "dim") ; # [1] 3 4
 dim (matrix(1:12, nrow=3, ncol=4)) ; # [1] 3 4
+
+
+typeof (as.POSIXct ("1991-01-01")) ; # [1] "double"
+class (as.POSIXct ("1991-01-01")) ; # [1] "POSIXct" "POSIXt" 
+attr (as.POSIXct ("1991-01-01"), "class") ; # [1] "POSIXct" "POSIXt" 
+attr (as.POSIXct ("1991-01-01"), "typeof") ; # NULL
