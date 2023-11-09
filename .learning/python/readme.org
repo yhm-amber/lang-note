@@ -1,1 +1,1 @@
-
+py 的[[https://www.python.org/shell/][主页]]可以玩很多语言，因为那是个 anaconda 环境。比如 ~os.system("luajit")~ 或者 ~os.system("zsh")~ 之类的。
