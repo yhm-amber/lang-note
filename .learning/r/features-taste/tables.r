@@ -6,9 +6,9 @@
 	, lang.name = c ("sh","rust","ocaml","wasm")
 	) ;
 	
-	funny.langs ;
-	`$<-` (funny.langs, "x", 2:5) ;
-	`$<-` (funny.langs, "xx", 2*2:5) ;
+	funny.langs |> print();
+	`$<-` (funny.langs, "x", 2:5) |> print();
+	`$<-` (funny.langs, "xx", 2*2:5) |> print();
 }) () ;
 ##   rk lang.emoji lang.name
 ## 1  1         🐌        sh
