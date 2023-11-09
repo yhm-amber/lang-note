@@ -33,3 +33,21 @@
 	f();
 }) () ; # [1] 1100
 
+
+
+
+
+(function (x) 
+{
+	y <- numeric(length(x));
+	y[x>0] <- 1; y; 
+}) (-3:3) ;
+(function (x) 
+{
+	`[<-` (numeric(length(x)), x>0, 1) ;
+}) (-3:3) ;
+# [1] 0 0 0 0 1 1 1
+
+
+
+
