@@ -37,6 +37,8 @@
 }) () ; # [1] 1100
 
 
+(function (x, y=ifelse(x>0, TRUE, FALSE)) 
+{ x <- -111; if(y) x*2 else x*10 }) (5) ; # [1] -1110
 
 
 
