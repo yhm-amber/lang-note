@@ -41,6 +41,13 @@
 (function (x, y=ifelse(x>0, TRUE, FALSE)) 
 { x <- -111; if(y) x*2 else x*10 }) (5) ; # [1] -1110
 
+(\ (x, y = ifelse(x>0, TRUE, FALSE)) 
+{ x <- -111; (if(y) x*2 else x*10) |> print()
+; x <- 3; (if(y) x*2 else x*10) |> print()
+; }) (5) ;
+## [1] -1110
+## [1] 30
+
 ### 👺 签名参数列表（形式参数）中的表达式是 Lazy 的。它更像是以另一种形式定义的函数，只有 y 被用的时候它才会被应用一下子。加上静态绑定的只是地址，所以后续修改就被体现出来了。
 
 (function (x) 
