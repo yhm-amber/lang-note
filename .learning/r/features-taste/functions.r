@@ -64,3 +64,27 @@
 
 
 
+
+
+
+(\()
+{
+	div <- 
+	\ (n) \ (r) \ (c) 
+	ifelse (n > r, div (n - r) (r) (c + 1), c) ;
+	
+	div (13) (2) (0) ; # [1] 6
+	#r-wasm/webr# div (103) (1) (0) ; # Error: evaluation nested too deeply: infinite recursion / options(expressions=)?
+	#rstudio/rstudio# div (10003) (1) (0) ; # Error: C stack usage  7969396 is too close to the limit
+}) () ;
+
+(\()
+{
+	div <- 
+	\ (n) \ (r) \ (c) 
+	if (n > r) div (n - r) (r) (c + 1) else c ;
+	
+	div (103) (2) (0) ; # [1] 51
+	#r-wasm/webr# div (1003) (1) (0) ; # Error: evaluation nested too deeply: infinite recursion / options(expressions=)?
+	#rstudio/rstudio# div (10003) (1) (0) ; # Error: evaluation nested too deeply: infinite recursion / options(expressions=)?
+}) () ;
