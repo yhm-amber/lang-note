@@ -70,3 +70,14 @@ list (1,2,4,3,6,5) |> Reduce (\(a,b) if (a<b) a else b, x = _) ;
 # [1] 1
 
 ### 👺 reduce 的 xs 位就是叫 x 。
+
+
+flatt <- \(xss,flatf = c) xss |> Reduce (\(a,b) flatf (a,b) , x = _) ;
+src |> flatt(c)
+src |> flatt(rbind)
+src |> flatt(cbind)
+
+### 👺 如果要摆平的是 List ，需要用的函数就是 c 即连接函数了。
+### 👺 因为 c (list (1,2,3), list (4,5)) 就相当于 list (1,2,3,4,5) 。
+
+
