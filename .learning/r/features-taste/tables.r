@@ -71,3 +71,18 @@
 	### 👺 这俩会一样地打印 markdown 格式的表格。
 }) ()
 ### 🤡 输出暂略
+
+
+
+(\ () 
+{
+	split_table = 
+	(\(tbl, size)
+	{
+		nrows = tbl |> nrow ();
+		tmp = tbl |> cbind (spr = 1:nrows %/% size);
+		return (tmp |> split (tmp$spr)) ;
+	}) ;
+	# tbl |> split_table (你希望按多大来切)
+}) ()
+
