@@ -59,3 +59,14 @@ mapply(rep, x = 1:4, MoreArgs = list(times = 5)) ;
 mtcars |> Map (\(xx) c(xx), xx = _) ;
 
 ### 👺 这样会把一个 n 行表格变为一个 List ，列表的键就是原本的字段名即 $foo $bar 这样的东西会在原本 [[1]] [[2]] ... 的位置，每个元素为长度为 n 的向量。
+
+
+min <- \(xs) Reduce (\(x,y) if (x<y) x else y, xs) ;
+
+list (1,2,4,3,6,5) |> min()
+Reduce (\(x,y) if (x<y) x else y, list (1,2,4,3,6,5)) ;
+list (1,2,4,3,6,5) |> Reduce (\(x,y) if (x<y) x else y, x = _) ;
+list (1,2,4,3,6,5) |> Reduce (\(a,b) if (a<b) a else b, x = _) ;
+# [1] 1
+
+### 👺 reduce 的 xs 位就是叫 x 。
