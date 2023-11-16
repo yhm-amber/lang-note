@@ -73,9 +73,9 @@ list (1,2,4,3,6,5) |> Reduce (\(a,b) if (a<b) a else b, x = _) ;
 
 
 flatt <- \(xss,flatf = c) xss |> Reduce (\(a,b) flatf (a,b) , x = _) ;
-src |> flatt(c)
-src |> flatt(rbind)
-src |> flatt(cbind)
+list (list (1,0,3),list (2,4),list (3,6,5)) |> flatt(c)
+list (list (1,0,3),list (2,4),list (3,6,5)) |> flatt(rbind)
+list (list (1,0,3),list (2,4),list (3,6,5)) |> flatt(cbind)
 
 ### 👺 如果要摆平的是 List ，需要用的函数就是 c 即连接函数了。
 ### 👺 因为 c (list (1,2,3), list (4,5)) 就相当于 list (1,2,3,4,5) 。
