@@ -60,15 +60,20 @@
 	
 	
 	### 👹 这个 `data.table` 是需额外安装的。
-	reptilia.emojis.table <- reptilia.emojis |> data.table::setDF() ;
+	reptilia.emojis.table <- reptilia.emojis |> data.table::setDT() ;
 	
 	reptilia.emojis |> print();
 	reptilia.emojis.table |> print();
-	### 👺 这俩会一样地以一种简洁的风格打印表格。
+	### 👺 这俩会以一种简洁的风格打印表格。后者比前者会多出类型部分。
 	
 	reptilia.emojis |> knitr::kable();
 	reptilia.emojis.table |> knitr::kable();
 	### 👺 这俩会一样地打印 markdown 格式的表格。
+	### 👹 这个 `knitr` 是需额外安装的。
+	
+	### 👺 data.table 就是 class 字段是 [1] "data.table" "data.frame" 的对象。
+	### 👺 data.frame 就是 class 字段是 [1] "data.frame" 的对象。
+	### 👺 它俩的 typeof 输出都是 [1] "list" 。
 }) ()
 ### 🤡 输出暂略
 
