@@ -120,9 +120,18 @@
 	
 	chop_records = 
 	\ (src, pieces) src |> split_records (pieces |> pieces2limitsize (src |> nrow ())) ;
+	### 👺 这个只能确保尽可能均匀切出多少整份，可能有余数份。
 	
+	mtcars |> chop_records (3) |> print (); # 它会被尽可能均匀地切成 3 整份（有余份）然后作为结果给出。
+	mtcars |> chop_records (4) |> print (); # 它会被尽可能均匀地切成 4 整份（无余份）然后作为结果给出。
 	
-	mtcars |> chop_records (3) |> print (); # 它会被尽可能均匀地切成 3 份然后作为结果给出。
-	mtcars |> chop_records (4) |> print (); # 它会被尽可能均匀地切成 4 份然后作为结果给出。
+	divide_records = 
+	\ (src, pieces, distributer_fieldname = "distributed_group") (\ (fielded) 
+		fielded |> split (fielded [[distributer_fieldname]] )
+		) (fielded = `[[<-` (src, distributer_fieldname
+			, value = (1:nrow(src) - 1) %% pieces)) ;
+	
+	mtcars |> divide_records (3) |> print (); # 会尽可能均匀地分出 3 个组，不确保完全均匀。
+	mtcars |> divide_records (4) |> print (); # 会尽可能均匀地分出 4 个组，不确保完全均匀。
 }) ()
 
