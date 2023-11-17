@@ -128,3 +128,19 @@ list (list (1,0,3),list (2,4),list (3,6,5)) |> flatt(cbind)
 ### 👺 因为 c (list (1,2,3), list (4,5)) 就相当于 list (1,2,3,4,5) 。
 
 
+
+(\()
+	c ("aaa#1.rds"
+		, "aaa#2.rds"
+		, "aaa#3.rds"
+		, "bbb#1.rds"
+		, "bbb#2.rds"
+		, "ccc#1.rds") -> src ;
+	
+	src |> lapply (\(per) per |> strsplit("[#]")) |> lapply (\(a) a[[1]][1]) |> unlist() ;
+	src |> strsplit("[#]") |> lapply (\(a) a[1]) |> unlist() ;
+	# [1] "aaa" "aaa" "aaa" "bbb" "bbb" "ccc"
+) ()
+
+### 👺 向量直接向量运算即可。
+
