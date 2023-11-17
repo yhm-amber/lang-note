@@ -93,11 +93,11 @@
 	divisibal = \(a,b) a %% b == 0 ;
 	divisibal -> `%.%` ;
 	split_table = 
-	(\ (src, rowsize, spliter_fieldname = "split_group") (\ (nrows) \ (fielded) 
+	(\ (src, rowsize, spliter_fieldname = "split_group") (\ (nrows) (\ (fielded) 
 		fielded |> split (fielded [[spliter_fieldname]] )
 		) (fielded = `[[<-` (src, spliter_fieldname
 			, value = (1:nrows - (if (nrows %.% rowsize) 1 else 0)) %/% rowsize)
-		) (nrows = src |> nrow())
+		)) (nrows = src |> nrow())
 	) ;
 	# mtcars |> split_table (你希望按每份最多多大来切)
 	# mtcars |> split_table (你希望按每份最多多大来切, 这里可以自己写个切分序号列的字段名)
