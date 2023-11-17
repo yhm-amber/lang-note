@@ -91,12 +91,17 @@
 (\ () 
 {
 	split_table = 
-	(\ (src, size, spliter_fieldname = "split_group") (\ (fielded) 
+	(\ (src, rowsize, spliter_fieldname = "split_group") (\ (fielded) 
 		fielded |> split (fielded [[spliter_fieldname]] )
 		) (fielded = `[[<-` (src, spliter_fieldname
-			, value = (1:nrow(src)) %/% size))
+			, value = (1:nrow(src)) %/% rowsize))
 	) ;
 	# mtcars |> split_table (你希望按每份最多多大来切)
 	# mtcars |> split_table (你希望按每份最多多大来切, 这里可以自己写个切分序号列的字段名)
+	
+	### 👺 计算 (1:nrow(src)) %/% rowsize 可得到内容为 rowsize 个 0 然后 rowsize 个 1 然后 rowsize 个 2 以此类推的序列的向量。
+	### 👺 然后这个序列会被补充为相应的一列，允许自定义列名是为了避免覆盖已有列。然后就是按这列来切了。
+	
+	mtcars |> split_table (6) ; # 这会得到一个列表，其中每个元素都是表，每个表都是最多有 6 行。
 }) ()
 
