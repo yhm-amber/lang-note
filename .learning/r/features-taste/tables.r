@@ -78,16 +78,25 @@
 ### 🤡 输出暂略
 
 
+(\ (ff) 
+{
+	`[[<-` (mtcars, ff, value = 1:nrow(mtcars))$pp |> print();
+	`$<-` (mtcars, ff, 1:nrow(mtcars))$ff |> print();
+	# ~ 1:32
+}) ("pp") ;
+
+### 👺 在 "data.frame" 里： `[[<-` 可以动态决定字段名，`$<-` 不行。
+### 👺 但前者传值必须用具名参数，后者则没有该具名参数。
 
 (\ () 
 {
 	split_table = 
-	(\(tbl, size)
-	{
-		nrows = tbl |> nrow ();
-		tmp = tbl |> cbind (spr = 1:nrows %/% size);
-		return (tmp |> split (tmp$spr)) ;
-	}) ;
-	# tbl |> split_table (你希望按多大来切)
+	(\ (src, size, spliter_fieldname = "split_group") (\ (fielded) 
+		fielded |> split (fielded [[spliter_fieldname]] )
+		) (fielded = `[[<-` (src, spliter_fieldname
+			, value = (1:nrow(src)) %/% size))
+	) ;
+	# mtcars |> split_table (你希望按多大来切)
+	# mtcars |> split_table (你希望按多大来切, 切分序号列的字段名)
 }) ()
 
