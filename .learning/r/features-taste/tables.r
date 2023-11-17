@@ -96,7 +96,7 @@
 		) (fielded = `[[<-` (src, spliter_fieldname
 			, value = (1:nrow(src)) %/% size))
 	) ;
-	# mtcars |> split_table (你希望按多大来切)
-	# mtcars |> split_table (你希望按多大来切, 切分序号列的字段名)
+	# mtcars |> split_table (你希望按每份最多多大来切)
+	# mtcars |> split_table (你希望按每份最多多大来切, 这里可以自己写个切分序号列的字段名)
 }) ()
 
