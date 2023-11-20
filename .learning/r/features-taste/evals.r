@@ -27,3 +27,10 @@ expression (1 + 1) |> eval () ; # [1] 2
 (expression (\ (x) x) |> eval (expr = _)) (0)
 (parse (text = "\\ (x) x") |> eval ()) (0)
 # [1] 0
+
+### 👺 所以只要能取得字符串就可以这样解析。
+
+(data.frame (fs = c("\\(x) x", "\\(x) \\(y) x + y"))$fs [1] |> parse(text = _) |> eval ()) (1)
+(data.frame (fs = c("\\(x) x", "\\(x) \\(y) x + y"))$fs [2] |> parse(text = _) |> eval ()) (1) (0)
+# [1] 1
+
