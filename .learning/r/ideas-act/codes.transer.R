@@ -36,9 +36,24 @@ list.have.nest =
 ### 🦕 判断一个 "list" 的元素里有没有 "list" class 的。
 
 
+
+### 🐍 test
 ### 🐍 示例：把乘号转为除号。
 list (1,2,3+1-4*8,list (3*5)) |> quote() |> 
 	codes.call.ast () |> 
 	codes.ast.deeplapply (\ (a) if (identical(a, `*` |> quote ())) `/` |> quote () else a) |> 
 	codes.ast.call () ; # list(1, 2, 3 + 1 - 4/8, list(3/5))
+### 🦎 pre test also
 
+### 🐊 define fun by pre 🦎
+codes.call.trans = 
+\ (callings, f) callings |> 
+	codes.call.ast () |> 
+	codes.ast.deeplapply (f) |> 
+	codes.ast.call () ;
+
+### 🐍 test
+list (1,2,3+1-4*8,list (3*5)) |> quote() |> 
+	codes.call.trans (\ (a) 
+		if (identical(a, `*` |> quote ())) 
+		`/` |> quote () else a) ; # list(1, 2, 3 + 1 - 4/8, list(3/5))
