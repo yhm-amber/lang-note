@@ -37,8 +37,7 @@ list.have.nest <-
 
 
 
-### 🐍 test
-### 🐍 示例：把乘号转为除号。
+### 🐍 test : 把乘号转为除号。
 list (1,2,3+1-4*8,list (3*5)) |> quote() |> 
 	codes.call.ast () |> 
 	codes.ast.deeplapply (\ (a) if (identical(a, `*` |> quote ())) `/` |> quote () else a) |> 
