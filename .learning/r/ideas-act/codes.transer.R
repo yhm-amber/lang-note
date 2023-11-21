@@ -47,7 +47,7 @@ list (1,2,3+1-4*8,list (3*5)) |> quote() |>
 
 ### 🐊 define fun by pre 🦎
 codes.call.trans = 
-\ (callings, f) callings |> 
+\ (callings, f = \ (a) a) callings |> 
 	codes.call.ast () |> 
 	codes.ast.deeplapply (f) |> 
 	codes.ast.call () ;
