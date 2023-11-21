@@ -4,6 +4,7 @@ codes.call.ast =
 	lapply (\ (x) 
 		if (is.call(x)) codes.call.ast (x) else x) ;
 
+### 🦕 转换被引用代码为列表格式的 AST
 ### 🦕 把 "call" class 变为 "list" class 的 AST （抽象语法树）。
 ### 🐢 这个定义一样的： codes.call.ast <- \ (callings) purrr::map_if(as.list(callings), is.call, codes.call.ast) ;
 
@@ -15,6 +16,7 @@ codes.ast.call =
 		if (is.list (xs)) as.call (xs) else xs) |> 
 	as.call() ;
 
+### 🦕 转换列表格式的 AST 为被引用代码
 ### 🦕 把像上面那样的 AST "list" 变回为对应的 "call" class 的数据
 
 codes.ast.deeplapply = 
@@ -24,6 +26,7 @@ codes.ast.deeplapply =
 		codes.ast.deeplapply (x, f) else 
 		f (x)) ;
 
+### 🦕 对 AST 中所有元素按 f 转换
 ### 🦕 能够对 AST "list" 中所有元素遍历并做出合乎 f 变换的转换
 ### 🦕 （比如能把乘号替换成除号）
 
@@ -33,6 +36,7 @@ list.have.nest <-
 	lapply (\ (x) is.list(x)) |> 
 	Reduce (\ (a, b) a || b, x = _) ;
 
+### 🦕 子列表检测
 ### 🦕 判断一个 "list" 的元素里有没有 "list" class 的。
 
 
@@ -42,7 +46,7 @@ list (1,2,3+1-4*8,list (3*5)) |> quote() |>
 	codes.call.ast () |> 
 	codes.ast.deeplapply (\ (a) if (identical(a, `*` |> quote ())) `/` |> quote () else a) |> 
 	codes.ast.call () ; # list(1, 2, 3 + 1 - 4/8, list(3/5))
-### 🦎 pre test also
+### 🦎 pre test : 上面的测试可作为下面定义的预测试。
 
 ### 🐊 define fun by pre 🦎
 codes.call.trans = 
@@ -50,6 +54,13 @@ codes.call.trans =
 	codes.call.ast () |> 
 	codes.ast.deeplapply (f) |> 
 	codes.ast.call () ;
+
+### 🦕 被引用代码内容转换器
+### 🦕 对 "call" class 的被引用代码中所有元素按照 f 规定转换。
+
+### 🦕 可用于对任何元素的指定转换，通过分支表达式完成。
+### 🦕 应该不能操作某个子 AST 整体，只能作用于非 "list" 的元素，即这里的 f 的自变量一定不会是 "list" 。
+
 
 ### 🐍 test
 list (1,2,3+1-4*8,list (3*5)) |> quote() |> 
