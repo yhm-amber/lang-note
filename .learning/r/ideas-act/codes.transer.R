@@ -1,4 +1,4 @@
-codes.call.ast <- 
+codes.call.ast = 
 \ (callings) callings |> 
 	as.list () |> 
 	lapply (\ (x) 
@@ -8,7 +8,7 @@ codes.call.ast <-
 ### 🐢 这个定义一样的： codes.call.ast <- \ (callings) purrr::map_if(as.list(callings), is.call, codes.call.ast) ;
 
 
-codes.ast.call <- 
+codes.ast.call = 
 \ (ast) ast |> 
 	lapply (\ (xs) 
 		if (list.have.nest (xs)) codes.ast.call (xs) else 
@@ -17,7 +17,7 @@ codes.ast.call <-
 
 ### 🦕 把像上面那样的 AST "list" 变回为对应的 "call" class 的数据
 
-codes.ast.deeplapply <- 
+codes.ast.deeplapply = 
 \ (ast, f) ast |> 
 	lapply (\ (x) 
 		if (is.list (x)) 
@@ -28,7 +28,7 @@ codes.ast.deeplapply <-
 ### 🦕 （比如能把乘号替换成除号）
 
 
-list.have.nest = 
+list.have.nest <- 
 \ (lst) lst |> 
 	lapply (\ (x) is.list(x)) |> 
 	Reduce (\ (a, b) a || b, x = _) ;
