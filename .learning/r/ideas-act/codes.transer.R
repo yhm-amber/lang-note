@@ -19,11 +19,11 @@ codes.ast.call =
 ### 🦕 转换列表格式的 AST 为被引用代码
 ### 🦕 把像上面那样的 AST "list" 变回为对应的 "call" class 的数据
 
-codes.ast.deeplapply = 
+codes.ast.deeplapply.element = 
 \ (ast, f) ast |> 
 	lapply (\ (x) 
 		if (is.list (x)) 
-		codes.ast.deeplapply (x, f) else 
+		codes.ast.deeplapply.element (x, f) else 
 		f (x)) ;
 
 ### 🦕 对 AST 中所有元素按 f 转换
@@ -45,7 +45,7 @@ list.have.nest <-
 ### 🦎 pre test
 list (1,2,3+1-4*8,list (3*5)) |> quote() |> 
 	codes.call.ast () |> 
-	codes.ast.deeplapply (\ (a) if (identical(a, `*` |> quote ())) `/` |> quote () else a) |> 
+	codes.ast.deeplapply.element (\ (a) if (identical(a, `*` |> quote ())) `/` |> quote () else a) |> 
 	codes.ast.call () ;
 # list(1, 2, 3 + 1 - 4/8, list(3/5))
 
@@ -54,7 +54,7 @@ list (1,2,3+1-4*8,list (3*5)) |> quote() |>
 codes.call.trans.element = 
 \ (callings, f = \ (x) x) callings |> 
 	codes.call.ast () |> 
-	codes.ast.deeplapply (f) |> 
+	codes.ast.deeplapply.element (f) |> 
 	codes.ast.call () ;
 
 ### 🦕 被引用代码内容转换器
@@ -75,20 +75,19 @@ list (1,2,3+1-4*8,list (3*5)) |> quote() |>
 
 
 ### 🐊 defines
-codes.ast.trans = 
-\ (ast, f) ast |> 
-	lapply (\ (xs) 
-		if (list.have.nest (xs)) 
-		xs |> codes.ast.trans (f) else 
-		if (is.list (xs)) 
-		xs |> f () else xs) ;
+codes.ast.deeplapply.ast = 
+\ (ast, f) ast |> lapply (\ (xs) 
+	if (list.have.nest (xs)) 
+	xs |> codes.ast.deeplapply.ast (f) else 
+	if (is.list (xs)) 
+	xs |> f () else xs) ;
 
 
 ### 🐍 test : 对于乘法等式把第一个参数变为 7 。
 ### 🦎 pre test
 list (1,2,3+1-4*8,list (3*5)) |> quote() |> 
 	codes.call.ast () |> 
-	codes.ast.trans (\ (ast) if (ast[[1]] |> identical(`*` |> quote ())) `[[<-` (ast, 2, value = 7) else ast) |> 
+	codes.ast.deeplapply.ast (\ (ast) if (ast[[1]] |> identical(`*` |> quote ())) `[[<-` (ast, 2, value = 7) else ast) |> 
 	codes.ast.call () ;
 # list(1, 2, 3 + 1 - 7 * 8, list(7 * 5))
 
@@ -97,7 +96,7 @@ list (1,2,3+1-4*8,list (3*5)) |> quote() |>
 codes.call.trans.ast = 
 \ (callings, f = \ (a) a) callings |> 
 	codes.call.ast () |> 
-	codes.ast.trans (\ (ast) if (ast[[1]] |> identical(`*` |> quote ())) `[[<-` (ast, 2, value = 7) else ast) |> 
+	codes.ast.deeplapply.ast (\ (ast) if (ast[[1]] |> identical(`*` |> quote ())) `[[<-` (ast, 2, value = 7) else ast) |> 
 	codes.ast.call () ;
 
 
