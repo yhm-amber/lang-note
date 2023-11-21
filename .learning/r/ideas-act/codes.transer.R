@@ -60,6 +60,7 @@ codes.call.trans =
 
 ### 🦕 可用于对任何元素的指定转换，通过分支表达式完成。
 ### 🦕 应该不能操作某个子 AST 整体，只能作用于非 "list" 的元素，即这里的 f 的自变量一定不会是 "list" 。
+### 🦕 操作最末端一个子 AST 的思路，和 codes.ast.call 一样。不能用 deeplapply 。
 
 
 ### 🐍 test
