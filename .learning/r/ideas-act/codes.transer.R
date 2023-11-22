@@ -31,13 +31,16 @@ codes.ast.deeplapply.element =
 ### 🦕 （比如能把乘号替换成除号）
 
 
+
 list.have.nest <- 
 \ (lst) lst |> 
 	lapply (\ (x) is.list(x)) |> 
-	Reduce (\ (a, b) a || b, x = _) ;
+	unlist () |> any () ;
+
 
 ### 🦕 子列表检测
 ### 🦕 判断一个 "list" 的元素里有没有 "list" class 的。
+### 🐢 unlist () |> any () 这段逻辑上相当于 Reduce (\ (a, b) a || b, x = _) 。
 
 
 
@@ -106,7 +109,6 @@ list (1,2,3+1-4*8,list (3*5)) |> quote() |>
 		if (ast[[1]] |> identical(`*` |> quote ())) 
 		`[[<-` (ast, 2, value = 7) else ast) ;
 # list(1, 2, 3 + 1 - 7 * 8, list(7 * 5))
-
 
 
 
