@@ -46,11 +46,11 @@ list.have.nest <-
 
 ### 🐍 test : 把乘号转为除号。
 ### 🦎 pre test
-list (1,2,3+1-4*8,list (3*5)) |> quote() |> 
+list (1,2,3+1-4*8*6,list (3*5)) |> quote() |> 
 	codes.call.ast () |> 
 	codes.ast.deeplapply.element (\ (a) if (identical(a, `*` |> quote ())) `/` |> quote () else a) |> 
 	codes.ast.call () ;
-# list(1, 2, 3 + 1 - 4/8, list(3/5))
+# list(1, 2, 3 + 1 - 4/8/6, list(3/5))
 
 
 ### 🐊 defines by pre
@@ -65,11 +65,11 @@ codes.call.trans.element =
 
 
 ### 🐍 test
-list (1,2,3+1-4*8,list (3*5)) |> quote() |> 
+list (1,2,3+1-4*8*6,list (3*5)) |> quote() |> 
 	codes.call.trans.element (\ (a) 
 		if (identical(a, `*` |> quote ())) 
 		`/` |> quote () else a) ;
-# list(1, 2, 3 + 1 - 4/8, list(3/5))
+# list(1, 2, 3 + 1 - 4/8/6, list(3/5))
 
 
 ### 🦕 可用于对任何元素的指定转换，通过分支表达式完成。
@@ -83,7 +83,8 @@ codes.ast.deeplapply.ast =
 	, f.ast.trees = f
 	, f.ast.leaves = f
 	, f.element.all = \ (x) x) 
-ast |> lapply (\ (xs) 
+ast |> 
+lapply (\ (xs) 
 	if (list.have.nest (xs)) 
 	xs |> 
 	codes.ast.deeplapply.ast (f
@@ -93,16 +94,17 @@ ast |> lapply (\ (xs)
 	f.ast.trees () else 
 	if (is.list (xs)) 
 	xs |> f.ast.leaves () else 
-	xs |> f.element.all ()) ;
+	xs |> f.element.all ()) |> 
+f.ast.trees () ;
 
 
 ### 🐍 test : 对于乘法等式把第一个参数变为 7 。
 ### 🦎 pre test
-list (1,2,3+1-4*8,list (3*5)) |> quote() |> 
+list (1,2,3+1-4*8*6,list (3*5)) |> quote() |> 
 	codes.call.ast () |> 
 	codes.ast.deeplapply.ast (\ (ast) if (ast[[1]] |> identical(`*` |> quote ())) `[[<-` (ast, 2, value = 7) else ast) |> 
 	codes.ast.call () ;
-# list(1, 2, 3 + 1 - 7 * 8, list(7 * 5))
+# list(1, 2, 3 + 1 - 7 * 6, list(7 * 5))
 
 
 ### 🐊 defines by pre
@@ -114,12 +116,17 @@ codes.call.trans.ast =
 
 
 ### 🐍 test
-list (1,2,3+1-4*8,list (3*5)) |> quote() |> 
+list (1,2,3+1-4*8*6,list (3*5)) |> quote() |> 
 	codes.call.trans.ast (\ (ast) 
 		if (ast[[1]] |> identical(`*` |> quote ())) 
 		`[[<-` (ast, 2, value = 7) else ast) ;
-# list(1, 2, 3 + 1 - 7 * 8, list(7 * 5))
+# list(1, 2, 3 + 1 - 7 * 6, list(7 * 5))
 
+list (1,2,3+1-4*8*6,list (list(7),3*5)) |> quote() |> 
+	codes.call.trans.ast (\ (ast) 
+		if (ast[[1]] |> identical(quote (list))) 
+		`[[<-` (ast, 3, value = 0) else ast) ;
+# list(1, 0, 3 + 1 - 4 * 8 * 6, list(list(7, 0), 0))
 
 
 
