@@ -79,11 +79,21 @@ list (1,2,3+1-4*8,list (3*5)) |> quote() |>
 
 ### 🐊 defines
 codes.ast.deeplapply.ast = 
-\ (ast, f) ast |> lapply (\ (xs) 
+\ (ast, f
+	, f.ast.trees = f
+	, f.ast.leaves = f
+	, f.element.all = \ (x) x) 
+ast |> lapply (\ (xs) 
 	if (list.have.nest (xs)) 
-	xs |> codes.ast.deeplapply.ast (f) else 
+	xs |> 
+	codes.ast.deeplapply.ast (f
+		, f.ast.trees
+		, f.ast.leaves
+		, f.element.all) |> 
+	f.ast.trees () else 
 	if (is.list (xs)) 
-	xs |> f () else xs) ;
+	xs |> f.ast.leaves () else 
+	xs |> f.element.all ()) ;
 
 
 ### 🐍 test : 对于乘法等式把第一个参数变为 7 。
