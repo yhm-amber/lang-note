@@ -73,3 +73,37 @@ c (\(x) x, \(x) \    (f)   f(x)) ;
 ### 👺 当然，由于 R 中， "data.frame" 的行是用向量而不是列表实现的。
 ### 👺 因而，这儿的表中的一格，也就不能够是列表、向量、表，也不能是闭包了。
 
+
+
+
+
+list(11,22,33)[2] |> identical (list(22)) ; # [1] TRUE
+list(11,22,33)[[2]] |> identical (22) ; # [1] TRUE
+
+list(aa=11,bb=22,cc=33)[[2]] |> identical (22) ; # [1] TRUE
+list(aa=11,bb=22,cc=33)[["bb"]] |> identical (22) ; # [1] TRUE
+list(aa=11,bb=22,cc=33)$bb |> identical (22) ; # [1] TRUE
+
+list(aa=11,bb=22,cc=33)[2] |> identical (list(bb = 22)) ; # [1] TRUE
+list(aa=11,bb=22,cc=33)[2] |> identical (list(aa = 22)) ; # [1] FALSE
+
+### 👺 一个 "list" class 的值，即一个列表，用单层中括号，即取得其相应子列表。
+
+list(aa=11,bb=22,cc=33)[3:2] |> identical (list(cc=33,bb=22)) ; # [1] TRUE
+list(aa=11,bb=22,cc=33)[2:3] |> identical (list(bb=22,cc=33)) ; # [1] TRUE
+list(aa=11,bb=22,cc=33)[c(T,F,T)] |> identical (list(aa=11,cc=33)) ; # [1] TRUE
+list(aa=11,bb=22,cc=33)[c(3,1,2)] |> identical (list(cc=33,aa=11,bb=22)) ; # [1] TRUE
+list(aa=11,bb=22,cc=33)[c("bb","cc","aa")] |> identical (list(bb=22,cc=33,aa=11)) ; # [1] TRUE
+
+### 👺 根据单层中括号中的限定：
+### 👺 	若只能选中一个元素，则取得的子列表就只有一个元素。比如 list(11,22,33)[2] 这样所得结果就相当于 list(22) 。
+### 👺 	若能够选中多个元素，则取得的子列表里就有这多个元素。比如 list(11,22,33)[c(2,3)] 这样所得结果就相当于 list(22,33) 。
+
+### 👺 对于有键名的 "list" 元素和更多的选中语法可见上面的例子。
+### 👺 不同于映射类型，键值列表的数据结构中的元素顺序是作为有意义的要素被解析的，因而也允许键的重复。
+
+list(cc=33,bb=22) |> identical (list(bb=22,cc=33)) ; # [1] FALSE
+list(cc=33,bb=22) |> identical (list(33,22)) ; # [1] FALSE
+
+### 👺 键值对内容完全相同的列表，顺序不同，也要被视为内容不同。
+### 👺 即便顺序相同，只是键层面有区别的列表内容也要被视为不同。
