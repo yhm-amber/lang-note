@@ -1,3 +1,21 @@
+
+(\()
+{
+	x = 1 ;
+	f = \(y) c (x=x, y=y, z=z) ;
+	z = 2 ;
+	f(3) |> print() ;
+	x = 4 ;
+	z = 5 ;
+	y = 6 ;
+	f(7) |> print() ;
+})()
+## x y z
+## 1 3 2
+## x y z
+## 4 7 5
+
+
 `names<-` (1:2, c("a", "b")) ;
 (function (x, y) { attr (x, "names") <- y  ; x }) (1:2, c("a", "b")) ;
 (function (x, y) { names (x) <- y  ; x }) (1:2, c("a", "b")) ;
