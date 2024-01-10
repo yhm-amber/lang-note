@@ -13,7 +13,8 @@ strsplit(
 		,"])")
 	, perl=TRUE) ;
 
-cut.letter.number = "A-Za-z" %characters.cutter% "0-9" ;
+cut.letter.number = 
+"A-Za-z" %characters.cutter% "0-9" ;
 
 
 
