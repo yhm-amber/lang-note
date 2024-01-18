@@ -18,3 +18,28 @@ sheepy = \(n) {Sys.sleep(n);n} ;
 
 ### 👺 前一行会 8 秒后给出所有结果
 ### 👺 后一行会每过一秒打一个数字并在最后一次打出所有数字
+
+
+#' 有限并行度
+
+future::plan(future::cluster, workers = 3)
+
+sheepy = \(n) {Sys.sleep(3);n}
+
+seq(6) %>% 
+  lapply (\(n) future::future(sheepy(n))) %>% 
+  lapply(\(x) x %>% (future::value) %>% as.character %T>% message) %>% 
+  unlist
+## 1
+## 2
+## 3
+## 4
+## 5
+## 6
+## [1] "1" "2" "3" "4" "5" "6"
+## 
+
+#' 三秒后出前三个序号，
+#' 再三秒出后三个序号、以及所有序号。
+#' 
+
