@@ -1,2 +1,2 @@
 
-[[webr][https://webr.r-wasm.org/latest/]]
+[[https://webr.r-wasm.org/latest/][webr]]
