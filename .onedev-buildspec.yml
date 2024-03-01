@@ -13,7 +13,7 @@ jobs:
   - !PushRepository
     name: force to cb yhm-ypa/lang-note
     remoteUrl: https://codeberg.org/yhm-ypa/lang-note.git
-    userName: yhm-amber
+    userName: yhm
     passwordSecret: codeberg.yhm
     withLfs: true
     force: true
