@@ -1,4 +1,6 @@
 
+
+list (a = 2) |> list2env (environment ())
 assign ("a", 2, parent.frame())
 assign ("a", 2)
 a <- 2
