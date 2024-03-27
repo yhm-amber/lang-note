@@ -1,6 +1,8 @@
 
 
 list (a = 2) |> list2env (environment ())
+list (a = 2) |> list2env (parent.frame ())
+list (a = 2) |> list2env (parent.env (new.env ()))
 assign ("a", 2, environment ())
 assign ("a", 2, parent.frame ())
 assign ("a", 2, parent.env (new.env ()))
@@ -9,7 +11,7 @@ a <- 2
 a = 2
 2 -> a
 
-#' Both these 8 lines have same effect
+#' Both these 10 lines have same effect to current environment.
 #' 
 
 env = new.env()
