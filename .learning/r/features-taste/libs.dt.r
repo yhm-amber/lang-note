@@ -3,8 +3,8 @@
 #' 
 
 data.table::as.data.table(dplyr::starwars)[
-  T, 
-  .(h = mean(height), m = sum(mass)), 
+  i = T, 
+  j = .(h = mean(height), m = sum(mass)), 
   by = .(species, homeworld)] -> a
 
 dtplyr::lazy_dt(dplyr::starwars) |> 
