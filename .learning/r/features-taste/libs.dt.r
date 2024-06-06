@@ -1,5 +1,13 @@
+#' Multi Thread
+#' - https://stackoverflow.com/questions/61750943/is-there-an-newer-version-or-alternative-for-data-table-in-r
+
+
 
 #' summarise syntax
+#' 
+#' see: 
+#' - https://stackoverflow.com/questions/36526141/summarize-data-table-by-group
+#' 
 #' 
 
 data.table::as.data.table(dplyr::starwars)[
@@ -16,6 +24,11 @@ a |> diffdf::diffdf(b, keys = base::c("species", "homeworld")) # No issues were 
 
 
 #' left join
+#' 
+#' more join see: 
+#' - https://stackoverflow.com/questions/1299871/how-to-join-merge-data-frames-inner-outer-left-right
+#' - https://stackoverflow.com/questions/34598139/left-join-using-data-table
+#' 
 #' 
 
 tibble::tribble(
