@@ -35,7 +35,9 @@ expression (1 + 1) |> eval () ; # [1] 2
 # [1] 1
 
 
-#' 这样可以取得字面量的代码（由于其特性所以取得不了产量内的内容顶多相当于表达式或 name 转字符串）
+#' 这样可以取得字面量的代码（有格式化的效果）
+#' 来自: https://dbplyr.tidyverse.org/reference/copy_to.src_sql.html
+#' 
 
-base::deparse(base::substitute(base::c(xxxx+1,''+y,zzz))) # [1] "base::c(xxxx + 1, \"\" + y, zzz)"
+base::deparse(base::substitute(base::c (xxxx+1,''+y,zzz))) # [1] "base::c(xxxx + 1, \"\" + y, zzz)"
 
