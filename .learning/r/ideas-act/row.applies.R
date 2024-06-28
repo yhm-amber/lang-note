@@ -146,3 +146,6 @@ simple_rowsumm = function (func) function (...) simple_rowfunc (func) (...) |>
 # simple_rowsumm (min) (1:4, 4:1)
 # # [1] 1 2 2 1
 
+# base::pmin (1:4, 4:1)
+# # [1] 1 2 2 1
+
