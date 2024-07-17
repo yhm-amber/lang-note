@@ -17,3 +17,4 @@ func main() {
 // - https://golangdocs.com/anonymous-functions-in-golang
 // - https://stackoverflow.com/questions/11766320/does-go-have-lambda-expressions-or-anything-similar
 // - https://en.wikipedia.org/wiki/Anonymous_function#Go
+// - https://stackoverflow.com/questions/36614509/golang-too-many-arguments-to-return
