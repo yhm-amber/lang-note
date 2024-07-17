@@ -12,3 +12,8 @@ func main() {
 }
 
 // https://go.dev/play/p/8XQ2Js0GqHz
+
+// see: 
+// - https://golangdocs.com/anonymous-functions-in-golang
+// - https://stackoverflow.com/questions/11766320/does-go-have-lambda-expressions-or-anything-similar
+
