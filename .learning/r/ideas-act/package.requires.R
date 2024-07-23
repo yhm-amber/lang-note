@@ -40,9 +40,9 @@ function (requires)
 	
 	rplz = \ (.if) \ (.d) \ (.x) base::replace(.x, .if(.x), .d)
 	rplz.na = rplz (base::is.na)
-	versionrplz.na = rplz.na ("0.0.0")
+	versionplz.na = rplz.na ("0.0.0")
 	
-	.requires$required = base::package_version(versionrplz.na (.requires$repo_ver)) > base::package_version(versionrplz.na (.requires$local_ver))
+	.requires$required = base::package_version(versionplz.na (.requires$repo_ver)) > base::package_version(versionplz.na (.requires$local_ver))
 	
 	return(.requires)
 }
