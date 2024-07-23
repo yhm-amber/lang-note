@@ -28,7 +28,7 @@ function (requires)
 {
 	.requires = base::data.frame(require = base::unique(requires))
 	
-	available_packages <- available.packages()
+	available_packages <- utils::available.packages()
 	
 	ver_local = \ (.data, .path_field, .name_field) \ (N) if (.data[N, .path_field] != "") base::as.character(utils::packageVersion(.data[N, .name_field])) else NA_character_
 	ver_repos = \ (.data, .fields, .name_field) \ (N) if (.data[N, .name_field] %in% row.names(available_packages)) available_packages[.data[N, .name_field], .fields] else NA_character_
