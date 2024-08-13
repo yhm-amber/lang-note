@@ -5,7 +5,7 @@
 #' @param path_same same in path
 #' @param diff_path_base subpath base
 #' @param diff_path_comp subpath comp
-#' @param .func_sort sort function to let you make sort rule for datasets (default: `dplyr::arrange_all`)
+#' @param .df_sort sort function to let you make sort rule for datasets (default: `dplyr::arrange_all`)
 #' To sort all columns before diff, use `dplyr::arrange_all` at here; 
 #' To do-nothing before diff, use `base::identity` at here.
 #' 
@@ -17,7 +17,7 @@
 #'     path_same = "path/to/some/path",
 #'     diff_path_base = 'dir/somedir_a/dir_maybe',
 #'     diff_path_comp = 'dir/somedir_b/dir_maybe', 
-#'     .func_sort = dplyr::arrange_all) -> report
+#'     .df_sort = dplyr::arrange_all) -> report
 #'   future::plan(future::sequential)
 #'   
 #'   report$diff_reports |> base::Filter(x = _, f = diffdf::diffdf_has_issues)
@@ -30,7 +30,7 @@ rdses_diff = function (
 			base = path_same |> base::file.path(diff_path_base),
 			comp = path_same |> base::file.path(diff_path_comp)), 
 		.files = .pathes |> base::lapply(base::list.files), 
-		.func_sort = dplyr::arrange_all, 
+		.df_sort = dplyr::arrange_all, 
 		..future_plan = NULL) 
 {
 	.files_base_lack = .files$comp |> base::setdiff(.files$base)
@@ -62,7 +62,7 @@ rdses_diff = function (
 			\ (pathes) pathes |> 
 				base::lapply(base::readRDS) |> 
 				base::lapply(data.table::as.data.table) |> 
-				base::lapply(.func_sort) |> 
+				base::lapply(.df_sort) |> 
 				base::lapply(data.table::as.data.table) |> 
 				base::Reduce(x = _, f = diffdf::diffdf)) |> 
 		base::identity() -> .reports
