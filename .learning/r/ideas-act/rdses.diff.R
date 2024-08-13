@@ -6,16 +6,18 @@
 #' @param diff_path_base subpath base
 #' @param diff_path_comp subpath comp
 #' @param .func_sort sort function to let you make sort rule for datasets (default: `dplyr::arrange_all`)
-#' @param .future_plan the parallel mode for future parallel functions (default: `future::multisession`)
+#' To sort all columns before diff, use `dplyr::arrange_all` at here; 
+#' To do-nothing before diff, use `base::identity` at here.
 #' 
 #' @examples
 #' 
 #'   future::plan(future::sequential)
+#'   future::plan(future::multisession)
 #'   rdses_diff(
 #'     path_same = "path/to/some/path",
 #'     diff_path_base = 'dir/somedir_a/dir_maybe',
 #'     diff_path_comp = 'dir/somedir_b/dir_maybe', 
-#'     .future_plan = future::multisession) -> report
+#'     .func_sort = dplyr::arrange_all) -> report
 #'   future::plan(future::sequential)
 #'   
 #'   report$diff_reports |> base::Filter(x = _, f = diffdf::diffdf_has_issues)
@@ -28,8 +30,8 @@ rdses_diff = function (
 			base = path_same |> base::file.path(diff_path_base),
 			comp = path_same |> base::file.path(diff_path_comp)), 
 		.files = .pathes |> base::lapply(base::list.files), 
-		.future_plan = future::multisession, 
-		.func_sort = dplyr::arrange_all) 
+		.func_sort = dplyr::arrange_all, 
+		..future_plan = NULL) 
 {
 	.files_base_lack = .files$comp |> base::setdiff(.files$base)
 	.files_comp_lack = .files$base |> base::setdiff(.files$comp)
@@ -51,7 +53,10 @@ rdses_diff = function (
 			base = files_fullpath$base[file], 
 			compare = files_fullpath$comp[file]))
 	
-	future::plan(.future_plan)
+	
+	if (base::is.null(..future_plan)) {} 
+	else future::plan(..future_plan)
+	
 	pathpairs |> 
 		future.apply::future_lapply(
 			\ (pathes) pathes |> 
@@ -67,7 +72,7 @@ rdses_diff = function (
 		x = .reports)
 	
 	if (! base::length(.issues) > 0) usethis::ui_info("No issues found !!") 
-	else usethis::ui_info("Have issue in: {usethis::ui_value(base::name(.issues))}")
+	else usethis::ui_info("Have issue in: {usethis::ui_value(base::names(.issues))}")
 	
 	base::list(
 		file_lack = base::list(
