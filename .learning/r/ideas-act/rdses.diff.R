@@ -21,7 +21,7 @@
 #'   report$diff_reports |> base::Filter(x = _, f = diffdf::diffdf_has_issues)
 #' 
 rdses_diff = function (
-		path_same, 
+		path_same = base::getwd(), 
 		diff_path_base, 
 		diff_path_comp, 
 		.pathes = base::list(
