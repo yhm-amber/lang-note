@@ -15,8 +15,10 @@
 #'     path_same = "path/to/some/path",
 #'     diff_path_base = 'dir/somedir_a/dir_maybe',
 #'     diff_path_comp = 'dir/somedir_b/dir_maybe', 
-#'     .future_plan = future::multisession) -> diffreport
+#'     .future_plan = future::multisession) -> report
 #'   future::plan(future::sequential)
+#'   
+#'   report$diff_reports |> base::Filter(x = _, f = diffdf::diffdf_has_issues)
 #' 
 rdses_diff = function (
 		path_same, 
@@ -64,6 +66,9 @@ rdses_diff = function (
 		file_lack = base::list(
 			base = .files_base_lack, 
 			comp = .files_comp_lack), 
+		issue_reports = base::Filter(
+			f = diffdf::diffdf_has_issues, 
+			x = .reports), 
 		diff_reports = .reports)
 }
 
