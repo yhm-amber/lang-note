@@ -1,4 +1,4 @@
-#' @name rdses_diff
+#' @name future_diffrdses
 #' @description
 #' Diff two folder that only have rds files
 #' 
@@ -13,7 +13,7 @@
 #' 
 #'   future::plan(future::sequential)
 #'   future::plan(future::multisession)
-#'   rdses_diff(
+#'   future_diffrdses(
 #'     path_same = "path/to/some/path",
 #'     diff_path_base = 'dir/somedir_a/dir_maybe',
 #'     diff_path_comp = 'dir/somedir_b/dir_maybe', 
@@ -22,7 +22,7 @@
 #'   
 #'   report$diff_reports |> base::Filter(x = _, f = diffdf::diffdf_has_issues)
 #' 
-rdses_diff = function (
+future_diffrdses = function (
 		path_same = base::getwd(), 
 		diff_path_base, 
 		diff_path_comp, 
