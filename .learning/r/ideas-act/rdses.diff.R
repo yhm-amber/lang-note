@@ -62,13 +62,18 @@ rdses_diff = function (
 				base::Reduce(x = _, f = diffdf::diffdf)) |> 
 		base::identity() -> .reports
 	
+	.issues = base::Filter(
+		f = diffdf::diffdf_has_issues, 
+		x = .reports)
+	
+	if (! base::length(.issues) > 0) usethis::ui_info("No issues found !!") 
+	else usethis::ui_info("Have issue in: {usethis::ui_value(base::name(.issues))}")
+	
 	base::list(
 		file_lack = base::list(
 			base = .files_base_lack, 
 			comp = .files_comp_lack), 
-		issue_reports = base::Filter(
-			f = diffdf::diffdf_has_issues, 
-			x = .reports), 
+		issue_reports = .issues, 
 		diff_reports = .reports)
 }
 
