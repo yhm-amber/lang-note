@@ -20,7 +20,8 @@
 #'     .df_sort = dplyr::arrange_all) -> report
 #'   future::plan(future::sequential)
 #'   
-#'   report$diff_reports |> base::Filter(x = _, f = diffdf::diffdf_has_issues)
+#'   # To see a type of summary
+#'   report$issue_reports |> purrr::map(~ .x$NumDiff$Variable)
 #' 
 future_diffrdses = function (
 		path_same = base::getwd(), 
