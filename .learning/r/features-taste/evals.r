@@ -1,4 +1,28 @@
 
+#' Value get or mutiple get from a environment
+\ () 
+{
+	a = 1
+	b = 2
+	
+	x = 'a'
+	y = 'x'
+	
+	#' same as `a` or `base::eval(base::parse(text = 'a'))`
+	base::get(x) |> base::print() # [1] 1
+	
+	base::mget(base::c(x,y)) |> base::print()
+	#| $a
+	#| [1] 1
+	#| 
+	#| $x
+	#| [1] "a"
+	#| 
+}
+
+
+
+
 #' 这个结构和 Elixir 的 quote 类似。表达式算是延迟执行的对象。
 
 expression (1 + 1) ;
