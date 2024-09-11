@@ -55,7 +55,7 @@ for sun + cloud photos:
 				pass_envvar = 'SMTP_PASSWORD', 
 				host = "server.mail.co", 
 				port = 465, 
-				use_ssl  = T), 
+				use_ssl = T), 
 			to = "receiver@mail.server.to", 
 			from = "sender@mail.server.from", 
 			subject = "Testing the `blastula::smtp_send()` function", 
