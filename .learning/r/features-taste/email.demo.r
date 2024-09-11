@@ -7,7 +7,7 @@
 #' demo: 
 #' 
 {
-	email <- emayili::envelope(text = "OMG !!!!") |> 
+	email = emayili::envelope(text = "OMG !!!!") |> 
 		emayili::from("sender@mail.server.from") |> 
 		emayili::to("receiver@mail.server.to") |> 
 		emayili::subject("This is a plain text message!")
@@ -42,7 +42,7 @@ for sun + cloud photos:
 	#' 
 	#' You can see preview by just enter `email` at R Studio console after create it.
 	#' 
-	email <- blastula::compose_email(
+	email = blastula::compose_email(
 		body = blastula::md(glue::glue(body_template)), 
 		footer = blastula::md(glue::glue("Email sent on {blastula::add_readable_time()}.")))
 	
