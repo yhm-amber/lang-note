@@ -4,6 +4,7 @@
 #'   Simple and fun.
 #'   Have curry in it.
 #' 
+#' cran: https://cran.r-project.org/web/packages/emayili/
 #' demo: 
 #' 
 {
@@ -26,6 +27,7 @@
 #'   Markdown syntaxed text support and easy to insert image.
 #'   Foot is simple to add and also md-supported.
 #' 
+#' cran: https://cran.r-project.org/web/packages/blastula/
 #' demo: 
 #' 
 {
