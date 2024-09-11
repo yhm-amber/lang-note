@@ -68,7 +68,7 @@ for sun + cloud photos:
 #' mailR (Not recommended)
 #' 
 #'   Don't have more funny, careful, prescriptive, or md or foot support than the Aboves.
-#'   It's not implemented by pure R (Based on Java) so might conflict with some other (such as other package also based on Java).
+#'   It's not implemented by pure R (you can see "SystemRequirements: Java" on its cran page) so might conflict with some other (such as other package also based on Java).
 #' 
 #' demo: Nothing.
 #' 
