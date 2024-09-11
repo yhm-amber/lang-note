@@ -1,5 +1,10 @@
 
-#' emayili demo: 
+#' emayili 
+#' 
+#'   Simple and fun.
+#'   Have curry in it.
+#' 
+#' demo: 
 #' 
 {
 	email <- emayili::envelope(text = "OMG !!!!") |> 
@@ -15,7 +20,13 @@
 			password = "(your passwd here)") (verbose = F) -> send_report
 }
 
-#' blastula demo: 
+#' blastula 
+#' 
+#'   Much more prescriptive and careful.
+#'   Markdown syntaxed text support and easy to insert image.
+#'   Foot is simple to add and also md-supported.
+#' 
+#' demo: 
 #' 
 {
 	img_path = base::system.file("img", "pexels-photo-267151.jpeg", package = "blastula")
@@ -48,3 +59,15 @@ for sun + cloud photos:
 			subject = "Testing the `blastula::smtp_send()` function", 
 			verbose = F) -> report
 }
+
+
+
+
+#' mailR (Not recommended)
+#' 
+#'   Don't have more funny, careful, prescriptive, or md or foot support than the Aboves.
+#'   It's not implemented by pure R (Based on Java) so might conflict with some other (such as other package also based on Java).
+#' 
+#' demo: Nothing.
+#' 
+{}
