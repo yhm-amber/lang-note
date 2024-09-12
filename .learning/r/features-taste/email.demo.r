@@ -46,12 +46,14 @@ for sun + cloud photos:
 	#' 
 	#' You can see preview by just enter `email` at R Studio console after create it.
 	#' 
-	email = blastula::compose_email(
-		body = blastula::md(glue::glue(body_template)), 
-		footer = blastula::md(glue::glue("Email sent on {blastula::add_readable_time()}."))) |> 
+	email = blastula::md(glue::glue(body_template)) |> 
+		blastula::compose_email(
+			title = "A Mail Test.",
+			footer = blastula::md(glue::glue("Email sent on {blastula::add_readable_time()}.")),
+			body = _) |> 
 		purrr::reduce(
-			.f = blastula::add_attachment, 
-			.x = attachment_path, 
+			.f = blastula::add_attachment,
+			.x = attachment_path,
 			.init = _) |> 
 		base::identity()
 	
