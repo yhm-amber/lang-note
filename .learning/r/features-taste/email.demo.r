@@ -40,13 +40,20 @@ for sun + cloud photos:
 
 {blastula::add_image(file = img_path)}"
 	
+	attachment_path = base::c()
+	
 	#' Image will trans to base64 by `blastula::add_image`.
 	#' 
 	#' You can see preview by just enter `email` at R Studio console after create it.
 	#' 
 	email = blastula::compose_email(
 		body = blastula::md(glue::glue(body_template)), 
-		footer = blastula::md(glue::glue("Email sent on {blastula::add_readable_time()}.")))
+		footer = blastula::md(glue::glue("Email sent on {blastula::add_readable_time()}."))) |> 
+		purrr::reduce(
+			.f = blastula::add_attachment, 
+			.x = attachment_path, 
+			.init = _) |> 
+		base::identity()
 	
 	email |> 
 		blastula::smtp_send(
