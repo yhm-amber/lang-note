@@ -8,10 +8,17 @@
 #' demo: 
 #' 
 {
+	attachment_path = base::c()
+	
 	email = emayili::envelope(text = "OMG !!!!") |> 
 		emayili::from("sender@mail.server.from") |> 
 		emayili::to("receiver@mail.server.to") |> 
-		emayili::subject("This is a plain text message!")
+		emayili::subject("This is a plain text message!") |> 
+		purrr::reduce(
+			.f = emayili::attachmentent,
+			.x = attachment_path,
+			.init = _) |> 
+		base::identity()
 
 	email |> 
 		emayili::server(
