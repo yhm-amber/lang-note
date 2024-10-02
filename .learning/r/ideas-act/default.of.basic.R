@@ -1,7 +1,7 @@
 
 default_of_basic = 
-function (val) class (val) |> 
-	base::head (1) |> 
+function (val) base::class (val) |> 
+	utils::head (1) |> 
 	base::paste ('(1)') |> 
 	base::parse (text = _) |> 
 	base::eval ()
