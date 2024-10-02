@@ -9,59 +9,59 @@ row.apply =
 		
 		#' formats
 		#' 
-		Reduce (
+		base::Reduce (
 			x = l,
-			f = \ (a,b) base::c (a, list({length(b) <- r; b})),
+			f = \ (a,b) base::c (a, base::list({base::length(b) <- r; b})),
 			init = _) |> 
 		base::'names<-'(
 			x = _,
 			value = n) |>
 		
-		lapply(as.list) |> 
+		base::lapply(base::as.list) |> 
 		
 		#' pivots
 		#' 
 		#' also: 
 		#' 
-		#'   Reduce (
+		#'   base::Reduce (
 		#'     x = _,
-		#'     f = \ (a,b) seq(r) |> 
-		#'       lapply (\ (rownum) base::c (a[[rownum]], list(b[rownum]))) ) |> 
+		#'     f = \ (a,b) base::seq(r) |> 
+		#'       base::lapply (\ (rownum) base::c (a[[rownum]], base::list(b[rownum]))) ) |> 
 		#' 
 		#' but the using codes are clear.
 		#' 
-		Reduce (
+		base::Reduce (
 			x = _,
-			init = list (),
-			f = \ (a,b) seq(r) |> 
-				lapply (\ (rownum) {length(a) <- r; base::c (a[[rownum]], list(b[[rownum]]))}) ) |> 
-		lapply (\ (l) base::'names<-'(x = l, value = n)) |> 
-		base::'names<-'(x = _, value = seq(r)) |> 
+			init = base::list (),
+			f = \ (a,b) base::seq(r) |> 
+				base::lapply (\ (rownum) {base::length(a) <- r; base::c (a[[rownum]], base::list(b[[rownum]]))}) ) |> 
+		base::lapply (\ (l) base::'names<-'(x = l, value = n)) |> 
+		base::'names<-'(x = _, value = base::seq(r)) |> 
 		
 		#' applies
 		#' 
-		lapply (\ (params) do.call (fun, params) ) |>
+		base::lapply (\ (params) base::do.call (fun, params) ) |>
 		
 		base::identity()
 	
-) (length(l[[1]]))
-) (if (is.null(n)) rep("",length(l)) else n)
-) (names(l))
-) (list (...))
+) (base::length(l[[1]]))
+) (if (base::is.null(n)) base::rep("",base::length(l)) else n)
+) (base::names(l))
+) (base::list (...))
 
 
-row.apply (min) (a = 1:4, b = 3:5, c = 2:5) |> unlist ()
+row.apply (base::min) (a = 1:4, b = 3:5, c = 2:5) |> unlist ()
 #| 1  2  3  4 
 #| 1  2  3 NA 
 
-row.apply (\ (...) list(...)) (a = 1:4, b = c("a","b"), c = 2:5)
+row.apply (\ (...) base::list(...)) (a = 1:4, b = c("a","b"), c = 2:5)
 #| (shows the params)
 
-row.apply (paste) (a = 1:4, b = c("a","b"), c = 2:5) |> unlist ()
+row.apply (base::paste) (a = 1:4, b = c("a","b"), c = 2:5) |> unlist ()
 #|       1        2        3        4 
 #| "1 a 2"  "2 b 3" "3 NA 4" "4 NA 5" 
 
-row.apply (sum) (list(1:4, c(NA,1), c(NA,2)), na.rm = c(F,F,T)) |> unlist ()
+row.apply (base::sum) (list(1:4, c(NA,1), c(NA,2)), na.rm = c(F,F,T)) |> unlist ()
 #| 1  2  3 
 #|10 NA  2 
 
@@ -141,9 +141,9 @@ simple_rowfunc = function (func) function (...) tibble::tibble(...) |>
 # # 4     5
 
 simple_rowsumm = function (func) function (...) simple_rowfunc (func) (...) |> 
-	unlist(recursive = T, use.names = F)
+	base::unlist(recursive = T, use.names = F)
 
-# simple_rowsumm (min) (1:4, 4:1)
+# simple_rowsumm (base::min) (1:4, 4:1)
 # # [1] 1 2 2 1
 
 # base::pmin (1:4, 4:1)
