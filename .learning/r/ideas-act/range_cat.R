@@ -5,7 +5,7 @@
 range_cat = function (
 		.seq, 
 		.cats, 
-		..cats_chr = .cats |> base::format(scientific = F), 
+		..cats_chr = .cats |> base::format(scientific = F) |> base::trimws(), 
 		..catts = base::paste(
 			..cats_chr, 
 			..cats_chr[base::seq(base::length(..cats_chr)) |> utils::tail(-1)] |> base::c(Inf), 
