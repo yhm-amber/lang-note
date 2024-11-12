@@ -5,9 +5,10 @@
 range_cat = function (
 		.seq, 
 		.cats, 
+		..cats_chr = .cats |> base::format(scientific = F), 
 		..catts = base::paste(
-			.cats, 
-			.cats[base::seq(base::length(.cats)) |> utils::tail(-1)] |> base::c(Inf), 
+			..cats_chr, 
+			..cats_chr[base::seq(base::length(..cats_chr)) |> utils::tail(-1)] |> base::c(Inf), 
 			sep = ' -> ')) .seq |> 
 	tibble::tibble(src_term = _) |> 
 	dplyr::mutate(cat_index = base::findInterval(src_term, .cats)) |> 
