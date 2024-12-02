@@ -5,16 +5,18 @@
 range_cat = function (
 		.seq, 
 		.cats, 
-		..cats_chr = .cats |> base::format(scientific = F) |> base::trimws(), 
+		.fn_as = base::identity, 
+		..cats = base::c(-Inf, base::sort(.cats), Inf) |> .fn_as(), 
+		..cats_chr = ..cats |> base::format(scientific = F, trim = T), 
 		..catts = base::paste(
 			..cats_chr, 
 			..cats_chr[base::seq(base::length(..cats_chr)) |> utils::tail(-1)] |> base::c(Inf), 
 			sep = ' -> ')) .seq |> 
 	tibble::tibble(src_term = _) |> 
-	dplyr::mutate(cat_index = base::findInterval(src_term, .cats)) |> 
+	dplyr::mutate(cat_index = .fn_as(src_term) |> base::findInterval(..cats)) |> 
 	dplyr::mutate(
 		cat_range = ..catts[cat_index], 
-		cat_until = .cats[cat_index]) 
+		cat_until = ..cats[cat_index]) 
 
 #| > 74999:225001 |> range_cat(c(0, 75000, 125000, 175000, 225000)) |> data.table::setDT() |> print()
 #|         src_term cat_index        cat_range cat_until
