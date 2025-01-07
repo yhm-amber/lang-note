@@ -1,0 +1,6 @@
+[[https://playground.cherrilang.org/][playground]]
+
+
+- [[https://cherrilang.org/][Site]]
+- [[https://apps.apple.com//app/shortcuts/id1462947752][Requires: Siri Shortcuts]]
+- [[https://cherrilang.org/language/][Docs]]
