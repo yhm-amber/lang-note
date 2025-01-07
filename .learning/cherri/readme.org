@@ -1,6 +1,8 @@
 [[https://playground.cherrilang.org/][playground]]
 
 
-- [[https://cherrilang.org/][Site]]
-- [[https://apps.apple.com//app/shortcuts/id1462947752][Requires: Siri Shortcuts]]
-- [[https://cherrilang.org/language/][Docs]]
+- Site: [[https://cherrilang.org/][Welcome | Cherri]]
+- Requires: [[https://apps.apple.com//app/shortcuts/id1462947752][Siri Shortcuts]]
+- Docs: [[https://cherrilang.org/language/][Documentation | Cherri]]
+- Src Repo: [[https://github.com/electrikmilk/cherri.git][Siri Shortcuts Programming Language 🍒]]
+- License: [[http://gnu.org/licenses/gpl-2.0.html][GPL-2.0]]
