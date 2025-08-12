@@ -3,5 +3,5 @@
 
 ----
 
-- site: [[https://sac-home.org/][About SaC [SaC-Home]]]
+- site: [[https://sac-home.org/][About SaC | SaC-Home]]
 - repo: [[https://github.com/SacBase/Stdlib.git][SacBase/Stdlib: This repository contains the Core and Extended source files of the Standard Library of the SaC programming language]]
