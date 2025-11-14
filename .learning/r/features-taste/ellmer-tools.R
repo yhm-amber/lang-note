@@ -229,3 +229,5 @@ annotations = ellmer::tool_annotations(
 	title = "Some Name of the Tool", 
 	icon = '<svg ...><path d="..."/></svg>')
 
+
+#. Thanks: gh:posit-dev/querychat.git@main:pkg-r/R/querychat_tools.R
