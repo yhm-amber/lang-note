@@ -45,4 +45,12 @@ chores::prompt_edit("expounder")
 		annotations = list()) |> 
 	base::getOption('.chores_chat')$register_tool()
 
+#: It's better to define a greate runner helper
+#:  to execute tool(s) and gives you the result.
+
+#~ Details see: ellmer-tools.R
+#~ - Define R-Code tools using: `ellmer::tool`,
+#~ - Give a R-Code tool to a chat using: `chat$register_tool`,
+#~ - And to get the chat pointer which chores is using by using: `base::getOption('.chores_chat')`.
+
 
