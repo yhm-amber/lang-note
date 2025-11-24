@@ -1,6 +1,6 @@
 
 {
-	ellmer_chat = \ (...) ... |> ellmer::chat_vllm(
+	new.ellmer_chat = \ (...) ... |> ellmer::chat_vllm(
 		base_url = Sys.getenv("VLLM_BASE_URL"),
 		# api_key = Sys.getenv("VLLM_API_KEY"),
 		credentials = \ () Sys.getenv("VLLM_API_KEY"),
@@ -13,7 +13,7 @@
 			ask = print(ask) |> utils::capture.output() |> paste(collapse = '\n')
 		}
 		
-		chat = ellmer_chat(system_prompt = role)
+		chat = new.ellmer_chat(system_prompt = role)
 		# chat$set_system_prompt(role)
 		chat$chat(ask)
 		
@@ -38,7 +38,7 @@
 			You have only one turn so say all messages plz!
 			')))
 	
-	assistant_scheduler = ellmer_chat(
+	assistant_scheduler = new.ellmer_chat(
 		system_prompt = '
 		You are a scheduler for any of llm-ai assistant. 
 		You can and must always call the worker assistant to get helpings.
