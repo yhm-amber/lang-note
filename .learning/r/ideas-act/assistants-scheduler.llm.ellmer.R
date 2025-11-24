@@ -1,11 +1,14 @@
 
+# define
 {
+	# specify your chat object creating base logic
 	new.ellmer_chat = \ (...) ... |> ellmer::chat_vllm(
 		base_url = Sys.getenv("VLLM_BASE_URL"),
 		# api_key = Sys.getenv("VLLM_API_KEY"),
 		credentials = \ () Sys.getenv("VLLM_API_KEY"),
 		model = Sys.getenv("VLLM_MODEL"))
-	
+
+	# worker define: role & ability
 	worker_assistant = (\ (role, ask) 
 	{
 		{
@@ -38,6 +41,7 @@
 			You have only one turn so say all messages plz!
 			')))
 	
+	# scheduler define: role
 	assistant_scheduler = new.ellmer_chat(
 		system_prompt = '
 		You are a scheduler for any of llm-ai assistant. 
@@ -54,15 +58,16 @@
 		
 		Ultimately, it will be **your subjectivity** that is reflected !!
 		')
-	
+
+	# scheduler define: ability
 	assistant_scheduler$register_tool(worker_assistant)
 }
 
+# demo:
 {
 	assistant_scheduler$set_turns(list())
 	assistant_scheduler$chat('让一个助手生成提问、再让另外两个解答。')
 }
-
 
 #| 为了更好地完成这个任务，我将首先创建一个问题，然后分别咨询两个专家来获取他们的见解。让我们开始吧。
 #| 
