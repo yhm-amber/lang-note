@@ -9,6 +9,7 @@ chat = chatlas.ChatGroq(
 #: Prepare sqlalchemy engine
 from sqlalchemy import create_engine
 engine = create_engine('xyz://...')
+#: Upload `dfply.diamonds` onto that db as "diamonds".
 
 #: Create qc
 from querychat import QueryChat
