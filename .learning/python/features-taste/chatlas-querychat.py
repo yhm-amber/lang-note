@@ -14,7 +14,7 @@ engine = create_engine('xyz://...')
 from querychat import QueryChat
 qc = QueryChat(
 	data_source = engine, 
-	table_name = 'starwars', 
+	table_name = 'diamonds', 
 	client = chat)
 #: run `?QueryChat` can see help.
 
