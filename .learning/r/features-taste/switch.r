@@ -1,5 +1,5 @@
 
-#: Its param won't be eval before it be choosed.
+#: The expressions in its param place won't be eval before it be choosed.
 type |> base::switch(wee = fn_a(), woo = fn_b(type))
 
 #: means this can same as
