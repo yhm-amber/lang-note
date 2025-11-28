@@ -10,3 +10,7 @@ NULL ;
 #: Also type can be index number
 #:  rather than name-specify
 #:  like the aboves.
+
+#. Thanks for the codes of fn-define
+#.  of the `type` param in fn:mcp_server 
+#.  in repo src-file gh:posit-dev/mcptools@main/R/server.R
