@@ -1,10 +1,12 @@
 
 #: 无限递减数列
 
+#: 定义生成器
 generate_encilioingzero = coro::generator(\ (.first = 0) {
 	repeat { coro::yield(.first); .first = .first - 1 }
 })
 
+#: 默认参数使用
 coro::loop(for (a in generate_encilioingzero()) {
 	print(a)
 }) #: will gen nums continuously like:
@@ -26,6 +28,7 @@ coro::loop(for (a in generate_encilioingzero()) {
 #| [1] -98095
 #| ...
 
+#: 指定递减数列的开始
 coro::loop(for (a in generate_encilioingzero(999999)) {
 	print(a)
 }) #: will gen nums continuously like:
@@ -52,6 +55,7 @@ coro::loop(for (a in generate_encilioingzero(999999)) {
 
 #: 循环播放一个向量
 
+#: 生成器定义
 generate_vecloop = coro::generator(\ (vec, .start_at = 1, .lenfn = base::length) {
 	repeat {
 		coro::yield(vec[.start_at])
@@ -59,6 +63,7 @@ generate_vecloop = coro::generator(\ (vec, .start_at = 1, .lenfn = base::length)
 	}
 })
 
+#: 循环播放大写字母
 coro::loop(for (a in generate_vecloop(base::toupper(base::letters))) {
 	print(a)
 })
@@ -78,9 +83,10 @@ coro::loop(for (a in generate_vecloop(base::toupper(base::letters))) {
 #| [1] "M"
 #| ...
 
+#: 指定停止点 - 输出九个后停止
 base::list2env(base::list(i = 9)) |> base::with({
 	coro::loop(for (a in base::toupper(base::letters) |> generate_vecloop(6)) {
-		print(a); if ((i <- i - 1) < 0) break
+		print(a); if ((i <- i - 1) > 0) {} else break
 	})
 })
 
@@ -93,5 +99,5 @@ base::list2env(base::list(i = 9)) |> base::with({
 #| [1] "L"
 #| [1] "M"
 #| [1] "N"
-#| [1] "O"
+
 
