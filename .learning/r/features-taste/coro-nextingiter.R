@@ -63,7 +63,7 @@ generate_vecloop = coro::generator(\ (vec, .start_at = 1, .lenfn = base::length)
 	}
 })
 
-#: 循环播放大写字母
+#: 无限循环播放大写字母
 coro::loop(for (a in generate_vecloop(base::toupper(base::letters))) {
 	print(a)
 })
@@ -83,7 +83,7 @@ coro::loop(for (a in generate_vecloop(base::toupper(base::letters))) {
 #| [1] "M"
 #| ...
 
-#: 指定停止点 - 输出九个后停止
+#: 指定停止点 - 播放九个后停止
 base::list2env(base::list(i = 9)) |> base::with({
 	coro::loop(for (a in base::toupper(base::letters) |> generate_vecloop(6)) {
 		print(a); if ((i <- i - 1) > 0) {} else break
