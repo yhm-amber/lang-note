@@ -1,3 +1,6 @@
+
+#: 简单数列生成
+
 generate_encilioingzero = coro::generator(\ (.first = 0) {
 	repeat { coro::yield(.first); .first = .first - 1 }
 })
@@ -40,4 +43,55 @@ coro::loop(for (a in generate_encilioingzero(999999)) {
 #| [1] 979120
 #| [1] 979119
 #| ...
+
+
+
+
+
+
+
+#: 对一个向量循环播放
+
+generate_vecloop = coro::generator(\ (vec, .start_at = 1, .lenfn = base::length) {
+	repeat {
+		coro::yield(vec[.start_at])
+		.start_at = (if (.start_at < .lenfn(vec)) .start_at + 1 else 1)
+	}
+})
+
+coro::loop(for (a in generate_vecloop(base::toupper(base::letters))) {
+	print(a)
+})
+
+#| ...
+#| [1] "B"
+#| [1] "C"
+#| [1] "D"
+#| [1] "E"
+#| [1] "F"
+#| [1] "G"
+#| [1] "H"
+#| [1] "I"
+#| [1] "J"
+#| [1] "K"
+#| [1] "L"
+#| [1] "M"
+#| ...
+
+base::list2env(base::list(i = 9)) |> base::with({
+	coro::loop(for (a in base::toupper(base::letters) |> generate_vecloop(6)) {
+		print(a); if ((i <- i - 1) < 0) break
+	})
+})
+
+#| [1] "F"
+#| [1] "G"
+#| [1] "H"
+#| [1] "I"
+#| [1] "J"
+#| [1] "K"
+#| [1] "L"
+#| [1] "M"
+#| [1] "N"
+#| [1] "O"
 
