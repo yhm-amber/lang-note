@@ -1,5 +1,5 @@
 
-#: 简单数列生成
+#: 无限递减数列
 
 generate_encilioingzero = coro::generator(\ (.first = 0) {
 	repeat { coro::yield(.first); .first = .first - 1 }
@@ -50,7 +50,7 @@ coro::loop(for (a in generate_encilioingzero(999999)) {
 
 
 
-#: 对一个向量循环播放
+#: 循环播放一个向量
 
 generate_vecloop = coro::generator(\ (vec, .start_at = 1, .lenfn = base::length) {
 	repeat {
