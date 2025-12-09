@@ -164,3 +164,30 @@ base::list2env(base::list(i = 9)) |> base::with({
 #| List of 1
 #|  $ mass: num [1:87] 77 75 32 136 49 120 75 32 84 77 ...
 
+
+
+
+
+#: we can also ---
+
+#: to define a df row-loop - directly,
+generate_dfloop = coro::generator(\ (df, .start_row = 1) {
+	repeat {
+		coro::yield(df[.start_row, ])
+		.start_row = (if (.start_row < base::nrow(df)) .start_row + 1 else 1)
+	}
+})
+
+#: ... - or using vec-loop warpper!
+#: (no-need to use coro::loop inner a coro::generator fn define)
+generate_dfloop = coro::generator(\ (df, .start_row = 1) {
+	for (i in generate_vecloop(base::seq(base::nrow(df)))) {
+		print(df[i, ])
+	}
+})
+
+coro::loop(for (a in generate_dfloop(src)) {
+	print(a)
+})
+#: will looping-play rows in src.
+
