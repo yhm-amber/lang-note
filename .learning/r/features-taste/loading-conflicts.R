@@ -26,6 +26,7 @@ starwars |> filter(height < 1)
 #: and you can just need to add the disambiguation code as prompted.
 
 conflicts_prefer(dplyr::filter)
+#| [conflicted] Will prefer dplyr::filter over any other package.
 starwars |> filter(height < 1)
 #| ...
 
