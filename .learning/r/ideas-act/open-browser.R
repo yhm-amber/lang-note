@@ -36,7 +36,7 @@ openurl_browser = function (
 {
 	web_mode = base::deparse(base::substitute(web_mode))
 	
-	#: udf by: iframe in shiny
+	#: udf by: shiny with iframe
 	.shiny_iframe = \ (url) shiny::runApp(shiny::shinyApp(
 		ui = shiny::fluidPage(
 			shiny::titlePanel("Shiny App in Non-Async: Need to close this window manually."),
