@@ -1,9 +1,13 @@
+#: ts fn
+timestamp = function (precision = 3, time = lubridate::now()) time |> 
+	magrittr::'%>%'({ base::round(base::as.numeric(.) * 10^precision) }) |> 
+	base::format(scientific = F, trim = T)
 
 #: prepare url
 uuid = uuid::UUIDgenerate(output = 'uuid')
-url_reqget = api_endpoint |> httr::modify_url(query = list(
+url_reqget = web_endpoint |> httr::modify_url(query = list(
 	hash = uuid |> openssl::sha256(key = salt), 
-	uuid = uuid))
+	timestamp = timestamp()))
 
 #: simple: utils::browseURL
 usethis::ui_info("Opening browser ...")
@@ -48,12 +52,35 @@ open.browser = base::alist(
 	base::append(base::list(EXPR = web_mode |> snakecase::to_snake_case()), after = 0L) |> 
 	base::do.call(what = base::switch, args = _)
 
-# Executing ...
-usethis::ui_info("Opening browser ...")
-if (base::isFALSE('mode.test' |> base::getOption(F))) { open.browser(url_reqget) }
-if (base::isTRUE('hint.more' |> base::getOption(T))) usethis::ui_done(
-	"UUID {usethis::ui_value(uuid)} is now Submitted!!")
+#: Executing ...
+open.browser(url_reqget)
 
+#: More:
+
+#: Maybe need to reg at first
+reg_resp <- reg_endpoint |> httr::POST(
+	body = list(
+		uuid_hash = uuid |> openssl::sha256(key = salt), 
+		timestamp = timestamp()), 
+	encode = 'form')
+#: Check status code
+as.character(httr::status_code(reg_resp)) |> switch(
+	'200' = usethis::ui_done("UUID {usethis::ui_value(uuid)} is now Registered!!"),
+	usethis::ui_stop("Failed to register - {usethis::ui_value(httr::status_code(reg_resp))}"))
+
+#: Open browser ...
+usethis::ui_info("Opening browser ...")
+open.browser(web_endpoint |> httr::modify_url(query = list(
+	hash = uuid |> openssl::sha256(key = salt))))
+usethis::ui_done("UUID {usethis::ui_value(uuid)} is now Submitted!!")
+
+#: Using uuid get things ...
+resp <- gen_endpoint |> httr::POST(
+	body = list(uuid = uuid),
+	encode = "form")
+
+
+#: Define:
 
 #' @name openurl_browser
 #' @title Open URL in Browser with Flexible Modes
