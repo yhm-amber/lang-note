@@ -1,4 +1,5 @@
 
+
 #' @title Tracker appender for magnet
 #' @name magnet_tr_append
 #' @param trackers {chr} urls of tracker
@@ -27,7 +28,7 @@
 #' Append trackers in your magnet url or a demo magnet url in default.
 #' @export
 #' 
-magnet_tr_append = function (
+magnet_tr_append <- function (
 		trackers, 
 		url_base = glue::glue_safe('magnet:?xt=urn:btih:{hash}'), 
 		hash = '<hash>', 
@@ -54,7 +55,7 @@ magnet_tr_append = function (
 #' @param delim {chr} (optional) character string to split by (defaults to newline `\n`)
 #' @returns {chr} a flattened character vector of URLs
 #' 
-urls_flat = function (
+urls_flat <- function (
 		urls, 
 		delim = '\n') urls |> 
 	base::strsplit(delim) |> 
@@ -69,7 +70,9 @@ urls_flat = function (
 #' @param output_tidys {lgl} (optional) if TRUE, the tidyed urls will be printed to console
 #' @returns {chr} a vector of unique, non-empty, trimmed urls
 #' 
-urls_tidy = function (urls, output_tidys = F) urls |> 
+urls_tidy <- function (
+		urls, 
+		output_tidys = F) urls |> 
 	base::trimws() |> 
 	base::unique() |> 
 	purrr::keep(~ base::nchar(.x) > 0) |> 
@@ -82,6 +85,30 @@ urls_tidy = function (urls, output_tidys = F) urls |>
 	}) |> 
 	base::identity()
 
+#' @title Merge URL chr
+#' @name urls_merge
+#' @description
+#' Combine multiple URL inputs. Delimiter split and tidy applying (trim, deduplicate, remove empty) supported.
+#' @param ... {chr} URL(s)' input.
+#' @param .output_res {lgl} (optional) show results in default.
+#' @param .delim {chr} (optional) delimiter setting for content inputed, defaults to newline `\n`.
+#' @returns {chr} merged & tidyed URLs (returned invisibly)
+#' @export
+#' @examples \dontrun{
+#' # Basic usage
+#' urls_merge(c("http://a.xyz:1010", "udp://b.info:1100"),"http://c.io")
+#' # Custom delimiter
+#' "https://a.co/, s3://b.xyz" |> urls_merge("http://c.info:9060", .delim = ",")
+#' }
+#' 
+urls_merge <- function (
+		..., 
+		.output_res = T, 
+		.delim = '\n') base::c(...) |> 
+	urls_flat(.delim) |> 
+	urls_tidy(output_tidys = .output_res) |> 
+	base::invisible()
+
 #' @title Extract URL query parameters (httr2 & purrr)
 #' @name url_extquery.httr
 #' @description Impl of extractor from url query part (with httr depd)
@@ -89,7 +116,7 @@ urls_tidy = function (urls, output_tidys = F) urls |>
 #' @param keys {chr} names of the query parameters to extract
 #' @returns {chr} a flattened vector of the extracted query values
 #' 
-url_extquery.httr = function (urls, keys) urls |> 
+url_extquery.httr <- function (urls, keys) urls |> 
 	purrr::map(~ httr2::url_parse(.x)$query |> magrittr::'%>%'({ .[base::names(.) %in% keys] })) |> 
 	base::unlist(use.names = F) |> 
 	base::identity()
@@ -101,7 +128,7 @@ url_extquery.httr = function (urls, keys) urls |>
 #' @param keys {chr} names of the query parameters to extract
 #' @returns {chr} a flattened vector of the extracted query values
 #' 
-url_extquery.base = function (urls, keys) urls |> 
+url_extquery.base <- function (urls, keys) urls |> 
 	base::strsplit('?') |> purrr::map_chr(~ .x |> utils::tail(-1L) |> base::paste(collapse = '?')) |> 
 	base::strsplit('&') |> base::unlist() |> base::unique() |> 
 	base::strsplit('=') |> purrr::keep(~ base::length(.x) |> base::identical(2L)) |> 
@@ -124,7 +151,7 @@ url_extquery.base = function (urls, keys) urls |>
 #' # This will use httr2 implementation if available, otherwise base R implementation
 #' url_extquery(urls, keys)
 #' }
-url_extquery = function (...) 'httr2' |> 
+url_extquery <- function (...) 'httr2' |> 
 	base::requireNamespace(quietly = TRUE) |> 
 	magrittr::'%>%'({ if (base::isTRUE(.)) 'httr' else 'base' }) |> 
 	base::switch(
@@ -152,7 +179,7 @@ url_extquery = function (...) 'httr2' |>
 #' }
 #' @export
 #' 
-magnet_tr_extract = function (...) base::list(...) |> 
+magnet_tr_extract <- function (...) base::list(...) |> 
 	parallel::mclapply(\ (.entry) .entry |> 
 		url_extquery('tr') |> urls_tidy() |> 
 		glue::as_glue() |> 
@@ -324,5 +351,3 @@ tracker_urls |>
 		display_name = '戏梦巴黎[未剪切版简繁中字].The.Dreamers.2003.UNCUT.BluRay.1080p.x264.DTS-NowYS', 
 		trackers_output = F) |> 
 	magrittr::'%T>%'(clipr::write_clip(.))
-
-
