@@ -79,7 +79,7 @@ urls_flat <- function (
 #' 
 urls_tidy <- function (
 		urls, 
-		output_tidys = F) urls |> 
+		output_tidys = F) as.urls_chr(urls) |> 
 	# 前后俱肃整
 	base::trimws() |> 
 	# 冗复无需说
@@ -88,17 +88,17 @@ urls_tidy <- function (
 	purrr::keep(~ base::nchar(.x) > 0) |> 
 	# 显我照丹青
 	magrittr::'%T>%'({
-		if (base::isTRUE(output_tidys)) . |> 
-			base::append('', after = 0) |> 
-			base::append('' |> base::rep(2)) |> 
-			base::paste(collapse = '\n') |> 
-			base::cat()
+		if (base::isTRUE(output_tidys)) . |> urls_show(
+			show_title = '', 
+			show_mark = '', 
+			show_delim = '\n', 
+			show_done = '\n')
 	}) |> 
 	base::identity()
 
 
 as.urls_chr <- function (urls) urls_flat(urls) |> 
-	# 定之型
+	# 平之踵 定之型
 	glue::as_glue() |> 
 	# 名诸类
 	magrittr::'%T>%'({ base::class(.) <- base::class(.) |> 
@@ -115,10 +115,12 @@ urls_show0 <- function (urls) as.urls_chr(urls) |>
 urls_show <- function (
 		urls, 
 		show_title = 'URLs: ', 
-		show_marking = crayon::yellow(cli::symbol$info)) show_marking |> 
+		show_mark = crayon::yellow(cli::symbol$info), 
+		show_delim = '\n------\n', 
+		show_done = '') show_mark |> 
 	base::paste(show_title) |> 
-	base::c(urls_show0(urls), '') |> 
-	base::paste(collapse = '\n------\n') |> 
+	base::c(urls_show0(urls), show_done) |> 
+	base::paste(collapse = show_delim) |> 
 	# 冕其形得示人
 	base::cat()
 
