@@ -34,16 +34,20 @@ magnet_tr_append <- function (
 		hash = '<hash>', 
 		display_name = NULL, 
 		trackers_output = T) trackers |> 
-	urls_flat('\n') |> 
-	urls_tidy(output_tidys = trackers_output) |> 
+	# 平且合整 亦如入编
+	urls_merge(.output_res = trackers_output) |> 
 	utils::URLencode(reserved = T, repeated = F) |> 
+	# 使加其冠 及随主后
 	purrr::map_chr(~ glue::glue_safe("tr={.x}")) |> 
 	base::append(url_base, after = 0) |> 
+	# 显名若定 亦将戴之
 	magrittr::'%>%'({ if (base::is.null(display_name)) . else . |> base::append(
 		values = "dn={dn}" |> glue::glue_safe(
 			dn = display_name |> utils::URLencode(reserved = T, repeated = F)), 
 		after = 1) }) |> 
+	# 其随其戴 此成一体
 	base::paste(collapse = '&') |> 
+	# 定之类目 收笔成型
 	glue::as_glue() |> 
 	base::identity()
 
@@ -58,8 +62,11 @@ magnet_tr_append <- function (
 urls_flat <- function (
 		urls, 
 		delim = '\n') urls |> 
+	# 以刀切之
 	base::strsplit(delim) |> 
+	# 除层并之
 	base::unlist() |> 
+	# 型完收笔
 	base::identity()
 
 #' @title Clean and deduplicate URLs chr
@@ -73,9 +80,13 @@ urls_flat <- function (
 urls_tidy <- function (
 		urls, 
 		output_tidys = F) urls |> 
+	# 前后俱肃整
 	base::trimws() |> 
+	# 冗复无需说
 	base::unique() |> 
+	# 存身方留当
 	purrr::keep(~ base::nchar(.x) > 0) |> 
+	# 显我照丹青
 	magrittr::'%T>%'({
 		if (base::isTRUE(output_tidys)) . |> 
 			base::append('', after = 0) |> 
@@ -84,6 +95,32 @@ urls_tidy <- function (
 			base::cat()
 	}) |> 
 	base::identity()
+
+
+as.urls_chr <- function (urls) urls_flat(urls) |> 
+	# 定之型
+	glue::as_glue() |> 
+	# 名诸类
+	magrittr::'%T>%'({ base::class(.) <- base::class(.) |> 
+		base::append('urls_chr', after = 0) }) |> 
+	base::identity()
+
+urls_show0 <- function (urls) as.urls_chr(urls) |> 
+	base::print() |> 
+	utils::capture.output() |> 
+	base::paste(collapse = '\n') |> 
+	# 抓其显以得形
+	base::invisible()
+
+urls_show <- function (
+		urls, 
+		show_title = 'URLs: ', 
+		show_marking = crayon::yellow(cli::symbol$info)) show_marking |> 
+	base::paste(show_title) |> 
+	base::c(urls_show0(urls), '') |> 
+	base::paste(collapse = '\n------\n') |> 
+	# 冕其形得示人
+	base::cat()
 
 #' @title Merge URL chr
 #' @name urls_merge
@@ -105,8 +142,11 @@ urls_merge <- function (
 		..., 
 		.output_res = T, 
 		.delim = '\n') base::c(...) |> 
+	# 平之
 	urls_flat(.delim) |> 
+	# 理之 去冗
 	urls_tidy(output_tidys = .output_res) |> 
+	# 可不见
 	base::invisible()
 
 #' @title Extract URL query parameters (httr2 & purrr)
@@ -117,8 +157,10 @@ urls_merge <- function (
 #' @returns {chr} a flattened vector of the extracted query values
 #' 
 url_extquery.httr <- function (urls, keys) urls |> 
-	purrr::map(~ httr2::url_parse(.x)$query |> magrittr::'%>%'({ .[base::names(.) %in% keys] })) |> 
-	base::unlist(use.names = F) |> 
+	# 借能解查
+	purrr::map(~ httr2::url_parse(.x)$query) |> base::unlist(use.names = T) |> 
+	# 凭指请命
+	magrittr::'%>%'({ .[base::names(.) %in% keys] }) |> 
 	base::identity()
 
 #' @title Extract URL query parameters (base & purrr)
@@ -129,12 +171,17 @@ url_extquery.httr <- function (urls, keys) urls |>
 #' @returns {chr} a flattened vector of the extracted query values
 #' 
 url_extquery.base <- function (urls, keys) urls |> 
-	base::strsplit('?') |> purrr::map_chr(~ .x |> utils::tail(-1L) |> base::paste(collapse = '?')) |> 
-	base::strsplit('&') |> base::unlist() |> base::unique() |> 
-	base::strsplit('=') |> purrr::keep(~ base::length(.x) |> base::identical(2L)) |> 
-	purrr::keep(~ .x |> utils::head(1L) |> base::'%in%'(keys)) |> 
-	purrr::map_chr(~ .x |> utils::tail(1L)) |> 
-	utils::URLdecode() |> 
+	# 切取余合 以取查部
+	base::strsplit('\\?') |> purrr::map_chr(~ .x |> utils::tail(-1L) |> base::paste(collapse = '?')) |> 
+	# 隔分各查 平整去同
+	base::strsplit('\\&') |> base::unlist() |> base::unique() |> 
+	# 各有名实 分当为二
+	base::strsplit('\\=') |> purrr::keep(~ base::length(.x) |> base::identical(2L)) |> 
+	# 各命其名 指请各命
+	magrittr::'%T>%'({ base::names(.) <- . |> purrr::map_chr(~ .x |> utils::head(1L)) }) |> 
+	magrittr::'%>%'({ .[base::names(.) %in% keys] |> purrr::map_chr(~ .x |> utils::tail(1L)) }) |> 
+	# 将命解之 分当为二
+	purrr::map_chr(~ utils::URLdecode(.x)) |> 
 	base::identity()
 
 #' @title Extract URL query parameters
@@ -154,6 +201,7 @@ url_extquery.base <- function (urls, keys) urls |>
 url_extquery <- function (...) 'httr2' |> 
 	base::requireNamespace(quietly = TRUE) |> 
 	magrittr::'%>%'({ if (base::isTRUE(.)) 'httr' else 'base' }) |> 
+	# 有能用 无则备
 	base::switch(
 		httr = url_extquery.httr, 
 		base = url_extquery.base) |> 
@@ -181,9 +229,12 @@ url_extquery <- function (...) 'httr2' |>
 #' 
 magnet_tr_extract <- function (...) base::list(...) |> 
 	parallel::mclapply(\ (.entry) .entry |> 
-		url_extquery('tr') |> urls_tidy() |> 
-		glue::as_glue() |> 
+		# 各项 取指
+		url_extquery('tr') |> 
+		# 整之 指型
+		urls_tidy() |> as.urls_chr() |> 
 		base::identity()) |> 
+	# 诸驾并之 得
 	base::identity()
 
 
