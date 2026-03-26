@@ -87,13 +87,10 @@ urls_tidy <- function (
 	# 存身方留当
 	purrr::keep(~ base::nchar(.x) > 0) |> 
 	# 显我照丹青
-	magrittr::'%T>%'({
-		if (base::isTRUE(output_tidys)) . |> urls_show(
-			show_title = '', 
-			show_mark = '', 
-			show_delim = '\n', 
-			show_done = '\n')
-	}) |> 
+	magrittr::'%T>%'({ output_tidys |> urls_trigshow(.) }) |> 
+	# 型之
+	as.urls_chr() |> 
+	# 此之
 	base::identity()
 
 
@@ -121,8 +118,24 @@ urls_show <- function (
 	base::paste(show_title) |> 
 	base::c(urls_show0(urls), show_done) |> 
 	base::paste(collapse = show_delim) |> 
-	# 冕其形得示人
+	# 冕其形得现人
 	base::cat()
+
+urls_trigshow <- function (
+		trigger_on = T, 
+		urls, 
+		show_title = '', 
+		show_mark = '', 
+		show_delim = '\n', 
+		show_done = '\n') urls |> arpr::iff(
+	base::isTRUE(trigger_on), 
+	# 鉴其德以如示
+	urls_show, 
+	show_title = show_title, 
+	show_mark = show_mark, 
+	show_delim = show_delim, 
+	show_done = show_done)
+
 
 #' @title Merge URL chr
 #' @name urls_merge
@@ -150,6 +163,47 @@ urls_merge <- function (
 	urls_tidy(output_tidys = .output_res) |> 
 	# 可不见
 	base::invisible()
+
+urls_diff <- function (
+		urls_a, 
+		urls_b, 
+		.delim = '\n') base::list(a = urls_a, b = urls_b) |> 
+	# 组之整之
+	purrr::map(~ .x |> urls_merge(
+		.delim = .delim, 
+		.output_res = F)) |> 
+	# 比之类之
+	magrittr::'%>%'({ as.urls_chr(.$a |> base::setdiff(.$b)) }) |> 
+	# 收结此之
+	base::identity()
+
+#' @title URLs appender
+#' @name urls_append
+#' @examples \dontrun{
+#' x = 'http://x.xyz, a.a' |> urls_append('c.c, a.a', .delim = ',') #> c.c
+#' x = 'http://x.xyz, a.a' |> urls_append('c.c, a.a', .delim = ',', .output_res = F)
+#' x #: http://x.xyz, a.a, c.c
+#' }
+#' @export
+#' 
+urls_append <- function (
+		urls_a, 
+		urls_b, 
+		.output_res = T, 
+		.delim = '\n') base::list(a = urls_a, b = urls_b) |> 
+	# 比之示之以若需
+	magrittr::'%T>%'({ .output_res |> arpr::iff(
+		base::isTRUE(.output_res), 
+		urls_trigshow, 
+		urls = .$b |> urls_diff(.$a, .delim = .delim)) }) |> 
+	# 合之得之以正法
+	magrittr::'%>%'({ .$a |> urls_merge(
+		.$b, 
+		.delim = .delim, 
+		.output_res = F) }) |> 
+	# 亦可不见
+	base::invisible()
+
 
 #' @title Extract URL query parameters (httr2 & purrr)
 #' @name url_extquery.httr
