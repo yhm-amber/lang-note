@@ -1,5 +1,6 @@
 
-codepoint_getchr <- function (codepoint) codepoint |> 
+#' @example base::c('0x6719', '0x6c49') |> codepoint.gen_utf8_text() #> "朙汉"
+codepoint.gen_utf8_text <- function (codepoints) codepoints |> 
 	# 毋使谬
 	magrittr::'%>%'(
 	{
@@ -13,8 +14,9 @@ codepoint_getchr <- function (codepoint) codepoint |>
 	{
 		base::as.hexmode(.) |> 
 			base::toupper() |> 
-			base::append(after = 0, 'U+') |> 
-			base::paste(collapse = '') |> 
+			purrr::map(~ .x |> base::append(after = 0, 'U+')) |> 
+			purrr::map_chr(~ .x |> base::paste(collapse = '')) |> 
+			base::append(after = 0, 'Code Point(s) Input:') |> 
 			usethis::ui_info()
 	}) |> 
 	# 得字
@@ -23,8 +25,8 @@ codepoint_getchr <- function (codepoint) codepoint |>
 	base::identity()
 
 #' @describe make encoding-raw text as raw type in ls
-#' @example base::c('e6 9c 99','e6 b1 89') |> as_raws.raw_texts() #: Raw List of 2
-as_raws.raw_texts <- function (
+#' @example base::c('e6 9c 99','e6 b1 89') |> rawtexts.as_raws() #: Raw List of 2
+rawtexts.as_raws <- function (
 		raw_texts, 
 		raw_numbase = 16L) raw_texts |> 
 	base::gsub(x = _, '[^0-9a-fA-F]', '') |> 
@@ -37,7 +39,8 @@ as_raws.raw_texts <- function (
 	base::identity()
 
 #' @describe let raw-ls has its show
-#' @example base::c('e6 9c 99','e6 b1 89') |> as_raws.raw_texts() #: see the show
+#' @example base::c('e6 9c 99','e6 b1 89') |> rawtexts.as_raws() #: see the show
+#' @example base::c(a = 'e6 9c 99',b = 'e6 b1 89') |> rawtexts.as_raws() #: see the named show
 print.raw.ls = \ (x, .n = base::names(x)) xx |> 
 	# 暂去其名 使能元令
 	magrittr::'%T>%'({ base::names(.) <- NULL }) |> 
@@ -82,22 +85,44 @@ print.raw.ls = \ (x, .n = base::names(x)) xx |>
 	# 果当不見
 	base::invisible()
 
+#' @describe create raw.ls from encoding-raw text(s).
+#' @example raws.from_text('e6 9c 99','e6 b1 89') #: see the created raw.ls
+#' @example raws.from_text(a = 'e6 9c 99',b = 'e6 b1 89') #: see the created named raw.ls
+raws.from_text <- function (
+		..., 
+		.raw_numbase = 16L) base::c(...) |> 
+	# 取 转
+	rawtexts.as_raws(raw_numbase = .raw_numbase) |> 
+	# 用 可
+	base::identity()
 
-
-
-#' @describe make char from encoding-raw text
-#' @example base::c('e6 9c 99','e6 b1 89') |> rawtext_chr() #: "朙" "汉"
-rawtext_chr <- function (
-		raw_texts, 
-		raw_numbase = 16L) raw_texts |> 
-	# 得弦而用 至本相
-	as_raws.raw_texts(raw_numbase = raw_numbase) |> 
-	# 自本显明 知何如
-	purrr::map_chr(rawToChar) |> 
+#' @describe trans raw.ls as its chr(s)
+#' @example raws.from_text(a = 'e6 9c 99',b = 'e6 b1 89') |> raws.as_chrs() #: a: "朙", b: "汉"
+raws.as_chrs <- function (raw.ls) raw.ls |> 
+	# 逐变之
+	purrr::map_chr(base::rawToChar) |> 
 	# 此
 	base::identity()
 
+#' @describe trans chr(s) as its raw.ls
+#' @example base::c(a = '朙', b = '汉') |> chrs.as_raws() #: a: e6 9c 99, b: e6 b1 89
+chrs.as_raws <- function (chrs) chrs |> 
+	# 逐变之
+	purrr::map(base::charToRaw) |> 
+	# 是列 型
+	magrittr::'%T>%'({ base::class(.) <- base::c('raws', 'raw.ls') }) |> 
+	# 此
+	base::identity()
 
-
-
-
+#' @describe make char from encoding-raw text
+#' @example base::c('e6 9c 99','e6 b1 89') |> rawtexts.as_chrs() #: "朙" "汉"
+#' @example base::c(a = 'e6 9c 99', b = 'e6 b1 89') |> rawtexts.as_chrs() #: a: "朙", b: "汉"
+rawtexts.as_chrs <- function (
+		raw_text, 
+		raw_numbase = 16L) raw_text |> 
+	# 得弦而用 至本相
+	rawtexts.as_raws(raw_numbase = raw_numbase) |> 
+	# 自本显明 知何如
+	raws.as_chrs() |> 
+	# 此
+	base::identity()
