@@ -1,3 +1,4 @@
+
 #' @example base::c(0x6719L, 0x6c49L) |> magrittr::'%T>%'({ base::class(.) = 'codepoint' }) |> base::print()
 print.codepoint <- \ (codepoint) base::as.hexmode(codepoint) |> 
 	base::toupper() |> 
@@ -75,11 +76,13 @@ codepointhexls.as_codepoints <- function (codepointhex.ls) codepointhex.ls |>
 
 
 
-#' @example base::c('0x6719', '0x6c49') |> codepoint.gen_utf8_text() #> "朙" "汉"
-#' @example base::c(0x6719, 0x6c49) |> base::as.integer() |> codepoint.gen_utf8_text() #> "朙" "汉"
-#' @example base::c(a = 0x6719L, b = 0x6c49L) |> codepoint.gen_utf8_text() #> a: "朙", b: "汉"
-#' @example base::list(a = base::c(0x6719L, 0x6c49L), b = 0x6719L) |> codepoint.gen_utf8_text() #> a: "朙汉", b: "朙"
-codepoint.gen_utf8_text <- function (codepoints, .show_input = T) codepoints |> 
+#' @example base::c('0x6719', '0x6c49') |> codepoint.gen_utf8text() #> "朙" "汉"
+#' @example base::c(0x6719, 0x6c49) |> base::as.integer() |> codepoint.gen_utf8text() #> "朙" "汉"
+#' @example base::c(a = 0x6719L, b = 0x6c49L) |> codepoint.gen_utf8text() #> a: "朙", b: "汉"
+#' @example base::list(a = base::c(0x6719L, 0x6c49L), b = 0x6719L) |> codepoint.gen_utf8text() #> a: "朙汉", b: "朙"
+codepoint.gen_utf8text <- function (
+		codepoints, 
+		.show_input = T) codepoints |> 
 	# 使正
 	codepointhexls.as_codepoints() |> 
 	# 若呈
@@ -88,6 +91,19 @@ codepoint.gen_utf8_text <- function (codepoints, .show_input = T) codepoints |>
 	purrr::map_chr(base::intToUtf8) |> 
 	# 是止
 	base::identity()
+
+#' @example base::c(a = '朙汉', b = '朙') |> utf8text.find_codepoint() #> a: U+6719, U+6C49; b: U+6719
+#' @example base::list(a = '朙汉', b = '朙') |> utf8text.find_codepoint() #> a: U+6719, U+6C49; b: U+6719
+utf8text.find_codepoint <- function (
+		utf8texts) utf8texts |> 
+	# 見其冥
+	purrr::map(base::utf8ToInt) |> 
+	# 須各型 列既指
+	codepointhexls.as_codepoints() |> 
+	# 見之
+	base::identity()
+
+
 
 
 #' @describe make encoding-raw text as raw type in ls
@@ -103,6 +119,9 @@ rawtexts.as_raws <- function (
 	magrittr::'%T>%'({ base::class(.) <- base::c('raws', 'raw.ls') }) |> 
 	# 至
 	base::identity()
+
+
+
 
 
 printool_outpre.list_namemark <- \ (
