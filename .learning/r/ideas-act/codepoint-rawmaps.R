@@ -314,7 +314,7 @@ rawtexts.as_chrs <- function (
 
 
 
-
+#: ref: https://zh.wikisource.org/wiki/Template:PUA/%E5%B7%B2%E6%9F%A5%E6%98%8E%E7%9A%84%E7%A7%81%E6%9C%89%E5%AD%97%E7%AC%A6
 pua_desc = tibble::tribble(
 	~ pua,	~ desc,	
 	'',	'木',	
