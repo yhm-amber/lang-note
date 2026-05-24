@@ -34,4 +34,10 @@ diff --report-identical-files --rcs -- 	chksums-latest-zip.b3sum	chksums-latest-
 diff --report-identical-files --rcs -- 	chksums-version-tgz.b3sum	chksums-latest-tgz.b3sum	#: compare version/latest for tgz
 diff --report-identical-files --rcs -- 	chksums-version-zip.b3sum	chksums-latest-zip.b3sum	#: compare version/latest for zip
 
+#> Files 	chksums-version-zip.b3sum	chksums-version-tgz.b3sum	 are identical
+#> Files 	chksums-latest-zip.b3sum	chksums-latest-tgz.b3sum	 are identical
+#> Files 	chksums-version-tgz.b3sum	chksums-latest-tgz.b3sum	 are identical
+#> Files 	chksums-version-zip.b3sum	chksums-latest-zip.b3sum	 are identical
+
+
 
