@@ -1,7 +1,7 @@
 
-#:	demo using onedev's builds
-#:	 in 2026-05-10 ~ 2026-05-21
-#:	 .
+#:	This demo using onedev's builds in 2026-05-10 ~ 2026-05-21
+#:	You can find the newest version in your time at the
+#:	 url: https://code.onedev.io/onedev/server/~builds?query=%22Job%22+is+%22Release%22+and+successful
 
 ( 
 	wget -P latest-zip -- https://code.onedev.io/onedev/server/~site/onedev-latest.zip && 
