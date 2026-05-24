@@ -1,4 +1,8 @@
 
+#:	demo using onedev's builds
+#:	 in 2026-05-10 ~ 2026-05-21
+#:	 .
+
 ( 
 	wget -P latest-zip -- https://code.onedev.io/onedev/server/~site/onedev-latest.zip && 
 	(cd -- latest-zip && unzip onedev-latest.zip) && 
@@ -29,3 +33,5 @@ diff --report-identical-files --rcs -- 	chksums-version-zip.b3sum	chksums-versio
 diff --report-identical-files --rcs -- 	chksums-latest-zip.b3sum	chksums-latest-tgz.b3sum	#: compare tgz/zip for latest
 diff --report-identical-files --rcs -- 	chksums-version-tgz.b3sum	chksums-latest-tgz.b3sum	#: compare version/latest for tgz
 diff --report-identical-files --rcs -- 	chksums-version-zip.b3sum	chksums-latest-zip.b3sum	#: compare version/latest for zip
+
+
