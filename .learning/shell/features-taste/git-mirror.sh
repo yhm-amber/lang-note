@@ -25,7 +25,10 @@
 	
 	: )
 
+
 : update trees
+#: simple for branch main: to the bare repo.git then - 
+#: ~ (cd ../tree/main && git checkout --detach) && git remote update && (cd ../tree/main && git checkout main)
 (
 	cd -- SukiSU.Ultra-src/SukiSU-Ultra.git && 
 	
@@ -63,8 +66,6 @@
 		done && 
 	: )
 
-#: simple for branch main: to the bare repo.git then - 
-#: ~ (cd ../tree/main && git checkout --detach) && git remote update && (cd ../tree/main && git checkout main)
 
 
 
