@@ -26,9 +26,17 @@
 	: )
 
 
-: update trees
-#: simple for branch main: to the bare repo.git then - 
+: update trees - only wt main
+#: simple for only branch main - to the bare repo.git then: 
 #: ~ (cd ../tree/main && git checkout --detach) && git remote update && (cd ../tree/main && git checkout main)
+
+: update trees
+#: ..but for more wt branch - to the bare repo.git then: 
+#: ~ ((cd ../tree/beanch-a && git checkout --detach) && (cd ../tree/beanch-b && git checkout --detach) && ...) && 
+#: ~ git remote update && 
+#: ~ ((cd ../tree/beanch-a && git checkout beanch-a) && (cd ../tree/beanch-b && git checkout beanch-b) && ...) && 
+#: ~ :;
+#: so can be codes: 
 (
 	cd -- SukiSU.Ultra-src/SukiSU-Ultra.git && 
 	
