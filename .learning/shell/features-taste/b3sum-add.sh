@@ -5,7 +5,7 @@ do
 		echo "$(dirname "$name")/$(basename -s .tar.xz -- "$name") - b3_${hash}.tar.xz" && 
 		: ) && 
 	( 
-		1>&2 printf "--- :from: $name" && 
+		1>&2 printf "\t :from: $name" && 
 		1>&2 printf " ~ :to: $hashed_name" && 
 		1>&2 echo && 
 		: ) && 
