@@ -43,7 +43,7 @@ yd = ns_dic(dict(
 	fnc = lambda yard: 
 		lambda x, y: x * y + yard.a() + yard.b(), 
 	_ = ...))
-#: then access entrys ...
+#: then access entrys in this ns/yard ...
 print((yd.a(), yd.b(), yd.fnc()(60, 2))) #> (1, 2, 123)
 
 
