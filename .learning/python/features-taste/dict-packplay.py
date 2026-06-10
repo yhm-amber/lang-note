@@ -34,7 +34,7 @@ opts3.fnc(60, 2) #> 123
 #:  so it is just a dict but just can query entrys by the dot syntax,
 #:  so, this one cannot using the object-self at the function's 1st param.
 
-#: because opts3 is able to use, so we can play like this: 
+#: because opts3 is able to use, so we can play like this (with some tmpl codes): 
 yd = ns_dic(dict(
 	a = lambda yard: 
 		1, 
