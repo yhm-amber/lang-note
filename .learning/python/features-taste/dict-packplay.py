@@ -25,14 +25,14 @@ opts3 = ns_dic(dict(** dic_demo))
 opts1.fnc(60, 2) #> 123
 opts2.fnc(60, 2) #> 123
 opts3.fnc(60, 2) #> 123
-#: 123 = 60 * 2 + 1 + (1 + 1)
-#: and because of type() make entrys in dic became class-property,
-#:  and fn class-property is class-method,
-#:  and first param for method is obj itself (that's the thing usually named 'self' in py, like the `this` in js.),
-#:  so, in opts1.fnc(60, 2) here, opts1 is the real 1st param we inputed in that call.
-#: but, for xxx = types.SimpleNamespace(** dic), it just gives dic value to xxx.__dict__ property,
-#:  so it is just a dict but just can query entrys by the dot syntax,
-#:  so, this one cannot using the object-self at the function's 1st param.
+#:	123 = 60 * 2 + 1 + (1 + 1)
+#:	and because of type() make entrys in dic became class-property,
+#:	 and fn class-property is class-method,
+#:	 and first param for method is obj itself (that's the thing usually named 'self' in py, like the `this` in js.),
+#:	 so, in opts1.fnc(60, 2) here, opts1 is the real 1st param we inputed in that call.
+#:	but, for xxx = types.SimpleNamespace(** dic), it just gives dic value to xxx.__dict__ property,
+#:	 so it is just a dict but just can query entrys by the dot syntax,
+#:	 so, this one cannot using the object-self at the function's 1st param.
 
 #: because opts3 is able to use, so we can play like this (with some tmpl codes): 
 yd = ns_dic(dict(
