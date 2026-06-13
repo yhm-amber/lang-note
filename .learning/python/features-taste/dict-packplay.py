@@ -55,3 +55,11 @@ print((yd.a(), yd.b(), yd.fnc()(60, 2))) #> (1, 2, 123)
 #:		-	如 `instance_name |> f(a)` 即为 `instance_name |> f.class_name(a)` 即 `f.class_name(instance_name, a)` 在于 R 中（此 `instance_name` 对象于其 `class` 属性中需有 `'class_name'` 这个标记）
 
 
+#: also for tuple/list but use single `*`
+(lambda a, b: a + b) (*(1, 2)) #> 3
+(lambda a, b: a + b) (*[1, 2]) #> 3
+
+
+
+
+
