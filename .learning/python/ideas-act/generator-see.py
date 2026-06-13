@@ -29,7 +29,8 @@ def see_gen[T, R](
 
 from urllib.request import Request, urlopen
 from urllib.parse import urlencode
-import json
+from time import sleep
+from json import loads
 
 # ── 配置 ──────────────────────────────────────
 SEARCH_KWD = "hanjian.svg"
@@ -37,6 +38,7 @@ HEADERS    = {
 	"Referer": "https://commons.wikimedia.org/", 
 	"User-Agent": "ZBot/1.0 (research; educational)" }
 PAGE_SIZE  = 50 # 项，一页多少
+DELAY      = 2  # 秒，限流保护
 
 # ── 构建请求 ──────────────────────────────────
 def _build_url(offset: int = 0) -> str:
@@ -54,7 +56,7 @@ def _build_url(offset: int = 0) -> str:
 
 def _fetch(url: str) -> dict:
 	resp = urlopen(Request(url, headers=HEADERS), timeout=15)
-	return json.loads(resp.read())
+	return loads(resp.read())
 
 # ── 生成器：惰性翻页 ──────────────────────────
 def pages(offset = 0) -> None:
@@ -64,7 +66,7 @@ def pages(offset = 0) -> None:
 		yield  resp.get("query", {}).get("pages", {})
 		#: 询下页 稍待时
 		offset = resp.get("continue", {}).get("gsroffset")
-		time.sleep(DELAY)
+		sleep(DELAY)
 	return offset
 
 # ── 管道：从翻页到文件清单 ────────────────────
