@@ -160,6 +160,7 @@ files_info = see_gen(files_info, DataFrame)
 # ~~~ ────────────────────
 
 #: so that we can see a generator many times.
+#: and at the first time it might necessary to run something.
 
 #: or using with rich to show updated info tbl
 #: -- need to run under script mode.
