@@ -1,3 +1,5 @@
+##### WIP
+
 from typing import Iterable, Callable
 from result import Ok, Err, as_result, Result
 from urllib.error import HTTPError, URLError, ContentTooShortError
@@ -147,3 +149,7 @@ if __name__ == "__main__":
 	files_info = see_generator(files_info, pl.DataFrame)
 	files_info = download_medias(files_info)
 	...
+
+
+
+
