@@ -31,6 +31,7 @@ def see_gen[T, R](
 
 #: using demo - data prepare
 
+# ~~~ ────────────────────
 from urllib.request import Request, urlopen
 from urllib.parse import urlencode
 from time import sleep
@@ -86,11 +87,12 @@ all_fileinfo = (
 	for p in pages()
 	for x in p.values()
 	if SEARCH_KWD in x.get("title", "") )
-
+# ~~~ ────────────────────
 
 
 #: using demo - see effect
 
+# ~~~ ────────────────────
 from polars import DataFrame
 
 all_fileinfo = see_gen(all_fileinfo, DataFrame)
@@ -131,11 +133,14 @@ all_fileinfo = see_gen(all_fileinfo, DataFrame)
 #|	│ File:龍-hanjian.svg ┆ https://upload.wikimedia.org/w… ┆ 9643  │
 #|	│ File:𠕹-hanjian.svg ┆ https://upload.wikimedia.org/w… ┆ 7506  │
 #|	└─────────────────────┴─────────────────────────────────┴───────┘
+# ~~~ ────────────────────
 
 #: so that we can see a generator many times.
 
 #: or using with rich to show updated info tbl
+#: -- need to run under script mode.
 
+# ~~~ ────────────────────
 import polars as pl
 from rich.console import Console
 from rich.prompt import Prompt
@@ -162,5 +167,5 @@ while True:
 		pass
 	else:
 		break
-
+# ~~~ ────────────────────
 
