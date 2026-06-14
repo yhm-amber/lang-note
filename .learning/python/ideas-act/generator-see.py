@@ -3,9 +3,12 @@
 
 #: lambda style
 from itertools import tee
-see_gen = ( lambda gen, see = list: 
+see_gen = ( lambda 
+		gen, 
+		see = list, 
+		say = print: 
 	( lambda saw, orig: 
-		(lambda _: orig) (print(see(saw))) 
+		(lambda _: orig) (say(see(saw))) 
 	) (* tee(gen, 2)) )
 
 #: or better with typing
@@ -13,10 +16,11 @@ from typing import Iterable, Callable
 def see_gen[T, R](
 		gen: Iterable[T], 
 		see: Callable[[Iterable[T]], R] = list, 
+		say: Callable[[R], None] = print, 
 		) -> Iterable[T]:
 	from itertools import tee
 	return (lambda saw, orig: 
-		(lambda _: orig) (print(see(saw)))
+		(lambda _: orig) (say(see(saw)))
 	) (* tee(gen, 2))
 
 #: ── define ───────────────────────────────────
