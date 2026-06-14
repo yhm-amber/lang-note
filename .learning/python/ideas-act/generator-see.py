@@ -86,7 +86,7 @@ def pager(offset = 0) -> None:
 			DELAY, 
 			...))
 		offset = resp.get("continue", {}).get("gsroffset")
-		time.sleep(DELAY)
+		sleep(DELAY)
 	return offset
 
 # ── 管道：从翻页到文件清单 ────────────────────
