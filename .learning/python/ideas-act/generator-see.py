@@ -92,7 +92,7 @@ def pager(offset = 0) -> None:
 # ── 管道：从翻页到文件清单 ────────────────────
 def search_file(
 		pages: Iterable[dict], 
-		kwd: str = SEARCH_KWD, 
+		kwd: str | None = None, 
 		) -> Iterable[dict[str, str]]:
 	return ( 
 	{
@@ -105,10 +105,13 @@ def search_file(
 	}
 	for p in pages
 	for x in p.values()
-	if kwd in x.get("title", "") )
+	if kwd is None or kwd in x.get("title", "") )
 
-#: data here prepared.
-files_info = search_file(pager(), SEARCH_KWD)
+
+#: data here can be prepared.
+
+files_info = search_file(pager())
+# files_info = search_file(pager(), SEARCH_KWD)
 # ~~~ ────────────────────
 
 
