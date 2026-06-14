@@ -68,7 +68,7 @@ def _fetch(url: str) -> dict:
 	return loads(resp.read())
 
 # ── 生成器：惰性翻页 ──────────────────────────
-def pages(offset = 0) -> None:
+def pager(offset = 0) -> None:
 	while offset is not None:
 		#: 一页得 整页出
 		resp   = _fetch(_build_url(offset))
@@ -88,7 +88,7 @@ all_fileinfo = (
 		#: 文件大小
 		"size":  (x.get("imageinfo") or [{}])[0].get("size"), 
 	}
-	for p in pages()
+	for p in pager()
 	for x in p.values()
 	if SEARCH_KWD in x.get("title", "") )
 # ~~~ ────────────────────
