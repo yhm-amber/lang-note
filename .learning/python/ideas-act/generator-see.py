@@ -134,4 +134,33 @@ all_fileinfo = see_gen(all_fileinfo, DataFrame)
 
 #: so that we can see a generator many times.
 
+#: or using with rich to show updated info tbl
+
+import polars as pl
+from rich.console import Console
+from rich.prompt import Prompt
+
+console = Console()        #: 控制台操作器只需一个
+pl.Config.set_tbl_rows(-1) #: 显示所有行
+pl.Config.set_tbl_cols(-1) #: 显示所有列
+
+while True:
+	console.clear()
+	all_fileinfo = see_gen(
+		all_fileinfo, 
+		see=pl.DataFrame, 
+		say=lambda df: console.print(df)
+		)
+	choice = Prompt.ask(
+		"[bold cyan]Retry unfinished?[/]", 
+		choices=["y", "n"], 
+		default="y"
+		)
+	if choice == "y":
+		#: do something
+		#: all_fileinfo = _info_download(all_fileinfo)
+		pass
+	else:
+		break
+
 
