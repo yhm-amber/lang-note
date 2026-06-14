@@ -2,6 +2,7 @@
 #: ── define ───────────────────────────────────
 
 #: lambda style
+# ~~~ ────────────────────
 from itertools import tee
 see_gen = ( lambda 
 		gen, 
@@ -10,8 +11,10 @@ see_gen = ( lambda
 	( lambda saw, orig: 
 		(lambda _: orig) (say(see(saw))) 
 	) (* tee(gen, 2)) )
+# ~~~ ────────────────────
 
 #: or better with typing
+# ~~~ ────────────────────
 from typing import Iterable, Callable
 def see_gen[T, R](
 		gen: Iterable[T], 
@@ -22,6 +25,7 @@ def see_gen[T, R](
 	return (lambda saw, orig: 
 		(lambda _: orig) (say(see(saw)))
 	) (* tee(gen, 2))
+# ~~~ ────────────────────
 
 #: ── define ───────────────────────────────────
 
