@@ -108,7 +108,7 @@ def search_file(
 	if kwd is None or kwd in x.get("title", "") )
 
 
-#: data here can be prepared.
+#: a generator can be prepared here as the data for test.
 
 files_info = search_file(pager())
 # files_info = search_file(pager(), SEARCH_KWD)
