@@ -118,6 +118,8 @@ files_info = search_file(pager(), SEARCH_KWD)
 from polars import DataFrame
 
 files_info = see_gen(files_info, DataFrame)
+#|	~ page 1: (1~50) files info fetching ...
+#|	~ page 1: (1~50) waiting <2 sec.> before continue ...
 #|	shape: (11, 3)
 #|	┌─────────────────────┬─────────────────────────────────┬───────┐
 #|	│ title               ┆ url                             ┆ size  │
