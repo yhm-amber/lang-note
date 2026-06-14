@@ -71,15 +71,30 @@ def _fetch(url: str) -> dict:
 def pager(offset = 0) -> None:
 	while offset is not None:
 		#: 一页得 整页出
+		print('~ page {}: ({}~{}) files info fetching ...'.format(
+			offset // PAGE_SIZE + 1, 
+			offset + 1, 
+			offset + PAGE_SIZE, 
+			...))
 		resp   = _fetch(_build_url(offset))
 		yield  resp.get("query", {}).get("pages", {})
 		#: 询下页 稍待时
+		print('~ page {}: ({}~{}) waiting <{} sec.> before continue ...'.format(
+			offset // PAGE_SIZE + 1, 
+			offset + 1, 
+			offset + PAGE_SIZE, 
+			DELAY, 
+			...))
 		offset = resp.get("continue", {}).get("gsroffset")
-		sleep(DELAY)
+		time.sleep(DELAY)
 	return offset
 
 # ── 管道：从翻页到文件清单 ────────────────────
-all_fileinfo = ( 
+def search_file(
+		pages: Iterable[dict], 
+		kwd: str = SEARCH_KWD, 
+		) -> Iterable[dict[str, str]]:
+	return ( 
 	{
 		#: 文件标题
 		"title": x.get("title", ""), 
@@ -88,9 +103,12 @@ all_fileinfo = (
 		#: 文件大小
 		"size":  (x.get("imageinfo") or [{}])[0].get("size"), 
 	}
-	for p in pager()
+	for p in pages
 	for x in p.values()
-	if SEARCH_KWD in x.get("title", "") )
+	if kwd in x.get("title", "") )
+
+#: data here prepared.
+files_info = search_file(pager(), SEARCH_KWD)
 # ~~~ ────────────────────
 
 
@@ -99,7 +117,7 @@ all_fileinfo = (
 # ~~~ ────────────────────
 from polars import DataFrame
 
-all_fileinfo = see_gen(all_fileinfo, DataFrame)
+files_info = see_gen(files_info, DataFrame)
 #|	shape: (11, 3)
 #|	┌─────────────────────┬─────────────────────────────────┬───────┐
 #|	│ title               ┆ url                             ┆ size  │
@@ -118,7 +136,7 @@ all_fileinfo = see_gen(all_fileinfo, DataFrame)
 #|	│ File:龍-hanjian.svg ┆ https://upload.wikimedia.org/w… ┆ 9643  │
 #|	│ File:𠕹-hanjian.svg ┆ https://upload.wikimedia.org/w… ┆ 7506  │
 #|	└─────────────────────┴─────────────────────────────────┴───────┘
-all_fileinfo = see_gen(all_fileinfo, DataFrame)
+files_info = see_gen(files_info, DataFrame)
 #|	shape: (11, 3)
 #|	┌─────────────────────┬─────────────────────────────────┬───────┐
 #|	│ title               ┆ url                             ┆ size  │
@@ -155,8 +173,8 @@ pl.Config.set_tbl_cols(-1) #: 显示所有列
 
 while True:
 	console.clear()
-	all_fileinfo = see_gen(
-		all_fileinfo, 
+	files_info = see_gen(
+		files_info, 
 		see=pl.DataFrame, 
 		say=lambda df: console.print(df)
 		)
@@ -167,7 +185,7 @@ while True:
 		)
 	if choice == "y":
 		#: do something
-		#: all_fileinfo = _info_download(all_fileinfo)
+		#: files_info = _info_download(files_info)
 		pass
 	else:
 		break
