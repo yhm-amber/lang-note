@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from typing import Iterable, Callable
 from result import Ok, Err, as_result, Result  # noqa: F401
 from urllib.error import HTTPError, URLError, ContentTooShortError
@@ -5,22 +7,61 @@ from rich.console import Console
 
 
 # ── 配置 ──────────────────────────────────────
-SEARCH_KWD = "hanjian.svg"
-OUT_DIR    = "./.hanjian-svg"
+def osenv_orask[T](
+		envnames: Iterable[str], 
+		default: str | T, 
+		outtype: Callable[[str], T], 
+		asking: str = None, 
+		_skip_ask: bool = False, 
+		) -> T:
+	"""
+	期效: 
+	- 若指名存 则用其值 不问
+	- 若不存 则用其全局名只值为默认以问 仍不存则以参传为默认
+	- 皆不存则且问矣
+	"""
+	from os import getenv
+	from itertools import tee
+	from rich.prompt import Prompt
+	envnames_glob, envnames_orig = tee(envnames, 2)
+	pass
+	asking = asking if asking else f'profile {'/'.join(list(envnames))} need to specified:'
+	pass
+	envgot_glob = next(
+		( env for name in envnames_glob if (env := getenv(name)) ), None)
+	envgot_orig = next(
+		( env for name in envnames_orig if (env := getenv(name)) ), None)
+	pass
+	default = str(default) if envgot_glob is None else envgot_glob
+	return outtype(
+		Prompt.ask(
+			f'[bold yellow]{asking}[/]', 
+			default = default if default else ...) 
+		if (not _skip_ask) and (envgot_orig is None) 
+		else envgot_orig if envgot_orig else default)
+
+SEARCH_KWD = osenv_orask(['SEARCH_KWD'], "hanjian.svg", str, 'Input your keyword for searching:')
+OUT_DIR    = osenv_orask(['OUT_DIR'], "./.hanjian-svg", str, 'Input a path for saving:')
+PAGE_SIZE  = osenv_orask(['PAGE_SIZE'], 6, int, 'How many entry(s) you want in one page?') # 项，一页多少
+DELAY      = osenv_orask(['DELAY'], 2, int, 'Setting a waiting sec. num for delay:') # 秒，限流保护
+MAX_CONCURRENT = osenv_orask(['MAX_WORKERS','MAX_WORKER','MAX_CONCURRENT'], 1, int, _skip_ask = True)
+#: 同时存在下载任务个数 (增加这个就要增加 DELAY 否则容易 429 - Wikimedia 的非官方请求容忍阈值大约是每秒 1 次以内)
 HEADERS    = {
 	"Referer": "https://commons.wikimedia.org/", 
-	"User-Agent": "ZBot/1.0 (research; educational)" }
-DELAY      = 2 # 秒，限流保护
-PAGE_SIZE  = 6 # 项，一页多少
-MAX_CONCURRENT = 1 # 同时存在下载任务个数 (增加这个就要增加 DELAY 否则容易 429 - Wikimedia 的非官方请求容忍阈值大约是每秒 1 次以内)
-
+	"User-Agent": "MediaFinder/1.2 (research; educational)" }
 console = Console() # 控制台操作器（只需一个）
-
 
 # ── 构建请求 ──────────────────────────────────
 def wikiapi_url(offset: int = 0) -> str:
+	"""
+	符其令
+	用取期
+	
+	Make full url for wikimedia api.
+	"""
 	from urllib.parse import urlencode
-	return "https://commons.wikimedia.org/w/api.php?" + urlencode({
+	return "https://commons.wikimedia.org/w/api.php?" + urlencode(
+	{
 		"action":       "query",            #: 告以寻
 		"generator":    "search",           #: 用以寻
 		"gsrsearch":    SEARCH_KWD,         #: 寻何物
@@ -33,6 +74,14 @@ def wikiapi_url(offset: int = 0) -> str:
 	})
 
 def url_fetch(url: str) -> dict:
+	"""
+	取诸天
+	受所机
+	
+	Fetch url
+	 and load its
+	 response.
+	"""
 	from urllib.request import Request, urlopen
 	from json import loads
 	resp = urlopen(Request(url, headers=HEADERS), timeout=15)
@@ -40,35 +89,49 @@ def url_fetch(url: str) -> dict:
 
 # ── 生成器：惰性翻页 ──────────────────────────
 def pages_flipper(offset = 0):
+	"""
+	定我页
+	见若行
+	
+	Create page flipper which is in lazy mode.
+	Will printing messages during real running.
+	"""
 	from time import sleep
 	while offset is not None:
 		#: 一页得 整页出
-		console.print('~ page {}: ({}~{}) files info fetching ...'.format(
+		console.print('[bold]:: [/]page {}: ({}~{}) files info fetching ...'.format(
 			offset // PAGE_SIZE + 1, 
 			offset + 1, 
 			offset + PAGE_SIZE, 
-			))
+		))
 		resp   = url_fetch(wikiapi_url(offset))
 		yield  resp.get("query", {}).get("pages", {})
 		#: 询下页 稍待时
-		console.print('~ page {}: ({}~{}) waiting <{} sec.> before continue ...'.format(
+		console.print('[bold]:: [/]page {}: ({}~{}) waiting <{} sec.> before continue ...'.format(
 			offset // PAGE_SIZE + 1, 
 			offset + 1, 
 			offset + PAGE_SIZE, 
 			DELAY, 
-			))
+		))
 		offset = resp.get("continue", {}).get("gsroffset")
 		sleep(DELAY)
+	console.print('[bold]:: [/]{} of any continue page, fin.'.format(offset))
 	pass
-	console.print('~ {} of any continue page, fin.'.format(offset))
 
 # ── 管道：从翻页到文件清单 ────────────────────
 def info_scraping(
 		pages: Iterable[dict], 
-		kwd: str | None = None, 
+		kwd: str = None, 
 		) -> Iterable[dict[str, str]]:
+	"""
+	取我所用
+	尽我设择
+	
+	Scraping info during pages' flipping.
+	Format of 'info' specified here.
+	"""
 	return ( 
-	(
+	( 
 		{
 			#: 文件标题
 			"title": x.get("title", ""), 
@@ -78,7 +141,7 @@ def info_scraping(
 			"size":  (x.get("imageinfo") or [{}])[0].get("size"), 
 		}
 		for x in p.values()
-		if kwd is None or kwd in x.get("title", ""))
+		if kwd is None or kwd in x.get("title", "") )
 	for p in pages )
 
 
@@ -90,6 +153,12 @@ pages_info = info_scraping(pages_flipper())
 # ── 下载 ──────────────────────────────────────
 
 def dir_prepare(path: str) -> str:
+	"""
+	兵马未动粮草先行
+	若用一地方显备之
+	
+	Prepare a dir's path before you using it.
+	"""
 	from os import makedirs
 	makedirs(path, exist_ok=True)
 	return path
@@ -97,10 +166,17 @@ def dir_prepare(path: str) -> str:
 # @as_result(Exception)
 @as_result(HTTPError, URLError, ContentTooShortError)
 def url_downloader(url: str, path: str, _wait: int = 0) -> str:
+	"""
+	取天至地
+	再报成否
+	
+	Download url into path
+	 and return report in <rustedpy/result> mode.
+	"""
 	from time import sleep
 	from urllib.request import Request, urlopen
 	sleep(_wait)
-	console.print('~ downloading to path <{}> from url <{}> after wait <{} sec.>.'.format(
+	console.print('[bold]:: [/]downloading to path <{}> from url <{}> after wait <{} sec.>.'.format(
 		path, url, _wait))
 	with urlopen(Request(url, headers=HEADERS), timeout=15) as resp:
 		with open(path, "wb") as out:
@@ -108,14 +184,21 @@ def url_downloader(url: str, path: str, _wait: int = 0) -> str:
 	return path
 
 
-#~ files_info = see_generator(files_info, pl.DataFrame)
-#~ from itertools import count as sequence
-#~ pages_info = see_generator(pages_info, lambda p: (print(x) for x in ({ 'page': i, 'content': x } for i, x in enumerate((see_generator(x, pl.DataFrame) for x in p), 1))), say = list)
+#: files_info = see_generator(files_info, pl.DataFrame)
+#: from itertools import count as sequence
+#: pages_info = see_generator(pages_info, lambda p: (print(x) for x in ({ 'page': i, 'content': x } for i, x in enumerate((see_generator(x, pl.DataFrame) for x in p), 1))), say = list)
 def see_generator[T, R](
 		gen: Iterable[T], 
 		see: Callable[[Iterable[T]], R] = list, 
 		say: Callable[[R], None] = print, 
 		) -> Iterable[T]:
+	"""
+	可见其内
+	犹返若初
+	
+	Can see a gen by the way you choose
+	 then return such gen which didn't had any consuming yet.
+	"""
 	from itertools import tee
 	return (lambda saw, orig: 
 		(lambda _: orig) (say(see(saw)))
@@ -123,6 +206,13 @@ def see_generator[T, R](
 
 
 def _flip_pages(pages_info: Iterable[Iterable[dict[str, str]]]):
+	"""
+	作业以问
+	页页致之
+	
+	Control with asking
+	 to flip the lazying page.
+	"""
 	from rich.prompt import Prompt
 	for page_num, files_info in enumerate(pages_info, 1):
 		while True:
@@ -130,7 +220,7 @@ def _flip_pages(pages_info: Iterable[Iterable[dict[str, str]]]):
 				gen = files_info, 
 				see = lambda x: { 'page': page_num, 'content': pl.DataFrame(x) }, 
 				say = console.print)
-			console.print('[blue]If you see Err 429, you\'d better having a long wait before next downloads.[/]')
+			console.print('[blue][bold]:: [/]If you see Err 429, you\'d better having a long wait before next downloads.[/]')
 			match Prompt.ask(
 				'[bold cyan]Try to (re)download all unfinished in page {} ?[/]'.format(page_num), 
 				choices = ['y', 'N'], 
@@ -152,6 +242,20 @@ def medias_download(
 		_workers: int = MAX_CONCURRENT, 
 		_wait_delay: int = DELAY, 
 		) -> Iterable[Result[str, Exception]]:
+	"""
+	仅允定式以入
+	可并行作业然不荐 故工者定为一
+	将返报以仍合定式 可再入以复作业其为未成
+	
+	Only support the info-format dict that defined in `info_scraping` for input.
+	Support parallel downloading with workers limit choose
+	 but parallel downloading will not good for 'wikimedia'
+	 so here we don't let user choose the `MAX_CONCURRENT`.
+	Will return a info-format dict with one more field `status`
+	 and it can be input into this tool like a info-format dict also
+	 and only files which with an Err status will be download again
+	 at this time.
+	"""
 	from concurrent.futures import ThreadPoolExecutor
 	from os.path import join as path_concat
 	from itertools import count as sequence
@@ -174,6 +278,9 @@ def medias_download(
 
 
 if __name__ == "__main__":
+	"""
+	些许显设 而作业之
+	"""
 	import polars as pl
 	pl.Config.set_tbl_rows(-1) # 显示所有行
 	pl.Config.set_tbl_cols(-1) # 显示所有列
