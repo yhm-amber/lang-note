@@ -52,7 +52,7 @@ HEADERS    = {
 console = Console() # 控制台操作器（只需一个）
 
 # ── 构建请求 ──────────────────────────────────
-def wikiapi_url(offset: int = 0) -> str:
+def wikiurl_filesapi(offset: int = 0) -> str:
 	"""
 	符其令
 	用取期
@@ -88,7 +88,7 @@ def url_fetch(url: str) -> dict:
 	return loads(resp.read())
 
 # ── 生成器：惰性翻页 ──────────────────────────
-def pages_flipper(offset = 0):
+def pages_flipper(wikiapi_url, offset = 0):
 	"""
 	定我页
 	见若行
@@ -143,8 +143,8 @@ def info_scraping(
 
 
 #: generator prepare.
-pages_info = info_scraping(pages_flipper())
-# pages_info = info_scraping(pages_flipper(), SEARCH_KWD)
+pages_info = info_scraping(pages_flipper(wikiurl_filesapi))
+# pages_info = info_scraping(pages_flipper(wikiurl_filesapi), SEARCH_KWD)
 
 
 # ── 下载 ──────────────────────────────────────
@@ -297,7 +297,7 @@ def _flip_pages(pages_info: Iterable[Iterable[dict[str, str]]]):
 	from rich.prompt import Prompt
 	for page_num, files_info in enumerate(pages_info, 1):
 		while True:
-			files_info, _ = gen_obs(
+			files_info, _obs = gen_obs(
 				gen = files_info, 
 				see = lambda x: { 'page': page_num, 'content': pl.DataFrame(x) }, 
 				say = console.print)
@@ -359,7 +359,7 @@ def medias_download(
 			info_iter)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
 	"""
 	些许显设 而作业之
 	"""
