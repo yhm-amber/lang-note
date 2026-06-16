@@ -98,24 +98,21 @@ def pages_flipper(offset = 0):
 	"""
 	from time import sleep
 	while offset is not None:
+		p_n = offset // PAGE_SIZE + 1
+		p_bg, p_ed = offset + 1, offset + PAGE_SIZE
 		#: 一页得 整页出
-		console.print('[bold]:: [/]page {}: ({}~{}) files info fetching ...'.format(
-			offset // PAGE_SIZE + 1, 
-			offset + 1, 
-			offset + PAGE_SIZE, 
-		))
+		console.print(f'[bold blue]:: [/]page {p_n}: ({p_bg}~{p_ed}) files info fetching ...')
 		resp   = url_fetch(wikiapi_url(offset))
 		yield  resp.get("query", {}).get("pages", {})
 		#: 询下页 稍待时
-		console.print('[bold]:: [/]page {}: ({}~{}) waiting <{} sec.> before continue ...'.format(
-			offset // PAGE_SIZE + 1, 
-			offset + 1, 
-			offset + PAGE_SIZE, 
-			DELAY, 
-		))
+		console.print(f'[bold blue]:: [/]page {p_n}: ({p_bg}~{p_ed}) finding continue with <{DELAY} sec.> waiting ...')
 		offset = resp.get("continue", {}).get("gsroffset")
 		sleep(DELAY)
-	console.print('[bold]:: [/]{} of any continue page, fin.'.format(offset))
+	from random import choice as whateverone
+	console.print('[bold blue]:: [/]{} of any continue page, fin. {}'.format(
+		offset, 
+		whateverone(['✨', '🙃', '🙄', '🎆', '👻', '🙈', ':D', ':P', '🎇', '🕹']), 
+	))
 	pass
 
 # ── 管道：从翻页到文件清单 ────────────────────
@@ -176,33 +173,117 @@ def url_downloader(url: str, path: str, _wait: int = 0) -> str:
 	from time import sleep
 	from urllib.request import Request, urlopen
 	sleep(_wait)
-	console.print('[bold]:: [/]downloading to path <{}> from url <{}> after wait <{} sec.>.'.format(
-		path, url, _wait))
+	console.print(
+		'[bold blue]:: [/]downloading to path <{}> from url <{}> after wait <{} sec.>.'.format(
+			path, url, _wait))
 	with urlopen(Request(url, headers=HEADERS), timeout=15) as resp:
 		with open(path, "wb") as out:
 			out.write(resp.read())
 	return path
 
 
-#: files_info = see_generator(files_info, pl.DataFrame)
-#: from itertools import count as sequence
-#: pages_info = see_generator(pages_info, lambda p: (print(x) for x in ({ 'page': i, 'content': x } for i, x in enumerate((see_generator(x, pl.DataFrame) for x in p), 1))), say = list)
-def see_generator[T, R](
+def generator_observe[T, R, X, Y](
 		gen: Iterable[T], 
-		see: Callable[[Iterable[T]], R] = list, 
-		say: Callable[[R], None] = print, 
-		) -> Iterable[T]:
+		see: Callable[[Iterable[T]], X] = list, 
+		say: Callable[[X], Y] = print, 
+		fin: Callable[
+			[Callable[[X], Y], Callable[[Iterable[T]], X]], 
+			Callable[[Iterable[T], Iterable[T]], R]] = (
+				lambda say, see: 
+				lambda saw, orig: 
+					(lambda _: orig) (say(see(saw))) ), 
+		) -> R:
 	"""
 	可见其内
 	犹返若初
 	
 	Can see a gen by the way you choose
 	 then return such gen which didn't had any consuming yet.
+	
+	----
+	Demo: 
+	
+	~~~ py
+	seq6 = ( { 'i_py': x, 'i_R': 1 + x } for x in range(6) )
+	seq6 = generator_observe(seq6, pl.DataFrame)
+	seq6_df, seq6 = generator_observe(
+		gen = seq6, 
+		see = pl.DataFrame, 
+		say = (lambda x: (lambda _: x) (print(x)) ), 
+		fin = (
+			lambda say, see: 
+			lambda saw, orig: 
+				(lambda y: (y, orig)) (say(see(saw))) ))
+	~~~
 	"""
 	from itertools import tee
-	return (lambda saw, orig: 
-		(lambda _: orig) (say(see(saw)))
-	) (* tee(gen, 2))
+	return (fin) (say, see) (* tee(gen, 2))
+
+def gen_obs[T, R](
+		gen: Iterable[T], 
+		see: Callable[[Iterable[T]], R] = list, 
+		say: Callable[[R], None] = print, 
+		) -> tuple[Iterable[T], R]:
+	"""
+	可得其内
+	返与犹初
+	
+	Can see a gen by the way you choose
+	 then return is such gen 
+	 which didn't had any consuming yet
+	 with an item which used for that saw.
+	
+	----
+	Demo: 
+	
+	~~~ py
+	seq6 = ( { 'i_py': x, 'i_R': 1 + x } for x in range(6) )
+	seq6, _ = gen_obs(seq6, pl.DataFrame)
+	seq6, _ = gen_obs(seq6, pl.DataFrame, say = console.print)
+	seq6, seq6_df = gen_obs(seq6, pl.DataFrame)
+	seq6, seq6_df = gen_obs(seq6, pl.DataFrame, say = console.print)
+	~~~
+	"""
+	pass
+	return generator_observe(
+		say = (lambda x: (lambda _: x) (say(x)) ), 
+		fin = (
+			lambda say, see: 
+			lambda saw, orig: 
+				(lambda y: (orig, y)) (say(see(saw))) ), 
+		see = see, 
+		gen = gen)
+
+def gen_see[T, R](
+		gen: Iterable[T], 
+		see: Callable[[Iterable[T]], R] = list, 
+		say: Callable[[R], None] = print, 
+		) -> Iterable[T]:
+	"""
+	可见其内
+	僅返犹初
+	
+	Can see a gen by the way you choose
+	 and only return such gen which didn't had any consuming yet.
+	
+	----
+	Demo: 
+	
+	~~~ py
+	seq6 = ( { 'i_py': x, 'i_R': 1 + x } for x in range(6) )
+	seq6 = gen_see(seq6, pl.DataFrame)
+	seq6 = gen_see(seq6, pl.DataFrame, say = console.print)
+	~~~
+	"""
+	pass
+	return generator_observe(
+		fin = (
+			lambda say, see: 
+			lambda saw, orig: 
+				(lambda _: orig) (say(see(saw))) ), 
+		say = say, 
+		see = see, 
+		gen = gen)
 
 
 def _flip_pages(pages_info: Iterable[Iterable[dict[str, str]]]):
@@ -216,11 +297,11 @@ def _flip_pages(pages_info: Iterable[Iterable[dict[str, str]]]):
 	from rich.prompt import Prompt
 	for page_num, files_info in enumerate(pages_info, 1):
 		while True:
-			files_info = see_generator(
+			files_info, _ = gen_obs(
 				gen = files_info, 
 				see = lambda x: { 'page': page_num, 'content': pl.DataFrame(x) }, 
 				say = console.print)
-			console.print('[blue][bold]:: [/]If you see Err 429, you\'d better having a long wait before next downloads.[/]')
+			console.print('[green][bold]([/]~ If you see Err 429, you\'d better having a long wait before next downloads. ~[bold])[/][/]')
 			match Prompt.ask(
 				'[bold cyan]Try to (re)download all unfinished in page {} ?[/]'.format(page_num), 
 				choices = ['y', 'N'], 
@@ -257,7 +338,7 @@ def medias_download(
 	 at this time.
 	"""
 	from concurrent.futures import ThreadPoolExecutor
-	from os.path import join as path_concat
+	# from os.path import join as path_concat
 	from itertools import count as sequence
 	with ThreadPoolExecutor(max_workers = _workers) as executor:
 		return executor.map(
@@ -268,9 +349,10 @@ def medias_download(
 				** info, 
 				'status': url_downloader(
 					_wait = (idx % _workers + 1) * _wait_delay, 
-					path = path_concat(
-						dir_prepare(OUT_DIR), 
-						info["title"].replace("File:", "")), 
+					path = f'{dir_prepare(OUT_DIR)}/{info["title"].replace("File:", "")}', 
+					# path = path_concat(
+					# 	dir_prepare(OUT_DIR)}, 
+					# 	info["title"].replace("File:", "")), 
 					url = info["url"]), 
 			}, 
 			sequence(start = 1, step = 1), 
