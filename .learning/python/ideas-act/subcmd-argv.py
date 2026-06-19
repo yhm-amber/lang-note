@@ -18,7 +18,7 @@ if __name__ == '__main__':
 			print(f'not found such sub command: {x}')
 			print('h')  # show help  # show subs here
 			pass
-		case Ok(e):
+		case Err(e):
 			print(f'met error: {e}')
 	...
 
