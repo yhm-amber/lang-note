@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 
 from typing import Iterable, Callable
-from result import Ok, Err, as_result, Result  # noqa: F401
+from result import Ok, Err, as_result, Result
 from urllib.error import HTTPError, URLError, ContentTooShortError
 from rich.console import Console
+from pydantic import TypeAdapter
+from polars import DataFrame
 
 
 # ── 配置 ──────────────────────────────────────
@@ -39,11 +41,15 @@ def osenv_orask[T](
 			default = default if default else ...) 
 		if (not _skip_ask) and (envgot_orig is None) 
 		else envgot_orig if envgot_orig else default)
+	pass
 
 SEARCH_KWD = osenv_orask(['SEARCH_KWD'], "hanjian.svg", str, 'Input your keyword for searching:')
 OUT_DIR    = osenv_orask(['OUT_DIR'], "./.hanjian-svg", str, 'Input a path for saving:')
 PAGE_SIZE  = osenv_orask(['PAGE_SIZE'], 6, int, 'How many entry(s) you want in one page?') # 项，一页多少
 DELAY      = osenv_orask(['DELAY'], 2, int, 'Setting a waiting sec. num for delay:') # 秒，限流保护
+AUTO_FLIP  = osenv_orask(
+	['AUTO_FLIP','AUTOFLIP_MODE'], False, TypeAdapter(bool).validate_python, 
+	'Do you want the script run in auto-mode (recommend “No/False” if you are first here) ?')
 MAX_CONCURRENT = osenv_orask(['MAX_WORKERS','MAX_WORKER','MAX_CONCURRENT'], 1, int, _skip_ask = True)
 #: 同时存在下载任务个数 (增加这个就要增加 DELAY 否则容易 429 - Wikimedia 的非官方请求容忍阈值大约是每秒 1 次以内)
 HEADERS    = {
@@ -72,6 +78,7 @@ def wikiurl_filesapi(offset: int = 0) -> str:
 		"iiprop":       "url|size|mime",    #: 相中何
 		"format":       "json",             #: 报予框
 	})
+	pass
 
 def url_fetch(url: str) -> dict:
 	"""
@@ -84,8 +91,9 @@ def url_fetch(url: str) -> dict:
 	"""
 	from urllib.request import Request, urlopen
 	from json import loads
-	resp = urlopen(Request(url, headers=HEADERS), timeout=15)
+	resp = urlopen(Request(url, headers = HEADERS), timeout=15)
 	return loads(resp.read())
+	pass
 
 # ── 生成器：惰性翻页 ──────────────────────────
 def pages_flipper(wikiapi_url, offset = 0):
@@ -113,7 +121,7 @@ def pages_flipper(wikiapi_url, offset = 0):
 		offset, 
 		whateverone(['✨', '🙃', '🙄', '🎆', '👻', '🙈', ':D', ':P', '🎇', '🕹']), 
 	))
-	pass
+	...
 
 # ── 管道：从翻页到文件清单 ────────────────────
 def info_scraping(
@@ -131,15 +139,18 @@ def info_scraping(
 	( 
 		{
 			#: 文件标题
-			"title": x.get("title", ""), 
+			"filename": filename, 
 			#: 最新地址
 			"url":   (x.get("imageinfo") or [{}])[0].get("url"), 
 			#: 文件大小
 			"size":  (x.get("imageinfo") or [{}])[0].get("size"), 
 		}
 		for x in p.values()
-		if kwd is None or kwd in x.get("title", "") )
+		if (
+			filename := x.get("title", "").removeprefix("File:"), 
+			kwd is None or kwd in filename)[-1] )
 	for p in pages )
+	pass
 
 
 #: generator prepare.
@@ -159,6 +170,7 @@ def dir_prepare(path: str) -> str:
 	from os import makedirs
 	makedirs(path, exist_ok=True)
 	return path
+	pass
 
 # @as_result(Exception)
 @as_result(HTTPError, URLError, ContentTooShortError)
@@ -180,6 +192,7 @@ def url_downloader(url: str, path: str, _wait: int = 0) -> str:
 		with open(path, "wb") as out:
 			out.write(resp.read())
 	return path
+	pass
 
 
 def generator_observe[T, R, X, Y](
@@ -218,6 +231,7 @@ def generator_observe[T, R, X, Y](
 	"""
 	from itertools import tee
 	return (fin) (say, see) (* tee(gen, 2))
+	pass
 
 def gen_obs[T, R](
 		gen: Iterable[T], 
@@ -244,7 +258,6 @@ def gen_obs[T, R](
 	seq6, seq6_df = gen_obs(seq6, pl.DataFrame, say = console.print)
 	~~~
 	"""
-	pass
 	return generator_observe(
 		say = (lambda x: (lambda _: x) (say(x)) ), 
 		fin = (
@@ -253,6 +266,7 @@ def gen_obs[T, R](
 				(lambda y: (orig, y)) (say(see(saw))) ), 
 		see = see, 
 		gen = gen)
+	pass
 
 def gen_see[T, R](
 		gen: Iterable[T], 
@@ -275,7 +289,6 @@ def gen_see[T, R](
 	seq6 = gen_see(seq6, pl.DataFrame, say = console.print)
 	~~~
 	"""
-	pass
 	return generator_observe(
 		fin = (
 			lambda say, see: 
@@ -284,7 +297,69 @@ def gen_see[T, R](
 		say = say, 
 		see = see, 
 		gen = gen)
+	pass
 
+def _determine_obs(df: DataFrame) -> tuple[bool, DataFrame]:
+	"""
+	辨初否 备与决
+	
+	To determine is this obs page is (not) the first
+	 times it generated.
+	"""
+	return (
+		not (nece_judge := 'status' in df.schema), 
+		df.with_columns(status = None).filter(nece_judge) 
+			if not nece_judge else df)
+	pass
+
+def _judge_obs(pageobs_df: DataFrame) -> bool:
+	"""
+	观其页 知其况
+	
+	To aggregate a statused OBS-DF
+	 for know is there any necessary to try again
+	 and more ....
+	"""
+	_, _determined_df = _determine_obs(pageobs_df)
+	judged = _determined_df.with_columns(
+		status_type = pl.col('status').map_elements(
+			function = lambda a: type(a).__name__, 
+			return_dtype = pl.String), 
+		error_message = pl.col('status').map_elements(
+			function = lambda a: a.unwrap_or_else(str) 
+				if isinstance(a, Err) else None, 
+			return_dtype = pl.String), 
+		is_done = pl.col('status').map_elements(
+			function = lambda a: isinstance(a, Ok), 
+			return_dtype = pl.Boolean), 
+	).group_by(
+		('status_type','is_done','error_message',), 
+		maintain_order = True, 
+	).agg(
+		names = pl.col('filename').str.join(', '), 
+		count = pl.len(), 
+	).with_columns(
+		message_fill = pl.col('is_done').map_elements(
+			function = lambda a: '...' if a else None, 
+			return_dtype = pl.String), 
+	).with_columns(
+		_show = pl.format(
+			'- {} ({}/{}): {} ~ {}', 
+			pl.col('status_type'), 
+			pl.col('count'), 
+			pl.lit(PAGE_SIZE), 
+			pl.col('names'), 
+			pl.col('error_message').fill_null(
+				pl.col('message_fill').fill_null(
+					'???impossible-here!!!!')), 
+		)
+	).select('_show','is_done')
+	for _show, _ in judged.iter_rows():
+		console.print(_show)
+		pass
+	return (lambda j: next(j, False) and all(j) ) ( 
+		is_done for _, is_done in judged.iter_rows() )
+	pass
 
 def _flip_pages(pages_info: Iterable[Iterable[dict[str, str]]]):
 	"""
@@ -301,21 +376,32 @@ def _flip_pages(pages_info: Iterable[Iterable[dict[str, str]]]):
 				gen = files_info, 
 				see = lambda x: { 'page': page_num, 'content': pl.DataFrame(x) }, 
 				say = console.print)
-			console.print('[green][bold]([/]~ If you see Err 429, you\'d better having a long wait before next downloads. ~[bold])[/][/]')
+			_is_first, _judgable_obs = _determine_obs(_obs['content'])
+			_page_alldone = _judge_obs(_judgable_obs)
+			pass
+			from random import choice as whateverone
+			console.print(
+				f'[bold blue]:: [/]all done in page {page_num} {whateverone(['🉑','🔮','🗝','🏹','✅','✔'])}'
+			) if _page_alldone else ...
+			console.print(
+				'[green italic][bold]([/]~ You\'d be better to [bold]having a long wait[/] before next downloading If you see Err 429 here ~[bold])[/][/]'
+			) if all([not _is_first, not _page_alldone]) else ...
+			pass
 			match Prompt.ask(
-				'[bold cyan]Try to (re)download all unfinished in page {} ?[/]'.format(page_num), 
+				f'[bold cyan]Try to (re)download all unfinished in page {page_num} ?[/]', 
 				choices = ['y', 'N'], 
 				default = 'y', 
-			):
+			) if not AUTO_FLIP else ('y' if not _page_alldone else 'N'):
 				case 'y':
 					files_info = medias_download(files_info)
 				case 'N':
 					break
 				case _:
 					pass
+			pass
 		console.print('[bold cyan]Quit out from page {} ...[/]'.format(page_num))
-		...
-	pass
+		pass
+	...
 
 
 def medias_download(
@@ -349,14 +435,15 @@ def medias_download(
 				** info, 
 				'status': url_downloader(
 					_wait = (idx % _workers + 1) * _wait_delay, 
-					path = f'{dir_prepare(OUT_DIR)}/{info["title"].replace("File:", "")}', 
+					path = f'{dir_prepare(OUT_DIR)}/{info["filename"]}', 
 					# path = path_concat(
 					# 	dir_prepare(OUT_DIR)}, 
-					# 	info["title"].replace("File:", "")), 
+					# 	info["filename"]), 
 					url = info["url"]), 
 			}, 
 			sequence(start = 1, step = 1), 
 			info_iter)
+	pass
 
 
 if __name__ == '__main__':
