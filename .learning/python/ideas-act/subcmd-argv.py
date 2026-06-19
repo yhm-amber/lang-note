@@ -12,12 +12,12 @@ if __name__ == '__main__':
 			print('sub: b')
 			pass
 		case Ok('help') | Ok('h') | Err(IndexError(args = ('pop from empty list',))):
-			print('h')
-			pass  # show help
+			print('h')  # show help  # show subs here
+			pass
 		case Ok(x):
 			print(f'not found such sub command: {x}')
-			print('h')
-			pass  # show subs here
+			print('h')  # show help  # show subs here
+			pass
 		case Ok(e):
 			print(f'met error: {e}')
 	...
