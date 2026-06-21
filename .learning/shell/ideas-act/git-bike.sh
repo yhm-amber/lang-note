@@ -108,7 +108,7 @@ git_bike ()
 	# git tag --no-column | cat # 可得全签记
 # ~~~~
 
-: \
+# : \
 git_bike "$@" && :
 
 
