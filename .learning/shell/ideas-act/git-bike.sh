@@ -6,16 +6,42 @@ git_bike ()
 	_out_param () 
 	(
 		for x in "$@" ;
-		do echo "${x}" && :; done && 
+		do "${OUTER_FN:-echo}" "${x}" && :; done && 
 		: ) && 
 	
+	take_param () 
+	(
+		head () ( echo "$1" && : ) && 
+		tail () ( shift 1 && _out_param "$@" && : ) && 
+		home () ( _out_param "$@" | head -n "$(($# - 1))" && : ) && 
+		ende () ( shift "$(($# - 1))" && _out_param "$@" && : ) && 
+		: :: && 
+		"$@" && 
+		: ) && 
+	
+	_lines_flatten () 
+	(
+		while read -r -- line ;
+		do OUTER_FN="${FLATTER_FN:-echo}" "${@:-_out_param}" $line && :; done && 
+		: ) && 
 	
 	#: git_bike auto_clone -- <remote-link> [<aim-path>]
 	auto_clone () 
 	(
-		git clone --depth 1 --no-single-branch "$@" && 
-		while ! git fetch --unshallow --all ;
-		do echo tryed: unshallow "$((++x))" && :; done && 
+		out_dir="$(
+			while ! (2>&1 git clone --depth 1 --no-single-branch "$@") ;
+			do 1>&2 echo tryed: clone "$((++try_clone))" && :; done | 
+				tee >(cat 1>&2) | 
+				head -n 1 | 
+				_lines_flatten _out_param | 
+				tail -n 1 | 
+				cut -d "'" -f 2 && 
+			: )" && 
+		(
+			echo : cd "${out_dir}" at "$PWD"  && cd "${out_dir}" && 
+			while ! git fetch --unshallow --all ;
+			do 1>&2 echo tryed: unshallow "$((++try_unshallow))" && :; done && 
+			: ) && 
 		: ) && 
 	
 	#: git_bike all_sync [<workspace>] [<workspace>] ...
