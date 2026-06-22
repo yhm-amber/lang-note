@@ -9,7 +9,7 @@ git_bike ()
 		do "${OUTER_FN:-echo}" "${x}" && :; done && 
 		: ) && 
 	
-	take_param () 
+	_params_take () 
 	(
 		head () ( echo "$1" && : ) && 
 		tail () ( shift 1 && _out_param "$@" && : ) && 
@@ -19,35 +19,55 @@ git_bike ()
 		"$@" && 
 		: ) && 
 	
-	_lines_flatten () 
+	_flatout_line () 
 	(
 		while read -r -- line ;
 		do OUTER_FN="${FLATTER_FN:-echo}" "${@:-_out_param}" $line && :; done && 
 		: ) && 
 	
+	#: ( echo 1 ; echo ::2 ; echo ::3 ; echo ::4 ; echo 5 ; sleep 10 ) | LINES_MAX=2 _wait_outs    #> out 1, ::2 after 10 sec. waites.
+	#: ( echo 1 ; echo ::2 ; echo ::3 ; echo ::4 ; echo 5 ; sleep 10 ) | LINES_MAX=2 _wait_outs :: #> out ::2, ::3 after 10 sec. waites.
+	_wait_outs() 
+	(
+		PAT="$*" awk -v max="${LINES_MAX:-6}" -- ' 
+		BEGIN { pat = ENVIRON["PAT"] }
+		$0 ~ pat { if (c < max) { a[++c] = $0 } else { next } }
+		END { for (i = 1; i < 1 + c; i++) print a[i] }' && 
+		: )
+	
 	#: git_bike auto_clone -- <remote-link> [<aim-path>]
 	auto_clone () 
 	(
-		out_dir="$(
-			while ! (2>&1 git clone --depth 1 --no-single-branch "$@") ;
-			do 1>&2 echo tryed: clone "$((++try_clone))" && :; done | 
-				tee >(cat 1>&2) | 
-				head -n 1 | 
-				_lines_flatten _out_param | 
-				tail -n 1 | 
-				cut -d "'" -f 2 && 
-			: )" && 
-		(
-			echo : cd "${out_dir}" at "$PWD"  && cd "${out_dir}" && 
-			while ! git fetch --unshallow --all ;
-			do 1>&2 echo tryed: unshallow "$((++try_unshallow))" && :; done && 
-			: ) && 
+		echo :: git cloning in shallow mode '(i.e.: depth 1)' :: && 
+		while ! git clone --progress --depth 1 --no-single-branch "$@" 2>&1 ;
+		do 1>&2 echo tryed: clone "$((++try_clone))" && :; done | 
+			tee >(cat 1>&2) | 
+			#::	will only out 3 lines (which has "'")
+			#;;	 after keep waiting until EOF
+			LINES_MAX=3 _wait_outs "'" | 
+			#::	Just a head -n 1 alternative
+			#;;	 but with no SIGPIPE to avoid pipe-broken.
+			LINES_MAX=1 _wait_outs 'Cloning into' | 
+			_flatout_line _out_param | 
+			tail -n 1 | 
+			cut -d "'" -f 2 | 
+			while read -r -- out_dir ;
+			do 
+			(
+				echo :: cd "${out_dir}" from "$PWD" for unshallow fetch :: && 
+				cd "${out_dir}" && 
+				git rev-parse --is-shallow-repository | 
+					( read -r -- is_shallow && "${is_shallow}" ) && 
+				while ! git fetch --unshallow --all ;
+				do 1>&2 echo tryed: unshallow "$((++try_unshallow))" && :; done && 
+				: ) && 
+			break ; done
 		: ) && 
 	
 	#: git_bike all_sync [<workspace>] [<workspace>] ...
-	#:	workspace: means the prefix in full name of a repo
-	#:	 like it in so many hubs -- <workspace>/<reponame>. In generally
-	#:	 a 'workspace' can be the id-name of a(n) user or org.
+	#::	workspace: means the prefix in full name of a repo
+	#..	 like it in so many hubs -- <workspace>/<reponame>. In generally
+	#;;	 a 'workspace' can be the id-name of a(n) user or org.
 	all_sync () 
 	(
 		_out_param "${@:-.}" | _all_sync && 
