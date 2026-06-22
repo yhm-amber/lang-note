@@ -54,11 +54,13 @@ git_bike ()
 			while read -r -- out_dir ;
 			do 
 			(
-				echo :: cd "${out_dir}" from "$PWD" for unshallow fetch :: && 
+				echo :: change workdir to "${out_dir}" from "$PWD" to unshallow fetch :: && 
 				cd "${out_dir}" && 
-				git rev-parse --is-shallow-repository | 
-					( read -r -- is_shallow && "${is_shallow}" ) && 
-				while ! git fetch --unshallow --all ;
+				while ! (
+					git rev-parse --is-shallow-repository | 
+						( read -r -- is_shallow && "${is_shallow}" ) && 
+					git fetch --unshallow --all && 
+					: ) ;
 				do 1>&2 echo tryed: unshallow "$((++try_unshallow))" && :; done && 
 				: ) && 
 			break ; done
