@@ -54,7 +54,7 @@ git_bike ()
 			while read -r -- out_dir ;
 			do 
 			(
-				echo :: change workdir to "${out_dir}" from "$PWD" to unshallow fetch :: && 
+				echo :: change workdir to "\`${out_dir}\`" from "\`$PWD\`" to unshallow fetch :: && 
 				cd "${out_dir}" && 
 				while ! (
 					git rev-parse --is-shallow-repository | 
@@ -226,3 +226,46 @@ git_bike "$@" && :
 
 
 
+#### demo -----------------------
+
+#|	$ git_bike auto_clone https://github.com/LibreService/my_rime.git --mirror
+#|	:: git cloning in shallow mode (i.e.: depth 1) ::
+#|	Cloning into bare repository 'my_rime.git'...
+#|	fatal: unable to access 'https://github.com/LibreService/my_rime.git/': Recv failure: Connection was reset
+#|	tried: 1 for clone
+#|	Cloning into bare repository 'my_rime.git'...
+#|	fatal: unable to access 'https://github.com/LibreService/my_rime.git/': Failed to connect to github.com port 443 after 21286 ms: Could not connect to server
+#|	tried: 2 for clone
+#|	Cloning into bare repository 'my_rime.git'...
+#|	fatal: unable to access 'https://github.com/LibreService/my_rime.git/': Failed to connect to github.com port 443 after 21287 ms: Could not connect to server
+#|	tried: 3 for clone
+#|	Cloning into bare repository 'my_rime.git'...
+#|	fatal: unable to access 'https://github.com/LibreService/my_rime.git/': Recv failure: Connection was reset
+#|	tried: 4 for clone
+#|	Cloning into bare repository 'my_rime.git'...
+#|	fatal: unable to access 'https://github.com/LibreService/my_rime.git/': Failed to connect to github.com port 443 after 21308 ms: Could not connect to server
+#|	tried: 5 for clone
+#|	Cloning into bare repository 'my_rime.git'...
+#|	remote: Enumerating objects: 589, done.
+#|	remote: Counting objects: 100% (589/589), done.
+#|	remote: Compressing objects: 100% (433/433), done.
+#|	remote: Total 589 (delta 272), reused 314 (delta 124), pack-reused 0 (from 0)
+#|	Receiving objects: 100% (589/589), 63.24 MiB | 9.70 MiB/s, done.
+#|	Resolving deltas: 100% (272/272), done.
+#|	:: change workdir to `my_rime.git` from `/mnt/e/rimeweb.pwa-src` to unshallow fetch ::
+#|	fatal: unable to access 'https://github.com/LibreService/my_rime.git/': Failed to connect to github.com port 443 after 21329 ms: Could not connect to server
+#|	tried: 1 for unshallow
+#|	fatal: unable to access 'https://github.com/LibreService/my_rime.git/': Failed to connect to github.com port 443 after 21321 ms: Could not connect to server
+#|	tried: 2 for unshallow
+#|	fatal: unable to access 'https://github.com/LibreService/my_rime.git/': Failed to connect to github.com port 443 after 21291 ms: Could not connect to server
+#|	tried: 3 for unshallow
+#|	fatal: unable to access 'https://github.com/LibreService/my_rime.git/': Failed to connect to github.com port 443 after 21287 ms: Could not connect to server
+#|	tried: 4 for unshallow
+#|	fatal: unable to access 'https://github.com/LibreService/my_rime.git/': Failed to connect to github.com port 443 after 21334 ms: Could not connect to server
+#|	tried: 5 for unshallow
+#|	remote: Enumerating objects: 2436, done.
+#|	remote: Counting objects: 100% (1850/1850), done.
+#|	remote: Compressing objects: 100% (435/435), done.
+#|	remote: Total 1573 (delta 1162), reused 1381 (delta 1058), pack-reused 0 (from 0)
+#|	Receiving objects: 100% (1573/1573), 1.58 MiB | 1.31 MiB/s, done.
+#|	Resolving deltas: 100% (1162/1162), completed with 122 local objects.
