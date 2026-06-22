@@ -40,7 +40,7 @@ git_bike ()
 	(
 		echo :: git cloning in shallow mode '(i.e.: depth 1)' :: && 
 		while ! git clone --progress --depth 1 --no-single-branch "$@" 2>&1 ;
-		do 1>&2 echo tryed: clone "$((++try_clone))" && :; done | 
+		do 1>&2 echo tried: "$((++try_clone))" for clone && :; done | 
 			tee >(cat 1>&2) | 
 			#::	will only out 3 lines (which has "'")
 			#;;	 after keep waiting until EOF
@@ -61,7 +61,7 @@ git_bike ()
 						( read -r -- is_shallow && "${is_shallow}" ) && 
 					git fetch --unshallow --all && 
 					: ) ;
-				do 1>&2 echo tryed: unshallow "$((++try_unshallow))" && :; done && 
+				do 1>&2 echo tried: "$((++try_unshallow))" for unshallow && :; done && 
 				: ) && 
 			break ; done
 		: ) && 
