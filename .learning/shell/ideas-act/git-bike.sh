@@ -114,7 +114,7 @@ git_bike ()
 			(
 				echo :: change workdir to "\`${out_dir}\`" from "\`$PWD\`" to unshallow fetch :: && 
 				cd "${out_dir}" && 
-				while ! (repo_chk shallow . && git fetch --unshallow --all && : ) ;
+				while ! ( repo_chk shallow . && git fetch --unshallow --all && : ) ;
 				do 1>&2 echo tried: "$((++try_unshallow))" for unshallow && :; done && 
 				: ) && 
 			break ; done
