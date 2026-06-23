@@ -25,6 +25,64 @@ git_bike ()
 		do OUTER_FN="${FLATTER_FN:-echo}" "${@:-_out_param}" $line && :; done && 
 		: ) && 
 	
+	_std_exec () 
+	(
+		#: (echo true | _std_exec once) && echo a || echo x
+		#: echo true | _std_exec once echo status is:
+		once () 
+		(
+			read -r -- xs && 
+			"$@" ${xs} && 
+			: ) && 
+		
+		#: echo 'true' | _std_exec lines
+		lines () 
+		(
+			while read -r -- line ;
+			do "$@" $line && :; done && 
+			: ) && 
+		: :: && 
+		"$@" && 
+		: ) && 
+	
+	#: repo_chk shallow . && git fetch --unshallow --all
+	repo_chk () 
+	(
+		gitdir () 
+		(
+			cd "${*:-.}" && 
+			git rev-parse --is-inside-git-dir | 
+				tee >( 1>&2 _std_exec once echo repochk: "\`$PWD\`" 'is inside gitdir ~' ) | 
+				_std_exec once && 
+			: ) && 
+		
+		worktree () 
+		(
+			cd "${*:-.}" && 
+			git rev-parse --is-inside-work-tree | 
+				tee >( 1>&2 _std_exec once echo repochk: "\`$PWD\`" 'is inside worktree ~' ) | 
+				_std_exec once && 
+			: ) && 
+		
+		bare () 
+		(
+			cd "${*:-.}" && 
+			git rev-parse --is-bare-repository | 
+				tee >( 1>&2 _std_exec once echo repochk: "\`$PWD\`" 'is bare repository ~' ) | 
+				_std_exec once && 
+			: ) && 
+		
+		shallow () 
+		(
+			cd "${*:-.}" && 
+			git rev-parse --is-shallow-repository | 
+				tee >( 1>&2 _std_exec once echo repochk: "\`$PWD\`" 'is shallow repository ~' ) | 
+				_std_exec once && 
+			: ) && 
+		: :: && 
+		"$@" && 
+		: ) && 
+	
 	#: ( echo 1 ; echo ::2 ; echo ::3 ; echo ::4 ; echo 5 ; sleep 10 ) | LINES_MAX=2 _wait_outs    #> out 1, ::2 after 10 sec. waites.
 	#: ( echo 1 ; echo ::2 ; echo ::3 ; echo ::4 ; echo 5 ; sleep 10 ) | LINES_MAX=2 _wait_outs :: #> out ::2, ::3 after 10 sec. waites.
 	_wait_outs() 
@@ -56,11 +114,7 @@ git_bike ()
 			(
 				echo :: change workdir to "\`${out_dir}\`" from "\`$PWD\`" to unshallow fetch :: && 
 				cd "${out_dir}" && 
-				while ! (
-					git rev-parse --is-shallow-repository | 
-						( read -r -- is_shallow && "${is_shallow}" ) && 
-					git fetch --unshallow --all && 
-					: ) ;
+				while ! (repo_chk shallow . && git fetch --unshallow --all && : ) ;
 				do 1>&2 echo tried: "$((++try_unshallow))" for unshallow && :; done && 
 				: ) && 
 			break ; done
@@ -253,6 +307,7 @@ git_bike "$@" && :
 #|	Receiving objects: 100% (589/589), 63.24 MiB | 9.70 MiB/s, done.
 #|	Resolving deltas: 100% (272/272), done.
 #|	:: change workdir to `my_rime.git` from `/mnt/e/rimeweb.pwa-src` to unshallow fetch ::
+#|	repochk: `/mnt/e/rimeweb.pwa-src/my_rime.git` is shallow repository ~ true
 #|	fatal: unable to access 'https://github.com/LibreService/my_rime.git/': Failed to connect to github.com port 443 after 21329 ms: Could not connect to server
 #|	tried: 1 for unshallow
 #|	fatal: unable to access 'https://github.com/LibreService/my_rime.git/': Failed to connect to github.com port 443 after 21321 ms: Could not connect to server
@@ -269,3 +324,23 @@ git_bike "$@" && :
 #|	remote: Total 1573 (delta 1162), reused 1381 (delta 1058), pack-reused 0 (from 0)
 #|	Receiving objects: 100% (1573/1573), 1.58 MiB | 1.31 MiB/s, done.
 #|	Resolving deltas: 100% (1162/1162), completed with 122 local objects.
+
+#|	$ git_bike auto_clone https://github.com/LibreService/my_rime.git --mirror
+#|	:: git cloning in shallow mode (i.e.: depth 1) ::
+#|	Cloning into bare repository 'my_rime.git'...
+#|	remote: Enumerating objects: 589, done.
+#|	remote: Counting objects: 100% (589/589), done.
+#|	remote: Compressing objects: 100% (433/433), done.
+#|	remote: Total 589 (delta 272), reused 314 (delta 124), pack-reused 0 (from 0)
+#|	Receiving objects: 100% (589/589), 63.24 MiB | 6.23 MiB/s, done.
+#|	Resolving deltas: 100% (272/272), done.
+#|	:: change workdir to `my_rime.git` from `/mnt/e/rimeweb.pwa-src` to unshallow fetch ::
+#|	repochk: `/mnt/e/rimeweb.pwa-src/my_rime.git` is shallow repository ~ true
+#|	remote: Enumerating objects: 2436, done.
+#|	remote: Counting objects: 100% (1850/1850), done.
+#|	remote: Compressing objects: 100% (435/435), done.
+#|	remote: Total 1573 (delta 1162), reused 1381 (delta 1058), pack-reused 0 (from 0)
+#|	Receiving objects: 100% (1573/1573), 1.58 MiB | 67.00 KiB/s, done.
+#|	Resolving deltas: 100% (1162/1162), completed with 122 local objects.
+
+
