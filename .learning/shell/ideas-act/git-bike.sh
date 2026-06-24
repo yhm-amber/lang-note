@@ -1,8 +1,39 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 
-git_bike () 
+alias git-bike=git_bike && git_bike () 
 (
+	local __aliases_home__="$(alias)" && 
+	
+	_lang_tool () 
+	(
+		alias_fn () 
+		(
+			cat - | 
+				while IFS== read -r -- a b ;
+				do echo "$a () ( $(eval echo "$b") "'"$@"'" ) ${SP:-&&} " && :; done | 
+				awk -v FS=alias -v OFS=function -- '{$NF=$NF}NR' | 
+				cat && 
+			: ) && 
+		: :: && 
+		"$@" && 
+		: ) && 
+	
+	#..	__a__="$(alias)"
+	#..	alias a=a b=b
+	#::	alias | _set_tools diff "$__a__"
+	#::	_set_tools diff "$__a__" <(alias)
+	#:>	out: `alias a='a'` and `alias b='b'`
+	_set_tools () 
+	(
+		diff () 
+		(
+			grep -x -F -f <( echo "$1" ) -v -- "${2:--}" && 
+			: ) && 
+		: :: && 
+		"$@" && 
+		: ) && 
+	
 	_out_param () 
 	(
 		for x in "$@" ;
@@ -46,9 +77,11 @@ git_bike ()
 		: ) && 
 	
 	#: repo_chk shallow . && git fetch --unshallow --all
-	repo_chk () 
+	alias repo-chk=repo_chk && repo_chk () 
 	(
-		gitdir () 
+		local __aliases_home__="$(alias)" && 
+		
+		alias gitdir=gitdir && gitdir () 
 		(
 			cd "${*:-.}" && 
 			git rev-parse --is-inside-git-dir | 
@@ -56,7 +89,7 @@ git_bike ()
 				_std_exec once && 
 			: ) && 
 		
-		worktree () 
+		alias worktree=worktree && worktree () 
 		(
 			cd "${*:-.}" && 
 			git rev-parse --is-inside-work-tree | 
@@ -64,7 +97,7 @@ git_bike ()
 				_std_exec once && 
 			: ) && 
 		
-		bare () 
+		alias bare=bare && bare () 
 		(
 			cd "${*:-.}" && 
 			git rev-parse --is-bare-repository | 
@@ -72,13 +105,20 @@ git_bike ()
 				_std_exec once && 
 			: ) && 
 		
-		shallow () 
+		alias shallow=shallow && shallow () 
 		(
 			cd "${*:-.}" && 
 			git rev-parse --is-shallow-repository | 
 				tee >( 1>&2 _std_exec once echo repochk: "\`$PWD\`" 'is shallow repository ~' ) | 
 				_std_exec once && 
 			: ) && 
+		
+		: :: && 
+		
+		alias sub-help=aliases && aliases () 
+		( _set_tools diff "$__aliases_home__" <(alias) && : ) && 
+		help () ( eval sub-help ) && 
+		
 		: :: && 
 		"$@" && 
 		: ) && 
@@ -94,10 +134,10 @@ git_bike ()
 		: )
 	
 	#: git_bike auto_clone -- <remote-link> [<aim-path>]
-	auto_clone () 
+	alias auto-clone=auto_clone && auto_clone () 
 	(
 		echo :: git cloning in shallow mode '(i.e.: depth 1)' :: && 
-		while ! git clone --progress --depth 1 --no-single-branch "$@" 2>&1 ;
+		while ! ( git clone --progress --depth 1 --no-single-branch "$@" 2>&1 && : ) ;
 		do 1>&2 echo tried: "$((++try_clone))" for clone && :; done | 
 			tee >(cat 1>&2) | 
 			#::	will only out 3 lines (which has "'")
@@ -114,7 +154,8 @@ git_bike ()
 			(
 				echo :: change workdir to "\`${out_dir}\`" from "\`$PWD\`" to unshallow fetch :: && 
 				cd "${out_dir}" && 
-				while ! ( repo_chk shallow . && git fetch --unshallow --all && : ) ;
+				repo_chk shallow . && 
+				while ! ( git fetch --unshallow --all && : ) ;
 				do 1>&2 echo tried: "$((++try_unshallow))" for unshallow && :; done && 
 				: ) && 
 			break ; done
@@ -124,7 +165,7 @@ git_bike ()
 	#::	workspace: means the prefix in full name of a repo
 	#..	 like it in so many hubs -- <workspace>/<reponame>. In generally
 	#;;	 a 'workspace' can be the id-name of a(n) user or org.
-	all_sync () 
+	alias all-sync=all_sync && all_sync () 
 	(
 		_out_param "${@:-.}" | _all_sync && 
 		: ) && 
@@ -133,23 +174,23 @@ git_bike ()
 	(
 		while read -r -- workspace ;
 		do 
-			ls -1 -d -- "${workspace}/*" | 
-				( tee >(cat >&3) | _all_pull && : ) 3>&1 | 
-				( tee >(cat >&3) | _all_push && : ) 3>&1 | 
-				cat -n -- - 1>&2 && 
+			ls -1 -d -- "${workspace}/*" | while read -r -- gitpath ;
+			do all_pull "${gitpath}" && all_push "${gitpath}" && :; done && 
 			:; 
 		done && 
 		: ) && 
 	
 	
 	#: git_bike all_push [<git-dir>] [<git-dir>] ...
-	all_push () 
+	alias all-push=all_push && all_push () 
 	(
+		echo :: pushing origin to all remotes in: "${@:-.}" :: && 
 		_out_param "${@:-.}" | _all_push && 
 		: ) && 
 	
 	_all_push () 
 	(
+		: Push origin to all remotes.
 		while read -r -- gitdir ;
 		do 
 			(
@@ -168,13 +209,15 @@ git_bike ()
 	
 	
 	#: git_bike all_pull [<git-dir>] [<git-dir>] ...
-	all_pull () 
+	alias all-pull=all_pull && all_pull () 
 	(
+		echo :: pulling from origin and all remotes in: "${@:-.}" :: && 
 		_out_param "${@:-.}" | _all_pull && 
 		: ) && 
 	
 	_all_pull () 
 	(
+		: Pull from origin and all remotes.
 		while read -r -- gitdir ;
 		do 
 			(
@@ -192,10 +235,18 @@ git_bike ()
 		: ) && 
 	
 	
-	: -------- && 
+	
+	: :: && 
+	
+	alias sub-help=aliases && aliases () 
+	( _set_tools diff "$__aliases_home__" <(alias) && : ) && 
+	help () ( eval sub-help ) && 
+	eval "$(aliases | SP='&&' _lang_tool alias_fn) :" && 
+	
+	: :: && 
 	
 	"$@" && 
-	: )
+	: ) && 
 
 
 #### 别令速记
