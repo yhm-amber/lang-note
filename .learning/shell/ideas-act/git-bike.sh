@@ -154,9 +154,17 @@ alias git-bike=git_bike && git_bike ()
 			(
 				echo :: change workdir to "\`${out_dir}\`" from "\`$PWD\`" to unshallow fetch :: && 
 				cd "${out_dir}" && 
-				repo_chk shallow . && 
-				while ! ( git fetch --unshallow --all && : ) ;
-				do 1>&2 echo tried: "$((++try_unshallow))" for unshallow && :; done && 
+				(
+					echo :: unshallowing in "\`$PWD\`" :: && 
+					repo_chk shallow . && 
+					while ! ( git fetch --unshallow --all && : ) ;
+					do 1>&2 echo tried: "$((++try_unshallow))" for unshallow && :; done && 
+					: ) && 
+				(
+					echo :: updating in "\`$PWD\`" :: && 
+					while ! ( git remote update && : ) ;
+					do 1>&2 echo tried: "$((++try_update))" for remote update && :; done && 
+					: ) && 
 				: ) && 
 			break ; done
 		: ) && 
@@ -393,5 +401,3 @@ git_bike "$@" && :
 #|	remote: Total 1573 (delta 1162), reused 1381 (delta 1058), pack-reused 0 (from 0)
 #|	Receiving objects: 100% (1573/1573), 1.58 MiB | 67.00 KiB/s, done.
 #|	Resolving deltas: 100% (1162/1162), completed with 122 local objects.
-
-
