@@ -7,22 +7,36 @@ alias git-bike=git_bike && git_bike ()
 	
 	_lang_tool () 
 	(
+		trim_line () 
+		(
+			while IFS="${SPACE_CHR:-${IFS}}" read -r -- _trimed ;
+			do echo "${_trimed}" && :; done && 
+			: ) && 
+		
 		alias_fn () 
 		(
 			cat - | 
+				SPACE_CHR="${IFS}" trim_line | 
+				awk '{sub(/^alias /, ""); print}' | 
 				while IFS== read -r -- a b ;
-				do echo "$a () ( $(eval echo "$b") "'"$@"'" ) ${SP:-&&} " && :; done | 
-				awk -v FS=alias -v OFS=function -- '{$NF=$NF}NR' | 
+				do 
+					_name="$(echo $a)" && 
+					_body="$(eval echo "$b")" && 
+					test "$_name" != "$_body" && 
+					echo "function $_name () ( $_body "'"$@"'" ) ${SP:-&&} " && 
+					:; 
+				done | 
 				cat && 
 			: ) && 
+		
 		: :: && 
 		"$@" && 
 		: ) && 
 	
-	#..	__a__="$(alias)"
-	#..	alias a=a b=b
-	#::	alias | _set_tools diff "$__a__"
-	#::	_set_tools diff "$__a__" <(alias)
+	#.	__a__="$(alias)"
+	#.	alias a=a b=b
+	#.	alias | _set_tools diff "$__a__"
+	#.	_set_tools diff "$__a__" <(alias)
 	#:>	out: `alias a='a'` and `alias b='b'`
 	_set_tools () 
 	(
@@ -58,15 +72,15 @@ alias git-bike=git_bike && git_bike ()
 	
 	_std_exec () 
 	(
-		#: (echo true | _std_exec once) && echo a || echo x
-		#: echo true | _std_exec once echo status is:
+		#. (echo true | _std_exec once) && echo a || echo x
+		#. echo true | _std_exec once echo status is:
 		once () 
 		(
 			read -r -- xs && 
 			"$@" ${xs} && 
 			: ) && 
 		
-		#: echo 'true' | _std_exec lines
+		#. echo 'true' | _std_exec lines
 		lines () 
 		(
 			while read -r -- line ;
@@ -76,7 +90,7 @@ alias git-bike=git_bike && git_bike ()
 		"$@" && 
 		: ) && 
 	
-	#: repo_chk shallow . && git fetch --unshallow --all
+	#. repo_chk shallow . && git fetch --unshallow --all
 	alias repo-chk=repo_chk && repo_chk () 
 	(
 		local __aliases_home__="$(alias)" && 
@@ -123,8 +137,8 @@ alias git-bike=git_bike && git_bike ()
 		"$@" && 
 		: ) && 
 	
-	#: ( echo 1 ; echo ::2 ; echo ::3 ; echo ::4 ; echo 5 ; sleep 10 ) | LINES_MAX=2 _wait_outs    #> out 1, ::2 after 10 sec. waites.
-	#: ( echo 1 ; echo ::2 ; echo ::3 ; echo ::4 ; echo 5 ; sleep 10 ) | LINES_MAX=2 _wait_outs :: #> out ::2, ::3 after 10 sec. waites.
+	#. ( echo 1 ; echo ::2 ; echo ::3 ; echo ::4 ; echo 5 ; sleep 10 ) | LINES_MAX=2 _wait_outs    #> out 1, ::2 after 10 sec. waites.
+	#. ( echo 1 ; echo ::2 ; echo ::3 ; echo ::4 ; echo 5 ; sleep 10 ) | LINES_MAX=2 _wait_outs :: #> out ::2, ::3 after 10 sec. waites.
 	_wait_outs() 
 	(
 		PAT="$*" awk -v max="${LINES_MAX:-6}" -- ' 
@@ -165,6 +179,7 @@ alias git-bike=git_bike && git_bike ()
 					while ! ( git remote update && : ) ;
 					do 1>&2 echo tried: "$((++try_update))" for remote update && :; done && 
 					: ) && 
+				echo :: done for repo "\`${out_dir}\`". :: && 
 				: ) && 
 			break ; done
 		: ) && 
@@ -257,6 +272,11 @@ alias git-bike=git_bike && git_bike ()
 	: ) && 
 
 
+
+# : \
+git_bike "$@" && :
+
+
 #### 别令速记
 # ~~~~
 	# git clone --no-single-branch -- ...
@@ -268,11 +288,6 @@ alias git-bike=git_bike && git_bike ()
 	# git branch --all | cat # 可得全分支
 	# git tag --no-column | cat # 可得全签记
 # ~~~~
-
-# : \
-git_bike "$@" && :
-
-
 
 
 
@@ -383,21 +398,27 @@ git_bike "$@" && :
 #|	remote: Total 1573 (delta 1162), reused 1381 (delta 1058), pack-reused 0 (from 0)
 #|	Receiving objects: 100% (1573/1573), 1.58 MiB | 1.31 MiB/s, done.
 #|	Resolving deltas: 100% (1162/1162), completed with 122 local objects.
+#|	:: updating in `/mnt/e/rimeweb.pwa-src/my_rime.git` ::
+#|	:: done for repo `my_rime.git`. ::
 
-#|	$ git_bike auto_clone https://github.com/LibreService/my_rime.git --mirror
+#|	$ git-bike auto-clone https://github.com/gurecn/YuyanIme.git --mirror
 #|	:: git cloning in shallow mode (i.e.: depth 1) ::
-#|	Cloning into bare repository 'my_rime.git'...
-#|	remote: Enumerating objects: 589, done.
-#|	remote: Counting objects: 100% (589/589), done.
-#|	remote: Compressing objects: 100% (433/433), done.
-#|	remote: Total 589 (delta 272), reused 314 (delta 124), pack-reused 0 (from 0)
-#|	Receiving objects: 100% (589/589), 63.24 MiB | 6.23 MiB/s, done.
-#|	Resolving deltas: 100% (272/272), done.
-#|	:: change workdir to `my_rime.git` from `/mnt/e/rimeweb.pwa-src` to unshallow fetch ::
-#|	repochk: `/mnt/e/rimeweb.pwa-src/my_rime.git` is shallow repository ~ true
-#|	remote: Enumerating objects: 2436, done.
-#|	remote: Counting objects: 100% (1850/1850), done.
-#|	remote: Compressing objects: 100% (435/435), done.
-#|	remote: Total 1573 (delta 1162), reused 1381 (delta 1058), pack-reused 0 (from 0)
-#|	Receiving objects: 100% (1573/1573), 1.58 MiB | 67.00 KiB/s, done.
-#|	Resolving deltas: 100% (1162/1162), completed with 122 local objects.
+#|	Cloning into bare repository 'YuyanIme.git'...
+#|	remote: Enumerating objects: 295, done.
+#|	remote: Counting objects: 100% (295/295), done.
+#|	remote: Compressing objects: 100% (220/220), done.
+#|	remote: Total 295 (delta 121), reused 210 (delta 45), pack-reused 0 (from 0)
+#|	Receiving objects: 100% (295/295), 1.47 MiB | 18.00 KiB/s, done.
+#|	Resolving deltas: 100% (121/121), done.
+#|	:: change workdir to `YuyanIme.git` from `/mnt/e/yuyanime.hanzi-src` to unshallow fetch ::
+#|	:: unshallowing in `/mnt/e/yuyanime.hanzi-src/YuyanIme.git` ::
+#|	repochk: `/mnt/e/yuyanime.hanzi-src/YuyanIme.git` is shallow repository ~ true
+#|	remote: Enumerating objects: 1514, done.
+#|	remote: Counting objects: 100% (1429/1429), done.
+#|	remote: Compressing objects: 100% (777/777), done.
+#|	Rremote: Total 1386 (delta 707), reused 1236 (delta 601), pack-reused 0 (from 0)
+#|	Receiving objects: 100% (1386/1386), 169.91 KiB | 135.00 KiB/s, done.
+#|	Resolving deltas: 100% (707/707), completed with 21 local objects.
+#|	:: updating in `/mnt/e/yuyanime.hanzi-src/YuyanIme.git` ::
+#|	:: done for repo `YuyanIme.git`. ::
+
