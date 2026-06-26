@@ -188,8 +188,54 @@ alias git-bike=git_bike && git_bike ()
 	(
 		repo_chk bare . || return 4 ;
 		
-		worktree () 
-		{
+		local __aliases_home__="$(alias)" && 
+		
+		#. git-bike bare-play up
+		#. git-bike bare-play up origin
+		#. git-bike bare-play up github
+		#. git-bike bare-play up disroot
+		alias up=update && update () 
+		(
+			find -- ../tree -maxdepth 1 -mindepth 1 -type d | while read -r -- treepath ;
+			do 
+				echo :: executing: '`checkout --detach`' in "'${treepath}'" :: && 
+				(
+					cd "${treepath}" && 
+					git checkout --detach && 
+					: ) && 
+				(1>&2 echo upper: detached "${treepath}") && 
+				:; 
+			done && 
+			
+			echo :: executing: remote update "$@" :: && 
+			while ! ( git remote update "$@" && : ) ;
+			do 1>&2 echo tried: "$((++try_update))" for remote update && :; done && 
+			(
+				1>&2 echo upper: updated in "'.../$(
+					read -r -- pwd < <(echo "$PWD") && 
+					echo "$(dirname "$pwd" | xargs basename)/$(basename "$pwd")" && 
+					: )'" for remote'(s)' $@ && 
+				: ) && 
+			
+			find -- ../tree -maxdepth 1 -mindepth 1 -type d | while read -r -- treepath ; 
+			do 
+				_branch="$(basename "${treepath}")" && 
+				echo :: executing: '`checkout '"$_branch"'`' in "'${treepath}'" :: && 
+				(
+					cd -- "${treepath}" && 
+					git checkout "$_branch" && 
+					: ) && 
+				(1>&2 echo upper: checkouted "${treepath}" as "$_branch") && 
+				:; 
+			done && 
+			: ) && 
+		
+		#. git-bike bare-play worktree add tree master
+		#. git-bike bare-play worktree rm tree master
+		#. git-bike bare-play worktree add tags v1.0.1
+		#. git-bike bare-play worktree rm tags v1.0.1
+		alias wt=worktree && worktree () 
+		(
 			case "$1" 
 			in 
 				(add|a|create|c|load|+)   __cmd_a__=add     __n_ctrl__=     && shift ;;
@@ -226,7 +272,14 @@ alias git-bike=git_bike && git_bike ()
 					} | 
 					cat - 1>&7 && 
 					:;
-			} 6>&1 && : ) && :; } 7>&1 && 
+			} 6>&1 && : ) && : ) 7>&1 && 
+		
+		: :: && 
+		
+		alias sub-help=aliases && aliases () 
+		( _set_tools diff "$__aliases_home__" <(alias) && : ) && 
+		help () ( eval sub-help ) && 
+		eval "$(aliases | SP='&&' _lang_tool alias_fn) :" && 
 		
 		: :: && 
 		"$@" && 
@@ -593,4 +646,45 @@ git_bike "$@" && :
 #|	Resolving deltas: 100% (707/707), completed with 21 local objects.
 #|	:: updating in `/mnt/e/yuyanime.hanzi-src/YuyanIme.git` ::
 #|	:: done for repo `YuyanIme.git`. ::
+
+#|	$ git-bike bare-play up
+#|	repochk: `/e/iso/rufus.usbfldr-src/rufus.git` is bare repository ~ true
+#|	:: executing: `checkout --detach` in '../tree/master' ::
+#|	HEAD is now at eedeaea7 [misc] fix multiple small issues
+#|	upper: detached ../tree/master
+#|	:: executing: remote update ::
+#|	fatal: unable to access 'https://github.com/pbatard/rufus.git/': Recv failure: Connection was reset
+#|	tried: 1 for remote update
+#|	fatal: unable to access 'https://github.com/pbatard/rufus.git/': Recv failure: Connection was reset
+#|	tried: 2 for remote update
+#|	fatal: unable to access 'https://github.com/pbatard/rufus.git/': Failed to connect to github.com port 44
+#|	3 after 21298 ms: Could not connect to server
+#|	tried: 3 for remote update
+#|	fatal: unable to access 'https://github.com/pbatard/rufus.git/': Recv failure: Connection was reset
+#|	tried: 4 for remote update
+#|	fatal: unable to access 'https://github.com/pbatard/rufus.git/': Failed to connect to github.com port 44
+#|	3 after 21361 ms: Could not connect to server
+#|	tried: 5 for remote update
+#|	fatal: unable to access 'https://github.com/pbatard/rufus.git/': Failed to connect to github.com port 44
+#|	3 after 21605 ms: Could not connect to server
+#|	tried: 6 for remote update
+#|	fatal: unable to access 'https://github.com/pbatard/rufus.git/': Recv failure: Connection was reset
+#|	tried: 7 for remote update
+#|	fatal: unable to access 'https://github.com/pbatard/rufus.git/': Failed to connect to github.com port 44
+#|	3 after 21470 ms: Could not connect to server
+#|	tried: 8 for remote update
+#|	fatal: unable to access 'https://github.com/pbatard/rufus.git/': Failed to connect to github.com port 44
+#|	3 after 21588 ms: Could not connect to server
+#|	tried: 9 for remote update
+#|	fatal: unable to access 'https://github.com/pbatard/rufus.git/': Failed to connect to github.com port 44
+#|	3 after 21308 ms: Could not connect to server
+#|	tried: 10 for remote update
+#|	fatal: unable to access 'https://github.com/pbatard/rufus.git/': Failed to connect to github.com port 44
+#|	3 after 21336 ms: Could not connect to server
+#|	tried: 11 for remote update
+#|	upper: updated in '.../rufus.usbfldr-src/rufus.git' for remote(s)
+#|	:: executing: `checkout master` in '../tree/master' ::
+#|	Switched to branch 'master'
+#|	upper: checkouted ../tree/master as master
+
 
