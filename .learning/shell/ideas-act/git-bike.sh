@@ -513,6 +513,17 @@ git_bike "$@" && :
 # ~~~~
 
 
+###	alias to fn must having `function` mark,
+###	 or if already having `alias foo-a='foo_a'`,
+###	 then the define like `foo-a () ( foo_a )` could
+###	 immediately become `foo_a () ( foo_a )`,
+###	 and that must making problem(s);
+###	and if define like `function foo-a () ( foo_a )`, the `foo-a` in it
+###	 won't be replaced implicitly, because the
+###	 implicitly-replacement of the alias only effected on
+###	 the first word in code.
+###	see: https://stackoverflow.com/questions/79966887/how-could-this-dash-style-named-function-makes-infinity-calling-in-bash
+
 
 
 #### demo -----------------------
