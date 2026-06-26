@@ -184,6 +184,54 @@ alias git-bike=git_bike && git_bike ()
 			break ; done
 		: ) && 
 	
+	alias bare-play=bare_play && bare_play () 
+	(
+		repo_chk bare . || return 4 ;
+		
+		worktree () 
+		{
+			case "$1" 
+			in 
+				(add|a|create|c|load|+)   __cmd_a__=add     __n_ctrl__=     && shift ;;
+				(rm|remove|del|d|drop|-)  __cmd_a__=remove  __n_ctrl__=' '  && shift ;;
+				(_) 1>&2 echo Unknown sub cmd a: "'$1'" && return 16 ;;
+			esac && 
+			
+			case "$1" 
+			in 
+				(tags)  __cmd_b__=tag     __dir__=tags  __called__=tags      && shift ;;
+				(tree)  __cmd_b__=branch  __dir__=tree  __called__=branches  && shift ;;
+				(_) 1>&2 echo Unknown sub cmd b: "'$1'" && return 16 ;;
+			esac && 
+			
+			return $( 
+			shopt -u -q -- extglob ;
+			{
+				_name_input="$1" && shift && 
+				{
+					git "${__cmd_b__}" --format='%(refname:short)' --no-column --contains "$_name_input" || 
+					echo $? 1>&6 ;
+					:; 
+				} | 
+					tee >(awk -- '{ print "-",$0 } BEGIN { print "Contained '"${__called__}"': " }' 1>&2) | 
+					{
+						while read -r -- _name ;
+						do 
+							echo :: executing: worktree "${__cmd_a__}" "'../${__dir__}/$_name'" ${__n_ctrl__:-${_name}} "$@" :: && 
+							git worktree "${__cmd_a__}" ../"${__dir__}"/$_name ${__n_ctrl__:-${_name}} "$@" && 
+							ls ../"${__dir__}" && 
+							:; 
+						done || 
+						echo $? 1>&6 ;
+					} | 
+					cat - 1>&7 && 
+					:;
+			} 6>&1 && : ) && :; } 7>&1 && 
+		
+		: :: && 
+		"$@" && 
+		: ) && 
+	
 	#: git_bike all_sync [<workspace>] [<workspace>] ...
 	#::	workspace: means the prefix in full name of a repo
 	#..	 like it in so many hubs -- <workspace>/<reponame>. In generally
@@ -290,6 +338,119 @@ git_bike "$@" && :
 # ~~~~
 
 
+
+### worktree old-style define
+# ~~~~
+		# 	add () 
+		# 	(
+		# 		tags () 
+		# 		{
+		# 			return $( 
+		# 			{
+		# 				_name_input="$1" && shift 1 && 
+		# 				{
+		# 					git tag --format='%(refname:short)' --no-column --contains "$_name_input" || 
+		# 					echo $? 1>&6 ;
+		# 					:; 
+		# 				} | 
+		# 					tee >(awk -- '{ print "-",$0 } BEGIN { print "Contained tags: " }' 1>&2) | 
+		# 					{
+		# 						while read -r -- _name ;
+		# 						do 
+		# 							echo :: executing: worktree add "'../tags/$_name'" "'$_name'" $@ :: && 
+		# 							git worktree add ../tags/"$_name" "$_name" "$@" && 
+		# 							ls ../tags && 
+		# 							:; 
+		# 						done || 
+		# 						echo $? 1>&6 ;
+		# 					} | 
+		# 					cat - 1>&7 && 
+		# 					:;
+		# 			} 6>&1 && : ) && :; } 7>&1 && 
+		# 		
+		# 		tree () 
+		# 		{
+		# 			return $( 
+		# 			{
+		# 				_name_input="$1" && shift 1 && 
+		# 				{
+		# 					git branch --format='%(refname:short)' --no-column --contains "$_name_input" || 
+		# 					echo $? 1>&6 ;
+		# 				} | 
+		# 					tee >(awk -- '{ print "-",$0 } BEGIN { print "Contained branches: " }' 1>&2) | 
+		# 					{
+		# 						while read -r -- _name ;
+		# 						do 
+		# 							echo :: executing: worktree add "'../tree/$_name'" "'$_name'" $@ :: && 
+		# 							git worktree add ../tree/"$_name" "$_name" "$@" && 
+		# 							ls ../tree && 
+		# 							:; 
+		# 						done || 
+		# 						echo $? 1>&6 ;
+		# 					} | 
+		# 					cat - 1>&7 && 
+		# 					:;
+		# 			} 6>&1 && : ) && :; } 7>&1 && 
+		# 		
+		# 		: :: && 
+		# 		"$@" && 
+		# 		: ) && 
+		# 	
+		# 	rm () 
+		# 	(
+		# 		tags () 
+		# 		{
+		# 			return $( 
+		# 			{
+		# 				_name_input="$1" && shift 1 && 
+		# 				{
+		# 					git tag --format='%(refname:short)' --no-column --contains "$_name_input" || 
+		# 					echo $? 1>&6 ;
+		# 					:; 
+		# 				} | 
+		# 					tee >(awk -- '{ print "-",$0 } BEGIN { print "Contained tags: " }' 1>&2) | 
+		# 					{
+		# 						while read -r -- _name ;
+		# 						do 
+		# 							echo :: executing: worktree remove "'../tags/$_name'" $@ :: && 
+		# 							git worktree remove ../tags/"$_name" "$@" && 
+		# 							ls ../tags && 
+		# 							:; 
+		# 						done || 
+		# 						echo $? 1>&6 ;
+		# 					} | 
+		# 					cat - 1>&7 && 
+		# 					:;
+		# 			} 6>&1 && : ) && :; } 7>&1 && 
+		# 		
+		# 		tree () 
+		# 		{
+		# 			return $( 
+		# 			{
+		# 				_name_input="$1" && shift 1 && 
+		# 				{
+		# 					git branch --format='%(refname:short)' --no-column --contains "$_name_input" || 
+		# 					echo $? 1>&6 ;
+		# 				} | 
+		# 					tee >(awk -- '{ print "-",$0 } BEGIN { print "Contained branches: " }' 1>&2) | 
+		# 					{
+		# 						while read -r -- _name ;
+		# 						do 
+		# 							echo :: executing: worktree remove "'../tree/$_name'" $@ :: && 
+		# 							git worktree remove ../tree/"$_name" "$@" && 
+		# 							ls ../tree && 
+		# 							:; 
+		# 						done || 
+		# 						echo $? 1>&6 ;
+		# 					} | 
+		# 					cat - 1>&7 && 
+		# 					:;
+		# 			} 6>&1 && : ) && :; } 7>&1 && 
+		# 		
+		# 		: :: && 
+		# 		"$@" && 
+		# 		: ) && 
+# ~~~~
 
 ### considering more but unfinished ...
 # ~~~~
