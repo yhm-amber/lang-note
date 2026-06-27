@@ -227,9 +227,10 @@ alias git-bike=git_bike && git_bike ()
 		echo 'See help:' && 
 		echo '- git-bike help auto-clone' && 
 		echo '- git-bike help ac' && 
+		echo '- git-bike help c' && 
 		echo && 
 		: ) && 
-	alias ac=auto_clone auto-clone=auto_clone && auto_clone () 
+	alias ac=auto_clone c=auto_clone auto-clone=auto_clone && auto_clone () 
 	(
 		echo :: git cloning in shallow mode '(i.e.: depth 1)' :: && 
 		while ! ( git clone --progress --depth 1 --no-single-branch "$@" 2>&1 && : ) ;
@@ -655,6 +656,7 @@ git_bike "$@" && :
 #|	- auto-clone: means 'auto_clone'.
 #|	- bare-play: means 'bare_play'.
 #|	- bp: means 'bare_play'.
+#|	- c: means 'auto_clone'.
 #|	- repo-chk: means 'repo_chk'.
 #|	- sub-help: means 'aliases'.
 #|	
@@ -679,6 +681,7 @@ git_bike "$@" && :
 #|	See help:
 #|	- git-bike help auto-clone
 #|	- git-bike help ac
+#|	- git-bike help c
 #|	
 
 #|	$ git-bike help bare-play up
@@ -690,6 +693,7 @@ git_bike "$@" && :
 #|	- auto-clone: means 'auto_clone'.
 #|	- bare-play: means 'bare_play'.
 #|	- bp: means 'bare_play'.
+#|	- c: means 'auto_clone'.
 #|	- repo-chk: means 'repo_chk'.
 #|	- sub-help: means 'aliases'.
 #|	
@@ -726,6 +730,7 @@ git_bike "$@" && :
 #|	- auto-clone: means 'auto_clone'.
 #|	- bare-play: means 'bare_play'.
 #|	- bp: means 'bare_play'.
+#|	- c: means 'auto_clone'.
 #|	- repo-chk: means 'repo_chk'.
 #|	- sub-help: means 'aliases'.
 #|	
@@ -753,42 +758,43 @@ git_bike "$@" && :
 #|	- git-bike bp help up
 #|	
 
-#| $ git-bike help bp wt
-#| sub command(s) here:
-#| - ac: means 'auto_clone'.
-#| - all-pull: means 'all_pull'.
-#| - all-push: means 'all_push'.
-#| - all-sync: means 'all_sync'.
-#| - auto-clone: means 'auto_clone'.
-#| - bare-play: means 'bare_play'.
-#| - bp: means 'bare_play'.
-#| - repo-chk: means 'repo_chk'.
-#| - sub-help: means 'aliases'.
-#| 
-#| sub command: bp wt
-#| repochk: `/mnt/e/gopass.passwd-srcs/cli/gopass.git` is bare repository ~ true
-#| 
-#| Using for create/delete worktree(s) of bare repo. It will
-#|  search from branches/tags then run worktree add/remove to those object(s)
-#| 
-#| Bare dir here MUST in a special named dir like: 'name.comments-src', then:
-#| - the path of worktree dir from branch will be like: 'name.comments-src/tree/<branch-name>'
-#| - the path of worktree dir from tag will be like: 'name.comments-src/tags/<tag-name>'
-#| 
-#| Demo:
-#| - git-bike bare-play worktree add tree master
-#| - git-bike bare-play worktree rm tree master
-#| - git-bike bare-play worktree add tags v1.0.1
-#| - git-bike bare-play worktree rm tags v1.0.1
-#| - git-bike bare-play wt a tags v1.16.1
-#| - git-bike bare-play wt a tree master
-#| 
-#| See help:
-#| - git-bike help bare-play worktree
-#| - git-bike help bare-play wt
+#|	$ git-bike help bp wt
+#|	sub command(s) here:
+#|	- ac: means 'auto_clone'.
+#|	- all-pull: means 'all_pull'.
+#|	- all-push: means 'all_push'.
+#|	- all-sync: means 'all_sync'.
+#|	- auto-clone: means 'auto_clone'.
+#|	- bare-play: means 'bare_play'.
+#|	- bp: means 'bare_play'.
+#|	- c: means 'auto_clone'.
+#|	- repo-chk: means 'repo_chk'.
+#|	- sub-help: means 'aliases'.
+#|	
+#|	sub command: bp wt
+#|	repochk: `/mnt/e/gopass.passwd-srcs/cli/gopass.git` is bare repository ~ true
+#|	
+#|	Using for create/delete worktree(s) of bare repo. It will
+#|	 search from branches/tags then run worktree add/remove to those object(s)
+#|	
+#|	Bare dir here MUST in a special named dir like: 'name.comments-src', then:
+#|	- the path of worktree dir from branch will be like: 'name.comments-src/tree/<branch-name>'
+#|	- the path of worktree dir from tag will be like: 'name.comments-src/tags/<tag-name>'
+#|	
+#|	Demo:
+#|	- git-bike bare-play worktree add tree master
+#|	- git-bike bare-play worktree rm tree master
+#|	- git-bike bare-play worktree add tags v1.0.1
+#|	- git-bike bare-play worktree rm tags v1.0.1
+#|	- git-bike bare-play wt a tags v1.16.1
+#|	- git-bike bare-play wt a tree master
+#|	
+#|	See help:
+#|	- git-bike help bare-play worktree
+#|	- git-bike help bare-play wt
 #|	- git-bike help bp wt
 #|	- git-bike bp help wt
-#| 
+#|	
 
 #|	$ git-bike bp wt a tags v1.61.1
 #|	repochk: `/mnt/e/gopass.passwd-srcs/cli/gopass.git` is bare repository ~ true
