@@ -299,6 +299,8 @@ alias git-bike=git_bike && git_bike ()
 			echo 'See help:' && 
 			echo '- git-bike help bare-play update' && 
 			echo '- git-bike help bare-play up' && 
+			echo '- git-bike help bp up' && 
+			echo '- git-bike bp help up' && 
 			echo && 
 			: ) && 
 		alias up=update && update () 
@@ -362,6 +364,8 @@ alias git-bike=git_bike && git_bike ()
 			echo 'See help:' && 
 			echo '- git-bike help bare-play worktree' && 
 			echo '- git-bike help bare-play wt' && 
+			echo '- git-bike help bp wt' && 
+			echo '- git-bike bp help wt' && 
 			echo && 
 			: ) && 
 		alias wt=worktree && worktree () 
@@ -709,6 +713,8 @@ git_bike "$@" && :
 #|	See help:
 #|	- git-bike help bare-play update
 #|	- git-bike help bare-play up
+#|	- git-bike help bp up
+#|	- git-bike bp help up
 #|	
 
 #|	$ git-bike help bp up
@@ -743,6 +749,8 @@ git_bike "$@" && :
 #|	See help:
 #|	- git-bike help bare-play update
 #|	- git-bike help bare-play up
+#|	- git-bike help bp up
+#|	- git-bike bp help up
 #|	
 
 #| $ git-bike help bp wt
@@ -778,6 +786,8 @@ git_bike "$@" && :
 #| See help:
 #| - git-bike help bare-play worktree
 #| - git-bike help bare-play wt
+#|	- git-bike help bp wt
+#|	- git-bike bp help wt
 #| 
 
 #|	$ git-bike bp wt a tags v1.61.1
@@ -848,6 +858,8 @@ git_bike "$@" && :
 #|	See help:
 #|	- git-bike help bare-play worktree
 #|	- git-bike help bare-play wt
+#|	- git-bike help bp wt
+#|	- git-bike bp help wt
 #|	
 
 
