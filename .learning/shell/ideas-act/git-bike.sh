@@ -780,4 +780,44 @@ git_bike "$@" && :
 #| - git-bike help bare-play wt
 #| 
 
+#|	$ git-bike bp wt a tags v1.61.1
+#|	repochk: `/mnt/e/gopass.passwd-srcs/cli/gopass.git` is bare repository ~ true
+#|	Contained tags:
+#|	error: malformed object name v1.61.1
+#|	$ echo $?
+#|	129
+
+#|	$ git-bike bp wt a tags v1.16.1
+#|	repochk: `/mnt/e/gopass.passwd-srcs/cli/gopass.git` is bare repository ~ true
+#|	Contained tags:
+#|	- v1.16.1
+#|	- v1.17.0-rc.1
+#|	- v1.17.0-rc.2
+#|	:: executing: worktree add ../tags/v1.16.1 v1.16.1 ::
+#|	Preparing worktree (detached HEAD f4bb1ded)
+#|	Updating files: 100% (652/652), done.
+#|	HEAD is now at f4bb1ded Tag v1.16.1 (#3304)
+#|	v1.16.1/
+#|	:: executing: worktree add ../tags/v1.17.0-rc.1 v1.17.0-rc.1 ::
+#|	Preparing worktree (detached HEAD bacb2454)
+#|	Updating files: 100% (687/687), done.
+#|	HEAD is now at bacb2454 Tag v1.17.0-rc.1
+#|	v1.16.1/
+#|	v1.17.0-rc.1/
+#|	:: executing: worktree add ../tags/v1.17.0-rc.2 v1.17.0-rc.2 ::
+#|	Preparing worktree (detached HEAD d28b405b)
+#|	Updating files: 100% (697/697), done.
+#|	HEAD is now at d28b405b Tag v1.17.0-rc.2
+#|	v1.16.1/
+#|	v1.17.0-rc.1/
+#|	v1.17.0-rc.2/
+#|	$ git-bike bp wt a tree master
+#|	repochk: `/mnt/e/gopass.passwd-srcs/cli/gopass.git` is bare repository ~ true
+#|	Contained branches:
+#|	- master
+#|	:: executing: worktree add ../tree/master master ::
+#|	Preparing worktree (checking out 'master')
+#|	Updating files: 100% (697/697), done.
+#|	HEAD is now at f25fc7b4 fix: restore clip flag through fuzzy search in show command (#3466)
+#|	master/
 
