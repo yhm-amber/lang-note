@@ -13,6 +13,41 @@ alias git-bike=git_bike && git_bike ()
 			do echo "${_trimed}" && :; done && 
 			: ) && 
 		
+		help_alias () 
+		(
+			cat - | 
+				SPACE_CHR="${IFS}" trim_line | 
+				awk '{sub(/^alias /, ""); print}' | 
+				while IFS== read -r -- a b ;
+				do echo "- ${a}: means ${b}." && :; done | 
+				awk '{print} BEGIN { print "sub command(s) here:" }'
+				cat - && 
+			#: only run if having args ...
+			for _ in "$@" ;
+			do 
+				echo && 
+				echo sub command: "$@" && 
+				"${@}__helper__" && 
+				:; 
+			return $? ; done && 
+			: ) && 
+		
+		alias_un () 
+		(
+			cat - | 
+				SPACE_CHR="${IFS}" trim_line | 
+				awk '{sub(/^alias /, ""); print}' | 
+				while IFS== read -r -- a b ;
+				do 
+					_name="$(echo $a)" && 
+					_body="$(eval echo "$b")" && 
+					test "$_name" != "$_body" && 
+					echo "unalias -- $_name ${SP:-;}" && 
+					:; 
+				done | 
+				cat - && 
+			: ) && 
+		
 		alias_fn () 
 		(
 			cat - | 
@@ -26,7 +61,23 @@ alias git-bike=git_bike && git_bike ()
 					echo "function $_name () ( $_body "'"$@"'" ) ${SP:-&&} " && 
 					:; 
 				done | 
-				cat && 
+				cat - && 
+			: ) && 
+		
+		alias_hp () 
+		(
+			cat - | 
+				SPACE_CHR="${IFS}" trim_line | 
+				awk '{sub(/^alias /, ""); print}' | 
+				while IFS== read -r -- a b ;
+				do 
+					_name="$(echo $a)" && 
+					_body="$(eval echo "$b")" && 
+					test "$_name" != "$_body" && 
+					echo "function ${_name}__helper__ () ( ${_body}__helper__ "'"$@"'" ) ${SP:-&&} " && 
+					:; 
+				done | 
+				cat - && 
 			: ) && 
 		
 		: :: && 
@@ -129,9 +180,15 @@ alias git-bike=git_bike && git_bike ()
 		
 		: :: && 
 		
-		alias sub-help=aliases && aliases () 
-		( _set_tools diff "$__aliases_home__" <(alias) && : ) && 
-		help () ( eval sub-help ) && 
+		alias sub-help=aliases && aliases () ( echo "$__aliases__" | _lang_tool "${@:-help_alias}" && : ) && 
+		local __aliases_ende__="$(alias)" && 
+		local __aliases__="$(echo "$__aliases_ende__" | _set_tools diff "$__aliases_home__")" && 
+		eval "
+			{ $(aliases cat | SP=';' _lang_tool alias_un) :; } && 
+			$(aliases cat | SP='&&' _lang_tool alias_fn)
+			$(aliases cat | SP='&&' _lang_tool alias_hp)
+			: " && 
+		help () ( sub-help help_alias "$@" ) && 
 		
 		: :: && 
 		"$@" && 
@@ -147,7 +204,27 @@ alias git-bike=git_bike && git_bike ()
 		END { for (i = 1; i < 1 + c; i++) print a[i] }' && 
 		: )
 	
-	#: git_bike auto_clone -- <remote-link> [<aim-path>]
+	#: git-bike auto-clone -- <remote-link> [<aim-path>]
+	auto_clone__helper__ () 
+	(
+		echo && 
+		echo 'Usage:' && 
+		echo $'\t' 'git-bike auto-clone [<git-clone-options>] -- <remote-link> [<aim-path>]' && 
+		echo && 
+		echo 'This tool is for when you having a bad internet to your' && 
+		echo ' remote repo. It will making a depth=1 shallow clone at the' && 
+		echo ' first and then unshallow it, also at the end update it once' && 
+		echo ' to make your local repo sync the newest records as far as it could.' && 
+		echo ' All of the downloading works can auto-retry while it failed.' && 
+		echo && 
+		echo 'Demo:' && 
+		echo '- git-bike auto-clone https://github.com/LibreService/my_rime.git --mirror' && 
+		echo '- git-bike auto-clone https://github.com/gurecn/YuyanIme.git --mirror' && 
+		echo '- git-bike auto-clone --mirror -- https://github.com/gurecn/YuyanIme.git yuyan.git' && 
+		echo '- git-bike auto-clone --mirror -- https://github.com/crynta/terax-ai.git' && 
+		echo '- git-bike auto-clone -- https://github.com/gopasspw/git-credential-gopass.git ~/gopass-src/git-credential-gopass' && 
+		echo && 
+		: ) && 
 	alias auto-clone=auto_clone && auto_clone () 
 	(
 		echo :: git cloning in shallow mode '(i.e.: depth 1)' :: && 
@@ -188,12 +265,34 @@ alias git-bike=git_bike && git_bike ()
 	(
 		repo_chk bare . || return 4 ;
 		
+		: "Bare dir in a special named dir like 'name.comments-src' then:" && 
+		: "- path of worktree dir from branch like 'name.comments-src/tree/<branch-name>'" && 
+		: "- path of worktree dir from tag like 'name.comments-src/tags/<tag-name>'" && 
+		
 		local __aliases_home__="$(alias)" && 
 		
 		#. git-bike bare-play up
 		#. git-bike bare-play up origin
 		#. git-bike bare-play up github
 		#. git-bike bare-play up disroot
+		update__helper__ () 
+		(
+			echo && 
+			echo 'Using for update bare repo. It will detach worktree dir(s)' && 
+			echo ' which by branch(es), then remote update in automatically retrying,' && 
+			echo ' then checkout these worktree dir(s) backing to their branch(es)' && 
+			echo && 
+			echo "Bare dir here MUST in a special named dir like: 'name.comments-src'. And:" && 
+			echo "- path of worktree dir from branch must be like: 'name.comments-src/tree/<branch-name>'" && 
+			echo "- path of worktree dir from tag must be like: 'name.comments-src/tags/<tag-name>'" && 
+			echo && 
+			echo 'Demo:' && 
+			echo '- git-bike bare-play up' && 
+			echo '- git-bike bare-play up origin' && 
+			echo '- git-bike bare-play up github' && 
+			echo '- git-bike bare-play up disroot' && 
+			echo && 
+			: ) && 
 		alias up=update && update () 
 		(
 			find -- ../tree -maxdepth 1 -mindepth 1 -type d | while read -r -- treepath ;
@@ -234,6 +333,29 @@ alias git-bike=git_bike && git_bike ()
 		#. git-bike bare-play worktree rm tree master
 		#. git-bike bare-play worktree add tags v1.0.1
 		#. git-bike bare-play worktree rm tags v1.0.1
+		worktree__helper__ () 
+		(
+			echo && 
+			echo 'Using for create/delete worktree(s) of bare repo. It will' && 
+			echo ' search from branches/tags then run worktree add/remove to those object(s)' && 
+			echo && 
+			echo "Bare dir here MUST in a special named dir like: 'name.comments-src', then:" && 
+			echo "- the path of worktree dir from branch will be like: 'name.comments-src/tree/<branch-name>'" && 
+			echo "- the path of worktree dir from tag will be like: 'name.comments-src/tags/<tag-name>'" && 
+			echo && 
+			echo 'Demo:' && 
+			echo '- git-bike bare-play worktree add tree master' && 
+			echo '- git-bike bare-play worktree rm tree master' && 
+			echo '- git-bike bare-play worktree add tags v1.0.1' && 
+			echo '- git-bike bare-play worktree rm tags v1.0.1' && 
+			echo '- git-bike bare-play wt a tags v1.16.1' && 
+			echo '- git-bike bare-play wt a tree master' && 
+			echo && 
+			echo 'See help:' && 
+			echo '- git-bike help bare-play worktree' && 
+			echo '- git-bike help bare-play wt' && 
+			echo && 
+			: ) && 
 		alias wt=worktree && worktree () 
 		(
 			case "$1" 
@@ -263,7 +385,7 @@ alias git-bike=git_bike && git_bike ()
 					{
 						while read -r -- _name ;
 						do 
-							echo :: executing: worktree "${__cmd_a__}" "'../${__dir__}/$_name'" ${__n_ctrl__:-${_name}} "$@" :: && 
+							echo :: executing: worktree "${__cmd_a__}" "../${__dir__}/$_name" ${__n_ctrl__:-${_name}} "$@" :: && 
 							git worktree "${__cmd_a__}" ../"${__dir__}"/$_name ${__n_ctrl__:-${_name}} "$@" && 
 							ls ../"${__dir__}" && 
 							:; 
@@ -276,10 +398,15 @@ alias git-bike=git_bike && git_bike ()
 		
 		: :: && 
 		
-		alias sub-help=aliases && aliases () 
-		( _set_tools diff "$__aliases_home__" <(alias) && : ) && 
-		help () ( eval sub-help ) && 
-		eval "$(aliases | SP='&&' _lang_tool alias_fn) :" && 
+		alias sub-help=aliases && aliases () ( echo "$__aliases__" | _lang_tool "${@:-help_alias}" && : ) && 
+		local __aliases_ende__="$(alias)" && 
+		local __aliases__="$(echo "$__aliases_ende__" | _set_tools diff "$__aliases_home__")" && 
+		eval "
+			{ $(aliases cat | SP=';' _lang_tool alias_un) :; } && 
+			$(aliases cat | SP='&&' _lang_tool alias_fn)
+			$(aliases cat | SP='&&' _lang_tool alias_hp)
+			: " && 
+		help () ( sub-help help_alias "$@" ) && 
 		
 		: :: && 
 		"$@" && 
@@ -362,10 +489,15 @@ alias git-bike=git_bike && git_bike ()
 	
 	: :: && 
 	
-	alias sub-help=aliases && aliases () 
-	( _set_tools diff "$__aliases_home__" <(alias) && : ) && 
-	help () ( eval sub-help ) && 
-	eval "$(aliases | SP='&&' _lang_tool alias_fn) :" && 
+	alias sub-help=aliases && aliases () ( echo "$__aliases__" | _lang_tool "${@:-help_alias}" && : ) && 
+	local __aliases_ende__="$(alias)" && 
+	local __aliases__="$(echo "$__aliases_ende__" | _set_tools diff "$__aliases_home__")" && 
+	eval "
+		{ $(aliases cat | SP=';' _lang_tool alias_un) :; } && 
+		$(aliases cat | SP='&&' _lang_tool alias_fn)
+		$(aliases cat | SP='&&' _lang_tool alias_hp)
+		: " && 
+	help () ( sub-help help_alias "$@" ) && 
 	
 	: :: && 
 	
