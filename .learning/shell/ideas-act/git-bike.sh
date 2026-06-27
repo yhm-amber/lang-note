@@ -821,3 +821,34 @@ git_bike "$@" && :
 #|	HEAD is now at f25fc7b4 fix: restore clip flag through fuzzy search in show command (#3466)
 #|	master/
 
+#|	$ git-bike bp help wt
+#|	repochk: `/mnt/e/gopass.passwd-srcs/cli/gopass.git` is bare repository ~ true
+#|	sub command(s) here:
+#|	- sub-help: means 'aliases'.
+#|	- up: means 'update'.
+#|	- wt: means 'worktree'.
+#|	
+#|	sub command: wt
+#|	
+#|	Using for create/delete worktree(s) of bare repo. It will
+#|	 search from branches/tags then run worktree add/remove to those object(s)
+#|	
+#|	Bare dir here MUST in a special named dir like: 'name.comments-src', then:
+#|	- the path of worktree dir from branch will be like: 'name.comments-src/tree/<branch-name>'
+#|	- the path of worktree dir from tag will be like: 'name.comments-src/tags/<tag-name>'
+#|	
+#|	Demo:
+#|	- git-bike bare-play worktree add tree master
+#|	- git-bike bare-play worktree rm tree master
+#|	- git-bike bare-play worktree add tags v1.0.1
+#|	- git-bike bare-play worktree rm tags v1.0.1
+#|	- git-bike bare-play wt a tags v1.16.1
+#|	- git-bike bare-play wt a tree master
+#|	
+#|	See help:
+#|	- git-bike help bare-play worktree
+#|	- git-bike help bare-play wt
+#|	
+
+
+
