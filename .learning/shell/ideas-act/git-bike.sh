@@ -224,8 +224,12 @@ alias git-bike=git_bike && git_bike ()
 		echo '- git-bike auto-clone --mirror -- https://github.com/crynta/terax-ai.git' && 
 		echo '- git-bike auto-clone -- https://github.com/gopasspw/git-credential-gopass.git ~/gopass-src/git-credential-gopass' && 
 		echo && 
+		echo 'See help:' && 
+		echo '- git-bike help auto-clone' && 
+		echo '- git-bike help ac' && 
+		echo && 
 		: ) && 
-	alias auto-clone=auto_clone && auto_clone () 
+	alias ac=auto_clone auto-clone=auto_clone && auto_clone () 
 	(
 		echo :: git cloning in shallow mode '(i.e.: depth 1)' :: && 
 		while ! ( git clone --progress --depth 1 --no-single-branch "$@" 2>&1 && : ) ;
@@ -261,7 +265,7 @@ alias git-bike=git_bike && git_bike ()
 			break ; done
 		: ) && 
 	
-	alias bare-play=bare_play && bare_play () 
+	alias bp=bare_play bare-play=bare_play && bare_play () 
 	(
 		repo_chk bare . || return 4 ;
 		
@@ -291,6 +295,10 @@ alias git-bike=git_bike && git_bike ()
 			echo '- git-bike bare-play up origin' && 
 			echo '- git-bike bare-play up github' && 
 			echo '- git-bike bare-play up disroot' && 
+			echo && 
+			echo 'See help:' && 
+			echo '- git-bike help bare-play update' && 
+			echo '- git-bike help bare-play up' && 
 			echo && 
 			: ) && 
 		alias up=update && update () 
@@ -594,7 +602,7 @@ git_bike "$@" && :
 #|	:: done for repo `YuyanIme.git`. ::
 
 #|	$ git-bike bare-play up
-#|	repochk: `/e/iso/rufus.usbfldr-src/rufus.git` is bare repository ~ true
+#|	repochk: `/mnt/e/rufus.usbfldr-src/rufus.git` is bare repository ~ true
 #|	:: executing: `checkout --detach` in '../tree/master' ::
 #|	HEAD is now at eedeaea7 [misc] fix multiple small issues
 #|	upper: detached ../tree/master
@@ -632,5 +640,144 @@ git_bike "$@" && :
 #|	:: executing: `checkout master` in '../tree/master' ::
 #|	Switched to branch 'master'
 #|	upper: checkouted ../tree/master as master
+
+
+#|	$ git-bike help ac
+#|	sub command(s) here:
+#|	- ac: means 'auto_clone'.
+#|	- all-pull: means 'all_pull'.
+#|	- all-push: means 'all_push'.
+#|	- all-sync: means 'all_sync'.
+#|	- auto-clone: means 'auto_clone'.
+#|	- bare-play: means 'bare_play'.
+#|	- bp: means 'bare_play'.
+#|	- repo-chk: means 'repo_chk'.
+#|	- sub-help: means 'aliases'.
+#|	
+#|	sub command: ac
+#|	
+#|	Usage:
+#|		 git-bike auto-clone [<git-clone-options>] -- <remote-link> [<aim-path>]
+#|	
+#|	This tool is for when you having a bad internet to your
+#|	 remote repo. It will making a depth=1 shallow clone at the
+#|	 first and then unshallow it, also at the end update it once
+#|	 to make your local repo sync the newest records as far as it could.
+#|	 All of the downloading works can auto-retry while it failed.
+#|	
+#|	Demo:
+#|	- git-bike auto-clone https://github.com/LibreService/my_rime.git --mirror
+#|	- git-bike auto-clone https://github.com/gurecn/YuyanIme.git --mirror
+#|	- git-bike auto-clone --mirror -- https://github.com/gurecn/YuyanIme.git yuyan.git
+#|	- git-bike auto-clone --mirror -- https://github.com/crynta/terax-ai.git
+#|	- git-bike auto-clone -- https://github.com/gopasspw/git-credential-gopass.git ~/gopass-src/git-credential-gopass
+#|	
+#|	See help:
+#|	- git-bike help auto-clone
+#|	- git-bike help ac
+#|	
+
+#|	$ git-bike help bare-play up
+#|	sub command(s) here:
+#|	- ac: means 'auto_clone'.
+#|	- all-pull: means 'all_pull'.
+#|	- all-push: means 'all_push'.
+#|	- all-sync: means 'all_sync'.
+#|	- auto-clone: means 'auto_clone'.
+#|	- bare-play: means 'bare_play'.
+#|	- bp: means 'bare_play'.
+#|	- repo-chk: means 'repo_chk'.
+#|	- sub-help: means 'aliases'.
+#|	
+#|	sub command: bare-play up
+#|	repochk: `/mnt/e/gopass.passwd-srcs/cli/gopass.git` is bare repository ~ true
+#|	
+#|	Using for update bare repo. It will detach worktree dir(s)
+#|	 which by branch(es), then remote update in automatically retrying,
+#|	 then checkout these worktree dir(s) backing to their branch(es)
+#|	
+#|	Bare dir here MUST in a special named dir like: 'name.comments-src'. And:
+#|	- path of worktree dir from branch must be like: 'name.comments-src/tree/<branch-name>'
+#|	- path of worktree dir from tag must be like: 'name.comments-src/tags/<tag-name>'
+#|	
+#|	Demo:
+#|	- git-bike bare-play up
+#|	- git-bike bare-play up origin
+#|	- git-bike bare-play up github
+#|	- git-bike bare-play up disroot
+#|	
+#|	See help:
+#|	- git-bike help bare-play update
+#|	- git-bike help bare-play up
+#|	
+
+#|	$ git-bike help bp up
+#|	sub command(s) here:
+#|	- ac: means 'auto_clone'.
+#|	- all-pull: means 'all_pull'.
+#|	- all-push: means 'all_push'.
+#|	- all-sync: means 'all_sync'.
+#|	- auto-clone: means 'auto_clone'.
+#|	- bare-play: means 'bare_play'.
+#|	- bp: means 'bare_play'.
+#|	- repo-chk: means 'repo_chk'.
+#|	- sub-help: means 'aliases'.
+#|	
+#|	sub command: bp up
+#|	repochk: `/mnt/e/gopass.passwd-srcs/cli/gopass.git` is bare repository ~ true
+#|	
+#|	Using for update bare repo. It will detach worktree dir(s)
+#|	 which by branch(es), then remote update in automatically retrying,
+#|	 then checkout these worktree dir(s) backing to their branch(es)
+#|	
+#|	Bare dir here MUST in a special named dir like: 'name.comments-src'. And:
+#|	- path of worktree dir from branch must be like: 'name.comments-src/tree/<branch-name>'
+#|	- path of worktree dir from tag must be like: 'name.comments-src/tags/<tag-name>'
+#|	
+#|	Demo:
+#|	- git-bike bare-play up
+#|	- git-bike bare-play up origin
+#|	- git-bike bare-play up github
+#|	- git-bike bare-play up disroot
+#|	
+#|	See help:
+#|	- git-bike help bare-play update
+#|	- git-bike help bare-play up
+#|	
+
+#| $ git-bike help bp wt
+#| sub command(s) here:
+#| - ac: means 'auto_clone'.
+#| - all-pull: means 'all_pull'.
+#| - all-push: means 'all_push'.
+#| - all-sync: means 'all_sync'.
+#| - auto-clone: means 'auto_clone'.
+#| - bare-play: means 'bare_play'.
+#| - bp: means 'bare_play'.
+#| - repo-chk: means 'repo_chk'.
+#| - sub-help: means 'aliases'.
+#| 
+#| sub command: bp wt
+#| repochk: `/mnt/e/gopass.passwd-srcs/cli/gopass.git` is bare repository ~ true
+#| 
+#| Using for create/delete worktree(s) of bare repo. It will
+#|  search from branches/tags then run worktree add/remove to those object(s)
+#| 
+#| Bare dir here MUST in a special named dir like: 'name.comments-src', then:
+#| - the path of worktree dir from branch will be like: 'name.comments-src/tree/<branch-name>'
+#| - the path of worktree dir from tag will be like: 'name.comments-src/tags/<tag-name>'
+#| 
+#| Demo:
+#| - git-bike bare-play worktree add tree master
+#| - git-bike bare-play worktree rm tree master
+#| - git-bike bare-play worktree add tags v1.0.1
+#| - git-bike bare-play worktree rm tags v1.0.1
+#| - git-bike bare-play wt a tags v1.16.1
+#| - git-bike bare-play wt a tree master
+#| 
+#| See help:
+#| - git-bike help bare-play worktree
+#| - git-bike help bare-play wt
+#| 
 
 
