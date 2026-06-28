@@ -194,15 +194,22 @@ alias git-bike=git_bike && git_bike ()
 		"$@" && 
 		: ) && 
 	
-	#. ( echo 1 ; echo ::2 ; echo ::3 ; echo ::4 ; echo 5 ; sleep 10 ) | LINES_MAX=2 _wait_outs    #> out 1, ::2 after 10 sec. waites.
-	#. ( echo 1 ; echo ::2 ; echo ::3 ; echo ::4 ; echo 5 ; sleep 10 ) | LINES_MAX=2 _wait_outs :: #> out ::2, ::3 after 10 sec. waites.
-	_wait_outs() 
+	#. ( echo 1 ; echo ::2 ; echo ::3 ; echo ::4 ; echo 5 ; sleep 10 ) | ELLIPSIS_SHOW=y LINES_MAX=2 _wait_outs    #> out 1, ::2, ... after 10 sec. waites.
+	#. ( echo 1 ; echo ::2 ; echo ::3 ; echo ::4 ; echo 5 ; sleep 10 ) | ELLIPSIS_SHOW=y LINES_MAX=2 _wait_outs :: #> out ::2, ::3, ... after 10 sec. waites.
+	#. ( echo 1 ; echo ::2 ; echo ::3 ; echo ::4 ; echo 5 ; sleep 10 ) | ELLIPSIS_SHOW=x LINES_MAX=2 _wait_outs :: #> out ::2, ::3 after 10 sec. waites.
+	_wait_outs () 
 	(
-		PAT="$*" awk -v max="${LINES_MAX:-6}" -- ' 
-		BEGIN { pat = ENVIRON["PAT"] }
-		$0 ~ pat { if (c < max) { a[++c] = $0 } else { next } }
+		PAT="$*" ELLIPSIS_SHOW="${ELLIPSIS_SHOW:-Yes}" awk -v max="${LINES_MAX:-6}" -- ' 
+		BEGIN { pat = ENVIRON["PAT"] ; ell_show = toupper(ENVIRON["ELLIPSIS_SHOW"]) ~ /^(Y|YES|T|TRUE)$/ }
+		$0 ~ pat { if (c < max) { a[++c] = $0 } else if (ell_show && c == max) { a[++c] = "..." } else { next } }
 		END { for (i = 1; i < 1 + c; i++) print a[i] }' && 
-		: )
+		: ) && 
+	
+	#. ( echo a ; echo b ; sleep 3 ; echo c ) | FD_TEE=2 _wait_tee awk -- '{ print "xx", $0 } BEGIN { print "ABC:" }'
+	_wait_tee () 
+	(
+		echo "$( { 1>&"${FD_TEE:-2}" echo "$( { tee >(1>&3 "$@") 1>&4 ; } 3>&1 )" ; } 4>&1 )" && 
+		: ) && 
 	
 	#: git-bike auto-clone -- <remote-link> [<aim-path>]
 	auto_clone__helper__ () 
@@ -238,10 +245,10 @@ alias git-bike=git_bike && git_bike ()
 			tee >(cat 1>&2) | 
 			#::	will only out 3 lines (which has "'")
 			#;;	 after keep waiting until EOF
-			LINES_MAX=3 _wait_outs "'" | 
+			ELLIPSIS_SHOW=x LINES_MAX=3 _wait_outs "'" | 
 			#::	Just a head -n 1 alternative
 			#;;	 but with no SIGPIPE to avoid pipe-broken.
-			LINES_MAX=1 _wait_outs 'Cloning into' | 
+			ELLIPSIS_SHOW=x LINES_MAX=1 _wait_outs 'Cloning into' | 
 			_flatout_line _out_param | 
 			tail -n 1 | 
 			cut -d "'" -f 2 | 
@@ -374,7 +381,7 @@ alias git-bike=git_bike && git_bike ()
 			case "$1" 
 			in 
 				(add|a|create|c|load|+)   __cmd_a__=add     __n_ctrl__=     && shift ;;
-				(rm|remove|del|d|drop|-)  __cmd_a__=remove  __n_ctrl__=' '  && shift ;;
+				(rm|remove|del|d|drop|x)  __cmd_a__=remove  __n_ctrl__=' '  && shift ;;
 				(_) 1>&2 echo Unknown sub cmd a: "'$1'" && return 16 ;;
 			esac && 
 			
@@ -385,6 +392,16 @@ alias git-bike=git_bike && git_bike ()
 				(_) 1>&2 echo Unknown sub cmd b: "'$1'" && return 16 ;;
 			esac && 
 			
+			case "${CHOOSE_MODE:-${CHOOSER:-Only}}" 
+			in 
+				(Only|O|o|only)  __chooser_name__=Only && __chooser () ( IN="${_name_input}" awk -- 'BEGIN { a = ENVIRON["IN"] } $0 == a' && : )  ;;
+				(All|A|a|all)    __chooser_name__=All  && __chooser () ( cat - && : )  ;;
+				(as|AS)          __chooser_name__=AS   && __chooser () ( awk -- "/${CHOOSE_AS:-}/" && : )  ;;
+				(_) 1>&2 echo Unknown select for CHOOSER: "${CHOOSER}" '-- Must be Only/All/AS.' && return 17 ;;
+			esac && 
+			
+			# __choose_max="${CHOOSE_MAX:-12}" && 
+			
 			return $( 
 			shopt -u -q -- extglob ;
 			{
@@ -394,7 +411,21 @@ alias git-bike=git_bike && git_bike ()
 					echo $? 1>&6 ;
 					:; 
 				} | 
-					tee >(awk -- '{ print "-",$0 } BEGIN { print "Contained '"${__called__}"': " }' 1>&2) | 
+					FD_TEE=2 _wait_tee awk -- '
+						{ print "-",$0 } 
+						BEGIN { 
+							OFS = "\t" ; 
+							print "Contained '"${__called__}"': " }
+						' | 
+					# tee >( | ELLIPSIS_SHOW=y LINES_MAX=128 _wait_outs 1>&2) | 
+					__chooser | # ELLIPSIS_SHOW=x LINES_MAX="$__choose_max" _wait_outs | 
+					FD_TEE=2 _wait_tee awk -- '
+						{ print "-",$0 } 
+						BEGIN { 
+							OFS = "\t" ; 
+							print "Choosed '"${__called__}"' (choose mode: '"${__chooser_name__}"'): " }
+						' | 
+					# tee >( | ELLIPSIS_SHOW=x LINES_MAX="$__choose_max" _wait_outs 1>&2) | 
 					{
 						while read -r -- _name ;
 						do 
@@ -803,12 +834,16 @@ git_bike "$@" && :
 #|	$ echo $?
 #|	129
 
-#|	$ git-bike bp wt a tags v1.16.1
+#|	$ CHOOSE_MODE=All git-bike bp wt a tags v1.16.1
 #|	repochk: `/mnt/e/gopass.passwd-srcs/cli/gopass.git` is bare repository ~ true
 #|	Contained tags:
-#|	- v1.16.1
-#|	- v1.17.0-rc.1
-#|	- v1.17.0-rc.2
+#|	-	v1.16.1
+#|	-	v1.17.0-rc.1
+#|	-	v1.17.0-rc.2
+#|	Choosed branches (choose mode: All):
+#|	-	v1.16.1
+#|	-	v1.17.0-rc.1
+#|	-	v1.17.0-rc.2
 #|	:: executing: worktree add ../tags/v1.16.1 v1.16.1 ::
 #|	Preparing worktree (detached HEAD f4bb1ded)
 #|	Updating files: 100% (652/652), done.
@@ -827,10 +862,40 @@ git_bike "$@" && :
 #|	v1.16.1/
 #|	v1.17.0-rc.1/
 #|	v1.17.0-rc.2/
+#|	$ CHOOSE_MODE=All git-bike bp wt x tags v1.16.1
+#|	repochk: `/mnt/e/gopass.passwd-srcs/cli/gopass.git` is bare repository ~ true
+#|	Contained tags:
+#|	-	v1.16.1
+#|	-	v1.17.0-rc.1
+#|	-	v1.17.0-rc.2
+#|	Choosed tags (choose mode: All):
+#|	-	v1.16.1
+#|	-	v1.17.0-rc.1
+#|	-	v1.17.0-rc.2
+#|	:: executing: worktree remove ../tags/v1.16.1 ::
+#|	v1.17.0-rc.1/
+#|	v1.17.0-rc.2/
+#|	:: executing: worktree remove ../tags/v1.17.0-rc.1 ::
+#|	v1.17.0-rc.2/
+#|	:: executing: worktree remove ../tags/v1.17.0-rc.2 ::
+
+#|	$ CHOOSE_MODE=Only git-bike bp wt a tags v1.16.1
+#|	repochk: `/mnt/e/gopass.passwd-srcs/cli/gopass.git` is bare repository ~ true
+#|	Contained tags:
+#|	-	v1.16.1
+#|	-	v1.17.0-rc.1
+#|	-	v1.17.0-rc.2
+#|	Choosed tags (choose mode: Only):
+#|	-	v1.16.1
+#|	:: executing: worktree add ../tags/v1.16.1 v1.16.1 ::
+#|	Preparing worktree (detached HEAD f4bb1ded)
+#|	Updating files: 100% (652/652), done.
+#|	HEAD is now at f4bb1ded Tag v1.16.1 (#3304)
+#|	v1.16.1/
 #|	$ git-bike bp wt a tree master
 #|	repochk: `/mnt/e/gopass.passwd-srcs/cli/gopass.git` is bare repository ~ true
 #|	Contained branches:
-#|	- master
+#|	-	master
 #|	:: executing: worktree add ../tree/master master ::
 #|	Preparing worktree (checking out 'master')
 #|	Updating files: 100% (697/697), done.
@@ -868,5 +933,18 @@ git_bike "$@" && :
 #|	- git-bike bp help wt
 #|	
 
-
+#|	$ git-bike bp wt a tree master
+#|	repochk: `/mnt/e/gopass.passwd-srcs/browser-ext/gopassbridge.git` is bare repository ~ true
+#|	Contained branches:
+#|	-	dependabot/github_actions/actions/checkout-7
+#|	-	dependabot/github_actions/codecov/codecov-action-7
+#|	-	dependabot/tools-e50eacec07
+#|	-	master
+#|	Choosed branches (choose mode: Only):
+#|	-	master
+#|	:: executing: worktree add ../tree/master master ::
+#|	Preparing worktree (checking out 'master')
+#|	Updating files: 100% (91/91), done.
+#|	HEAD is now at 5da4522 Merge pull request #342 from gopasspw/dependabot/tools-48090d0390
+#|	master/
 
