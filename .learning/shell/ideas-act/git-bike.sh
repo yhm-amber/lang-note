@@ -251,7 +251,7 @@ alias git-bike=git_bike && git_bike ()
 		: ) && 
 	alias ac=auto_clone c=auto_clone auto-clone=auto_clone && auto_clone () 
 	(
-		echo :: git cloning in shallow mode '(i.e.: depth 1)' :: && 
+		echo :: git cloning in shallow '(depth 1)' mode :: && 
 		while ! ( git clone --progress --depth 1 --no-single-branch "$@" 2>&1 && : ) ;
 		do 1>&2 echo tried: "$((++try_clone))" for clone && :; done | 
 			tee >(cat 1>&2) | 
@@ -584,7 +584,7 @@ git_bike "$@" && :
 #### demo -----------------------
 
 #|	$ git_bike auto_clone https://github.com/LibreService/my_rime.git --mirror
-#|	:: git cloning in shallow mode (i.e.: depth 1) ::
+#|	:: git cloning in shallow (depth 1) mode ::
 #|	Cloning into bare repository 'my_rime.git'...
 #|	fatal: unable to access 'https://github.com/LibreService/my_rime.git/': Recv failure: Connection was reset
 #|	tried: 1 for clone
@@ -629,7 +629,7 @@ git_bike "$@" && :
 #|	:: done for repo `my_rime.git`. ::
 
 #|	$ git-bike auto-clone https://github.com/gurecn/YuyanIme.git --mirror
-#|	:: git cloning in shallow mode (i.e.: depth 1) ::
+#|	:: git cloning in shallow (depth 1) mode ::
 #|	Cloning into bare repository 'YuyanIme.git'...
 #|	remote: Enumerating objects: 295, done.
 #|	remote: Counting objects: 100% (295/295), done.
