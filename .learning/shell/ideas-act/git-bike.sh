@@ -443,7 +443,7 @@ alias git-bike=git_bike && git_bike ()
 						do 
 							echo :: executing: worktree "${__cmd_a__}" "../${__dir__}/$_name" ${__n_ctrl__:-${_name}} "$@" :: && 
 							git worktree "${__cmd_a__}" ../"${__dir__}"/$_name ${__n_ctrl__:-${_name}} "$@" && 
-							ls ../"${__dir__}" && 
+							{ ls -d -- ../"${__dir__}"/* || ls ../"${__dir__}" ; } && 
 							:; 
 						done || 
 						echo $? 1>&6 ;
@@ -860,20 +860,20 @@ git_bike "$@" && :
 #|	Preparing worktree (detached HEAD f4bb1ded)
 #|	Updating files: 100% (652/652), done.
 #|	HEAD is now at f4bb1ded Tag v1.16.1 (#3304)
-#|	v1.16.1/
+#|	../tags/v1.16.1/
 #|	:: executing: worktree add ../tags/v1.17.0-rc.1 v1.17.0-rc.1 ::
 #|	Preparing worktree (detached HEAD bacb2454)
 #|	Updating files: 100% (687/687), done.
 #|	HEAD is now at bacb2454 Tag v1.17.0-rc.1
-#|	v1.16.1/
-#|	v1.17.0-rc.1/
+#|	../tags/v1.16.1/
+#|	../tags/v1.17.0-rc.1/
 #|	:: executing: worktree add ../tags/v1.17.0-rc.2 v1.17.0-rc.2 ::
 #|	Preparing worktree (detached HEAD d28b405b)
 #|	Updating files: 100% (697/697), done.
 #|	HEAD is now at d28b405b Tag v1.17.0-rc.2
-#|	v1.16.1/
-#|	v1.17.0-rc.1/
-#|	v1.17.0-rc.2/
+#|	../tags/v1.16.1/
+#|	../tags/v1.17.0-rc.1/
+#|	../tags/v1.17.0-rc.2/
 #|	$ CHOOSE_MODE=All git-bike bp wt x tags v1.16.1
 #|	repochk: `/mnt/e/gopass.passwd-srcs/cli/gopass.git` is bare repository ~ true
 #|	Contained tags:
@@ -885,11 +885,12 @@ git_bike "$@" && :
 #|	-	v1.17.0-rc.1
 #|	-	v1.17.0-rc.2
 #|	:: executing: worktree remove ../tags/v1.16.1 ::
-#|	v1.17.0-rc.1/
-#|	v1.17.0-rc.2/
+#|	../tags/v1.17.0-rc.1/
+#|	../tags/v1.17.0-rc.2/
 #|	:: executing: worktree remove ../tags/v1.17.0-rc.1 ::
-#|	v1.17.0-rc.2/
+#|	../tags/v1.17.0-rc.2/
 #|	:: executing: worktree remove ../tags/v1.17.0-rc.2 ::
+#|	ls: cannot access '../tags/*': No such file or directory
 
 #|	$ CHOOSE_MODE=Only git-bike bp wt a tags v1.16.1
 #|	repochk: `/mnt/e/gopass.passwd-srcs/cli/gopass.git` is bare repository ~ true
@@ -903,7 +904,7 @@ git_bike "$@" && :
 #|	Preparing worktree (detached HEAD f4bb1ded)
 #|	Updating files: 100% (652/652), done.
 #|	HEAD is now at f4bb1ded Tag v1.16.1 (#3304)
-#|	v1.16.1/
+#|	../tags/v1.16.1/
 #|	$ git-bike bp wt a tree master
 #|	repochk: `/mnt/e/gopass.passwd-srcs/cli/gopass.git` is bare repository ~ true
 #|	Contained branches:
@@ -912,7 +913,7 @@ git_bike "$@" && :
 #|	Preparing worktree (checking out 'master')
 #|	Updating files: 100% (697/697), done.
 #|	HEAD is now at f25fc7b4 fix: restore clip flag through fuzzy search in show command (#3466)
-#|	master/
+#|	../tree/master/
 
 #|	$ git-bike bp help wt
 #|	repochk: `/mnt/e/gopass.passwd-srcs/cli/gopass.git` is bare repository ~ true
@@ -958,5 +959,93 @@ git_bike "$@" && :
 #|	Preparing worktree (checking out 'master')
 #|	Updating files: 100% (91/91), done.
 #|	HEAD is now at 5da4522 Merge pull request #342 from gopasspw/dependabot/tools-48090d0390
-#|	master/
+#|	../tree/master/
+
+#|	$ git-bike ac https://github.com/t8y2/dbx.git --mirror
+#|	:: git cloning in shallow (depth 1) mode ::
+#|	Cloning into bare repository 'dbx.git'...
+#|	remote: Enumerating objects: 24035, done.
+#|	remote: Counting objects: 100% (24035/24035), done.
+#|	remote: Compressing objects: 100% (11838/11838), done.
+#|	remote: Total 24035 (delta 15543), reused 18741 (delta 10815), pack-reused 0 (from 0)
+#|	Receiving objects: 100% (24035/24035), 31.32 MiB | 47.00 KiB/s, done.
+#|	Resolving deltas: 100% (15543/15543), done.
+#|	:: change workdir to `dbx.git` from `/e/iso/dbx.sqlclient.ai-src` to unshallow fetch ::
+#|	:: unshallowing in `/e/iso/dbx.sqlclient.ai-src/dbx.git` ::
+#|	repochk: `/e/iso/dbx.sqlclient.ai-src/dbx.git` is shallow repository ~ true
+#|	fatal: unable to access 'https://github.com/t8y2/dbx.git/': Recv failure: Connection was reset
+#|	tried: 1 for unshallow
+#|	remote: Enumerating objects: 29539, done.
+#|	remote: Counting objects: 100% (25803/25803), done.
+#|	remote: Compressing objects: 100% (14807/14807), done.
+#|	error: RPC failed; curl 56 Recv failure: Connection was reset
+#|	error: 4027 bytes of body are still expected
+#|	fetch-pack: unexpected disconnect while reading sideband packet
+#|	fatal: early EOF
+#|	fatal: fetch-pack: invalid index-pack output
+#|	tried: 2 for unshallow
+#|	remote: Enumerating objects: 29558, done.
+#|	remote: Counting objects: 100% (25875/25875), done.
+#|	remote: Compressing objects: 100% (14815/14815), done.
+#|	error: RPC failed; curl 18 transfer closed with outstanding read data remaining
+#|	error: 2977 bytes of body are still expected
+#|	fetch-pack: unexpected disconnect while reading sideband packet
+#|	fatal: early EOF
+#|	fatal: fetch-pack: invalid index-pack output
+#|	tried: 3 for unshallow
+#|	remote: Enumerating objects: 29579, done.
+#|	remote: Counting objects: 100% (25887/25887), done.
+#|	remote: Compressing objects: 100% (14828/14828), done.
+#|	remote: Total 24629 (delta 14265), reused 19298 (delta 9413), pack-reused 0 (from 0)
+#|	Receiving objects: 100% (24629/24629), 254.68 MiB | 77.00 KiB/s, done.
+#|	Resolving deltas: 100% (14265/14265), completed with 571 local objects.
+#|	From https://github.com/t8y2/dbx
+#|	 * [new ref]           refs/pull/2155/head  -> refs/pull/2155/head
+#|	 * [new ref]           refs/pull/2155/merge -> refs/pull/2155/merge
+#|	 * [new ref]           refs/pull/2156/head  -> refs/pull/2156/head
+#|	 * [new ref]           refs/pull/2156/merge -> refs/pull/2156/merge
+#|	:: updating in `/e/iso/dbx.sqlclient.ai-src/dbx.git` ::
+#|	fatal: unable to access 'https://github.com/t8y2/dbx.git/': Failed to connect to github.com port 443 after 21398 ms: Could not connect to server
+#|	tried: 1 for remote update
+#|	remote: Enumerating objects: 25, done.
+#|	remote: Counting objects: 100% (21/21), done.
+#|	remote: Compressing objects: 100% (10/10), done.
+#|	remote: Total 25 (delta 12), reused 11 (delta 11), pack-reused 4 (from 1)
+#|	Unpacking objects: 100% (25/25), 26.46 KiB | 13.00 KiB/s, done.
+#|	From https://github.com/t8y2/dbx
+#|	   b951d3a5..7a21f258  main       -> main
+#|	:: done for repo `dbx.git`. ::
+#|	$ git-bike bp wt a tags v0.5.41
+#|	repochk: `/e/iso/dbx.sqlclient.ai-src/dbx.git` is bare repository ~ true
+#|	Contained tags:
+#|	-	agents-latest
+#|	-	agents-v0.2.39
+#|	-	packages-v0.4.17
+#|	-	v0.5.41
+#|	Choosed tags (choose mode: Only):
+#|	-	v0.5.41
+#|	:: executing: worktree add ../tags/v0.5.41 v0.5.41 ::
+#|	Preparing worktree (detached HEAD ba872303)
+#|	Updating files: 100% (1656/1656), done.
+#|	HEAD is now at ba872303 feat(release): bump app version to 0.5.41
+#|	../tags/v0.5.41/
+#|	$ git-bike bp wt a tree main
+#|	repochk: `/e/iso/dbx.sqlclient.ai-src/dbx.git` is bare repository ~ true
+#|	Contained branches:
+#|	-	main
+#|	Choosed branches (choose mode: Only):
+#|	-	main
+#|	:: executing: worktree add ../tree/main main ::
+#|	Preparing worktree (checking out 'main')
+#|	Updating files: 100% (1656/1656), done.
+#|	HEAD is now at 7a21f258 feat(sqlCompletion): support SELECT list expand-all-fields completion (#2155)
+#|	../tree/main/
+#|	$ git-bike bp wt x tree main
+#|	repochk: `/e/iso/dbx.sqlclient.ai-src/dbx.git` is bare repository ~ true
+#|	Contained branches:
+#|	-	main
+#|	Choosed branches (choose mode: Only):
+#|	-	main
+#|	:: executing: worktree remove ../tree/main ::
+#|	ls: cannot access '../tree/*': No such file or directory
 
