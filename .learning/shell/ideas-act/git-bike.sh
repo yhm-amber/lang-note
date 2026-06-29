@@ -194,22 +194,34 @@ alias git-bike=git_bike && git_bike ()
 		"$@" && 
 		: ) && 
 	
-	#. ( echo 1 ; echo ::2 ; echo ::3 ; echo ::4 ; echo 5 ; sleep 10 ) | ELLIPSIS_SHOW=y LINES_MAX=2 _wait_outs    #> out 1, ::2, ... after 10 sec. waites.
-	#. ( echo 1 ; echo ::2 ; echo ::3 ; echo ::4 ; echo 5 ; sleep 10 ) | ELLIPSIS_SHOW=y LINES_MAX=2 _wait_outs :: #> out ::2, ::3, ... after 10 sec. waites.
-	#. ( echo 1 ; echo ::2 ; echo ::3 ; echo ::4 ; echo 5 ; sleep 10 ) | ELLIPSIS_SHOW=x LINES_MAX=2 _wait_outs :: #> out ::2, ::3 after 10 sec. waites.
-	_wait_outs () 
-	(
-		PAT="$*" ELLIPSIS_SHOW="${ELLIPSIS_SHOW:-Yes}" awk -v max="${LINES_MAX:-6}" -- ' 
-		BEGIN { pat = ENVIRON["PAT"] ; ell_show = toupper(ENVIRON["ELLIPSIS_SHOW"]) ~ /^(Y|YES|T|TRUE)$/ }
-		$0 ~ pat { if (c < max) { a[++c] = $0 } else if (ell_show && c == max) { a[++c] = "..." } else { next } }
-		END { for (i = 1; i < 1 + c; i++) print a[i] }' && 
-		: ) && 
 	
-	#. ( echo a ; echo b ; sleep 3 ; echo c ) | FD_TEE=2 _wait_tee awk -- '{ print "xx", $0 } BEGIN { print "ABC:" }'
-	_wait_tee () 
-	(
-		echo "$( { 1>&"${FD_TEE:-2}" echo "$( { tee >(1>&3 "$@") 1>&4 ; } 3>&1 )" ; } 4>&1 )" && 
-		: ) && 
+	_jobs_ctl () ( _Jobs_Ctl "$@" && : ) && 
+	_Jobs_Ctl () 
+	{
+		#. ( echo 1 ; echo ::2 ; echo ::3 ; echo ::4 ; echo 5 ; sleep 10 ) | ELLIPSIS_SHOW=y LINES_MAX=2 _jobs_ctl _wait_outs    #> out 1, ::2, ... after 10 sec. waites.
+		#. ( echo 1 ; echo ::2 ; echo ::3 ; echo ::4 ; echo 5 ; sleep 10 ) | ELLIPSIS_SHOW=y LINES_MAX=2 _jobs_ctl _wait_outs :: #> out ::2, ::3, ... after 10 sec. waites.
+		#. ( echo 1 ; echo ::2 ; echo ::3 ; echo ::4 ; echo 5 ; sleep 10 ) | ELLIPSIS_SHOW=x LINES_MAX=2 _jobs_ctl _wait_outs :: #> out ::2, ::3 after 10 sec. waites.
+		_wait_outs () 
+		(
+			PAT="$*" ELLIPSIS_SHOW="${ELLIPSIS_SHOW:-Yes}" awk -v max="${LINES_MAX:-6}" -- ' 
+			BEGIN { pat = ENVIRON["PAT"] ; ell_show = toupper(ENVIRON["ELLIPSIS_SHOW"]) ~ /^(Y|YES|T|TRUE)$/ }
+			$0 ~ pat { if (c < max) { a[++c] = $0 } else if (ell_show && c == max) { a[++c] = "..." } else { next } }
+			END { for (i = 1; i < 1 + c; i++) print a[i] }' && 
+			: ) && 
+		
+		#. ( echo a ; echo b ; sleep 3 ; echo c ) | FD_TEE=2 _jobs_ctl _wait_tee awk -- '{ print "xx", $0 } BEGIN { print "ABC:" }'
+		_wait_tee () 
+		(
+			echo "$( { 1>&"${FD_TEE:-${TEE_FD:-${TEETO_FD:-2}}}" echo "$( { tee >(1>&3 "$@") 1>&4 ; } 3>&1 )" ; } 4>&1 )" && 
+			: ) && 
+		
+		: :: && 
+		"$@" && 
+		:;
+	} && 
+	
+	# _Jobs_Ctl : && 
+	
 	
 	#: git-bike auto-clone -- <remote-link> [<aim-path>]
 	auto_clone__helper__ () 
@@ -245,10 +257,10 @@ alias git-bike=git_bike && git_bike ()
 			tee >(cat 1>&2) | 
 			#::	will only out 3 lines (which has "'")
 			#;;	 after keep waiting until EOF
-			ELLIPSIS_SHOW=x LINES_MAX=3 _wait_outs "'" | 
+			ELLIPSIS_SHOW=x LINES_MAX=3 _jobs_ctl _wait_outs "'" | 
 			#::	Just a head -n 1 alternative
 			#;;	 but with no SIGPIPE to avoid pipe-broken.
-			ELLIPSIS_SHOW=x LINES_MAX=1 _wait_outs 'Cloning into' | 
+			ELLIPSIS_SHOW=x LINES_MAX=1 _jobs_ctl _wait_outs 'Cloning into' | 
 			_flatout_line _out_param | 
 			tail -n 1 | 
 			cut -d "'" -f 2 | 
@@ -411,21 +423,21 @@ alias git-bike=git_bike && git_bike ()
 					echo $? 1>&6 ;
 					:; 
 				} | 
-					FD_TEE=2 _wait_tee awk -- '
+					FD_TEE=2 _jobs_ctl _wait_tee awk -- '
 						{ print "-",$0 } 
 						BEGIN { 
 							OFS = "\t" ; 
 							print "Contained '"${__called__}"': " }
 						' | 
-					# tee >( | ELLIPSIS_SHOW=y LINES_MAX=128 _wait_outs 1>&2) | 
-					__chooser | # ELLIPSIS_SHOW=x LINES_MAX="$__choose_max" _wait_outs | 
-					FD_TEE=2 _wait_tee awk -- '
+					# tee >( | ELLIPSIS_SHOW=y LINES_MAX=128 _jobs_ctl _wait_outs 1>&2) | 
+					__chooser | # ELLIPSIS_SHOW=x LINES_MAX="$__choose_max" _jobs_ctl _wait_outs | 
+					FD_TEE=2 _jobs_ctl _wait_tee awk -- '
 						{ print "-",$0 } 
 						BEGIN { 
 							OFS = "\t" ; 
 							print "Choosed '"${__called__}"' (choose mode: '"${__chooser_name__}"'): " }
 						' | 
-					# tee >( | ELLIPSIS_SHOW=x LINES_MAX="$__choose_max" _wait_outs 1>&2) | 
+					# tee >( | ELLIPSIS_SHOW=x LINES_MAX="$__choose_max" _jobs_ctl _wait_outs 1>&2) | 
 					{
 						while read -r -- _name ;
 						do 
