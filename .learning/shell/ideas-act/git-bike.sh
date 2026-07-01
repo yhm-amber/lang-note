@@ -443,7 +443,7 @@ alias git-bike=git_bike && git_bike ()
 						do 
 							echo :: executing: worktree "${__cmd_a__}" "../${__dir__}/$_name" ${__n_ctrl__:-${_name}} "$@" :: && 
 							git worktree "${__cmd_a__}" ../"${__dir__}"/$_name ${__n_ctrl__:-${_name}} "$@" && 
-							{ ls -d -- ../"${__dir__}"/* || ls ../"${__dir__}" ; } && 
+							{ ls -d -- ../"${__dir__}"/* || ls ../"${__dir__}" || ls -d -- ../* ; } && 
 							:; 
 						done || 
 						echo $? 1>&6 ;
@@ -481,7 +481,7 @@ alias git-bike=git_bike && git_bike ()
 	(
 		while read -r -- workspace ;
 		do 
-			ls -1 -d -- "${workspace}/*" | while read -r -- gitpath ;
+			ls -1 -d -- "${workspace}"/* | while read -r -- gitpath ;
 			do all_pull "${gitpath}" && all_push "${gitpath}" && :; done && 
 			:; 
 		done && 
@@ -502,7 +502,7 @@ alias git-bike=git_bike && git_bike ()
 		do 
 			(
 				cd "${gitdir}" && 
-				git pull && 
+				{ git pull || git remote update ; } && 
 				git remote | while read -r -- git_remote ;
 				do 
 					echo working: push to remote "'${git_remote}'" for "'${gitdir}'" && 
@@ -532,10 +532,10 @@ alias git-bike=git_bike && git_bike ()
 				git remote | while read -r -- git_remote ;
 				do 
 					echo working: pull from remote "'${git_remote}'" for "'${gitdir}'" && 
-					git pull "${git_remote}" && 
+					{ git pull "${git_remote}" || git remote update "${git_remote}" ; } && 
 					:; 
 				done && 
-				git pull && 
+				{ git pull || git remote update ; } && 
 				: ) && 
 			:; 
 		done
@@ -561,7 +561,6 @@ alias git-bike=git_bike && git_bike ()
 	: ) && 
 
 
-
 # : \
 git_bike "$@" && :
 
@@ -580,6 +579,7 @@ git_bike "$@" && :
 ###	see: https://stackoverflow.com/questions/79966887/how-could-this-dash-style-named-function-makes-infinity-calling-in-bash
 
 
+# git config --global -- alias.bike "!/usr/bin/env bash ~/.local/git-bike.sh"
 
 #### demo -----------------------
 
@@ -970,9 +970,9 @@ git_bike "$@" && :
 #|	remote: Total 24035 (delta 15543), reused 18741 (delta 10815), pack-reused 0 (from 0)
 #|	Receiving objects: 100% (24035/24035), 31.32 MiB | 47.00 KiB/s, done.
 #|	Resolving deltas: 100% (15543/15543), done.
-#|	:: change workdir to `dbx.git` from `/e/iso/dbx.sqlclient.ai-src` to unshallow fetch ::
-#|	:: unshallowing in `/e/iso/dbx.sqlclient.ai-src/dbx.git` ::
-#|	repochk: `/e/iso/dbx.sqlclient.ai-src/dbx.git` is shallow repository ~ true
+#|	:: change workdir to `dbx.git` from `/mnt/e/dbx.sqlclient.ai-src` to unshallow fetch ::
+#|	:: unshallowing in `/mnt/e/dbx.sqlclient.ai-src/dbx.git` ::
+#|	repochk: `/mnt/e/dbx.sqlclient.ai-src/dbx.git` is shallow repository ~ true
 #|	fatal: unable to access 'https://github.com/t8y2/dbx.git/': Recv failure: Connection was reset
 #|	tried: 1 for unshallow
 #|	remote: Enumerating objects: 29539, done.
@@ -1004,7 +1004,7 @@ git_bike "$@" && :
 #|	 * [new ref]           refs/pull/2155/merge -> refs/pull/2155/merge
 #|	 * [new ref]           refs/pull/2156/head  -> refs/pull/2156/head
 #|	 * [new ref]           refs/pull/2156/merge -> refs/pull/2156/merge
-#|	:: updating in `/e/iso/dbx.sqlclient.ai-src/dbx.git` ::
+#|	:: updating in `/mnt/e/dbx.sqlclient.ai-src/dbx.git` ::
 #|	fatal: unable to access 'https://github.com/t8y2/dbx.git/': Failed to connect to github.com port 443 after 21398 ms: Could not connect to server
 #|	tried: 1 for remote update
 #|	remote: Enumerating objects: 25, done.
@@ -1016,7 +1016,7 @@ git_bike "$@" && :
 #|	   b951d3a5..7a21f258  main       -> main
 #|	:: done for repo `dbx.git`. ::
 #|	$ git-bike bp wt a tags v0.5.41
-#|	repochk: `/e/iso/dbx.sqlclient.ai-src/dbx.git` is bare repository ~ true
+#|	repochk: `/mnt/e/dbx.sqlclient.ai-src/dbx.git` is bare repository ~ true
 #|	Contained tags:
 #|	-	agents-latest
 #|	-	agents-v0.2.39
@@ -1030,7 +1030,7 @@ git_bike "$@" && :
 #|	HEAD is now at ba872303 feat(release): bump app version to 0.5.41
 #|	../tags/v0.5.41/
 #|	$ git-bike bp wt a tree main
-#|	repochk: `/e/iso/dbx.sqlclient.ai-src/dbx.git` is bare repository ~ true
+#|	repochk: `/mnt/e/dbx.sqlclient.ai-src/dbx.git` is bare repository ~ true
 #|	Contained branches:
 #|	-	main
 #|	Choosed branches (choose mode: Only):
@@ -1041,11 +1041,39 @@ git_bike "$@" && :
 #|	HEAD is now at 7a21f258 feat(sqlCompletion): support SELECT list expand-all-fields completion (#2155)
 #|	../tree/main/
 #|	$ git-bike bp wt x tree main
-#|	repochk: `/e/iso/dbx.sqlclient.ai-src/dbx.git` is bare repository ~ true
+#|	repochk: `/mnt/e/dbx.sqlclient.ai-src/dbx.git` is bare repository ~ true
 #|	Contained branches:
 #|	-	main
 #|	Choosed branches (choose mode: Only):
 #|	-	main
 #|	:: executing: worktree remove ../tree/main ::
 #|	ls: cannot access '../tree/*': No such file or directory
+
+#|	$ git-bike bp wt a tags v3.1.5
+#|	repochk: `/mnt/e/xed.repoctl.editor.android-src/Xed-Editor.git` is bare repository ~ true
+#|	Contained tags:
+#|	-	sdk-latest
+#|	-	v3.1.5
+#|	-	v3.1.7
+#|	-	v3.1.8
+#|	-	v3.1.9
+#|	-	v3.2.1
+#|	-	v3.2.3
+#|	-	v3.2.4
+#|	-	v3.2.5
+#|	-	v3.2.6
+#|	-	v3.2.7
+#|	-	v3.2.9
+#|	-	v3.3.1
+#|	-	v3.3.2
+#|	-	v3.3.3
+#|	-	v3.3.4
+#|	Choosed tags (choose mode: Only):
+#|	-	v3.1.5
+#|	:: executing: worktree add ../tags/v3.1.5 v3.1.5 ::
+#|	Preparing worktree (detached HEAD 3dd223437)
+#|	Updating files: 100% (715/715), done.
+#|	HEAD is now at 3dd223437 Update network_security_config.xml
+#|	../tags/v3.1.5/
+
 
