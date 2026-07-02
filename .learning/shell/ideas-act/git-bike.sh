@@ -1,13 +1,11 @@
 #!/usr/bin/env bash
 
 
-alias git-bike=git_bike && git_bike () 
-(
-	local __aliases_home__="$(alias)" && 
+Libs () 
+{
 	
 	_lang_tool () 
 	(
-		
 		trim_line () 
 		(
 			while IFS="${SPACE_CHR:-${IFS}}" read -r -- _trimed ;
@@ -79,6 +77,37 @@ alias git-bike=git_bike && git_bike ()
 					:; 
 				done | 
 				cat - && 
+			: ) && 
+		
+		#. eval "$(_subs_frame codes_head)" && 
+		#. eval "$(_subs_frame codes_tail)" && 
+		_subs_frame () 
+		(
+			: 亓可别名 去别承体 && 
+			: 亓可助令 略别详体 && 
+			
+			codes_head () 
+			(
+				echo '
+					local __aliases_home__="$(alias)" && 
+					: ' && 
+				: ) && 
+			codes_tail () 
+			(
+				echo '
+					alias sub-help=aliases && aliases () ( echo "$__aliases__" | _lang_tool "${@:-help_alias}" && : ) && 
+					local __aliases_ende__="$(alias)" && 
+					local __aliases__="$(echo "$__aliases_ende__" | _set_tools diff "$__aliases_home__")" && 
+					eval "
+						{ $(aliases cat | SP='"';'"' _lang_tool alias_un) :; } && 
+						$(aliases cat | SP='"'&&'"' _lang_tool alias_fn)
+						$(aliases cat | SP='"'&&'"' _lang_tool alias_hp)
+						: " && 
+					help () ( sub-help help_alias "$@" ) && 
+					: ' && 
+				: ) && 
+			: :: && 
+			"$@" && 
 			: ) && 
 		
 		: :: && 
@@ -181,13 +210,23 @@ alias git-bike=git_bike && git_bike ()
 		"$@" && 
 		: ) && 
 	
+	: :: && 
+	"$@" && 
+	:;
+} && 
+
+
+alias git-bike=git_bike && git_bike () 
+(
+	Libs : && 
 	
+	eval "$(_subs_frame codes_head)" && 
 	
 	#. repo_chk shallow . && git fetch --unshallow --all
 	#. (repo_chk shallow . echo | _cmnd_tools _std_exec once) && git fetch --unshallow --all
 	alias repo-chk=repo_chk && repo_chk () 
 	(
-		local __aliases_home__="$(alias)" && 
+		eval "$(_subs_frame codes_head)" && 
 		
 		alias gitdir=gitdir && gitdir () 
 		(
@@ -223,15 +262,7 @@ alias git-bike=git_bike && git_bike ()
 		
 		: :: && 
 		
-		alias sub-help=aliases && aliases () ( echo "$__aliases__" | _lang_tool "${@:-help_alias}" && : ) && 
-		local __aliases_ende__="$(alias)" && 
-		local __aliases__="$(echo "$__aliases_ende__" | _set_tools diff "$__aliases_home__")" && 
-		eval "
-			{ $(aliases cat | SP=';' _lang_tool alias_un) :; } && 
-			$(aliases cat | SP='&&' _lang_tool alias_fn)
-			$(aliases cat | SP='&&' _lang_tool alias_hp)
-			: " && 
-		help () ( sub-help help_alias "$@" ) && 
+		eval "$(_subs_frame codes_tail)" && 
 		
 		: :: && 
 		"$@" && 
@@ -309,7 +340,7 @@ alias git-bike=git_bike && git_bike ()
 		: "- path of worktree dir from branch like 'name.comments-src/tree/<branch-name>'" && 
 		: "- path of worktree dir from tag like 'name.comments-src/tags/<tag-name>'" && 
 		
-		local __aliases_home__="$(alias)" && 
+		eval "$(_subs_frame codes_head)" && 
 		
 		#. git-bike bare-play up
 		#. git-bike bare-play up origin
@@ -470,15 +501,7 @@ alias git-bike=git_bike && git_bike ()
 		
 		: :: && 
 		
-		alias sub-help=aliases && aliases () ( echo "$__aliases__" | _lang_tool "${@:-help_alias}" && : ) && 
-		local __aliases_ende__="$(alias)" && 
-		local __aliases__="$(echo "$__aliases_ende__" | _set_tools diff "$__aliases_home__")" && 
-		eval "
-			{ $(aliases cat | SP=';' _lang_tool alias_un) :; } && 
-			$(aliases cat | SP='&&' _lang_tool alias_fn)
-			$(aliases cat | SP='&&' _lang_tool alias_hp)
-			: " && 
-		help () ( sub-help help_alias "$@" ) && 
+		eval "$(_subs_frame codes_tail)" && 
 		
 		: :: && 
 		"$@" && 
@@ -648,15 +671,7 @@ alias git-bike=git_bike && git_bike ()
 	
 	: :: && 
 	
-	alias sub-help=aliases && aliases () ( echo "$__aliases__" | _lang_tool "${@:-help_alias}" && : ) && 
-	local __aliases_ende__="$(alias)" && 
-	local __aliases__="$(echo "$__aliases_ende__" | _set_tools diff "$__aliases_home__")" && 
-	eval "
-		{ $(aliases cat | SP=';' _lang_tool alias_un) :; } && 
-		$(aliases cat | SP='&&' _lang_tool alias_fn)
-		$(aliases cat | SP='&&' _lang_tool alias_hp)
-		: " && 
-	help () ( sub-help help_alias "$@" ) && 
+	eval "$(_subs_frame codes_tail)" && 
 	
 	: :: && 
 	
