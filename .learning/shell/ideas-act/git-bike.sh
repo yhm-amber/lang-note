@@ -7,6 +7,7 @@ alias git-bike=git_bike && git_bike ()
 	
 	_lang_tool () 
 	(
+		
 		trim_line () 
 		(
 			while IFS="${SPACE_CHR:-${IFS}}" read -r -- _trimed ;
@@ -84,6 +85,35 @@ alias git-bike=git_bike && git_bike ()
 		"$@" && 
 		: ) && 
 	
+	_cmnd_tools () 
+	(
+		_returns () ( return $1 ) && 
+		_booled_returns () ( ! _returns $1 ) && 
+		
+		_std_exec () 
+		(
+			#. (echo true | _cmnd_tools _std_exec once) && echo a || echo x
+			#. echo true | _cmnd_tools _std_exec once echo status is:
+			once () 
+			(
+				read -r -- xs && 
+				"$@" ${xs} && 
+				: ) && 
+			
+			#. echo 'true' | _cmnd_tools _std_exec lines
+			lines () 
+			(
+				while read -r -- line ;
+				do "$@" $line && :; done && 
+				: ) && 
+			: :: && 
+			"$@" && 
+			: ) && 
+		
+		: :: && 
+		"$@" && 
+		: ) && 
+	
 	#.	__a__="$(alias)"
 	#.	alias a=a b=b
 	#.	alias | _set_tools diff "$__a__"
@@ -99,83 +129,96 @@ alias git-bike=git_bike && git_bike ()
 		"$@" && 
 		: ) && 
 	
-	_out_param () 
+	_param_tools () 
 	(
-		for x in "$@" ;
-		do "${OUTER_FN:-echo}" "${x}" && :; done && 
-		: ) && 
-	
-	_params_take () 
-	(
-		head () ( echo "$1" && : ) && 
-		tail () ( shift 1 && _out_param "$@" && : ) && 
-		home () ( _out_param "$@" | head -n "$(($# - 1))" && : ) && 
-		ende () ( shift "$(($# - 1))" && _out_param "$@" && : ) && 
-		: :: && 
-		"$@" && 
-		: ) && 
-	
-	_flatout_line () 
-	(
-		while read -r -- line ;
-		do OUTER_FN="${FLATTER_FN:-echo}" "${@:-_out_param}" $line && :; done && 
-		: ) && 
-	
-	_std_exec () 
-	(
-		#. (echo true | _std_exec once) && echo a || echo x
-		#. echo true | _std_exec once echo status is:
-		once () 
+		params_out () 
 		(
-			read -r -- xs && 
-			"$@" ${xs} && 
+			for x in "$@" ;
+			do "${OUTER_FN:-echo}" "${x}" && :; done && 
 			: ) && 
 		
-		#. echo 'true' | _std_exec lines
-		lines () 
+		params_take () 
+		(
+			head () ( echo "$1" && : ) && 
+			tail () ( shift 1 && params_out "$@" && : ) && 
+			home () ( params_out "$@" | head -n "$(($# - 1))" && : ) && 
+			ende () ( shift "$(($# - 1))" && params_out "$@" && : ) && 
+			: :: && 
+			"$@" && 
+			: ) && 
+		
+		flatten_line () 
 		(
 			while read -r -- line ;
-			do "$@" $line && :; done && 
+			do OUTER_FN="${FLATTER_FN:-echo}" "${@:-params_out}" $line && :; done && 
 			: ) && 
+		
 		: :: && 
 		"$@" && 
 		: ) && 
 	
+	
+	_ctrl_tools () 
+	(
+		#. ( echo 1 ; echo ::2 ; echo ::3 ; echo ::4 ; echo 5 ; sleep 10 ) | ELLIPSIS_SHOW=y LINES_MAX=2 _ctrl_tools _wait_outs    #> out 1, ::2, ... after 10 sec. waites.
+		#. ( echo 1 ; echo ::2 ; echo ::3 ; echo ::4 ; echo 5 ; sleep 10 ) | ELLIPSIS_SHOW=y LINES_MAX=2 _ctrl_tools _wait_outs :: #> out ::2, ::3, ... after 10 sec. waites.
+		#. ( echo 1 ; echo ::2 ; echo ::3 ; echo ::4 ; echo 5 ; sleep 10 ) | ELLIPSIS_SHOW=x LINES_MAX=2 _ctrl_tools _wait_outs :: #> out ::2, ::3 after 10 sec. waites.
+		_wait_outs () 
+		(
+			PAT="$*" ELLIPSIS_SHOW="${ELLIPSIS_SHOW:-Yes}" awk -v max="${LINES_MAX:-6}" -- ' 
+			BEGIN { pat = ENVIRON["PAT"] ; ell_show = toupper(ENVIRON["ELLIPSIS_SHOW"]) ~ /^(Y|YES|T|TRUE)$/ }
+			$0 ~ pat { if (c < max) { a[++c] = $0 } else if (ell_show && c == max) { a[++c] = "..." } else { next } }
+			END { for (i = 1; i < 1 + c; i++) print a[i] }' && 
+			: ) && 
+		
+		#. ( echo a ; echo b ; sleep 3 ; echo c ) | FD_TEE=2 _ctrl_tools _wait_tee awk -- '{ print "xx", $0 } BEGIN { print "ABC:" }'
+		_wait_tee () 
+		(
+			echo "$( { 1>&"${FD_TEE:-${TEE_FD:-${TEETO_FD:-2}}}" echo "$( { tee >(1>&3 "$@") 1>&4 ; } 3>&1 )" ; } 4>&1 )" && 
+			: ) && 
+		
+		: :: && 
+		"$@" && 
+		: ) && 
+	
+	
+	
 	#. repo_chk shallow . && git fetch --unshallow --all
+	#. (repo_chk shallow . echo | _cmnd_tools _std_exec once) && git fetch --unshallow --all
 	alias repo-chk=repo_chk && repo_chk () 
 	(
 		local __aliases_home__="$(alias)" && 
 		
 		alias gitdir=gitdir && gitdir () 
 		(
-			cd "${*:-.}" && 
+			{ cd "${1:-.}" && shift 1 ; } && 
 			git rev-parse --is-inside-git-dir | 
-				tee >( 1>&2 _std_exec once echo repochk: "\`$PWD\`" 'is inside gitdir ~' ) | 
-				_std_exec once && 
+				tee >( 1>&2 _cmnd_tools _std_exec once echo repochk: "\`$PWD\`" 'is inside gitdir ~' ) | 
+				_cmnd_tools _std_exec once "$@" && 
 			: ) && 
 		
 		alias worktree=worktree && worktree () 
 		(
-			cd "${*:-.}" && 
+			{ cd "${1:-.}" && shift 1 ; } && 
 			git rev-parse --is-inside-work-tree | 
-				tee >( 1>&2 _std_exec once echo repochk: "\`$PWD\`" 'is inside worktree ~' ) | 
-				_std_exec once && 
+				tee >( 1>&2 _cmnd_tools _std_exec once echo repochk: "\`$PWD\`" 'is inside worktree ~' ) | 
+				_cmnd_tools _std_exec once "$@" && 
 			: ) && 
 		
 		alias bare=bare && bare () 
 		(
-			cd "${*:-.}" && 
+			{ cd "${1:-.}" && shift 1 ; } && 
 			git rev-parse --is-bare-repository | 
-				tee >( 1>&2 _std_exec once echo repochk: "\`$PWD\`" 'is bare repository ~' ) | 
-				_std_exec once && 
+				tee >( 1>&2 _cmnd_tools _std_exec once echo repochk: "\`$PWD\`" 'is bare repository ~' ) | 
+				_cmnd_tools _std_exec once "$@" && 
 			: ) && 
 		
 		alias shallow=shallow && shallow () 
 		(
-			cd "${*:-.}" && 
+			{ cd "${1:-.}" && shift 1 ; } && 
 			git rev-parse --is-shallow-repository | 
-				tee >( 1>&2 _std_exec once echo repochk: "\`$PWD\`" 'is shallow repository ~' ) | 
-				_std_exec once && 
+				tee >( 1>&2 _cmnd_tools _std_exec once echo repochk: "\`$PWD\`" 'is shallow repository ~' ) | 
+				_cmnd_tools _std_exec once "$@" && 
 			: ) && 
 		
 		: :: && 
@@ -194,33 +237,6 @@ alias git-bike=git_bike && git_bike ()
 		"$@" && 
 		: ) && 
 	
-	
-	_jobs_ctl () ( _Jobs_Ctl "$@" && : ) && 
-	_Jobs_Ctl () 
-	{
-		#. ( echo 1 ; echo ::2 ; echo ::3 ; echo ::4 ; echo 5 ; sleep 10 ) | ELLIPSIS_SHOW=y LINES_MAX=2 _jobs_ctl _wait_outs    #> out 1, ::2, ... after 10 sec. waites.
-		#. ( echo 1 ; echo ::2 ; echo ::3 ; echo ::4 ; echo 5 ; sleep 10 ) | ELLIPSIS_SHOW=y LINES_MAX=2 _jobs_ctl _wait_outs :: #> out ::2, ::3, ... after 10 sec. waites.
-		#. ( echo 1 ; echo ::2 ; echo ::3 ; echo ::4 ; echo 5 ; sleep 10 ) | ELLIPSIS_SHOW=x LINES_MAX=2 _jobs_ctl _wait_outs :: #> out ::2, ::3 after 10 sec. waites.
-		_wait_outs () 
-		(
-			PAT="$*" ELLIPSIS_SHOW="${ELLIPSIS_SHOW:-Yes}" awk -v max="${LINES_MAX:-6}" -- ' 
-			BEGIN { pat = ENVIRON["PAT"] ; ell_show = toupper(ENVIRON["ELLIPSIS_SHOW"]) ~ /^(Y|YES|T|TRUE)$/ }
-			$0 ~ pat { if (c < max) { a[++c] = $0 } else if (ell_show && c == max) { a[++c] = "..." } else { next } }
-			END { for (i = 1; i < 1 + c; i++) print a[i] }' && 
-			: ) && 
-		
-		#. ( echo a ; echo b ; sleep 3 ; echo c ) | FD_TEE=2 _jobs_ctl _wait_tee awk -- '{ print "xx", $0 } BEGIN { print "ABC:" }'
-		_wait_tee () 
-		(
-			echo "$( { 1>&"${FD_TEE:-${TEE_FD:-${TEETO_FD:-2}}}" echo "$( { tee >(1>&3 "$@") 1>&4 ; } 3>&1 )" ; } 4>&1 )" && 
-			: ) && 
-		
-		: :: && 
-		"$@" && 
-		:;
-	} && 
-	
-	# _Jobs_Ctl : && 
 	
 	
 	#: git-bike auto-clone -- <remote-link> [<aim-path>]
@@ -257,11 +273,11 @@ alias git-bike=git_bike && git_bike ()
 			tee >(cat 1>&2) | 
 			#::	will only out 3 lines (which has "'")
 			#;;	 after keep waiting until EOF
-			ELLIPSIS_SHOW=x LINES_MAX=3 _jobs_ctl _wait_outs "'" | 
+			ELLIPSIS_SHOW=x LINES_MAX=3 _ctrl_tools _wait_outs "'" | 
 			#::	Just a head -n 1 alternative
 			#;;	 but with no SIGPIPE to avoid pipe-broken.
-			ELLIPSIS_SHOW=x LINES_MAX=1 _jobs_ctl _wait_outs 'Cloning into' | 
-			_flatout_line _out_param | 
+			ELLIPSIS_SHOW=x LINES_MAX=1 _ctrl_tools _wait_outs 'Cloning into' | 
+			_param_tools flatten_line params_out | 
 			tail -n 1 | 
 			cut -d "'" -f 2 | 
 			while read -r -- out_dir ;
@@ -423,21 +439,21 @@ alias git-bike=git_bike && git_bike ()
 					echo $? 1>&6 ;
 					:; 
 				} | 
-					FD_TEE=2 _jobs_ctl _wait_tee awk -- '
+					FD_TEE=2 _ctrl_tools _wait_tee awk -- '
 						{ print "-",$0 } 
 						BEGIN { 
 							OFS = "\t" ; 
 							print "Contained '"${__called__}"': " }
 						' | 
-					# tee >( | ELLIPSIS_SHOW=y LINES_MAX=128 _jobs_ctl _wait_outs 1>&2) | 
-					__chooser | # ELLIPSIS_SHOW=x LINES_MAX="$__choose_max" _jobs_ctl _wait_outs | 
-					FD_TEE=2 _jobs_ctl _wait_tee awk -- '
+					# tee >( | ELLIPSIS_SHOW=y LINES_MAX=128 _ctrl_tools _wait_outs 1>&2) | 
+					__chooser | # ELLIPSIS_SHOW=x LINES_MAX="$__choose_max" _ctrl_tools _wait_outs | 
+					FD_TEE=2 _ctrl_tools _wait_tee awk -- '
 						{ print "-",$0 } 
 						BEGIN { 
 							OFS = "\t" ; 
 							print "Choosed '"${__called__}"' (choose mode: '"${__chooser_name__}"'): " }
 						' | 
-					# tee >( | ELLIPSIS_SHOW=x LINES_MAX="$__choose_max" _jobs_ctl _wait_outs 1>&2) | 
+					# tee >( | ELLIPSIS_SHOW=x LINES_MAX="$__choose_max" _ctrl_tools _wait_outs 1>&2) | 
 					{
 						while read -r -- _name ;
 						do 
@@ -474,7 +490,7 @@ alias git-bike=git_bike && git_bike ()
 	#;;	 a 'workspace' can be the id-name of a(n) user or org.
 	alias all-sync=all_sync && all_sync () 
 	(
-		_out_param "${@:-.}" | _all_sync && 
+		_param_tools params_out "${@:-.}" | _all_sync && 
 		: ) && 
 	
 	_all_sync () 
@@ -492,7 +508,7 @@ alias git-bike=git_bike && git_bike ()
 	alias all-push=all_push && all_push () 
 	(
 		echo :: pushing origin to all remotes in: "${@:-.}" :: && 
-		_out_param "${@:-.}" | _all_push && 
+		_param_tools params_out "${@:-.}" | _all_push ${GITPUSH_FLAGS:--v} && 
 		: ) && 
 	
 	_all_push () 
@@ -500,26 +516,70 @@ alias git-bike=git_bike && git_bike ()
 		: Push origin to all remotes.
 		while read -r -- gitdir ;
 		do 
+			repo_chk gitdir "${gitdir}" && 
 			(
 				cd "${gitdir}" && 
-				{ git pull || git remote update ; } && 
+				echo :: push all remotes in "'${gitdir}'" :: && 
+				echo before: pull from remote for "'${gitdir}'" && 
+				local checked_bare="$(repo_chk bare . echo)" && 
+				while ! 
+				if ! "$(checked_bare)" ;
+					then git pull ;
+					else git remote update ;
+				fi ;
+				do 
+					echo before: tried: "$((++try_pull_before))" for '`'"$(if ! "$(checked_bare)" ;
+						then echo "git pull" ;
+						else echo "git remote update" ;
+					fi)"'`' in "'${gitdir}'" && 
+					:; 
+				done && 
+				echo before: pulled in "'${gitdir}'" && 
 				git remote | while read -r -- git_remote ;
 				do 
 					echo working: push to remote "'${git_remote}'" for "'${gitdir}'" && 
-					git push "${git_remote}" && 
+					local _rests_try_push="${MAXTRY_PUSH:-${PUSH_MAXTRY:-0}}" && 
+					while ! 
+					if ! "$(checked_bare)" && : 其令选行 ;
+						then git push "$@" -- "${git_remote}" ;
+						else git push "$@" -- "${git_remote}" 'refs/heads/*:refs/heads/*' ;
+					fi ;
+					do 
+						: 此下 乃复试探 有询 && 
+						: 其尝回显 && 
+						echo tried: "$((++try_push))" for '`'"$(if ! "$(checked_bare)" && : 其显选出 ;
+							then echo "git push $* -- ${git_remote}" ;
+							else echo "git push $* -- ${git_remote} 'refs/heads/*:refs/heads/*'" ;
+						fi)"'`' in "'${gitdir}'" && 
+						: 其尝适询 && 
+						if _cmnd_tools _booled_returns "$((_rests_try_push == 0))" ; 
+						then 
+							0<&9 read -p ':: rest: How many times you want to retry then ? :: ' -r -- _rests_try_push && 
+							echo :: rest: you inputed "'$_rests_try_push'" as "$((_rests_try_push--))". && 
+							:;
+						else 
+							echo :: rest: rested times of push trying: "$((_rests_try_push))". && 
+							if _cmnd_tools _booled_returns "$((_rests_try_push < 0))" ; 
+							then echo :: rest: Break.; break; else echo :: rest: Then: "$((--_rests_try_push))"; fi && 
+							:;
+						fi && 
+						:; 
+					done && 
 					:; 
 				done && 
 				: ) && 
 			:; 
-		done
-		: ) && 
+		done && 
+		echo && 
+		: 使其询必曰问之 && 
+		: ) 9</dev/tty && 
 	
 	
 	#: git_bike all_pull [<git-dir>] [<git-dir>] ...
 	alias all-pull=all_pull && all_pull () 
 	(
 		echo :: pulling from origin and all remotes in: "${@:-.}" :: && 
-		_out_param "${@:-.}" | _all_pull && 
+		_param_tools params_out "${@:-.}" | _all_pull ${GITPULL_FLAGS:--v} && 
 		: ) && 
 	
 	_all_pull () 
@@ -527,19 +587,62 @@ alias git-bike=git_bike && git_bike ()
 		: Pull from origin and all remotes.
 		while read -r -- gitdir ;
 		do 
+			repo_chk gitdir "${gitdir}" && 
 			(
 				cd "${gitdir}" && 
+				echo :: pull all remotes in "'${gitdir}'" :: && 
 				git remote | while read -r -- git_remote ;
 				do 
 					echo working: pull from remote "'${git_remote}'" for "'${gitdir}'" && 
-					{ git pull "${git_remote}" || git remote update "${git_remote}" ; } && 
+					local _rests_try_pull="${MAXTRY_PULL:-${PULL_MAXTRY:-0}}" && 
+					while ! 
+					if ! "$(checked_bare)" && : 其令选行 ;
+						then git pull  "$@" -- "${git_remote}" ;
+						else git fetch "$@" -- "${git_remote}" 'refs/heads/*:refs/heads/*' ;
+					fi ;
+					do 
+						: 此下 乃复试探 有询 && 
+						: 其尝回显 && 
+						echo tried: "$((++try_pull))" for '`'"$(if ! "$(checked_bare)" && : 其显选出 ;
+							then echo "git pull  $* -- ${git_remote}" ;
+							else echo "git fetch $* -- ${git_remote} 'refs/heads/*:refs/heads/*'" ;
+						fi)"'`' in "'${gitdir}'" && 
+						: 其尝适询 && 
+						if _cmnd_tools _booled_returns "$((_rests_try_pull == 0))" ; 
+						then 
+							0<&9 read -p ':: rest: How many times you want to retry then ? :: ' -r -- _rests_try_pull && 
+							echo :: rest: you inputed "'$_rests_try_pull'" as "$((_rests_try_pull--))". && 
+							:;
+						else 
+							echo :: rest: rested times of pull trying: "$((_rests_try_pull))". && 
+							if _cmnd_tools _booled_returns "$((_rests_try_pull < 0))" ; 
+							then echo :: rest: Break.; break; else echo :: rest: Then: "$((--_rests_try_pull))"; fi && 
+							:;
+						fi && 
+						:; 
+					done && 
 					:; 
 				done && 
-				{ git pull || git remote update ; } && 
+				echo done: pull from remotes for "'${gitdir}'" && 
+				while ! 
+				if ! "$(checked_bare)" ;
+					then git pull ;
+					else git remote update ;
+				fi ;
+				do 
+					echo done: tried: "$((++try_pull_done))" for '`'"$(if ! "$(checked_bare)" ;
+						then echo "git pull" ;
+						else echo "git remote update" ;
+					fi)"'`' in "'${gitdir}'" && 
+					:; 
+				done && 
+				echo done: pulled in "'${gitdir}'" && 
 				: ) && 
 			:; 
-		done
-		: ) && 
+		done && 
+		echo && 
+		: 使其询必曰问之 && 
+		: ) 9</dev/tty && 
 	
 	
 	
@@ -578,7 +681,12 @@ git_bike "$@" && :
 ###	 the first word in code.
 ###	see: https://stackoverflow.com/questions/79966887/how-could-this-dash-style-named-function-makes-infinity-calling-in-bash
 
+## pull/push --all
+#  - in push: Push all branches
+#  - in pull: Fetch all remotes
 
+# git symbolic-ref HEAD #: 查 HEAD 指向、用 cat ./HEAD 也能看到相应信息
+# git symbolic-ref HEAD refs/heads/some-other-branch #: 变 HEAD 指向
 # git config --global -- alias.bike "!/usr/bin/env bash ~/.local/git-bike.sh"
 
 #### demo -----------------------
