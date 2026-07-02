@@ -3,85 +3,91 @@
 
 Libs () 
 {
-	
-	_lang_tool () 
-	(
-		trim_line () 
+	Subs () 
+	{
+		_lang_tool () 
 		(
-			while IFS="${SPACE_CHR:-${IFS}}" read -r -- _trimed ;
-			do echo "${_trimed}" && :; done && 
-			: ) && 
-		
-		help_alias () 
-		(
-			cat - | 
-				SPACE_CHR="${IFS}" trim_line | 
-				awk '{sub(/^alias /, ""); print}' | 
-				while IFS== read -r -- a b ;
-				do echo "- ${a}: means ${b}." && :; done | 
-				awk '{print} BEGIN { print "sub command(s) here:" }'
-				cat - && 
-			#: only run if having args ...
-			for _ in "$@" ;
-			do 
-				echo && 
-				echo sub command: "$@" && 
-				"${@}__helper__" && 
-				:; 
-			return $? ; done && 
-			: ) && 
-		
-		alias_un () 
-		(
-			cat - | 
-				SPACE_CHR="${IFS}" trim_line | 
-				awk '{sub(/^alias /, ""); print}' | 
-				while IFS== read -r -- a b ;
+			trim_line () 
+			(
+				while IFS="${SPACE_CHR:-${IFS}}" read -r -- _trimed ;
+				do echo "${_trimed}" && :; done && 
+				: ) && 
+			
+			help_alias () 
+			(
+				cat - | 
+					SPACE_CHR="${IFS}" trim_line | 
+					awk '{sub(/^alias /, ""); print}' | 
+					while IFS== read -r -- a b ;
+					do echo "- ${a}: means ${b}." && :; done | 
+					awk '{print} BEGIN { print "sub command(s) here:" }'
+					cat - && 
+				#: only run if having args ...
+				for _ in "$@" ;
 				do 
-					_name="$(echo $a)" && 
-					_body="$(eval echo "$b")" && 
-					test "$_name" != "$_body" && 
-					echo "unalias -- $_name ${SP:-;}" && 
+					echo && 
+					echo sub command: "$@" && 
+					"${@}__helper__" && 
 					:; 
-				done | 
-				cat - && 
+				return $? ; done && 
+				: ) && 
+			
+			alias_un () 
+			(
+				cat - | 
+					SPACE_CHR="${IFS}" trim_line | 
+					awk '{sub(/^alias /, ""); print}' | 
+					while IFS== read -r -- a b ;
+					do 
+						_name="$(echo $a)" && 
+						_body="$(eval echo "$b")" && 
+						test "$_name" != "$_body" && 
+						echo "unalias -- $_name ${SP:-;}" && 
+						:; 
+					done | 
+					cat - && 
+				: ) && 
+			
+			alias_fn () 
+			(
+				cat - | 
+					SPACE_CHR="${IFS}" trim_line | 
+					awk '{sub(/^alias /, ""); print}' | 
+					while IFS== read -r -- a b ;
+					do 
+						_name="$(echo $a)" && 
+						_body="$(eval echo "$b")" && 
+						test "$_name" != "$_body" && 
+						echo "function $_name () ( $_body "'"$@"'" ) ${SP:-&&} " && 
+						:; 
+					done | 
+					cat - && 
+				: ) && 
+			
+			alias_hp () 
+			(
+				cat - | 
+					SPACE_CHR="${IFS}" trim_line | 
+					awk '{sub(/^alias /, ""); print}' | 
+					while IFS== read -r -- a b ;
+					do 
+						_name="$(echo $a)" && 
+						_body="$(eval echo "$b")" && 
+						test "$_name" != "$_body" && 
+						echo "function ${_name}__helper__ () ( ${_body}__helper__ "'"$@"'" ) ${SP:-&&} " && 
+						:; 
+					done | 
+					cat - && 
+				: ) && 
+			
+			: :: && 
+			"$@" && 
 			: ) && 
 		
-		alias_fn () 
-		(
-			cat - | 
-				SPACE_CHR="${IFS}" trim_line | 
-				awk '{sub(/^alias /, ""); print}' | 
-				while IFS== read -r -- a b ;
-				do 
-					_name="$(echo $a)" && 
-					_body="$(eval echo "$b")" && 
-					test "$_name" != "$_body" && 
-					echo "function $_name () ( $_body "'"$@"'" ) ${SP:-&&} " && 
-					:; 
-				done | 
-				cat - && 
-			: ) && 
 		
-		alias_hp () 
-		(
-			cat - | 
-				SPACE_CHR="${IFS}" trim_line | 
-				awk '{sub(/^alias /, ""); print}' | 
-				while IFS== read -r -- a b ;
-				do 
-					_name="$(echo $a)" && 
-					_body="$(eval echo "$b")" && 
-					test "$_name" != "$_body" && 
-					echo "function ${_name}__helper__ () ( ${_body}__helper__ "'"$@"'" ) ${SP:-&&} " && 
-					:; 
-				done | 
-				cat - && 
-			: ) && 
-		
-		#. eval "$(_subs_frame codes_head)" && 
-		#. eval "$(_subs_frame codes_tail)" && 
-		_subs_frame () 
+		#. eval "$(_frame_subs codes_head)" && 
+		#. eval "$(_frame_subs codes_tail)" && 
+		_frame_subs () 
 		(
 			: 亓可别名 去别承体 && 
 			: 亓可助令 略别详体 && 
@@ -112,7 +118,8 @@ Libs ()
 		
 		: :: && 
 		"$@" && 
-		: ) && 
+		:;
+	} && 
 	
 	_cmnd_tools () 
 	(
@@ -218,15 +225,15 @@ Libs ()
 
 alias git-bike=git_bike && git_bike () 
 (
-	Libs : && 
+	Libs Subs : && 
 	
-	eval "$(_subs_frame codes_head)" && 
+	eval "$(_frame_subs codes_head)" && 
 	
 	#. repo_chk shallow . && git fetch --unshallow --all
 	#. (repo_chk shallow . echo | _cmnd_tools _std_exec once) && git fetch --unshallow --all
 	alias repo-chk=repo_chk && repo_chk () 
 	(
-		eval "$(_subs_frame codes_head)" && 
+		eval "$(_frame_subs codes_head)" && 
 		
 		alias gitdir=gitdir && gitdir () 
 		(
@@ -262,7 +269,7 @@ alias git-bike=git_bike && git_bike ()
 		
 		: :: && 
 		
-		eval "$(_subs_frame codes_tail)" && 
+		eval "$(_frame_subs codes_tail)" && 
 		
 		: :: && 
 		"$@" && 
@@ -340,7 +347,7 @@ alias git-bike=git_bike && git_bike ()
 		: "- path of worktree dir from branch like 'name.comments-src/tree/<branch-name>'" && 
 		: "- path of worktree dir from tag like 'name.comments-src/tags/<tag-name>'" && 
 		
-		eval "$(_subs_frame codes_head)" && 
+		eval "$(_frame_subs codes_head)" && 
 		
 		#. git-bike bare-play up
 		#. git-bike bare-play up origin
@@ -501,7 +508,7 @@ alias git-bike=git_bike && git_bike ()
 		
 		: :: && 
 		
-		eval "$(_subs_frame codes_tail)" && 
+		eval "$(_frame_subs codes_tail)" && 
 		
 		: :: && 
 		"$@" && 
@@ -671,7 +678,7 @@ alias git-bike=git_bike && git_bike ()
 	
 	: :: && 
 	
-	eval "$(_subs_frame codes_tail)" && 
+	eval "$(_frame_subs codes_tail)" && 
 	
 	: :: && 
 	
