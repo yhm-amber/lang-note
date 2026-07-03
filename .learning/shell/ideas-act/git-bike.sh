@@ -3,6 +3,13 @@
 
 Libs () 
 {
+	subs () 
+	(
+		langtools () ( _lang_tool "$@" && : ) && 
+		frames () ( PKG_LANG='subs langtools' _frame_subs "$@" && : ) && 
+		: :: && 
+		Subs "$@" && 
+		: ) && 
 	Subs () 
 	{
 		_lang_tool () 
@@ -89,6 +96,8 @@ Libs ()
 		#. eval "$(_frame_subs codes_tail)" && 
 		_frame_subs () 
 		(
+			PKG_LANG="${PKG_LANG:-Subs _lang_tool}" && 
+			
 			: 亓可别名 去别承体 && 
 			: 亓可助令 略别详体 && 
 			
@@ -101,13 +110,13 @@ Libs ()
 			codes_tail () 
 			(
 				echo '
-					alias sub-help=aliases && aliases () ( echo "$__aliases__" | _lang_tool "${@:-help_alias}" && : ) && 
+					alias sub-help=aliases && aliases () ( echo "$__aliases__" | '"${PKG_LANG}"' "${@:-help_alias}" && : ) && 
 					local __aliases_ende__="$(alias)" && 
 					local __aliases__="$(echo "$__aliases_ende__" | _set_tools diff "$__aliases_home__")" && 
 					eval "
-						{ $(aliases cat | SP='"';'"' _lang_tool alias_un) :; } && 
-						$(aliases cat | SP='"'&&'"' _lang_tool alias_fn)
-						$(aliases cat | SP='"'&&'"' _lang_tool alias_hp)
+						{ $(aliases cat | SP='"';'"' '"${PKG_LANG}"' alias_un) :; } && 
+						$(aliases cat | SP='"'&&'"' '"${PKG_LANG}"' alias_fn)
+						$(aliases cat | SP='"'&&'"' '"${PKG_LANG}"' alias_hp)
 						: " && 
 					help () ( sub-help help_alias "$@" ) && 
 					: ' && 
@@ -225,15 +234,16 @@ Libs ()
 
 alias git-bike=git_bike && git_bike () 
 (
-	Libs Subs : && 
+	# Libs Subs : && 
+	Libs : && 
 	
-	eval "$(_frame_subs codes_head)" && 
+	eval "$(subs frames codes_head)" && 
 	
 	#. repo_chk shallow . && git fetch --unshallow --all
 	#. (repo_chk shallow . echo | _cmnd_tools _std_exec once) && git fetch --unshallow --all
 	alias repo-chk=repo_chk && repo_chk () 
 	(
-		eval "$(_frame_subs codes_head)" && 
+		eval "$(subs frames codes_head)" && 
 		
 		alias gitdir=gitdir && gitdir () 
 		(
@@ -269,7 +279,7 @@ alias git-bike=git_bike && git_bike ()
 		
 		: :: && 
 		
-		eval "$(_frame_subs codes_tail)" && 
+		eval "$(subs frames codes_tail)" && 
 		
 		: :: && 
 		"$@" && 
@@ -347,7 +357,7 @@ alias git-bike=git_bike && git_bike ()
 		: "- path of worktree dir from branch like 'name.comments-src/tree/<branch-name>'" && 
 		: "- path of worktree dir from tag like 'name.comments-src/tags/<tag-name>'" && 
 		
-		eval "$(_frame_subs codes_head)" && 
+		eval "$(subs frames codes_head)" && 
 		
 		#. git-bike bare-play up
 		#. git-bike bare-play up origin
@@ -508,7 +518,7 @@ alias git-bike=git_bike && git_bike ()
 		
 		: :: && 
 		
-		eval "$(_frame_subs codes_tail)" && 
+		eval "$(subs frames codes_tail)" && 
 		
 		: :: && 
 		"$@" && 
@@ -678,7 +688,7 @@ alias git-bike=git_bike && git_bike ()
 	
 	: :: && 
 	
-	eval "$(_frame_subs codes_tail)" && 
+	eval "$(subs frames codes_tail)" && 
 	
 	: :: && 
 	
