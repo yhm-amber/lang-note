@@ -241,6 +241,12 @@ alias git-bike=git_bike && git_bike ()
 	
 	#. repo_chk shallow . && git fetch --unshallow --all
 	#. (repo_chk shallow . echo | _cmnd_tools _std_exec once) && git fetch --unshallow --all
+	repo_chk__helper__ () 
+	(
+		echo && 
+		echo '(TODO...)' && 
+		echo && 
+		: ) && 
 	alias repo-chk=repo_chk && repo_chk () 
 	(
 		eval "$(subs frames codes_head)" && 
@@ -285,93 +291,119 @@ alias git-bike=git_bike && git_bike ()
 		"$@" && 
 		: ) && 
 	
-	#: OPTS_CLONE='<git-clone-options>' git-bike multi-clone <working-dir> <remote-link> [<remote-link> ...]
-	multi_clone__helper__ () 
-	( 
+	#: ...
+	clone_play__helper__ () 
+	(
 		echo && 
 		echo '(TODO...)' && 
 		echo && 
 		: ) && 
-	alias mc=multi_clone multi-clone=multi_clone && multi_clone () 
+	alias cp=clone_play clone-play=clone_play && clone_play () 
 	(
-		local working_dir="$1" && shift && 
-		_param_tools params_out "$@" | 
-			WORKING_PATH="${working_dir}" OPTS_CLONE="${OPTS_CLONE}" _multi_clone | 
-			cat - && 
-		: ) && 
-	_multi_clone () 
-	(
-		cd "${WORKING_PATH:-.}" && 
-		while read -r -- remote_link ;
-		do 
-			echo :: executing: '`'auto-clone ${OPTS_CLONE} -- "'${remote_link}'"'`' in "'${PWD}'" :: && 
-			auto_clone ${OPTS_CLONE} -- "${remote_link}" && 
-			:; 
-		done && 
-		: ) && 
-	
-	#: git-bike auto-clone [<git-clone-options>] -- <remote-link> [<aim-path>]
-	auto_clone__helper__ () 
-	(
-		echo && 
-		echo 'Usage:' && 
-		echo $'\t' 'git-bike auto-clone [<git-clone-options>] -- <remote-link> [<aim-path>]' && 
-		echo && 
-		echo 'This tool is for when you having a bad internet to your' && 
-		echo ' remote repo. It will making a depth=1 shallow clone at the' && 
-		echo ' first and then unshallow it, also at the end update it once' && 
-		echo ' to make your local repo sync the newest records as far as it could.' && 
-		echo ' All of the downloading works can auto-retry while it failed.' && 
-		echo && 
-		echo 'Demo:' && 
-		echo '- git-bike auto-clone https://github.com/LibreService/my_rime.git --mirror' && 
-		echo '- git-bike auto-clone https://github.com/gurecn/YuyanIme.git --mirror' && 
-		echo '- git-bike auto-clone --mirror -- https://github.com/gurecn/YuyanIme.git yuyan.git' && 
-		echo '- git-bike auto-clone --mirror -- https://github.com/crynta/terax-ai.git' && 
-		echo '- git-bike auto-clone -- https://github.com/gopasspw/git-credential-gopass.git ~/gopass-src/git-credential-gopass' && 
-		echo && 
-		echo 'See help:' && 
-		echo '- git-bike help auto-clone' && 
-		echo '- git-bike help ac' && 
-		echo '- git-bike help c' && 
-		echo && 
-		: ) && 
-	alias ac=auto_clone c=auto_clone auto-clone=auto_clone && auto_clone () 
-	(
-		echo :: git cloning in shallow '(depth 1)' mode :: && 
-		while ! ( git clone --progress --depth 1 --no-single-branch "$@" 2>&1 && : ) ;
-		do 1>&2 echo tried: "$((++try_clone))" for clone && :; done | 
-			tee >(cat 1>&2) | 
-			#::	will only out 3 lines (which has "'")
-			#;;	 after keep waiting until EOF
-			ELLIPSIS_SHOW=x LINES_MAX=3 _ctrl_tools _wait_outs "'" | 
-			#::	Just a head -n 1 alternative
-			#;;	 but with no SIGPIPE to avoid pipe-broken.
-			ELLIPSIS_SHOW=x LINES_MAX=1 _ctrl_tools _wait_outs 'Cloning into' | 
-			_param_tools flatten_line params_out | 
-			tail -n 1 | 
-			cut -d "'" -f 2 | 
-			while read -r -- out_dir ;
+		eval "$(subs frames codes_head)" && 
+		
+		#: OPTS_CLONE='<git-clone-options>' git-bike cp multi-clone <working-dir> <remote-link> [<remote-link> ...]
+		multi_clone__helper__ () 
+		(
+			echo && 
+			echo '(TODO...)' && 
+			echo && 
+			: ) && 
+		alias mc=multi_clone multi-clone=multi_clone && multi_clone () 
+		(
+			local working_dir="$1" && shift && 
+			_param_tools params_out "$@" | 
+				WORKING_PATH="${working_dir}" OPTS_CLONE="${OPTS_CLONE}" _multi_clone | 
+				cat - && 
+			: ) && 
+		_multi_clone () 
+		(
+			cd "${WORKING_PATH:-.}" && 
+			while read -r -- remote_link ;
 			do 
-			(
-				echo :: change workdir to "\`${out_dir}\`" from "\`$PWD\`" to unshallow fetch :: && 
-				cd "${out_dir}" && 
+				echo :: executing: '`'auto-clone ${OPTS_CLONE} -- "'${remote_link}'"'`' in "'${PWD}'" :: && 
+				auto_clone ${OPTS_CLONE} -- "${remote_link}" && 
+				:; 
+			done && 
+			: ) && 
+		
+		#: git-bike cp auto-clone [<git-clone-options>] -- <remote-link> [<aim-path>]
+		auto_clone__helper__ () 
+		(
+			echo && 
+			echo 'Usage:' && 
+			echo $'\t' 'git-bike cp auto-clone [<git-clone-options>] -- <remote-link> [<aim-path>]' && 
+			echo && 
+			echo 'This tool is for when you having a bad internet to your' && 
+			echo ' remote repo. It will making a depth=1 shallow clone at the' && 
+			echo ' first and then unshallow it, also at the end update it once' && 
+			echo ' to make your local repo sync the newest records as far as it could.' && 
+			echo ' All of the downloading works can auto-retry while it failed.' && 
+			echo && 
+			echo 'Demo:' && 
+			echo '- git-bike cp auto-clone https://github.com/LibreService/my_rime.git --mirror' && 
+			echo '- git-bike cp auto-clone https://github.com/gurecn/YuyanIme.git --mirror' && 
+			echo '- git-bike cp auto-clone --mirror -- https://github.com/gurecn/YuyanIme.git yuyan.git' && 
+			echo '- git-bike cp auto-clone --mirror -- https://github.com/crynta/terax-ai.git' && 
+			echo '- git-bike cp auto-clone -- https://github.com/gopasspw/git-credential-gopass.git ~/gopass-src/git-credential-gopass' && 
+			echo && 
+			echo 'See help:' && 
+			echo '- git-bike help auto-clone' && 
+			echo '- git-bike help ac' && 
+			echo '- git-bike help c' && 
+			echo && 
+			: ) && 
+		alias ac=auto_clone c=auto_clone auto-clone=auto_clone && auto_clone () 
+		(
+			echo :: git cloning in shallow '(depth 1)' mode :: && 
+			while ! ( git clone --progress --depth 1 --no-single-branch "$@" 2>&1 && : ) ;
+			do 1>&2 echo tried: "$((++try_clone))" for clone && :; done | 
+				tee >(cat 1>&2) | 
+				#::	will only out 3 lines (which has "'")
+				#;;	 after keep waiting until EOF
+				ELLIPSIS_SHOW=x LINES_MAX=3 _ctrl_tools _wait_outs "'" | 
+				#::	Just a head -n 1 alternative
+				#;;	 but with no SIGPIPE to avoid pipe-broken.
+				ELLIPSIS_SHOW=x LINES_MAX=1 _ctrl_tools _wait_outs 'Cloning into' | 
+				_param_tools flatten_line params_out | 
+				tail -n 1 | 
+				cut -d "'" -f 2 | 
+				while read -r -- out_dir ;
+				do 
 				(
-					echo :: unshallowing in "\`$PWD\`" :: && 
-					repo_chk shallow . && 
-					while ! ( git fetch --unshallow --all && : ) ;
-					do 1>&2 echo tried: "$((++try_unshallow))" for unshallow && :; done && 
+					echo :: change workdir to "\`${out_dir}\`" from "\`$PWD\`" to unshallow fetch :: && 
+					cd "${out_dir}" && 
+					(
+						echo :: unshallowing in "\`$PWD\`" :: && 
+						repo_chk shallow . && 
+						while ! ( git fetch --unshallow --all && : ) ;
+						do 1>&2 echo tried: "$((++try_unshallow))" for unshallow && :; done && 
+						: ) && 
+					(
+						echo :: updating in "\`$PWD\`" :: && 
+						while ! ( git remote update && : ) ;
+						do 1>&2 echo tried: "$((++try_update))" for remote update && :; done && 
+						: ) && 
+					echo :: done for repo "\`${out_dir}\`". :: && 
 					: ) && 
-				(
-					echo :: updating in "\`$PWD\`" :: && 
-					while ! ( git remote update && : ) ;
-					do 1>&2 echo tried: "$((++try_update))" for remote update && :; done && 
-					: ) && 
-				echo :: done for repo "\`${out_dir}\`". :: && 
-				: ) && 
-			break ; done
+				break ; done
+			: ) && 
+		
+		: :: && 
+		
+		eval "$(subs frames codes_tail)" && 
+		
+		: :: && 
+		"$@" && 
 		: ) && 
 	
+	#: ...
+	bare_play__helper__ () 
+	(
+		echo && 
+		echo '(TODO...)' && 
+		echo && 
+		: ) && 
 	alias bp=bare_play bare-play=bare_play && bare_play () 
 	(
 		repo_chk bare . || return 4 ;
@@ -546,6 +578,27 @@ alias git-bike=git_bike && git_bike ()
 		: :: && 
 		"$@" && 
 		: ) && 
+	
+	#: ...
+	sync_play__helper__ () 
+	(
+		echo && 
+		echo '(TODO...)' && 
+		echo && 
+		: ) && 
+	alias sp=sync_play sync-play=sync_play && sync_play () 
+	(
+		eval "$(subs frames codes_head)" && 
+		
+		# TODO
+		
+		: :: && 
+		
+		eval "$(subs frames codes_tail)" && 
+		
+		: :: && 
+		"$@" && 
+		: )
 	
 	#: git_bike all_sync [<workspace>] [<workspace>] ...
 	#::	workspace: means the prefix in full name of a repo
@@ -791,7 +844,7 @@ git_bike "$@" && :
 #|	:: updating in `/mnt/e/rimeweb.pwa-src/my_rime.git` ::
 #|	:: done for repo `my_rime.git`. ::
 
-#|	$ git-bike auto-clone https://github.com/gurecn/YuyanIme.git --mirror
+#|	$ git-bike cp auto-clone https://github.com/gurecn/YuyanIme.git --mirror
 #|	:: git cloning in shallow (depth 1) mode ::
 #|	Cloning into bare repository 'YuyanIme.git'...
 #|	remote: Enumerating objects: 295, done.
@@ -853,23 +906,24 @@ git_bike "$@" && :
 #|	upper: checkouted ../tree/master as master
 
 
-#|	$ git-bike help ac
+#|	$ git-bike help cp ac
 #|	sub command(s) here:
-#|	- ac: means 'auto_clone'.
 #|	- all-pull: means 'all_pull'.
 #|	- all-push: means 'all_push'.
 #|	- all-sync: means 'all_sync'.
-#|	- auto-clone: means 'auto_clone'.
 #|	- bare-play: means 'bare_play'.
 #|	- bp: means 'bare_play'.
-#|	- c: means 'auto_clone'.
+#|	- clone-play: means 'clone_play'.
+#|	- cp: means 'clone_play'.
 #|	- repo-chk: means 'repo_chk'.
+#|	- sp: means 'sync_play'.
 #|	- sub-help: means 'aliases'.
+#|	- sync-play: means 'sync_play'.
 #|	
-#|	sub command: ac
+#|	sub command: cp ac
 #|	
 #|	Usage:
-#|		 git-bike auto-clone [<git-clone-options>] -- <remote-link> [<aim-path>]
+#|		 git-bike cp auto-clone [<git-clone-options>] -- <remote-link> [<aim-path>]
 #|	
 #|	This tool is for when you having a bad internet to your
 #|	 remote repo. It will making a depth=1 shallow clone at the
@@ -878,11 +932,11 @@ git_bike "$@" && :
 #|	 All of the downloading works can auto-retry while it failed.
 #|	
 #|	Demo:
-#|	- git-bike auto-clone https://github.com/LibreService/my_rime.git --mirror
-#|	- git-bike auto-clone https://github.com/gurecn/YuyanIme.git --mirror
-#|	- git-bike auto-clone --mirror -- https://github.com/gurecn/YuyanIme.git yuyan.git
-#|	- git-bike auto-clone --mirror -- https://github.com/crynta/terax-ai.git
-#|	- git-bike auto-clone -- https://github.com/gopasspw/git-credential-gopass.git ~/gopass-src/git-credential-gopass
+#|	- git-bike cp auto-clone https://github.com/LibreService/my_rime.git --mirror
+#|	- git-bike cp auto-clone https://github.com/gurecn/YuyanIme.git --mirror
+#|	- git-bike cp auto-clone --mirror -- https://github.com/gurecn/YuyanIme.git yuyan.git
+#|	- git-bike cp auto-clone --mirror -- https://github.com/crynta/terax-ai.git
+#|	- git-bike cp auto-clone -- https://github.com/gopasspw/git-credential-gopass.git ~/gopass-src/git-credential-gopass
 #|	
 #|	See help:
 #|	- git-bike help auto-clone
@@ -892,16 +946,17 @@ git_bike "$@" && :
 
 #|	$ git-bike help bare-play up
 #|	sub command(s) here:
-#|	- ac: means 'auto_clone'.
 #|	- all-pull: means 'all_pull'.
 #|	- all-push: means 'all_push'.
 #|	- all-sync: means 'all_sync'.
-#|	- auto-clone: means 'auto_clone'.
 #|	- bare-play: means 'bare_play'.
 #|	- bp: means 'bare_play'.
-#|	- c: means 'auto_clone'.
+#|	- clone-play: means 'clone_play'.
+#|	- cp: means 'clone_play'.
 #|	- repo-chk: means 'repo_chk'.
+#|	- sp: means 'sync_play'.
 #|	- sub-help: means 'aliases'.
+#|	- sync-play: means 'sync_play'.
 #|	
 #|	sub command: bare-play up
 #|	repochk: `/mnt/e/gopass.passwd-srcs/cli/gopass.git` is bare repository ~ true
@@ -929,16 +984,17 @@ git_bike "$@" && :
 
 #|	$ git-bike help bp up
 #|	sub command(s) here:
-#|	- ac: means 'auto_clone'.
 #|	- all-pull: means 'all_pull'.
 #|	- all-push: means 'all_push'.
 #|	- all-sync: means 'all_sync'.
-#|	- auto-clone: means 'auto_clone'.
 #|	- bare-play: means 'bare_play'.
 #|	- bp: means 'bare_play'.
-#|	- c: means 'auto_clone'.
+#|	- clone-play: means 'clone_play'.
+#|	- cp: means 'clone_play'.
 #|	- repo-chk: means 'repo_chk'.
+#|	- sp: means 'sync_play'.
 #|	- sub-help: means 'aliases'.
+#|	- sync-play: means 'sync_play'.
 #|	
 #|	sub command: bp up
 #|	repochk: `/mnt/e/gopass.passwd-srcs/cli/gopass.git` is bare repository ~ true
@@ -966,16 +1022,17 @@ git_bike "$@" && :
 
 #|	$ git-bike help bp wt
 #|	sub command(s) here:
-#|	- ac: means 'auto_clone'.
 #|	- all-pull: means 'all_pull'.
 #|	- all-push: means 'all_push'.
 #|	- all-sync: means 'all_sync'.
-#|	- auto-clone: means 'auto_clone'.
 #|	- bare-play: means 'bare_play'.
 #|	- bp: means 'bare_play'.
-#|	- c: means 'auto_clone'.
+#|	- clone-play: means 'clone_play'.
+#|	- cp: means 'clone_play'.
 #|	- repo-chk: means 'repo_chk'.
+#|	- sp: means 'sync_play'.
 #|	- sub-help: means 'aliases'.
+#|	- sync-play: means 'sync_play'.
 #|	
 #|	sub command: bp wt
 #|	repochk: `/mnt/e/gopass.passwd-srcs/cli/gopass.git` is bare repository ~ true
