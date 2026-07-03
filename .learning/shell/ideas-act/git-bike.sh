@@ -756,7 +756,7 @@ alias git-bike=git_bike && git_bike ()
 		
 		: :: && 
 		"$@" && 
-		: )
+		: ) && 
 	
 	
 	: :: && 
