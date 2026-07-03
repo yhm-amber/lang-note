@@ -590,7 +590,165 @@ alias git-bike=git_bike && git_bike ()
 	(
 		eval "$(subs frames codes_head)" && 
 		
-		# TODO
+		#: git_bike all_sync [<workspace>] [<workspace>] ...
+		#::	workspace: means the prefix in full name of a repo
+		#..	 like it in so many hubs -- <workspace>/<reponame>. In generally
+		#;;	 a 'workspace' can be the id-name of a(n) user or org.
+		alias all-sync=all_sync && all_sync () 
+		(
+			_param_tools params_out "${@:-.}" | _all_sync && 
+			: ) && 
+		
+		_all_sync () 
+		(
+			while read -r -- workspace ;
+			do 
+				ls -1 -d -- "${workspace}"/* | while read -r -- gitpath ;
+				do all_pull "${gitpath}" && all_push "${gitpath}" && :; done && 
+				:; 
+			done && 
+			: ) && 
+		
+		
+		#: git_bike all_push [<git-dir>] [<git-dir>] ...
+		alias all-push=all_push && all_push () 
+		(
+			echo :: pushing origin to all remotes in: "${@:-.}" :: && 
+			_param_tools params_out "${@:-.}" | _all_push ${GITPUSH_FLAGS:--v} && 
+			: ) && 
+		
+		_all_push () 
+		(
+			: Push origin to all remotes.
+			while read -r -- gitdir ;
+			do 
+				repo_chk gitdir "${gitdir}" && 
+				(
+					cd "${gitdir}" && 
+					echo :: push all remotes in "'${gitdir}'" :: && 
+					echo before: pull from remote for "'${gitdir}'" && 
+					local checked_bare="$(repo_chk bare . echo)" && 
+					while ! 
+					if ! "$(checked_bare)" ;
+						then git pull ;
+						else git remote update ;
+					fi ;
+					do 
+						echo before: tried: "$((++try_pull_before))" for '`'"$(if ! "$(checked_bare)" ;
+							then echo "git pull" ;
+							else echo "git remote update" ;
+						fi)"'`' in "'${gitdir}'" && 
+						:; 
+					done && 
+					echo before: pulled in "'${gitdir}'" && 
+					git remote | while read -r -- git_remote ;
+					do 
+						echo working: push to remote "'${git_remote}'" for "'${gitdir}'" && 
+						local _rests_try_push="${MAXTRY_PUSH:-${PUSH_MAXTRY:-0}}" && 
+						while ! 
+						if ! "$(checked_bare)" && : 其令选行 ;
+							then git push "$@" -- "${git_remote}" ;
+							else git push "$@" -- "${git_remote}" 'refs/heads/*:refs/heads/*' ;
+						fi ;
+						do 
+							: 此下 乃复试探 有询 && 
+							: 其尝回显 && 
+							echo tried: "$((++try_push))" for '`'"$(if ! "$(checked_bare)" && : 其显选出 ;
+								then echo "git push $* -- ${git_remote}" ;
+								else echo "git push $* -- ${git_remote} 'refs/heads/*:refs/heads/*'" ;
+							fi)"'`' in "'${gitdir}'" && 
+							: 其尝适询 && 
+							if _cmnd_tools _booled_returns "$((_rests_try_push == 0))" ; 
+							then 
+								0<&9 read -p ':: rest: How many times you want to retry then ? :: ' -r -- _rests_try_push && 
+								echo :: rest: you inputed "'$_rests_try_push'" as "$((_rests_try_push--))". && 
+								:;
+							else 
+								echo :: rest: rested times of push trying: "$((_rests_try_push))". && 
+								if _cmnd_tools _booled_returns "$((_rests_try_push < 0))" ; 
+								then echo :: rest: Break.; break; else echo :: rest: Then: "$((--_rests_try_push))"; fi && 
+								:;
+							fi && 
+							:; 
+						done && 
+						:; 
+					done && 
+					: ) && 
+				:; 
+			done && 
+			echo && 
+			: 使其询必曰问之 && 
+			: ) 9</dev/tty && 
+		
+		
+		#: git_bike all_pull [<git-dir>] [<git-dir>] ...
+		alias all-pull=all_pull && all_pull () 
+		(
+			echo :: pulling from origin and all remotes in: "${@:-.}" :: && 
+			_param_tools params_out "${@:-.}" | _all_pull ${GITPULL_FLAGS:--v} && 
+			: ) && 
+		
+		_all_pull () 
+		(
+			: Pull from origin and all remotes.
+			while read -r -- gitdir ;
+			do 
+				repo_chk gitdir "${gitdir}" && 
+				(
+					cd "${gitdir}" && 
+					echo :: pull all remotes in "'${gitdir}'" :: && 
+					git remote | while read -r -- git_remote ;
+					do 
+						echo working: pull from remote "'${git_remote}'" for "'${gitdir}'" && 
+						local _rests_try_pull="${MAXTRY_PULL:-${PULL_MAXTRY:-0}}" && 
+						while ! 
+						if ! "$(checked_bare)" && : 其令选行 ;
+							then git pull  "$@" -- "${git_remote}" ;
+							else git fetch "$@" -- "${git_remote}" 'refs/heads/*:refs/heads/*' ;
+						fi ;
+						do 
+							: 此下 乃复试探 有询 && 
+							: 其尝回显 && 
+							echo tried: "$((++try_pull))" for '`'"$(if ! "$(checked_bare)" && : 其显选出 ;
+								then echo "git pull  $* -- ${git_remote}" ;
+								else echo "git fetch $* -- ${git_remote} 'refs/heads/*:refs/heads/*'" ;
+							fi)"'`' in "'${gitdir}'" && 
+							: 其尝适询 && 
+							if _cmnd_tools _booled_returns "$((_rests_try_pull == 0))" ; 
+							then 
+								0<&9 read -p ':: rest: How many times you want to retry then ? :: ' -r -- _rests_try_pull && 
+								echo :: rest: you inputed "'$_rests_try_pull'" as "$((_rests_try_pull--))". && 
+								:;
+							else 
+								echo :: rest: rested times of pull trying: "$((_rests_try_pull))". && 
+								if _cmnd_tools _booled_returns "$((_rests_try_pull < 0))" ; 
+								then echo :: rest: Break.; break; else echo :: rest: Then: "$((--_rests_try_pull))"; fi && 
+								:;
+							fi && 
+							:; 
+						done && 
+						:; 
+					done && 
+					echo done: pull from remotes for "'${gitdir}'" && 
+					while ! 
+					if ! "$(checked_bare)" ;
+						then git pull ;
+						else git remote update ;
+					fi ;
+					do 
+						echo done: tried: "$((++try_pull_done))" for '`'"$(if ! "$(checked_bare)" ;
+							then echo "git pull" ;
+							else echo "git remote update" ;
+						fi)"'`' in "'${gitdir}'" && 
+						:; 
+					done && 
+					echo done: pulled in "'${gitdir}'" && 
+					: ) && 
+				:; 
+			done && 
+			echo && 
+			: 使其询必曰问之 && 
+			: ) 9</dev/tty && 
 		
 		: :: && 
 		
@@ -599,167 +757,6 @@ alias git-bike=git_bike && git_bike ()
 		: :: && 
 		"$@" && 
 		: )
-	
-	#: git_bike all_sync [<workspace>] [<workspace>] ...
-	#::	workspace: means the prefix in full name of a repo
-	#..	 like it in so many hubs -- <workspace>/<reponame>. In generally
-	#;;	 a 'workspace' can be the id-name of a(n) user or org.
-	alias all-sync=all_sync && all_sync () 
-	(
-		_param_tools params_out "${@:-.}" | _all_sync && 
-		: ) && 
-	
-	_all_sync () 
-	(
-		while read -r -- workspace ;
-		do 
-			ls -1 -d -- "${workspace}"/* | while read -r -- gitpath ;
-			do all_pull "${gitpath}" && all_push "${gitpath}" && :; done && 
-			:; 
-		done && 
-		: ) && 
-	
-	
-	#: git_bike all_push [<git-dir>] [<git-dir>] ...
-	alias all-push=all_push && all_push () 
-	(
-		echo :: pushing origin to all remotes in: "${@:-.}" :: && 
-		_param_tools params_out "${@:-.}" | _all_push ${GITPUSH_FLAGS:--v} && 
-		: ) && 
-	
-	_all_push () 
-	(
-		: Push origin to all remotes.
-		while read -r -- gitdir ;
-		do 
-			repo_chk gitdir "${gitdir}" && 
-			(
-				cd "${gitdir}" && 
-				echo :: push all remotes in "'${gitdir}'" :: && 
-				echo before: pull from remote for "'${gitdir}'" && 
-				local checked_bare="$(repo_chk bare . echo)" && 
-				while ! 
-				if ! "$(checked_bare)" ;
-					then git pull ;
-					else git remote update ;
-				fi ;
-				do 
-					echo before: tried: "$((++try_pull_before))" for '`'"$(if ! "$(checked_bare)" ;
-						then echo "git pull" ;
-						else echo "git remote update" ;
-					fi)"'`' in "'${gitdir}'" && 
-					:; 
-				done && 
-				echo before: pulled in "'${gitdir}'" && 
-				git remote | while read -r -- git_remote ;
-				do 
-					echo working: push to remote "'${git_remote}'" for "'${gitdir}'" && 
-					local _rests_try_push="${MAXTRY_PUSH:-${PUSH_MAXTRY:-0}}" && 
-					while ! 
-					if ! "$(checked_bare)" && : 其令选行 ;
-						then git push "$@" -- "${git_remote}" ;
-						else git push "$@" -- "${git_remote}" 'refs/heads/*:refs/heads/*' ;
-					fi ;
-					do 
-						: 此下 乃复试探 有询 && 
-						: 其尝回显 && 
-						echo tried: "$((++try_push))" for '`'"$(if ! "$(checked_bare)" && : 其显选出 ;
-							then echo "git push $* -- ${git_remote}" ;
-							else echo "git push $* -- ${git_remote} 'refs/heads/*:refs/heads/*'" ;
-						fi)"'`' in "'${gitdir}'" && 
-						: 其尝适询 && 
-						if _cmnd_tools _booled_returns "$((_rests_try_push == 0))" ; 
-						then 
-							0<&9 read -p ':: rest: How many times you want to retry then ? :: ' -r -- _rests_try_push && 
-							echo :: rest: you inputed "'$_rests_try_push'" as "$((_rests_try_push--))". && 
-							:;
-						else 
-							echo :: rest: rested times of push trying: "$((_rests_try_push))". && 
-							if _cmnd_tools _booled_returns "$((_rests_try_push < 0))" ; 
-							then echo :: rest: Break.; break; else echo :: rest: Then: "$((--_rests_try_push))"; fi && 
-							:;
-						fi && 
-						:; 
-					done && 
-					:; 
-				done && 
-				: ) && 
-			:; 
-		done && 
-		echo && 
-		: 使其询必曰问之 && 
-		: ) 9</dev/tty && 
-	
-	
-	#: git_bike all_pull [<git-dir>] [<git-dir>] ...
-	alias all-pull=all_pull && all_pull () 
-	(
-		echo :: pulling from origin and all remotes in: "${@:-.}" :: && 
-		_param_tools params_out "${@:-.}" | _all_pull ${GITPULL_FLAGS:--v} && 
-		: ) && 
-	
-	_all_pull () 
-	(
-		: Pull from origin and all remotes.
-		while read -r -- gitdir ;
-		do 
-			repo_chk gitdir "${gitdir}" && 
-			(
-				cd "${gitdir}" && 
-				echo :: pull all remotes in "'${gitdir}'" :: && 
-				git remote | while read -r -- git_remote ;
-				do 
-					echo working: pull from remote "'${git_remote}'" for "'${gitdir}'" && 
-					local _rests_try_pull="${MAXTRY_PULL:-${PULL_MAXTRY:-0}}" && 
-					while ! 
-					if ! "$(checked_bare)" && : 其令选行 ;
-						then git pull  "$@" -- "${git_remote}" ;
-						else git fetch "$@" -- "${git_remote}" 'refs/heads/*:refs/heads/*' ;
-					fi ;
-					do 
-						: 此下 乃复试探 有询 && 
-						: 其尝回显 && 
-						echo tried: "$((++try_pull))" for '`'"$(if ! "$(checked_bare)" && : 其显选出 ;
-							then echo "git pull  $* -- ${git_remote}" ;
-							else echo "git fetch $* -- ${git_remote} 'refs/heads/*:refs/heads/*'" ;
-						fi)"'`' in "'${gitdir}'" && 
-						: 其尝适询 && 
-						if _cmnd_tools _booled_returns "$((_rests_try_pull == 0))" ; 
-						then 
-							0<&9 read -p ':: rest: How many times you want to retry then ? :: ' -r -- _rests_try_pull && 
-							echo :: rest: you inputed "'$_rests_try_pull'" as "$((_rests_try_pull--))". && 
-							:;
-						else 
-							echo :: rest: rested times of pull trying: "$((_rests_try_pull))". && 
-							if _cmnd_tools _booled_returns "$((_rests_try_pull < 0))" ; 
-							then echo :: rest: Break.; break; else echo :: rest: Then: "$((--_rests_try_pull))"; fi && 
-							:;
-						fi && 
-						:; 
-					done && 
-					:; 
-				done && 
-				echo done: pull from remotes for "'${gitdir}'" && 
-				while ! 
-				if ! "$(checked_bare)" ;
-					then git pull ;
-					else git remote update ;
-				fi ;
-				do 
-					echo done: tried: "$((++try_pull_done))" for '`'"$(if ! "$(checked_bare)" ;
-						then echo "git pull" ;
-						else echo "git remote update" ;
-					fi)"'`' in "'${gitdir}'" && 
-					:; 
-				done && 
-				echo done: pulled in "'${gitdir}'" && 
-				: ) && 
-			:; 
-		done && 
-		echo && 
-		: 使其询必曰问之 && 
-		: ) 9</dev/tty && 
-	
 	
 	
 	: :: && 
