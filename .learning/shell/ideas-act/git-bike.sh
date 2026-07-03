@@ -285,9 +285,32 @@ alias git-bike=git_bike && git_bike ()
 		"$@" && 
 		: ) && 
 	
+	#: OPTS_CLONE='<git-clone-options>' git-bike multi-clone <working-dir> <remote-link> [<remote-link> ...]
+	multi_clone__helper__ () 
+	( 
+		echo && 
+		echo '(TODO...)' && 
+		echo && 
+		: ) && 
+	alias mc=multi_clone multi-clone=multi_clone && multi_clone () 
+	(
+		local working_dir="$1" && shift && 
+		_param_tools params_out "$@" | 
+			WORKING_PATH="${working_dir}" OPTS_CLONE="${OPTS_CLONE}" _multi_clone | 
+			cat - && 
+		: ) && 
+	_multi_clone () 
+	(
+		cd "${WORKING_PATH:-.}" && 
+		while read -r -- remote_link ;
+		do 
+			echo :: executing: '`'auto-clone ${OPTS_CLONE} -- "'${remote_link}'"'`' in "'${PWD}'" :: && 
+			auto_clone ${OPTS_CLONE} -- "${remote_link}" && 
+			:; 
+		done && 
+		: ) && 
 	
-	
-	#: git-bike auto-clone -- <remote-link> [<aim-path>]
+	#: git-bike auto-clone [<git-clone-options>] -- <remote-link> [<aim-path>]
 	auto_clone__helper__ () 
 	(
 		echo && 
