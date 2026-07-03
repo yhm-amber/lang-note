@@ -348,12 +348,12 @@ alias git-bike=git_bike && git_bike ()
 			echo '- git-bike cp auto-clone -- https://github.com/gopasspw/git-credential-gopass.git ~/gopass-src/git-credential-gopass' && 
 			echo && 
 			echo 'See help:' && 
-			echo '- git-bike help auto-clone' && 
-			echo '- git-bike help ac' && 
-			echo '- git-bike help c' && 
+			echo '- git-bike help cp auto-clone' && 
+			echo '- git-bike help cp ac' && 
+			echo '- git-bike cp help ac' && 
 			echo && 
 			: ) && 
-		alias ac=auto_clone c=auto_clone auto-clone=auto_clone && auto_clone () 
+		alias ac=auto_clone auto-clone=auto_clone && auto_clone () 
 		(
 			echo :: git cloning in shallow '(depth 1)' mode :: && 
 			while ! ( git clone --progress --depth 1 --no-single-branch "$@" 2>&1 && : ) ;
@@ -905,9 +905,6 @@ git_bike "$@" && :
 
 #|	$ git-bike help cp ac
 #|	sub command(s) here:
-#|	- all-pull: means 'all_pull'.
-#|	- all-push: means 'all_push'.
-#|	- all-sync: means 'all_sync'.
 #|	- bare-play: means 'bare_play'.
 #|	- bp: means 'bare_play'.
 #|	- clone-play: means 'clone_play'.
@@ -936,16 +933,13 @@ git_bike "$@" && :
 #|	- git-bike cp auto-clone -- https://github.com/gopasspw/git-credential-gopass.git ~/gopass-src/git-credential-gopass
 #|	
 #|	See help:
-#|	- git-bike help auto-clone
-#|	- git-bike help ac
-#|	- git-bike help c
+#|	- git-bike help cp auto-clone
+#|	- git-bike help cp ac
+#|	- git-bike cp help ac
 #|	
 
 #|	$ git-bike help bare-play up
 #|	sub command(s) here:
-#|	- all-pull: means 'all_pull'.
-#|	- all-push: means 'all_push'.
-#|	- all-sync: means 'all_sync'.
 #|	- bare-play: means 'bare_play'.
 #|	- bp: means 'bare_play'.
 #|	- clone-play: means 'clone_play'.
@@ -981,9 +975,6 @@ git_bike "$@" && :
 
 #|	$ git-bike help bp up
 #|	sub command(s) here:
-#|	- all-pull: means 'all_pull'.
-#|	- all-push: means 'all_push'.
-#|	- all-sync: means 'all_sync'.
 #|	- bare-play: means 'bare_play'.
 #|	- bp: means 'bare_play'.
 #|	- clone-play: means 'clone_play'.
@@ -1019,9 +1010,6 @@ git_bike "$@" && :
 
 #|	$ git-bike help bp wt
 #|	sub command(s) here:
-#|	- all-pull: means 'all_pull'.
-#|	- all-push: means 'all_push'.
-#|	- all-sync: means 'all_sync'.
 #|	- bare-play: means 'bare_play'.
 #|	- bp: means 'bare_play'.
 #|	- clone-play: means 'clone_play'.
