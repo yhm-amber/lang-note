@@ -717,16 +717,26 @@ alias git-bike=git_bike && git_bike ()
 								else echo "git push $* -- ${git_remote} 'refs/heads/*:refs/heads/*'" ;
 							fi)"'`' in "'${gitdir}'" && 
 							: 其尝适询 && 
+							__asker_codes () 
+							(
+								echo '
+									0<&9 read -p ":: try-asking: How many times you want to retry then ? :: " -r -- _rests_try_push && 
+									echo :: try-asking: you inputed "'"'"'$_rests_try_push'"'"'" as "$((_rests_try_push--))". && 
+									: ' && 
+								: ) && 
+							__verifier_codes () 
+							(
+								echo '
+									echo :: try-asking: rested times of push trying: "$((_rests_try_push))". && 
+									if _cmnd_tools _booled_returns "$((_rests_try_push < 0))" ; 
+										then echo :: try-asking: Break. ; break ;
+										else echo :: try-asking: Then: "$((--_rests_try_push))" ;
+									fi && 
+									: ' && 
+								: ) && 
 							if _cmnd_tools _booled_returns "$((_rests_try_push == 0))" ; 
-							then 
-								0<&9 read -p ':: rest: How many times you want to retry then ? :: ' -r -- _rests_try_push && 
-								echo :: rest: you inputed "'$_rests_try_push'" as "$((_rests_try_push--))". && 
-								:;
-							else 
-								echo :: rest: rested times of push trying: "$((_rests_try_push))". && 
-								if _cmnd_tools _booled_returns "$((_rests_try_push < 0))" ; 
-								then echo :: rest: Break.; break; else echo :: rest: Then: "$((--_rests_try_push))"; fi && 
-								:;
+								then eval "$(__asker_codes)" ; eval "$(__verifier_codes)" ;
+								else eval "$(__verifier_codes)" ;
 							fi && 
 							:; 
 						done && 
@@ -780,16 +790,26 @@ alias git-bike=git_bike && git_bike ()
 								else echo "git fetch $* -- ${git_remote} 'refs/heads/*:refs/heads/*'" ;
 							fi)"'`' in "'${gitdir}'" && 
 							: 其尝适询 && 
+							__asker_codes ()
+							(
+								echo '
+									0<&9 read -p ":: try-asking: How many times you want to retry then ? :: " -r -- _rests_try_pull && 
+									echo :: try-asking: you inputed "'"'"'$_rests_try_pull'"'"'" as "$((_rests_try_pull--))". && 
+									: ' && 
+								: ) && 
+							__verifier_codes () 
+							(
+								echo '
+									echo :: try-asking: rested times of pull trying: "$((_rests_try_pull))". && 
+									if _cmnd_tools _booled_returns "$((_rests_try_pull < 0))" ; 
+										then echo :: try-asking: Break. ; break ;
+										else echo :: try-asking: Then: "$((--_rests_try_pull))" ;
+									fi && 
+									: ' && 
+								: ) && 
 							if _cmnd_tools _booled_returns "$((_rests_try_pull == 0))" ; 
-							then 
-								0<&9 read -p ':: rest: How many times you want to retry then ? :: ' -r -- _rests_try_pull && 
-								echo :: rest: you inputed "'$_rests_try_pull'" as "$((_rests_try_pull--))". && 
-								:;
-							else 
-								echo :: rest: rested times of pull trying: "$((_rests_try_pull))". && 
-								if _cmnd_tools _booled_returns "$((_rests_try_pull < 0))" ; 
-								then echo :: rest: Break.; break; else echo :: rest: Then: "$((--_rests_try_pull))"; fi && 
-								:;
+								then eval "$(__asker_codes)" ; eval "$(__verifier_codes)" ;
+								else eval "$(__verifier_codes)" ;
 							fi && 
 							:; 
 						done && 
