@@ -279,7 +279,7 @@ alias git-bike=git_bike && git_bike ()
 		(
 			{ cd "${1:-.}" && shift 1 ; } && 
 			git rev-parse --is-inside-git-dir | 
-				tee >( __SHOW_HINTS__ && 1>&2 _cmnd_tools _std_exec once echo repochk: "\`$PWD\`" 'is inside gitdir ~' ) | 
+				tee >( "${__SHOW_HINTS__}" && 1>&2 _cmnd_tools _std_exec once echo repochk: "\`$PWD\`" 'is inside gitdir ~' ) | 
 				_cmnd_tools _std_exec once "$@" && 
 			: ) && 
 		
@@ -287,7 +287,7 @@ alias git-bike=git_bike && git_bike ()
 		(
 			{ cd "${1:-.}" && shift 1 ; } && 
 			git rev-parse --is-inside-work-tree | 
-				tee >( __SHOW_HINTS__ && 1>&2 _cmnd_tools _std_exec once echo repochk: "\`$PWD\`" 'is inside worktree ~' ) | 
+				tee >( "${__SHOW_HINTS__}" && 1>&2 _cmnd_tools _std_exec once echo repochk: "\`$PWD\`" 'is inside worktree ~' ) | 
 				_cmnd_tools _std_exec once "$@" && 
 			: ) && 
 		
@@ -295,7 +295,7 @@ alias git-bike=git_bike && git_bike ()
 		(
 			{ cd "${1:-.}" && shift 1 ; } && 
 			git rev-parse --is-bare-repository | 
-				tee >( __SHOW_HINTS__ && 1>&2 _cmnd_tools _std_exec once echo repochk: "\`$PWD\`" 'is bare repository ~' ) | 
+				tee >( "${__SHOW_HINTS__}" && 1>&2 _cmnd_tools _std_exec once echo repochk: "\`$PWD\`" 'is bare repository ~' ) | 
 				_cmnd_tools _std_exec once "$@" && 
 			: ) && 
 		
@@ -303,7 +303,7 @@ alias git-bike=git_bike && git_bike ()
 		(
 			{ cd "${1:-.}" && shift 1 ; } && 
 			git rev-parse --is-shallow-repository | 
-				tee >( __SHOW_HINTS__ && 1>&2 _cmnd_tools _std_exec once echo repochk: "\`$PWD\`" 'is shallow repository ~' ) | 
+				tee >( "${__SHOW_HINTS__}" && 1>&2 _cmnd_tools _std_exec once echo repochk: "\`$PWD\`" 'is shallow repository ~' ) | 
 				_cmnd_tools _std_exec once "$@" && 
 			: ) && 
 		
