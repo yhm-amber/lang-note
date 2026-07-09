@@ -126,7 +126,8 @@ Libs ()
 			"$@" && 
 			: ) && 
 		
-		#. eval "$(_frame_kwargs as_bool SHOW_HINTS)" && 
+		#. eval "$(_frame_kwargs as_bool SHOW_HINTS y)" && 
+		#. eval "$(_frame_kwargs as_bool IS_BARE '')" && 
 		_frame_kwargs () 
 		(
 			as_bool () 
@@ -269,7 +270,7 @@ alias git-bike=git_bike && git_bike ()
 		echo '(TODO...)' && 
 		echo && 
 		: ) && 
-	alias repo-chk=repo_chk && repo_chk () 
+	alias rc=repo_chk repo-check=repo_chk repo-chk=repo_chk && repo_chk () 
 	(
 		eval "$(subs frames codes_head)" && 
 		
@@ -647,17 +648,20 @@ alias git-bike=git_bike && git_bike ()
 		(
 			while read -r -- gitdir ;
 			do 
-				SHOW_HINTS="${SHOW_MORE_HINTS:-y}" repo_chk gitdir "${gitdir}" && 
+				(
+					SHOW_HINTS="${SHOW_MORE_HINTS:-y}" repo_chk worktree "${gitdir}" || 
+					SHOW_HINTS="${SHOW_MORE_HINTS:-y}" repo_chk gitdir "${gitdir}" && 
+					: ) && 
 				(
 					cd "${gitdir}" && 
 					if test -z "${IS_BARE:-}" ;
 						then local IS_BARE="$(repo_chk bare . echo)" ;
 						else local IS_BARE="${IS_BARE:-}" ;
 					fi && 
-					eval "$(subs kwargs as_bool IS_BARE)" && 
+					eval "$(subs kwargs as_bool IS_BARE '')" && 
 					echo base_upgrade: update from remote for "'${gitdir}'" && 
-					while ! 
-					if ! "${__IS_BARE__}" ;
+					while 
+					! if ! "${__IS_BARE__}" ;
 						then git pull ;
 						else git remote update ;
 					fi ;
@@ -687,7 +691,10 @@ alias git-bike=git_bike && git_bike ()
 			: Push origin to all remotes.
 			while read -r -- gitdir ;
 			do 
-				repo_chk gitdir "${gitdir}" && 
+				(
+					repo_chk worktree "${gitdir}" || 
+					repo_chk gitdir "${gitdir}" && 
+					: ) && 
 				local checked_bare="$(repo_chk bare "${gitdir}" echo)" && 
 				SHOW_MORE_HINTS=no IS_BARE="$checked_bare" base_upgrade "${gitdir}" && 
 				(
@@ -697,8 +704,8 @@ alias git-bike=git_bike && git_bike ()
 					do 
 						echo working: push to remote "'${git_remote}'" for "'${gitdir}'" && 
 						local _rests_try_push="${MAXTRY_PUSH:-${PUSH_MAXTRY:-0}}" && 
-						while ! 
-						if ! "${checked_bare}" && : 其令选行 ;
+						while 
+						! if ! "${checked_bare}" && : 其令选行 ;
 							then git push "$@" --branches -- "${git_remote}" ;
 							else git push "$@" -- "${git_remote}" 'refs/heads/*:refs/heads/*' ;
 						fi ;
@@ -746,7 +753,10 @@ alias git-bike=git_bike && git_bike ()
 			: Pull from origin and all remotes.
 			while read -r -- gitdir ;
 			do 
-				repo_chk gitdir "${gitdir}" && 
+				(
+					repo_chk worktree "${gitdir}" || 
+					repo_chk gitdir "${gitdir}" && 
+					: ) && 
 				local checked_bare="$(repo_chk bare "${gitdir}" echo)" && 
 				SHOW_MORE_HINTS=no IS_BARE="$checked_bare" base_upgrade "${gitdir}" && 
 				(
@@ -757,8 +767,8 @@ alias git-bike=git_bike && git_bike ()
 						echo working: pull from remote "'${git_remote}'" for "'${gitdir}'" && 
 						local _rests_try_pull="${MAXTRY_PULL:-${PULL_MAXTRY:-0}}" && 
 						local _symbref_head="$(git symbolic-ref -- HEAD)" && 
-						while ! 
-						if ! "${checked_bare}" && : 其令选行 ;
+						while 
+						! if ! "${checked_bare}" && : 其令选行 ;
 							then git fetch "$@" -- "${git_remote}" 'refs/heads/*:refs/heads/*' '^'"${_symbref_head}" ;
 							else git fetch "$@" -- "${git_remote}" 'refs/heads/*:refs/heads/*' ;
 						fi ;
