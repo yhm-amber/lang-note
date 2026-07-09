@@ -125,6 +125,27 @@ Libs ()
 			"$@" && 
 			: ) && 
 		
+		#. eval "$(_frame_kwargs as_bool SHOW_HINTS)" && 
+		_frame_kwargs () 
+		(
+			as_bool () 
+			(
+				: 其音嵌之 其出用之 && 
+				local NAME_EMBEDDED="${1:-${NAME_EMBEDDED:-}}" && shift && 
+				local BOOL_DEFAULT="${1:-${BOOL_DEFAULT:-}}" && shift && 
+				echo '
+					case "$(echo "${'"$NAME_EMBEDDED"':-'"$BOOL_DEFAULT"'}" | tr '"'"'[:lower:]'"'"' '"'"'[:upper:]'"'"')" 
+					in 
+						(Y|YES|T|TRUE) local __'"$NAME_EMBEDDED"'__=true ;; 
+						(N|NO|F|FALSE) local __'"$NAME_EMBEDDED"'__=false ;; 
+						(_) 1>&2 echo unknown kwargs '"$NAME_EMBEDDED"': "'"'"'${'"$NAME_EMBEDDED"'}'"'"'": only support true/false. ; return 13 ;; 
+					esac && 
+					: ' && 
+				: ) && 
+			: :: && 
+			"$@" && 
+			: ) && 
+		
 		: :: && 
 		"$@" && 
 		:;
@@ -251,11 +272,13 @@ alias git-bike=git_bike && git_bike ()
 	(
 		eval "$(subs frames codes_head)" && 
 		
+		eval "$(_frame_kwargs as_bool SHOW_HINTS yes)" && 
+		
 		alias gitdir=gitdir && gitdir () 
 		(
 			{ cd "${1:-.}" && shift 1 ; } && 
 			git rev-parse --is-inside-git-dir | 
-				tee >( 1>&2 _cmnd_tools _std_exec once echo repochk: "\`$PWD\`" 'is inside gitdir ~' ) | 
+				tee >( __SHOW_HINTS__ && 1>&2 _cmnd_tools _std_exec once echo repochk: "\`$PWD\`" 'is inside gitdir ~' ) | 
 				_cmnd_tools _std_exec once "$@" && 
 			: ) && 
 		
@@ -263,7 +286,7 @@ alias git-bike=git_bike && git_bike ()
 		(
 			{ cd "${1:-.}" && shift 1 ; } && 
 			git rev-parse --is-inside-work-tree | 
-				tee >( 1>&2 _cmnd_tools _std_exec once echo repochk: "\`$PWD\`" 'is inside worktree ~' ) | 
+				tee >( __SHOW_HINTS__ && 1>&2 _cmnd_tools _std_exec once echo repochk: "\`$PWD\`" 'is inside worktree ~' ) | 
 				_cmnd_tools _std_exec once "$@" && 
 			: ) && 
 		
@@ -271,7 +294,7 @@ alias git-bike=git_bike && git_bike ()
 		(
 			{ cd "${1:-.}" && shift 1 ; } && 
 			git rev-parse --is-bare-repository | 
-				tee >( 1>&2 _cmnd_tools _std_exec once echo repochk: "\`$PWD\`" 'is bare repository ~' ) | 
+				tee >( __SHOW_HINTS__ && 1>&2 _cmnd_tools _std_exec once echo repochk: "\`$PWD\`" 'is bare repository ~' ) | 
 				_cmnd_tools _std_exec once "$@" && 
 			: ) && 
 		
@@ -279,7 +302,7 @@ alias git-bike=git_bike && git_bike ()
 		(
 			{ cd "${1:-.}" && shift 1 ; } && 
 			git rev-parse --is-shallow-repository | 
-				tee >( 1>&2 _cmnd_tools _std_exec once echo repochk: "\`$PWD\`" 'is shallow repository ~' ) | 
+				tee >( __SHOW_HINTS__ && 1>&2 _cmnd_tools _std_exec once echo repochk: "\`$PWD\`" 'is shallow repository ~' ) | 
 				_cmnd_tools _std_exec once "$@" && 
 			: ) && 
 		
@@ -309,7 +332,7 @@ alias git-bike=git_bike && git_bike ()
 			echo '(TODO...)' && 
 			echo && 
 			: ) && 
-		alias mc=multi_clone multi-clone=multi_clone && multi_clone () 
+		alias m=multi_clone mc=multi_clone multi-clone=multi_clone && multi_clone () 
 		(
 			local working_dir="$1" && shift && 
 			_param_tools params_out "$@" | 
@@ -353,7 +376,7 @@ alias git-bike=git_bike && git_bike ()
 			echo '- git-bike cp help ac' && 
 			echo && 
 			: ) && 
-		alias ac=auto_clone auto-clone=auto_clone && auto_clone () 
+		alias a=auto_clone ac=auto_clone auto-clone=auto_clone && auto_clone () 
 		(
 			echo :: git cloning in shallow '(depth 1)' mode :: && 
 			while ! ( git clone --progress --depth 1 --no-single-branch "$@" 2>&1 && : ) ;
@@ -590,7 +613,7 @@ alias git-bike=git_bike && git_bike ()
 	(
 		eval "$(subs frames codes_head)" && 
 		
-		#: git_bike all_sync [<workspace>] [<workspace>] ...
+		#: git_bike all_sync [<workspace> ...]
 		#::	workspace: means the prefix in full name of a repo
 		#..	 like it in so many hubs -- <workspace>/<reponame>. In generally
 		#;;	 a 'workspace' can be the id-name of a(n) user or org.
@@ -610,6 +633,46 @@ alias git-bike=git_bike && git_bike ()
 			: ) && 
 		
 		
+		#: base_upgrade [<gitdir-path> ...]
+		#: IS_BARE=true base_upgrade [<gitdir-path> ...]
+		#: SHOW_MORE_HINTS=n IS_BARE=y base_upgrade [<gitdir-path> ...]
+		base_upgrade () 
+		(
+			_param_tools params_out "${@:-.}" | IS_BARE="${IS_BARE:-}" _base_upgrade && 
+			: ) && 
+		
+		_base_upgrade () 
+		(
+			while read -r -- gitdir ;
+			do 
+				SHOW_HINTS="${SHOW_MORE_HINTS:-y}" repo_chk gitdir "${gitdir}" && 
+				(
+					cd "${gitdir}" && 
+					if test -z "${IS_BARE:-}" ;
+						then local IS_BARE="$(repo_chk bare . echo)" ;
+						else local IS_BARE="${IS_BARE:-}" ;
+					fi && 
+					eval "$(_frame_kwargs as_bool IS_BARE)" && 
+					echo base_upgrade: update from remote for "'${gitdir}'" && 
+					while ! 
+					if ! "${__IS_BARE__}" ;
+						then git pull ;
+						else git remote update ;
+					fi ;
+					do 
+						echo base_upgrade: tried: "$((++try_pull_base_upgrade))" for '`'"$(if ! "${__IS_BARE__}" ;
+							then echo "git pull" ;
+							else echo "git remote update" ;
+						fi)"'`' in "'${gitdir}'" && 
+						:; 
+					done && 
+					echo base_upgrade: updated in "'${gitdir}'" && 
+					: ) && 
+				:; 
+			done && 
+			: ) && 
+		
+		
 		#: git_bike all_push [<git-dir>] [<git-dir>] ...
 		alias all-push=all_push && all_push () 
 		(
@@ -623,38 +686,25 @@ alias git-bike=git_bike && git_bike ()
 			while read -r -- gitdir ;
 			do 
 				repo_chk gitdir "${gitdir}" && 
+				local checked_bare="$(repo_chk bare "${gitdir}" echo)" && 
+				SHOW_MORE_HINTS=no IS_BARE="$checked_bare" base_upgrade "${gitdir}" && 
 				(
 					cd "${gitdir}" && 
-					echo :: push all remotes in "'${gitdir}'" :: && 
-					echo before: pull from remote for "'${gitdir}'" && 
-					local checked_bare="$(repo_chk bare . echo)" && 
-					while ! 
-					if ! "$(checked_bare)" ;
-						then git pull ;
-						else git remote update ;
-					fi ;
-					do 
-						echo before: tried: "$((++try_pull_before))" for '`'"$(if ! "$(checked_bare)" ;
-							then echo "git pull" ;
-							else echo "git remote update" ;
-						fi)"'`' in "'${gitdir}'" && 
-						:; 
-					done && 
-					echo before: pulled in "'${gitdir}'" && 
+					echo :: pushing all remotes in "'${gitdir}'" :: && 
 					git remote | while read -r -- git_remote ;
 					do 
 						echo working: push to remote "'${git_remote}'" for "'${gitdir}'" && 
 						local _rests_try_push="${MAXTRY_PUSH:-${PUSH_MAXTRY:-0}}" && 
 						while ! 
-						if ! "$(checked_bare)" && : 其令选行 ;
-							then git push "$@" -- "${git_remote}" ;
+						if ! "${checked_bare}" && : 其令选行 ;
+							then git push "$@" --branches -- "${git_remote}" ;
 							else git push "$@" -- "${git_remote}" 'refs/heads/*:refs/heads/*' ;
 						fi ;
 						do 
 							: 此下 乃复试探 有询 && 
 							: 其尝回显 && 
-							echo tried: "$((++try_push))" for '`'"$(if ! "$(checked_bare)" && : 其显选出 ;
-								then echo "git push $* -- ${git_remote}" ;
+							echo tried: "$((++try_push))" for '`'"$(if ! "${checked_bare}" && : 其显选出 ;
+								then echo "git push $* --branches -- ${git_remote}" ;
 								else echo "git push $* -- ${git_remote} 'refs/heads/*:refs/heads/*'" ;
 							fi)"'`' in "'${gitdir}'" && 
 							: 其尝适询 && 
@@ -673,6 +723,7 @@ alias git-bike=git_bike && git_bike ()
 						done && 
 						:; 
 					done && 
+					echo :: pushed all remotes in "'${gitdir}'" :: && 
 					: ) && 
 				:; 
 			done && 
@@ -694,23 +745,26 @@ alias git-bike=git_bike && git_bike ()
 			while read -r -- gitdir ;
 			do 
 				repo_chk gitdir "${gitdir}" && 
+				local checked_bare="$(repo_chk bare "${gitdir}" echo)" && 
+				SHOW_MORE_HINTS=no IS_BARE="$checked_bare" base_upgrade "${gitdir}" && 
 				(
 					cd "${gitdir}" && 
-					echo :: pull all remotes in "'${gitdir}'" :: && 
+					echo :: pulling all remotes in "'${gitdir}'" :: && 
 					git remote | while read -r -- git_remote ;
 					do 
 						echo working: pull from remote "'${git_remote}'" for "'${gitdir}'" && 
 						local _rests_try_pull="${MAXTRY_PULL:-${PULL_MAXTRY:-0}}" && 
+						local _symbref_head="$(git symbolic-ref -- HEAD)" && 
 						while ! 
-						if ! "$(checked_bare)" && : 其令选行 ;
-							then git pull  "$@" -- "${git_remote}" ;
+						if ! "${checked_bare}" && : 其令选行 ;
+							then git fetch "$@" -- "${git_remote}" 'refs/heads/*:refs/heads/*' '^'"${_symbref_head}" ;
 							else git fetch "$@" -- "${git_remote}" 'refs/heads/*:refs/heads/*' ;
 						fi ;
 						do 
 							: 此下 乃复试探 有询 && 
 							: 其尝回显 && 
-							echo tried: "$((++try_pull))" for '`'"$(if ! "$(checked_bare)" && : 其显选出 ;
-								then echo "git pull  $* -- ${git_remote}" ;
+							echo tried: "$((++try_pull))" for '`'"$(if ! "${checked_bare}" && : 其显选出 ;
+								then echo "git fetch $* -- ${git_remote} 'refs/heads/*:refs/heads/*' '^${_symbref_head}'" ;
 								else echo "git fetch $* -- ${git_remote} 'refs/heads/*:refs/heads/*'" ;
 							fi)"'`' in "'${gitdir}'" && 
 							: 其尝适询 && 
@@ -729,20 +783,7 @@ alias git-bike=git_bike && git_bike ()
 						done && 
 						:; 
 					done && 
-					echo done: pull from remotes for "'${gitdir}'" && 
-					while ! 
-					if ! "$(checked_bare)" ;
-						then git pull ;
-						else git remote update ;
-					fi ;
-					do 
-						echo done: tried: "$((++try_pull_done))" for '`'"$(if ! "$(checked_bare)" ;
-							then echo "git pull" ;
-							else echo "git remote update" ;
-						fi)"'`' in "'${gitdir}'" && 
-						:; 
-					done && 
-					echo done: pulled in "'${gitdir}'" && 
+					echo :: pulled all remotes in "'${gitdir}'" :: && 
 					: ) && 
 				:; 
 			done && 
