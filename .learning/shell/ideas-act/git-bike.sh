@@ -7,6 +7,7 @@ Libs ()
 	(
 		langtools () ( _lang_tool "$@" && : ) && 
 		frames () ( PKG_LANG='subs langtools' _frame_subs "$@" && : ) && 
+		kwargs () ( _frame_kwargs "$@" && : ) && 
 		: :: && 
 		Subs "$@" && 
 		: ) && 
@@ -272,7 +273,7 @@ alias git-bike=git_bike && git_bike ()
 	(
 		eval "$(subs frames codes_head)" && 
 		
-		eval "$(_frame_kwargs as_bool SHOW_HINTS yes)" && 
+		eval "$(subs kwargs as_bool SHOW_HINTS yes)" && 
 		
 		alias gitdir=gitdir && gitdir () 
 		(
@@ -653,7 +654,7 @@ alias git-bike=git_bike && git_bike ()
 						then local IS_BARE="$(repo_chk bare . echo)" ;
 						else local IS_BARE="${IS_BARE:-}" ;
 					fi && 
-					eval "$(_frame_kwargs as_bool IS_BARE)" && 
+					eval "$(subs kwargs as_bool IS_BARE)" && 
 					echo base_upgrade: update from remote for "'${gitdir}'" && 
 					while ! 
 					if ! "${__IS_BARE__}" ;
