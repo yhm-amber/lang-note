@@ -613,7 +613,7 @@ alias git-bike=git_bike && git_bike ()
 	(
 		eval "$(subs frames codes_head)" && 
 		
-		#: git_bike all_sync [<workspace> ...]
+		#: git-bike sp all-sync [<workspace> ...]
 		#::	workspace: means the prefix in full name of a repo
 		#..	 like it in so many hubs -- <workspace>/<reponame>. In generally
 		#;;	 a 'workspace' can be the id-name of a(n) user or org.
@@ -633,10 +633,11 @@ alias git-bike=git_bike && git_bike ()
 			: ) && 
 		
 		
+		#: git-bike sp base-upgrade [<gitdir-path> ...]
 		#: base_upgrade [<gitdir-path> ...]
 		#: IS_BARE=true base_upgrade [<gitdir-path> ...]
 		#: SHOW_MORE_HINTS=n IS_BARE=y base_upgrade [<gitdir-path> ...]
-		base_upgrade () 
+		alias base-upgrade=base_upgrade && base_upgrade () 
 		(
 			_param_tools params_out "${@:-.}" | IS_BARE="${IS_BARE:-}" _base_upgrade && 
 			: ) && 
@@ -673,7 +674,7 @@ alias git-bike=git_bike && git_bike ()
 			: ) && 
 		
 		
-		#: git_bike all_push [<git-dir>] [<git-dir>] ...
+		#: git-bike sp all-push [<git-dir> ...]
 		alias all-push=all_push && all_push () 
 		(
 			echo :: pushing origin to all remotes in: "${@:-.}" :: && 
@@ -732,7 +733,7 @@ alias git-bike=git_bike && git_bike ()
 			: ) 9</dev/tty && 
 		
 		
-		#: git_bike all_pull [<git-dir>] [<git-dir>] ...
+		#: git-bike sp all-pull [<git-dir> ...]
 		alias all-pull=all_pull && all_pull () 
 		(
 			echo :: pulling from origin and all remotes in: "${@:-.}" :: && 
