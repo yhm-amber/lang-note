@@ -314,24 +314,26 @@ Libs ()
 
 eval "$(MARK_MORE=GIT_BENCH PKG_SUBS='libs subs lang' libs subs frames codes_head)" && 
 
-git_bench__helper__ () 
+git_player__helper__ () 
 (
 	echo && 
-	echo 'Git bench (also names 'git bike') is a workbench for git to give levers/wheels with its helpdocs.' && 
+	echo 'Git Aide Player (also names 'git bench/bike') is an assistant for git to give levers/wheels with its helpdocs.' && 
 	echo ' It'"'"'s also a demo for `Subs` frame which is a simple helper frame in shell (tested in bash & brush) that can trans alias names' && 
 	echo ' as function with a helpdocs feature supported.' && 
 	echo && 
 	echo 'See help:' && 
-	echo '- git-bench help' && 
-	echo '- git-bench help git-bench' && 
-	echo '- git-bench help git-bike' && 
-	echo '- git-bench help gb' && 
+	echo '- git-aide help' && 
+	echo '- git-aide help git-aide' && 
+	echo '- git-aide help git-bench' && 
+	echo '- git-aide help git-bike' && 
+	echo '- git-aide help gp' && 
+	echo '- help git-aide' && 
 	echo '- help git-bench' && 
 	echo '- help git-bike' && 
-	echo '- help gb' && 
+	echo '- help gp' && 
 	echo && 
 	: ) && 
-alias gb=git_bench git-bike=git_bench git-bench=git_bench && git_bench () 
+alias gp=git_player git-bike=git_player git-bench=git_player git-aide=git_player git-player=git_player && git_player () 
 (
 	# Libs Subs : && 
 	Libs : && 
@@ -403,8 +405,8 @@ alias gb=git_bench git-bike=git_bench git-bench=git_bench && git_bench ()
 	(
 		eval "$(subs frames codes_head)" && 
 		
-		#: OPTS_CLONE='<git-clone-options>' git-bench cp multi-clone <working-dir> [<local-dir>]:<remote-link> [[<local-dir>]:<remote-link> ...]
-		#. OPTS_CLONE=--bare git-bike cp m . mabin.sp-src/mabynogion.spells.git:https://github.com/pure-symbols/mabynogion.spells.git pure.lexi-src/pure.lexicals.git:https://github.com/pure-symbols/pure.lexicals.git
+		#: OPTS_CLONE='<git-clone-options>' git-player cp multi-clone <working-dir> [<local-dir>]:<remote-link> [[<local-dir>]:<remote-link> ...]
+		#. OPTS_CLONE=--bare git-player cp m . mabin.sp-src/mabynogion.spells.git:https://github.com/pure-symbols/mabynogion.spells.git pure.lexi-src/pure.lexicals.git:https://github.com/pure-symbols/pure.lexicals.git
 		multi_clone__helper__ () 
 		(
 			echo && 
@@ -423,18 +425,18 @@ alias gb=git_bench git-bike=git_bench git-bench=git_bench && git_bench ()
 			cd "${WORKING_PATH:-.}" && 
 			while IFS=: read -r -- landing_path remote_link ;
 			do 
-				echo :: executing: '`'.bench cp auto-clone ${OPTS_CLONE} -- "'${remote_link}'" ${landing_path}'`' in "'${PWD}'" :: && 
+				echo :: executing: '`'.aide cp auto-clone ${OPTS_CLONE} -- "'${remote_link}'" ${landing_path}'`' in "'${PWD}'" :: && 
 				auto_clone ${OPTS_CLONE} -- "${remote_link}" ${landing_path} && 
 				:; 
 			done && 
 			: ) && 
 		
-		#: git-bench cp auto-clone [<git-clone-options>] -- <remote-link> [<aim-path>]
+		#: git-player cp auto-clone [<git-clone-options>] -- <remote-link> [<aim-path>]
 		auto_clone__helper__ () 
 		(
 			echo && 
 			echo 'Usage:' && 
-			echo $'\t' 'git-bench cp auto-clone [<git-clone-options>] -- <remote-link> [<aim-path>]' && 
+			echo $'\t' 'git-player cp auto-clone [<git-clone-options>] -- <remote-link> [<aim-path>]' && 
 			echo && 
 			echo 'This tool is for when you having a bad internet to your' && 
 			echo ' remote repo. It will making a depth=1 shallow clone at the' && 
@@ -443,16 +445,16 @@ alias gb=git_bench git-bike=git_bench git-bench=git_bench && git_bench ()
 			echo ' All of the downloading works can auto-retry while it failed.' && 
 			echo && 
 			echo 'Demo:' && 
-			echo '- git-bench cp auto-clone https://github.com/LibreService/my_rime.git --mirror' && 
-			echo '- git-bench cp auto-clone https://github.com/gurecn/YuyanIme.git --mirror' && 
-			echo '- git-bench cp auto-clone --mirror -- https://github.com/gurecn/YuyanIme.git yuyan.git' && 
-			echo '- git-bench cp auto-clone --mirror -- https://github.com/crynta/terax-ai.git' && 
-			echo '- git-bench cp auto-clone -- https://github.com/gopasspw/git-credential-gopass.git ~/gopass-src/git-credential-gopass' && 
+			echo '- git-aide cp auto-clone https://github.com/LibreService/my_rime.git --mirror' && 
+			echo '- git-aide cp auto-clone https://github.com/gurecn/YuyanIme.git --mirror' && 
+			echo '- git-aide cp auto-clone --mirror -- https://github.com/gurecn/YuyanIme.git yuyan.git' && 
+			echo '- git-aide cp auto-clone --mirror -- https://github.com/crynta/terax-ai.git' && 
+			echo '- git-aide cp auto-clone -- https://github.com/gopasspw/git-credential-gopass.git ~/gopass-src/git-credential-gopass' && 
 			echo && 
 			echo 'See help:' && 
-			echo '- git-bench help cp auto-clone' && 
-			echo '- git-bench help cp ac' && 
-			echo '- git-bench cp help ac' && 
+			echo '- git-aide help cp auto-clone' && 
+			echo '- git-aide help cp ac' && 
+			echo '- git-aide cp help ac' && 
 			echo && 
 			: ) && 
 		alias a=auto_clone ac=auto_clone auto-clone=auto_clone && auto_clone () 
@@ -517,10 +519,10 @@ alias gb=git_bench git-bike=git_bench git-bench=git_bench && git_bench ()
 		
 		eval "$(subs frames codes_head)" && 
 		
-		#. git-bench bare-play up
-		#. git-bench bare-play up origin
-		#. git-bench bare-play up github
-		#. git-bench bare-play up disroot
+		#. git-player bare-play up
+		#. git-player bare-play up origin
+		#. git-player bare-play up github
+		#. git-player bare-play up disroot
 		update__helper__ () 
 		(
 			echo && 
@@ -533,16 +535,16 @@ alias gb=git_bench git-bike=git_bench git-bench=git_bench && git_bench ()
 			echo "- path of worktree dir from tag must be like: 'name.comments-src/tags/<tag-name>'" && 
 			echo && 
 			echo 'Demo:' && 
-			echo '- git-bench bare-play up' && 
-			echo '- git-bench bare-play up origin' && 
-			echo '- git-bench bare-play up github' && 
-			echo '- git-bench bare-play up disroot' && 
+			echo '- git-aide bare-play up' && 
+			echo '- git-aide bare-play up origin' && 
+			echo '- git-aide bare-play up github' && 
+			echo '- git-aide bare-play up disroot' && 
 			echo && 
 			echo 'See help:' && 
-			echo '- git-bench help bare-play update' && 
-			echo '- git-bench help bare-play up' && 
-			echo '- git-bench help bp up' && 
-			echo '- git-bench bp help up' && 
+			echo '- git-aide help bare-play update' && 
+			echo '- git-aide help bare-play up' && 
+			echo '- git-aide help bp up' && 
+			echo '- git-aide bp help up' && 
 			echo && 
 			: ) && 
 		alias up=update && update () 
@@ -550,6 +552,7 @@ alias gb=git_bench git-bike=git_bench git-bench=git_bench && git_bench ()
 			_find_in () 
 			(
 				_path="${1}" && shift && 
+				#: means run find ... just if path exists.
 				{ ! ( &>/dev/null cd "$_path" ) || find -- "$_path" "$@" ; } && 
 				: ) && 
 			
@@ -589,10 +592,10 @@ alias gb=git_bench git-bike=git_bench git-bench=git_bench && git_bench ()
 				done && 
 			: ) && 
 		
-		#. git-bench bare-play worktree add tree master
-		#. git-bench bare-play worktree rm tree master
-		#. git-bench bare-play worktree add tags v1.0.1
-		#. git-bench bare-play worktree rm tags v1.0.1
+		#. git-player bare-play worktree add tree master
+		#. git-player bare-play worktree rm tree master
+		#. git-player bare-play worktree add tags v1.0.1
+		#. git-player bare-play worktree rm tags v1.0.1
 		worktree__helper__ () 
 		(
 			echo && 
@@ -604,18 +607,18 @@ alias gb=git_bench git-bike=git_bench git-bench=git_bench && git_bench ()
 			echo "- the path of worktree dir from tag will be like: 'name.comments-src/tags/<tag-name>'" && 
 			echo && 
 			echo 'Demo:' && 
-			echo '- git-bench bare-play worktree add tree master' && 
-			echo '- git-bench bare-play worktree rm tree master' && 
-			echo '- git-bench bare-play worktree add tags v1.0.1' && 
-			echo '- git-bench bare-play worktree rm tags v1.0.1' && 
-			echo '- git-bench bare-play wt a tags v1.16.1' && 
-			echo '- git-bench bare-play wt a tree master' && 
+			echo '- git-aide bare-play worktree add tree master' && 
+			echo '- git-aide bare-play worktree rm tree master' && 
+			echo '- git-aide bare-play worktree add tags v1.0.1' && 
+			echo '- git-aide bare-play worktree rm tags v1.0.1' && 
+			echo '- git-aide bare-play wt a tags v1.16.1' && 
+			echo '- git-aide bare-play wt a tree master' && 
 			echo && 
 			echo 'See help:' && 
-			echo '- git-bench help bare-play worktree' && 
-			echo '- git-bench help bare-play wt' && 
-			echo '- git-bench help bp wt' && 
-			echo '- git-bench bp help wt' && 
+			echo '- git-aide help bare-play worktree' && 
+			echo '- git-aide help bare-play wt' && 
+			echo '- git-aide help bp wt' && 
+			echo '- git-aide bp help wt' && 
 			echo && 
 			: ) && 
 		alias wt=worktree && worktree () 
@@ -701,7 +704,7 @@ alias gb=git_bench git-bike=git_bench git-bench=git_bench && git_bench ()
 	(
 		eval "$(subs frames codes_head)" && 
 		
-		#: git-bench sp all-sync [<workspace> ...]
+		#: git-player sp all-sync [<workspace> ...]
 		#::	workspace: means the prefix in full name of a repo
 		#..	 like it in so many hubs -- <workspace>/<reponame>. In generally
 		#;;	 a 'workspace' can be the id-name of a(n) user or org.
@@ -721,7 +724,7 @@ alias gb=git_bench git-bike=git_bench git-bench=git_bench && git_bench ()
 			: ) && 
 		
 		
-		#: git-bench sp base-upgrade [<gitdir-path> ...]
+		#: git-player sp base-upgrade [<gitdir-path> ...]
 		#: base_upgrade [<gitdir-path> ...]
 		#: IS_BARE=true base_upgrade [<gitdir-path> ...]
 		#: SHOW_MORE_HINTS=n IS_BARE=y base_upgrade [<gitdir-path> ...]
@@ -766,7 +769,7 @@ alias gb=git_bench git-bike=git_bench git-bench=git_bench && git_bench ()
 			: ) && 
 		
 		
-		#: git-bench sp all-push [<git-dir> ...]
+		#: git-player sp all-push [<git-dir> ...]
 		alias all-push=all_push && all_push () 
 		(
 			echo :: pushing origin to all remotes in: "${@:-.}" :: && 
@@ -818,7 +821,7 @@ alias gb=git_bench git-bike=git_bench git-bench=git_bench && git_bench ()
 			: ) 9</dev/tty && 
 		
 		
-		#: git-bench sp all-pull [<git-dir> ...]
+		#: git-player sp all-pull [<git-dir> ...]
 		alias all-pull=all_pull && all_pull () 
 		(
 			echo :: pulling from origin and all remotes in: "${@:-.}" :: && 
@@ -891,7 +894,7 @@ alias gb=git_bench git-bike=git_bench git-bench=git_bench && git_bench ()
 eval "$(MARK_MORE=GIT_BENCH PKG_SUBS='libs subs lang' libs subs frames codes_tail)" && 
 
 # : \
-git_bench "$@" && :
+git_player "$@" && :
 
 
 
@@ -913,11 +916,11 @@ git_bench "$@" && :
 
 # git symbolic-ref HEAD #: 查 HEAD 指向、用 cat ./HEAD 也能看到相应信息
 # git symbolic-ref HEAD refs/heads/some-other-branch #: 变 HEAD 指向
-# git config --global -- alias.bench "!/usr/bin/env bash ~/.local/git-bench.sh"
+# git config --global -- alias.aide "!/usr/bin/env bash ~/.local/git-aide.sh"
 
 #### demo -----------------------
 
-#|	$ git-bench cp auto-clone https://github.com/LibreService/my_rime.git --mirror
+#|	$ git-aide cp auto-clone https://github.com/LibreService/my_rime.git --mirror
 #|	:: git cloning in shallow (depth 1) mode ::
 #|	Cloning into bare repository 'my_rime.git'...
 #|	fatal: unable to access 'https://github.com/LibreService/my_rime.git/': Recv failure: Connection was reset
@@ -962,7 +965,7 @@ git_bench "$@" && :
 #|	:: updating in `/mnt/e/rimeweb.pwa-src/my_rime.git` ::
 #|	:: done for repo `my_rime.git`. ::
 
-#|	$ git-bench cp auto-clone https://github.com/gurecn/YuyanIme.git --mirror
+#|	$ git-aide cp auto-clone https://github.com/gurecn/YuyanIme.git --mirror
 #|	:: git cloning in shallow (depth 1) mode ::
 #|	Cloning into bare repository 'YuyanIme.git'...
 #|	remote: Enumerating objects: 295, done.
@@ -983,7 +986,7 @@ git_bench "$@" && :
 #|	:: updating in `/mnt/e/yuyanime.hanzi-src/YuyanIme.git` ::
 #|	:: done for repo `YuyanIme.git`. ::
 
-#|	$ git-bench bare-play up
+#|	$ git-aide bare-play up
 #|	repochk: `/mnt/e/rufus.usbfldr-src/rufus.git` is bare repository ~ true
 #|	:: executing: `checkout --detach` in '../tree/master' ::
 #|	HEAD is now at eedeaea7 [misc] fix multiple small issues
@@ -1024,7 +1027,7 @@ git_bench "$@" && :
 #|	upper: checkouted ../tree/master as master
 
 
-#|	$ git-bench help cp ac
+#|	$ git-aide help cp ac
 #|	sub command(s) here:
 #|	- bare-play: means 'bare_play'.
 #|	- bp: means 'bare_play'.
@@ -1040,7 +1043,7 @@ git_bench "$@" && :
 #|	sub command: cp ac
 #|	
 #|	Usage:
-#|		 git-bench cp auto-clone [<git-clone-options>] -- <remote-link> [<aim-path>]
+#|		 git-player cp auto-clone [<git-clone-options>] -- <remote-link> [<aim-path>]
 #|	
 #|	This tool is for when you having a bad internet to your
 #|	 remote repo. It will making a depth=1 shallow clone at the
@@ -1049,19 +1052,19 @@ git_bench "$@" && :
 #|	 All of the downloading works can auto-retry while it failed.
 #|	
 #|	Demo:
-#|	- git-bench cp auto-clone https://github.com/LibreService/my_rime.git --mirror
-#|	- git-bench cp auto-clone https://github.com/gurecn/YuyanIme.git --mirror
-#|	- git-bench cp auto-clone --mirror -- https://github.com/gurecn/YuyanIme.git yuyan.git
-#|	- git-bench cp auto-clone --mirror -- https://github.com/crynta/terax-ai.git
-#|	- git-bench cp auto-clone -- https://github.com/gopasspw/git-credential-gopass.git ~/gopass-src/git-credential-gopass
+#|	- git-aide cp auto-clone https://github.com/LibreService/my_rime.git --mirror
+#|	- git-aide cp auto-clone https://github.com/gurecn/YuyanIme.git --mirror
+#|	- git-aide cp auto-clone --mirror -- https://github.com/gurecn/YuyanIme.git yuyan.git
+#|	- git-aide cp auto-clone --mirror -- https://github.com/crynta/terax-ai.git
+#|	- git-aide cp auto-clone -- https://github.com/gopasspw/git-credential-gopass.git ~/gopass-src/git-credential-gopass
 #|	
 #|	See help:
-#|	- git-bench help cp auto-clone
-#|	- git-bench help cp ac
-#|	- git-bench cp help ac
+#|	- git-aide help cp auto-clone
+#|	- git-aide help cp ac
+#|	- git-aide cp help ac
 #|	
 
-#|	$ git-bench help bare-play up
+#|	$ git-aide help bare-play up
 #|	sub command(s) here:
 #|	- bare-play: means 'bare_play'.
 #|	- bp: means 'bare_play'.
@@ -1086,19 +1089,19 @@ git_bench "$@" && :
 #|	- path of worktree dir from tag must be like: 'name.comments-src/tags/<tag-name>'
 #|	
 #|	Demo:
-#|	- git-bench bare-play up
-#|	- git-bench bare-play up origin
-#|	- git-bench bare-play up github
-#|	- git-bench bare-play up disroot
+#|	- git-aide bare-play up
+#|	- git-aide bare-play up origin
+#|	- git-aide bare-play up github
+#|	- git-aide bare-play up disroot
 #|	
 #|	See help:
-#|	- git-bench help bare-play update
-#|	- git-bench help bare-play up
-#|	- git-bench help bp up
-#|	- git-bench bp help up
+#|	- git-aide help bare-play update
+#|	- git-aide help bare-play up
+#|	- git-aide help bp up
+#|	- git-aide bp help up
 #|	
 
-#|	$ git-bench help bp up
+#|	$ git-aide help bp up
 #|	sub command(s) here:
 #|	- bare-play: means 'bare_play'.
 #|	- bp: means 'bare_play'.
@@ -1123,19 +1126,19 @@ git_bench "$@" && :
 #|	- path of worktree dir from tag must be like: 'name.comments-src/tags/<tag-name>'
 #|	
 #|	Demo:
-#|	- git-bench bare-play up
-#|	- git-bench bare-play up origin
-#|	- git-bench bare-play up github
-#|	- git-bench bare-play up disroot
+#|	- git-aide bare-play up
+#|	- git-aide bare-play up origin
+#|	- git-aide bare-play up github
+#|	- git-aide bare-play up disroot
 #|	
 #|	See help:
-#|	- git-bench help bare-play update
-#|	- git-bench help bare-play up
-#|	- git-bench help bp up
-#|	- git-bench bp help up
+#|	- git-aide help bare-play update
+#|	- git-aide help bare-play up
+#|	- git-aide help bp up
+#|	- git-aide bp help up
 #|	
 
-#|	$ git-bench help bp wt
+#|	$ git-aide help bp wt
 #|	sub command(s) here:
 #|	- bare-play: means 'bare_play'.
 #|	- bp: means 'bare_play'.
@@ -1159,28 +1162,28 @@ git_bench "$@" && :
 #|	- the path of worktree dir from tag will be like: 'name.comments-src/tags/<tag-name>'
 #|	
 #|	Demo:
-#|	- git-bench bare-play worktree add tree master
-#|	- git-bench bare-play worktree rm tree master
-#|	- git-bench bare-play worktree add tags v1.0.1
-#|	- git-bench bare-play worktree rm tags v1.0.1
-#|	- git-bench bare-play wt a tags v1.16.1
-#|	- git-bench bare-play wt a tree master
+#|	- git-aide bare-play worktree add tree master
+#|	- git-aide bare-play worktree rm tree master
+#|	- git-aide bare-play worktree add tags v1.0.1
+#|	- git-aide bare-play worktree rm tags v1.0.1
+#|	- git-aide bare-play wt a tags v1.16.1
+#|	- git-aide bare-play wt a tree master
 #|	
 #|	See help:
-#|	- git-bench help bare-play worktree
-#|	- git-bench help bare-play wt
-#|	- git-bench help bp wt
-#|	- git-bench bp help wt
+#|	- git-aide help bare-play worktree
+#|	- git-aide help bare-play wt
+#|	- git-aide help bp wt
+#|	- git-aide bp help wt
 #|	
 
-#|	$ git-bench bp wt a tags v1.61.1
+#|	$ git-aide bp wt a tags v1.61.1
 #|	repochk: `/mnt/e/gopass.passwd-srcs/cli/gopass.git` is bare repository ~ true
 #|	Contained tags:
 #|	error: malformed object name v1.61.1
 #|	$ echo $?
 #|	129
 
-#|	$ CHOOSE_MODE=All git-bench bp wt a tags v1.16.1
+#|	$ CHOOSE_MODE=All git-aide bp wt a tags v1.16.1
 #|	repochk: `/mnt/e/gopass.passwd-srcs/cli/gopass.git` is bare repository ~ true
 #|	Contained tags:
 #|	-	v1.16.1
@@ -1208,7 +1211,7 @@ git_bench "$@" && :
 #|	../tags/v1.16.1/
 #|	../tags/v1.17.0-rc.1/
 #|	../tags/v1.17.0-rc.2/
-#|	$ CHOOSE_MODE=All git-bench bp wt x tags v1.16.1
+#|	$ CHOOSE_MODE=All git-player bp wt x tags v1.16.1
 #|	repochk: `/mnt/e/gopass.passwd-srcs/cli/gopass.git` is bare repository ~ true
 #|	Contained tags:
 #|	-	v1.16.1
@@ -1226,7 +1229,7 @@ git_bench "$@" && :
 #|	:: executing: worktree remove ../tags/v1.17.0-rc.2 ::
 #|	ls: cannot access '../tags/*': No such file or directory
 
-#|	$ CHOOSE_MODE=Only git-bench bp wt a tags v1.16.1
+#|	$ CHOOSE_MODE=Only git-player bp wt a tags v1.16.1
 #|	repochk: `/mnt/e/gopass.passwd-srcs/cli/gopass.git` is bare repository ~ true
 #|	Contained tags:
 #|	-	v1.16.1
@@ -1239,7 +1242,7 @@ git_bench "$@" && :
 #|	Updating files: 100% (652/652), done.
 #|	HEAD is now at f4bb1ded Tag v1.16.1 (#3304)
 #|	../tags/v1.16.1/
-#|	$ git-bench bp wt a tree master
+#|	$ git-aide bp wt a tree master
 #|	repochk: `/mnt/e/gopass.passwd-srcs/cli/gopass.git` is bare repository ~ true
 #|	Contained branches:
 #|	-	master
@@ -1249,7 +1252,7 @@ git_bench "$@" && :
 #|	HEAD is now at f25fc7b4 fix: restore clip flag through fuzzy search in show command (#3466)
 #|	../tree/master/
 
-#|	$ git-bench bp help wt
+#|	$ git-aide bp help wt
 #|	repochk: `/mnt/e/gopass.passwd-srcs/cli/gopass.git` is bare repository ~ true
 #|	sub command(s) here:
 #|	- sub-help: means 'aliases'.
@@ -1266,21 +1269,21 @@ git_bench "$@" && :
 #|	- the path of worktree dir from tag will be like: 'name.comments-src/tags/<tag-name>'
 #|	
 #|	Demo:
-#|	- git-bench bare-play worktree add tree master
-#|	- git-bench bare-play worktree rm tree master
-#|	- git-bench bare-play worktree add tags v1.0.1
-#|	- git-bench bare-play worktree rm tags v1.0.1
-#|	- git-bench bare-play wt a tags v1.16.1
-#|	- git-bench bare-play wt a tree master
+#|	- git-aide bare-play worktree add tree master
+#|	- git-aide bare-play worktree rm tree master
+#|	- git-aide bare-play worktree add tags v1.0.1
+#|	- git-aide bare-play worktree rm tags v1.0.1
+#|	- git-aide bare-play wt a tags v1.16.1
+#|	- git-aide bare-play wt a tree master
 #|	
 #|	See help:
-#|	- git-bench help bare-play worktree
-#|	- git-bench help bare-play wt
-#|	- git-bench help bp wt
-#|	- git-bench bp help wt
+#|	- git-aide help bare-play worktree
+#|	- git-aide help bare-play wt
+#|	- git-aide help bp wt
+#|	- git-aide bp help wt
 #|	
 
-#|	$ git-bench bp wt a tree master
+#|	$ git-aide bp wt a tree master
 #|	repochk: `/mnt/e/gopass.passwd-srcs/browser-ext/gopassbridge.git` is bare repository ~ true
 #|	Contained branches:
 #|	-	dependabot/github_actions/actions/checkout-7
@@ -1295,7 +1298,7 @@ git_bench "$@" && :
 #|	HEAD is now at 5da4522 Merge pull request #342 from gopasspw/dependabot/tools-48090d0390
 #|	../tree/master/
 
-#|	$ git-bench ac https://github.com/t8y2/dbx.git --mirror
+#|	$ git-aide ac https://github.com/t8y2/dbx.git --mirror
 #|	:: git cloning in shallow (depth 1) mode ::
 #|	Cloning into bare repository 'dbx.git'...
 #|	remote: Enumerating objects: 24035, done.
@@ -1349,7 +1352,7 @@ git_bench "$@" && :
 #|	From https://github.com/t8y2/dbx
 #|	   b951d3a5..7a21f258  main       -> main
 #|	:: done for repo `dbx.git`. ::
-#|	$ git-bench bp wt a tags v0.5.41
+#|	$ git-aide bp wt a tags v0.5.41
 #|	repochk: `/mnt/e/dbx.sqlclient.ai-src/dbx.git` is bare repository ~ true
 #|	Contained tags:
 #|	-	agents-latest
@@ -1363,7 +1366,7 @@ git_bench "$@" && :
 #|	Updating files: 100% (1656/1656), done.
 #|	HEAD is now at ba872303 feat(release): bump app version to 0.5.41
 #|	../tags/v0.5.41/
-#|	$ git-bench bp wt a tree main
+#|	$ git-aide bp wt a tree main
 #|	repochk: `/mnt/e/dbx.sqlclient.ai-src/dbx.git` is bare repository ~ true
 #|	Contained branches:
 #|	-	main
@@ -1374,7 +1377,7 @@ git_bench "$@" && :
 #|	Updating files: 100% (1656/1656), done.
 #|	HEAD is now at 7a21f258 feat(sqlCompletion): support SELECT list expand-all-fields completion (#2155)
 #|	../tree/main/
-#|	$ git-bench bp wt x tree main
+#|	$ git-aide bp wt x tree main
 #|	repochk: `/mnt/e/dbx.sqlclient.ai-src/dbx.git` is bare repository ~ true
 #|	Contained branches:
 #|	-	main
@@ -1383,7 +1386,7 @@ git_bench "$@" && :
 #|	:: executing: worktree remove ../tree/main ::
 #|	ls: cannot access '../tree/*': No such file or directory
 
-#|	$ git-bench bp wt a tags v3.1.5
+#|	$ git-aide bp wt a tags v3.1.5
 #|	repochk: `/mnt/e/xed.repoctl.editor.android-src/Xed-Editor.git` is bare repository ~ true
 #|	Contained tags:
 #|	-	sdk-latest
@@ -1410,7 +1413,7 @@ git_bench "$@" && :
 #|	HEAD is now at 3dd223437 Update network_security_config.xml
 #|	../tags/v3.1.5/
 
-#|	$ . ~/git-bench.sh ; git-bench sp all-sync
+#|	$ . ~/git-aide.sh && git-player sp all-sync
 #|	:: pulling from origin and all remotes in: ./pure.lexicals/ ::
 #|	repochk: `/mnt/e/repos-testing/pure.lexicals` is inside worktree ~ true
 #|	repochk: `/mnt/e/repos-testing/pure.lexicals` is bare repository ~ false
@@ -1424,7 +1427,7 @@ git_bench "$@" && :
 #|	   d536247..8fbcd08  main       -> origin/main
 #|	Updating d536247..8fbcd08
 #|	Fast-forward
-#|	 .notes/sh3rrs/Subs/.demo/git-bench.sh               | 90 ++++++++++++++--------
+#|	 .notes/sh3rrs/Subs/.demo/git-aide.sh               | 90 ++++++++++++++--------
 #|	 .../readme"                                        | 16 +++-
 #|	 2 files changed, 75 insertions(+), 31 deletions(-)
 #|	base_upgrade: updated in './pure.lexicals/'
@@ -1537,7 +1540,7 @@ git_bench "$@" && :
 #|	:: pushed all remotes in './pure.lexicals.git/' ::
 #|	
 
-#|	$ git-bench help
+#|	$ git-aide help
 #|	sub command(s) here:
 #|	- bare-play: means 'bare_play'.
 #|	- bp: means 'bare_play'.
@@ -1550,7 +1553,7 @@ git_bench "$@" && :
 #|	- sub-help: means 'aliases'.
 #|	- sync-play: means 'sync_play'.
 
-#|	$ git-bench help git-bench
+#|	$ git-aide help git-aide
 #|	sub command(s) here:
 #|	- bare-play: means 'bare_play'.
 #|	- bp: means 'bare_play'.
@@ -1563,69 +1566,176 @@ git_bench "$@" && :
 #|	- sub-help: means 'aliases'.
 #|	- sync-play: means 'sync_play'.
 #|	
-#|	sub command: git-bench
+#|	sub command: git-player
 #|	
-#|	Git bench (also names git bike) is a workbench for git to give levers/wheels with its helpdocs.
+#|	Git Aide Player (also names 'git bench/bike') is an assistant for git to give levers/wheels with its helpdocs
 #|	 It's also a demo for `Subs` frame which is a simple helper frame in shell (tested in bash & brush) that can trans alias names
 #|	 as function with a helpdocs feature supported.
 #|	
 #|	See help:
-#|	- git-bench help
-#|	- git-bench help git-bench
-#|	- git-bench help git-bike
-#|	- git-bench help gb
+#|	- git-aide help
+#|	- git-aide help git-aide
+#|	- git-aide help git-bench
+#|	- git-aide help git-bike
+#|	- git-aide help gp
+#|	- help git-aide
 #|	- help git-bench
 #|	- help git-bike
-#|	- help gb
+#|	- help gp
 #|	
 
-#|	$ help git-bike
+#|	$ help git-aide
 #|	sub command(s) here:
-#|	- gb: means 'git_bench'.
-#|	- git-bench: means 'git_bench'.
-#|	- git-bike: means 'git_bench'.
+#|	- git-aide: means 'git_player'.
+#|	- git-bench: means 'git_player'.
+#|	- git-bike: means 'git_player'.
+#|	- git-player: means 'git_player'.
+#|	- gp: means 'git_player'.
 #|	- sub-help: means 'aliases'.
 #|	
-#|	sub command: git-bike
+#|	sub command: git-player
 #|	
-#|	Git bench (also names git bike) is a workbench for git to give levers/wheels with its helpdocs.
+#|	Git Aide Player (also names 'git bench/bike') is an assistant for git to give levers/wheels with its helpdocs
 #|	 It's also a demo for `Subs` frame which is a simple helper frame in shell (tested in bash & brush) that can trans alias names
 #|	 as function with a helpdocs feature supported.
 #|	
 #|	See help:
-#|	- git-bench help
-#|	- git-bench help git-bench
-#|	- git-bench help git-bike
-#|	- git-bench help gb
+#|	- git-aide help
+#|	- git-aide help git-aide
+#|	- git-aide help git-bench
+#|	- git-aide help git-bike
+#|	- git-aide help gp
+#|	- help git-aide
 #|	- help git-bench
 #|	- help git-bike
-#|	- help gb
+#|	- help gp
 #|	
 
-#|	$ help gb
+#|	$ help gp
 #|	sub command(s) here:
-#|	- gb: means 'git_bench'.
-#|	- git-bench: means 'git_bench'.
-#|	- git-bike: means 'git_bench'.
+#|	- git-aide: means 'git_player'.
+#|	- git-bench: means 'git_player'.
+#|	- git-bike: means 'git_player'.
+#|	- git-player: means 'git_player'.
+#|	- gp: means 'git_player'.
 #|	- sub-help: means 'aliases'.
 #|	
-#|	sub command: gb
+#|	sub command: gp
 #|	
-#|	Git bench (also names git bike) is a workbench for git to give levers/wheels with its helpdocs.
+#|	Git Aide Player (also names 'git bench/bike') is an assistant for git to give levers/wheels with its helpdocs
 #|	 It's also a demo for `Subs` frame which is a simple helper frame in shell (tested in bash & brush) that can trans alias names
 #|	 as function with a helpdocs feature supported.
 #|	
 #|	See help:
-#|	- git-bench help
-#|	- git-bench help git-bench
-#|	- git-bench help git-bike
-#|	- git-bench help gb
+#|	- git-aide help
+#|	- git-aide help git-aide
+#|	- git-aide help git-bench
+#|	- git-aide help git-bike
+#|	- git-aide help gp
+#|	- help git-aide
 #|	- help git-bench
 #|	- help git-bike
-#|	- help gb
+#|	- help gp
 #|	
 
-#|	$ . ~/git-bike.sh && OPTS_CLONE=--bare git-bike cp m . mabin.sp-src/mabynogion.spells.git:https://github.com/pure-symbols/mabynogion.spells.git pure.lexi-src/pure.lexicals.git:https://github.com/pure-symbols/pure.lexicals.git :https://github.com/yhm-amber/lang-note.git
-#|	
+#|	$ . ~/git-aide.sh && OPTS_CLONE=--bare git-aide cp m . mabin.sp-src/mabynogion.spells.git:https://github.com/pure-symbols/mabynogion.spells.git pure.lexi-src/pure.lexicals.git:https://github.com/pure-symbols/pure.lexicals.git :https://github.com/yhm-amber/lang-note.git
+#|	:: executing: `.aide cp auto-clone --bare -- 'https://github.com/pure-symbols/mabynogion.spells.git' mabin.sp-src/mabynogion.spells.git` in '/mnt/e/repos' ::
+#|	:: git cloning in shallow (depth 1) mode ::
+#|	Cloning into bare repository 'mabin.sp-src/mabynogion.spells.git'...
+#|	remote: Enumerating objects: 80, done.
+#|	remote: Counting objects: 100% (80/80), done.
+#|	remote: Compressing objects: 100% (73/73), done.
+#|	remote: Total 80 (delta 0), reused 38 (delta 0), pack-reused 0 (from 0)
+#|	Receiving objects: 100% (80/80), 68.97 KiB | 105.00 KiB/s, done.
+#|	:: change workdir to `mabin.sp-src/mabynogion.spells.git` from `/mnt/e/repos` to unshallow fetch ::
+#|	:: unshallowing in `/mnt/e/repos/mabin.sp-src/mabynogion.spells.git` ::
+#|	repochk: `/mnt/e/repos/mabin.sp-src/mabynogion.spells.git` is shallow repository ~ true
+#|	fatal: unable to access 'https://github.com/pure-symbols/mabynogion.spells.git/': Failed to connect to github.com port 443 after 21342 ms: Could not connect to server
+#|	tried: 1 for unshallow
+#|	remote: Enumerating objects: 710, done.
+#|	remote: Counting objects: 100% (710/710), done.
+#|	remote: Compressing objects: 100% (387/387), done.
+#|	remote: Total 645 (delta 381), reused 455 (delta 248), pack-reused 0 (from 0)
+#|	Receiving objects: 100% (645/645), 171.43 KiB | 816.00 KiB/s, done.
+#|	Resolving deltas: 100% (381/381), completed with 54 local objects.
+#|	From https://github.com/pure-symbols/mabynogion.spells
+#|	 * branch            HEAD       -> FETCH_HEAD
+#|	:: updating in `/mnt/e/repos/mabin.sp-src/mabynogion.spells.git` ::
+#|	repochk: `/mnt/e/repos/mabin.sp-src/mabynogion.spells.git` is inside worktree ~ false
+#|	repochk: `/mnt/e/repos/mabin.sp-src/mabynogion.spells.git` is inside gitdir ~ true
+#|	repochk: `/mnt/e/repos/mabin.sp-src/mabynogion.spells.git` is bare repository ~ true
+#|	base_upgrade: update from remote for '.'
+#|	repochk: `/mnt/e/repos/mabin.sp-src/mabynogion.spells.git` is bare repository ~ true
+#|	:: executing: remote update ::
+#|	From https://github.com/pure-symbols/mabynogion.spells
+#|	 * branch            HEAD       -> FETCH_HEAD
+#|	upper: updated in '.../mabin.sp-src/mabynogion.spells.git' for remote(s)
+#|	base_upgrade: updated in '.'
+#|	:: done for repo `mabin.sp-src/mabynogion.spells.git`. ::
+#|	:: executing: `.aide cp auto-clone --bare -- 'https://github.com/pure-symbols/pure.lexicals.git' pure.lexi-src/pure.lexicals.git` in '/mnt/e/repos' ::
+#|	:: git cloning in shallow (depth 1) mode ::
+#|	Cloning into bare repository 'pure.lexi-src/pure.lexicals.git'...
+#|	remote: Enumerating objects: 972, done.
+#|	remote: Counting objects: 100% (972/972), done.
+#|	remote: Compressing objects: 100% (728/728), done.
+#|	remote: Total 972 (delta 11), reused 904 (delta 9), pack-reused 0 (from 0)
+#|	Receiving objects: 100% (972/972), 50.83 MiB | 104.00 KiB/s, done.
+#|	Resolving deltas: 100% (11/11), done.
+#|	:: change workdir to `pure.lexi-src/pure.lexicals.git` from `/mnt/e/repos` to unshallow fetch ::
+#|	:: unshallowing in `/mnt/e/repos/pure.lexi-src/pure.lexicals.git` ::
+#|	repochk: `/mnt/e/repos/pure.lexi-src/pure.lexicals.git` is shallow repository ~ true
+#|	remote: Enumerating objects: 13742, done.
+#|	remote: Counting objects: 100% (13742/13742), done.
+#|	remote: Compressing objects: 100% (4297/4297), done.
+#|	remote: Total 13370 (delta 8513), reused 13080 (delta 8304), pack-reused 0 (from 0)
+#|	Receiving objects: 100% (13370/13370), 10.43 MiB | 2.63 MiB/s, done.
+#|	Resolving deltas: 100% (8513/8513), completed with 182 local objects.
+#|	From https://github.com/pure-symbols/pure.lexicals
+#|	 * branch            HEAD       -> FETCH_HEAD
+#|	:: updating in `/mnt/e/repos/pure.lexi-src/pure.lexicals.git` ::
+#|	repochk: `/mnt/e/repos/pure.lexi-src/pure.lexicals.git` is inside worktree ~ false
+#|	repochk: `/mnt/e/repos/pure.lexi-src/pure.lexicals.git` is inside gitdir ~ true
+#|	repochk: `/mnt/e/repos/pure.lexi-src/pure.lexicals.git` is bare repository ~ true
+#|	base_upgrade: update from remote for '.'
+#|	repochk: `/mnt/e/repos/pure.lexi-src/pure.lexicals.git` is bare repository ~ true
+#|	:: executing: remote update ::
+#|	From https://github.com/pure-symbols/pure.lexicals
+#|	 * branch            HEAD       -> FETCH_HEAD
+#|	upper: updated in '.../pure.lexi-src/pure.lexicals.git' for remote(s)
+#|	base_upgrade: updated in '.'
+#|	:: done for repo `pure.lexi-src/pure.lexicals.git`. ::
+#|	:: executing: `.aide cp auto-clone --bare -- 'https://github.com/yhm-amber/lang-note.git' ` in '/mnt/e/repos' ::
+#|	:: git cloning in shallow (depth 1) mode ::
+#|	Cloning into bare repository 'lang-note.git'...
+#|	remote: Enumerating objects: 279, done.
+#|	remote: Counting objects: 100% (279/279), done.
+#|	remote: Compressing objects: 100% (215/215), done.
+#|	remote: Total 279 (delta 8), reused 239 (delta 4), pack-reused 0 (from 0)
+#|	Receiving objects: 100% (279/279), 838.62 KiB | 149.00 KiB/s, done.
+#|	Resolving deltas: 100% (8/8), done.
+#|	:: change workdir to `lang-note.git` from `/mnt/e/repos` to unshallow fetch ::
+#|	:: unshallowing in `/mnt/e/repos/lang-note.git` ::
+#|	repochk: `/mnt/e/repos/lang-note.git` is shallow repository ~ true
+#|	remote: Enumerating objects: 4105, done.
+#|	remote: Counting objects: 100% (4105/4105), done.
+#|	remote: Compressing objects: 100% (1590/1590), done.
+#|	Rremote: Total 3950 (delta 2295), reused 3772 (delta 2184), pack-reused 0 (from 0)
+#|	Receiving objects: 100% (3950/3950), 732.22 KiB | 616.00 KiB/s, done.
+#|	Resolving deltas: 100% (2295/2295), completed with 102 local objects.
+#|	From https://github.com/yhm-amber/lang-note
+#|	 * branch            HEAD       -> FETCH_HEAD
+#|	:: updating in `/mnt/e/repos/lang-note.git` ::
+#|	repochk: `/mnt/e/repos/lang-note.git` is inside worktree ~ false
+#|	repochk: `/mnt/e/repos/lang-note.git` is inside gitdir ~ true
+#|	repochk: `/mnt/e/repos/lang-note.git` is bare repository ~ true
+#|	base_upgrade: update from remote for '.'
+#|	repochk: `/mnt/e/repos/lang-note.git` is bare repository ~ true
+#|	:: executing: remote update ::
+#|	From https://github.com/yhm-amber/lang-note
+#|	 * branch            HEAD       -> FETCH_HEAD
+#|	upper: updated in '.../test/lang-note.git' for remote(s)
+#|	base_upgrade: updated in '.'
+#|	:: done for repo `lang-note.git`. ::
+
 
 
