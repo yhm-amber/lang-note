@@ -133,8 +133,8 @@ Libs ()
 			as_bool () 
 			(
 				: 其音嵌之 其出用之 && 
-				local NAME_EMBEDDED="${1:-${NAME_EMBEDDED:-}}" && shift && 
-				local BOOL_DEFAULT="${1:-${BOOL_DEFAULT:-}}" && shift && 
+				local NAME_EMBEDDED="${1:-${NAME_EMBEDDED:-}}" && 
+				local BOOL_DEFAULT="${2:-${BOOL_DEFAULT:-}}" && 
 				echo '
 					case "$(echo "${'"$NAME_EMBEDDED"':-'"$BOOL_DEFAULT"'}" | tr '"'"'[:lower:]'"'"' '"'"'[:upper:]'"'"')" 
 					in 
@@ -173,6 +173,50 @@ Libs ()
 			(
 				while read -r -- line ;
 				do "$@" $line && :; done && 
+				: ) && 
+			: :: && 
+			"$@" && 
+			: ) && 
+		
+		#. eval "$(FD_TTY=9 _cmnd_tools _retry_asking init_codes)" && 
+		#. eval "$(FD_TTY=9 _cmnd_tools _retry_asking body_codes)" && 
+		_retry_asking () 
+		(
+			PKG_ASKING="${PKG_ASKING:-_cmnd_tools _retry_asking}" && 
+			FD_TTY="${FD_TTY:-${TTY_FD:-9}}" && 
+			
+			: 其尝适询 && 
+			__chunk_asker () 
+			(
+				echo '
+					0<&'"$FD_TTY"' read -p ":: try-asking: How many times you want to retry then ? :: " -r -- _rests_tryasking && 
+					echo :: try-asking: you inputed "'"'"'$_rests_tryasking'"'"'" as "$((_rests_tryasking--))". && 
+					: ' && 
+				: ) && 
+			__chunk_verifier () 
+			(
+				echo '
+					echo :: try-asking: rested times of push trying: "$((_rests_tryasking))". && 
+					if _cmnd_tools _booled_returns "$((_rests_tryasking < 0))" ; 
+						then echo :: try-asking: Break. ; break ;
+						else echo :: try-asking: Then: "$((--_rests_tryasking))" ;
+					fi && 
+					: ' && 
+				: ) && 
+			
+			init_codes () 
+			(
+				echo '
+					local _rests_tryasking="${MAXTRY_ASKING:-${ASKING_MAXTRY:-0}}" && 
+					: ' && 
+				: ) && 
+			body_codes () 
+			(
+				echo '
+					if _cmnd_tools _booled_returns "$((_rests_tryasking == 0))" ; 
+						then eval "$('"${PKG_ASKING}"' __chunk_asker)" ; eval "$('"${PKG_ASKING}"' __chunk_verifier)" ;
+						else eval "$('"${PKG_ASKING}"' __chunk_verifier)" ;
+					fi && : ' && 
 				: ) && 
 			: :: && 
 			"$@" && 
@@ -703,7 +747,7 @@ alias git-bike=git_bike && git_bike ()
 					git remote | while read -r -- git_remote ;
 					do 
 						echo working: push to remote "'${git_remote}'" for "'${gitdir}'" && 
-						local _rests_try_push="${MAXTRY_PUSH:-${PUSH_MAXTRY:-0}}" && 
+						eval "$(_cmnd_tools _retry_asking init_codes)" && 
 						while 
 						! if ! "${checked_bare}" && : 其令选行 ;
 							then git push "$@" --branches -- "${git_remote}" ;
@@ -717,27 +761,7 @@ alias git-bike=git_bike && git_bike ()
 								else echo "git push $* -- ${git_remote} 'refs/heads/*:refs/heads/*'" ;
 							fi)"'`' in "'${gitdir}'" && 
 							: 其尝适询 && 
-							__asker_codes () 
-							(
-								echo '
-									0<&9 read -p ":: try-asking: How many times you want to retry then ? :: " -r -- _rests_try_push && 
-									echo :: try-asking: you inputed "'"'"'$_rests_try_push'"'"'" as "$((_rests_try_push--))". && 
-									: ' && 
-								: ) && 
-							__verifier_codes () 
-							(
-								echo '
-									echo :: try-asking: rested times of push trying: "$((_rests_try_push))". && 
-									if _cmnd_tools _booled_returns "$((_rests_try_push < 0))" ; 
-										then echo :: try-asking: Break. ; break ;
-										else echo :: try-asking: Then: "$((--_rests_try_push))" ;
-									fi && 
-									: ' && 
-								: ) && 
-							if _cmnd_tools _booled_returns "$((_rests_try_push == 0))" ; 
-								then eval "$(__asker_codes)" ; eval "$(__verifier_codes)" ;
-								else eval "$(__verifier_codes)" ;
-							fi && 
+							eval "$(FD_TTY=9 _cmnd_tools _retry_asking body_codes)" && 
 							:; 
 						done && 
 						:; 
@@ -774,9 +798,9 @@ alias git-bike=git_bike && git_bike ()
 					echo :: pulling all remotes in "'${gitdir}'" :: && 
 					git remote | while read -r -- git_remote ;
 					do 
-						echo working: pull from remote "'${git_remote}'" for "'${gitdir}'" && 
-						local _rests_try_pull="${MAXTRY_PULL:-${PULL_MAXTRY:-0}}" && 
 						local _symbref_head="$(git symbolic-ref -- HEAD)" && 
+						echo working: pull from remote "'${git_remote}'" for "'${gitdir}'" && 
+						eval "$(_cmnd_tools _retry_asking init_codes)" && 
 						while 
 						! if ! "${checked_bare}" && : 其令选行 ;
 							then git fetch "$@" -- "${git_remote}" 'refs/heads/*:refs/heads/*' '^'"${_symbref_head}" ;
@@ -790,27 +814,7 @@ alias git-bike=git_bike && git_bike ()
 								else echo "git fetch $* -- ${git_remote} 'refs/heads/*:refs/heads/*'" ;
 							fi)"'`' in "'${gitdir}'" && 
 							: 其尝适询 && 
-							__asker_codes ()
-							(
-								echo '
-									0<&9 read -p ":: try-asking: How many times you want to retry then ? :: " -r -- _rests_try_pull && 
-									echo :: try-asking: you inputed "'"'"'$_rests_try_pull'"'"'" as "$((_rests_try_pull--))". && 
-									: ' && 
-								: ) && 
-							__verifier_codes () 
-							(
-								echo '
-									echo :: try-asking: rested times of pull trying: "$((_rests_try_pull))". && 
-									if _cmnd_tools _booled_returns "$((_rests_try_pull < 0))" ; 
-										then echo :: try-asking: Break. ; break ;
-										else echo :: try-asking: Then: "$((--_rests_try_pull))" ;
-									fi && 
-									: ' && 
-								: ) && 
-							if _cmnd_tools _booled_returns "$((_rests_try_pull == 0))" ; 
-								then eval "$(__asker_codes)" ; eval "$(__verifier_codes)" ;
-								else eval "$(__verifier_codes)" ;
-							fi && 
+							eval "$(FD_TTY=9 _cmnd_tools _retry_asking body_codes)" && 
 							:; 
 						done && 
 						:; 
@@ -869,7 +873,7 @@ git_bike "$@" && :
 
 #### demo -----------------------
 
-#|	$ git_bike auto_clone https://github.com/LibreService/my_rime.git --mirror
+#|	$ git-bike cp auto-clone https://github.com/LibreService/my_rime.git --mirror
 #|	:: git cloning in shallow (depth 1) mode ::
 #|	Cloning into bare repository 'my_rime.git'...
 #|	fatal: unable to access 'https://github.com/LibreService/my_rime.git/': Recv failure: Connection was reset
@@ -982,6 +986,8 @@ git_bike "$@" && :
 #|	- bp: means 'bare_play'.
 #|	- clone-play: means 'clone_play'.
 #|	- cp: means 'clone_play'.
+#|	- rc: means 'repo_chk'.
+#|	- repo-check: means 'repo_chk'.
 #|	- repo-chk: means 'repo_chk'.
 #|	- sp: means 'sync_play'.
 #|	- sub-help: means 'aliases'.
@@ -1017,6 +1023,8 @@ git_bike "$@" && :
 #|	- bp: means 'bare_play'.
 #|	- clone-play: means 'clone_play'.
 #|	- cp: means 'clone_play'.
+#|	- rc: means 'repo_chk'.
+#|	- repo-check: means 'repo_chk'.
 #|	- repo-chk: means 'repo_chk'.
 #|	- sp: means 'sync_play'.
 #|	- sub-help: means 'aliases'.
@@ -1052,6 +1060,8 @@ git_bike "$@" && :
 #|	- bp: means 'bare_play'.
 #|	- clone-play: means 'clone_play'.
 #|	- cp: means 'clone_play'.
+#|	- rc: means 'repo_chk'.
+#|	- repo-check: means 'repo_chk'.
 #|	- repo-chk: means 'repo_chk'.
 #|	- sp: means 'sync_play'.
 #|	- sub-help: means 'aliases'.
@@ -1087,6 +1097,8 @@ git_bike "$@" && :
 #|	- bp: means 'bare_play'.
 #|	- clone-play: means 'clone_play'.
 #|	- cp: means 'clone_play'.
+#|	- rc: means 'repo_chk'.
+#|	- repo-check: means 'repo_chk'.
 #|	- repo-chk: means 'repo_chk'.
 #|	- sp: means 'sync_play'.
 #|	- sub-help: means 'aliases'.
@@ -1353,5 +1365,133 @@ git_bike "$@" && :
 #|	Updating files: 100% (715/715), done.
 #|	HEAD is now at 3dd223437 Update network_security_config.xml
 #|	../tags/v3.1.5/
+
+#|	$ . ~/git-bike.sh ; git-bike sp all-sync
+#|	:: pulling from origin and all remotes in: ./pure.lexicals/ ::
+#|	repochk: `/mnt/e/repos-testing/pure.lexicals` is inside worktree ~ true
+#|	repochk: `/mnt/e/repos-testing/pure.lexicals` is bare repository ~ false
+#|	base_upgrade: update from remote for './pure.lexicals/'
+#|	remote: Enumerating objects: 39, done.
+#|	remote: Counting objects: 100% (39/39), done.
+#|	remote: Compressing objects: 100% (28/28), done.
+#|	remote: Total 28 (delta 18), reused 0 (delta 0), pack-reused 0 (from 0)
+#|	Unpacking objects: 100% (28/28), 6.46 KiB | 2.00 KiB/s, done.
+#|	From https://github.com/pure-symbols/pure.lexicals
+#|	   d536247..8fbcd08  main       -> origin/main
+#|	Updating d536247..8fbcd08
+#|	Fast-forward
+#|	 .notes/sh3rrs/Subs/.demo/git-bike.sh               | 90 ++++++++++++++--------
+#|	 .../readme"                                        | 16 +++-
+#|	 2 files changed, 75 insertions(+), 31 deletions(-)
+#|	base_upgrade: updated in './pure.lexicals/'
+#|	:: pulling all remotes in './pure.lexicals/' ::
+#|	working: pull from remote 'disroot' for './pure.lexicals/'
+#|	POST git-upload-pack (165 bytes)
+#|	working: pull from remote 'origin' for './pure.lexicals/'
+#|	POST git-upload-pack (165 bytes)
+#|	:: pulled all remotes in './pure.lexicals/' ::
+#|	
+#|	:: pushing origin to all remotes in: ./pure.lexicals/ ::
+#|	repochk: `/mnt/e/repos-testing/pure.lexicals` is inside worktree ~ true
+#|	repochk: `/mnt/e/repos-testing/pure.lexicals` is bare repository ~ false
+#|	base_upgrade: update from remote for './pure.lexicals/'
+#|	Already up to date.
+#|	base_upgrade: updated in './pure.lexicals/'
+#|	:: pushing all remotes in './pure.lexicals/' ::
+#|	working: push to remote 'disroot' for './pure.lexicals/'
+#|	Pushing to https://git.disroot.org/pure.symbols/pure.lexicals.git
+#|	Enumerating objects: 468, done.
+#|	Counting objects: 100% (468/468), done.
+#|	Delta compression using up to 16 threads
+#|	Compressing objects: 100% (191/191), done.
+#|	Writing objects: 100% (453/453), 132.51 KiB | 2.28 MiB/s, done.
+#|	Total 453 (delta 306), reused 398 (delta 261), pack-reused 0 (from 0)
+#|	POST git-receive-pack (135873 bytes)
+#|	remote: Resolving deltas: 100% (306/306), completed with 11 local objects.
+#|	remote: Checking connectivity: 453, done.
+#|	To https://git.disroot.org/pure.symbols/pure.lexicals.git
+#|	   d89077d..8fbcd08  main -> main
+#|	updating local tracking ref 'refs/remotes/disroot/main'
+#|	working: push to remote 'origin' for './pure.lexicals/'
+#|	Pushing to https://github.com/pure-symbols/pure.lexicals.git
+#|	To https://github.com/pure-symbols/pure.lexicals.git
+#|	 = [up to date]      main -> main
+#|	updating local tracking ref 'refs/remotes/origin/main'
+#|	Everything up-to-date
+#|	:: pushed all remotes in './pure.lexicals/' ::
+#|	
+#|	:: pulling from origin and all remotes in: ./pure.lexicals.git/ ::
+#|	repochk: `/mnt/e/repos-testing/pure.lexicals.git` is inside worktree ~ false
+#|	repochk: `/mnt/e/repos-testing/pure.lexicals.git` is inside gitdir ~ true
+#|	repochk: `/mnt/e/repos-testing/pure.lexicals.git` is bare repository ~ true
+#|	base_upgrade: update from remote for './pure.lexicals.git/'
+#|	Fetching origin
+#|	remote: Enumerating objects: 32, done.
+#|	remote: Counting objects: 100% (32/32), done.
+#|	remote: Compressing objects: 100% (21/21), done.
+#|	remote: Total 21 (delta 14), reused 0 (delta 0), pack-reused 0 (from 0)
+#|	Unpacking objects: 100% (21/21), 4.87 KiB | 2.00 KiB/s, done.
+#|	From https://github.com/pure-symbols/pure.lexicals
+#|	   1f2f05a..8fbcd08  main       -> main
+#|	Fetching disroot
+#|	From https://git.disroot.org/pure.symbols/pure.lexicals
+#|	   d89077d..8fbcd08  main       -> disroot/main
+#|	Fetching dr
+#|	From https://git.disroot.org/pure.symbols/pure.lexicals
+#|	   d89077d..8fbcd08  main       -> dr/main
+#|	base_upgrade: updated in './pure.lexicals.git/'
+#|	:: pulling all remotes in './pure.lexicals.git/' ::
+#|	working: pull from remote 'disroot' for './pure.lexicals.git/'
+#|	POST git-upload-pack (165 bytes)
+#|	From https://git.disroot.org/pure.symbols/pure.lexicals
+#|	 = [up to date]      main       -> main
+#|	 = [up to date]      main       -> disroot/main
+#|	working: pull from remote 'dr' for './pure.lexicals.git/'
+#|	POST git-upload-pack (165 bytes)
+#|	From https://git.disroot.org/pure.symbols/pure.lexicals
+#|	 = [up to date]      main       -> main
+#|	 = [up to date]      main       -> dr/main
+#|	working: pull from remote 'origin' for './pure.lexicals.git/'
+#|	POST git-upload-pack (165 bytes)
+#|	From https://github.com/pure-symbols/pure.lexicals
+#|	 = [up to date]      main       -> main
+#|	:: pulled all remotes in './pure.lexicals.git/' ::
+#|	
+#|	:: pushing origin to all remotes in: ./pure.lexicals.git/ ::
+#|	repochk: `/mnt/e/repos-testing/pure.lexicals.git` is inside worktree ~ false
+#|	repochk: `/mnt/e/repos-testing/pure.lexicals.git` is inside gitdir ~ true
+#|	repochk: `/mnt/e/repos-testing/pure.lexicals.git` is bare repository ~ true
+#|	base_upgrade: update from remote for './pure.lexicals.git/'
+#|	Fetching origin
+#|	From https://github.com/pure-symbols/pure.lexicals
+#|	 + 8fbcd08...d89077d disroot/main -> disroot/main  (forced update)
+#|	Fetching disroot
+#|	From https://git.disroot.org/pure.symbols/pure.lexicals
+#|	   d89077d..8fbcd08  main       -> disroot/main
+#|	Fetching dr
+#|	base_upgrade: updated in './pure.lexicals.git/'
+#|	:: pushing all remotes in './pure.lexicals.git/' ::
+#|	working: push to remote 'disroot' for './pure.lexicals.git/'
+#|	Pushing to https://git.disroot.org/pure.symbols/pure.lexicals.git
+#|	To https://git.disroot.org/pure.symbols/pure.lexicals.git
+#|	 = [up to date]      main -> main
+#|	updating local tracking ref 'refs/remotes/disroot/main'
+#|	Everything up-to-date
+#|	working: push to remote 'dr' for './pure.lexicals.git/'
+#|	Pushing to https://git.disroot.org/pure.symbols/pure.lexicals.git
+#|	To https://git.disroot.org/pure.symbols/pure.lexicals.git
+#|	 = [up to date]      main -> main
+#|	updating local tracking ref 'refs/remotes/dr/main'
+#|	Everything up-to-date
+#|	working: push to remote 'origin' for './pure.lexicals.git/'
+#|	fatal: --mirror can't be combined with refspecs
+#|	tried: 1 for `git push -v -- origin 'refs/heads/*:refs/heads/*'` in './pure.lexicals.git/'
+#|	:: try-asking: How many times you want to retry then ? :: 0
+#|	:: try-asking: you inputed '0' as 0.
+#|	:: try-asking: rested times of push trying: -1.
+#|	:: try-asking: Break.
+#|	:: pushed all remotes in './pure.lexicals.git/' ::
+#|	
+
 
 
