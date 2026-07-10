@@ -1,18 +1,33 @@
 #!/usr/bin/env bash
 
-
+libs () ( Libs "$@" ) && 
 Libs () 
 {
 	subs () 
 	(
-		langtools () ( _lang_tool "$@" && : ) && 
-		frames () ( PKG_LANG='subs langtools' _frame_subs "$@" && : ) && 
+		lang () ( _lang_tool "$@" && : ) && 
+		frames () ( PKG_SUBS="${PKG_SUBSLANG:-${PKG_SUBS:-subs lang}}" _frame_subs "$@" && : ) && 
 		kwargs () ( _frame_kwargs "$@" && : ) && 
 		: :: && 
 		Subs "$@" && 
 		: ) && 
 	Subs () 
 	{
+		#.	__a__="$(alias)"
+		#.	alias a=a b=b
+		#.	alias | _set_tool diff "$__a__"
+		#.	_set_tool diff "$__a__" <(alias)
+		#:>	out: `alias a='a'` and `alias b='b'`
+		_set_tool () 
+		(
+			diff () 
+			(
+				grep -x -F -f <( echo "$1" ) -v -- "${2:--}" && 
+				: ) && 
+			: :: && 
+			"$@" && 
+			: ) && 
+		
 		_lang_tool () 
 		(
 			trim_line () 
@@ -97,7 +112,8 @@ Libs ()
 		#. eval "$(_frame_subs codes_tail)" && 
 		_frame_subs () 
 		(
-			PKG_LANG="${PKG_LANG:-Subs _lang_tool}" && 
+			PKG_SUBS="${PKG_SUBSLANG:-${PKG_SUBS:-Subs _lang_tool}}" && 
+			NAMEMARK_MORE="${NAMEMARK_MORE:-${MARK_MORE:-}}" && 
 			
 			: 亓可别名 去别承体 && 
 			: 亓可助令 略别详体 && 
@@ -105,19 +121,31 @@ Libs ()
 			codes_head () 
 			(
 				echo '
-					local __aliases_home__="$(alias)" && 
+					{
+						! { &>/dev/null local ; } || 
+						{
+							local __aliases_home__'"$NAMEMARK_MORE"' ;
+							local __aliases_ende__'"$NAMEMARK_MORE"' ;
+							local __aliases__'"$NAMEMARK_MORE"' ;
+						} ;
+						:; 
+					} && 
+					__aliases_home__'"$NAMEMARK_MORE"'="$(alias)" && 
 					: ' && 
 				: ) && 
 			codes_tail () 
 			(
 				echo '
-					alias sub-help=aliases && aliases () ( echo "$__aliases__" | '"${PKG_LANG}"' "${@:-help_alias}" && : ) && 
-					local __aliases_ende__="$(alias)" && 
-					local __aliases__="$(echo "$__aliases_ende__" | _set_tools diff "$__aliases_home__")" && 
+					alias sub-help=aliases && aliases () ( echo "$__aliases__'"$NAMEMARK_MORE"'" | '"${PKG_SUBS}"' "${@:-help_alias}" && : ) && 
+					__aliases_ende__'"$NAMEMARK_MORE"'="$(alias)" && 
+					__aliases__'"$NAMEMARK_MORE"'="$(
+						echo "$__aliases_ende__'"$NAMEMARK_MORE"'" | 
+							'"${PKG_SUBS}"' _set_tool diff "$__aliases_home__'"$NAMEMARK_MORE"'" | 
+							cat -)" && 
 					eval "
-						{ $(aliases cat | SP='"';'"' '"${PKG_LANG}"' alias_un) :; } && 
-						$(aliases cat | SP='"'&&'"' '"${PKG_LANG}"' alias_fn)
-						$(aliases cat | SP='"'&&'"' '"${PKG_LANG}"' alias_hp)
+						{ $(aliases cat | SP='"';'"' '"${PKG_SUBS}"' alias_un) :; } && 
+						$(aliases cat | SP='"'&&'"' '"${PKG_SUBS}"' alias_fn)
+						$(aliases cat | SP='"'&&'"' '"${PKG_SUBS}"' alias_hp)
 						: " && 
 					help () ( sub-help help_alias "$@" ) && 
 					: ' && 
@@ -226,21 +254,6 @@ Libs ()
 		"$@" && 
 		: ) && 
 	
-	#.	__a__="$(alias)"
-	#.	alias a=a b=b
-	#.	alias | _set_tools diff "$__a__"
-	#.	_set_tools diff "$__a__" <(alias)
-	#:>	out: `alias a='a'` and `alias b='b'`
-	_set_tools () 
-	(
-		diff () 
-		(
-			grep -x -F -f <( echo "$1" ) -v -- "${2:--}" && 
-			: ) && 
-		: :: && 
-		"$@" && 
-		: ) && 
-	
 	_param_tools () 
 	(
 		params_out () 
@@ -299,7 +312,26 @@ Libs ()
 } && 
 
 
-alias git-bike=git_bike && git_bike () 
+eval "$(MARK_MORE=GIT_BENCH PKG_SUBS='libs subs lang' libs subs frames codes_head)" && 
+
+git_bench__helper__ () 
+(
+	echo && 
+	echo 'Git bench (also names 'git bike') is a workbench for git to give levers/wheels with its helpdocs.' && 
+	echo ' It'"'"'s also a demo for `Subs` frame which is a simple helper frame in shell (tested in bash & brush) that can trans alias names' && 
+	echo ' as function with a helpdocs feature supported.' && 
+	echo && 
+	echo 'See help:' && 
+	echo '- git-bench help' && 
+	echo '- git-bench help git-bench' && 
+	echo '- git-bench help git-bike' && 
+	echo '- git-bench help gb' && 
+	echo '- help git-bench' && 
+	echo '- help git-bike' && 
+	echo '- help gb' && 
+	echo && 
+	: ) && 
+alias gb=git_bench git-bike=git_bench git-bench=git_bench && git_bench () 
 (
 	# Libs Subs : && 
 	Libs : && 
@@ -371,7 +403,8 @@ alias git-bike=git_bike && git_bike ()
 	(
 		eval "$(subs frames codes_head)" && 
 		
-		#: OPTS_CLONE='<git-clone-options>' git-bike cp multi-clone <working-dir> <remote-link> [<remote-link> ...]
+		#: OPTS_CLONE='<git-clone-options>' git-bench cp multi-clone <working-dir> [<local-dir>]:<remote-link> [[<local-dir>]:<remote-link> ...]
+		#. OPTS_CLONE=--bare git-bike cp m . mabin.sp-src/mabynogion.spells.git:https://github.com/pure-symbols/mabynogion.spells.git pure.lexi-src/pure.lexicals.git:https://github.com/pure-symbols/pure.lexicals.git
 		multi_clone__helper__ () 
 		(
 			echo && 
@@ -388,20 +421,20 @@ alias git-bike=git_bike && git_bike ()
 		_multi_clone () 
 		(
 			cd "${WORKING_PATH:-.}" && 
-			while read -r -- remote_link ;
+			while IFS=: read -r -- landing_path remote_link ;
 			do 
-				echo :: executing: '`'auto-clone ${OPTS_CLONE} -- "'${remote_link}'"'`' in "'${PWD}'" :: && 
-				auto_clone ${OPTS_CLONE} -- "${remote_link}" && 
+				echo :: executing: '`'cp auto-clone ${OPTS_CLONE} -- "'${remote_link}'" ${landing_path}'`' in "'${PWD}'" :: && 
+				auto_clone ${OPTS_CLONE} -- "${remote_link}" ${landing_path} && 
 				:; 
 			done && 
 			: ) && 
 		
-		#: git-bike cp auto-clone [<git-clone-options>] -- <remote-link> [<aim-path>]
+		#: git-bench cp auto-clone [<git-clone-options>] -- <remote-link> [<aim-path>]
 		auto_clone__helper__ () 
 		(
 			echo && 
 			echo 'Usage:' && 
-			echo $'\t' 'git-bike cp auto-clone [<git-clone-options>] -- <remote-link> [<aim-path>]' && 
+			echo $'\t' 'git-bench cp auto-clone [<git-clone-options>] -- <remote-link> [<aim-path>]' && 
 			echo && 
 			echo 'This tool is for when you having a bad internet to your' && 
 			echo ' remote repo. It will making a depth=1 shallow clone at the' && 
@@ -410,16 +443,16 @@ alias git-bike=git_bike && git_bike ()
 			echo ' All of the downloading works can auto-retry while it failed.' && 
 			echo && 
 			echo 'Demo:' && 
-			echo '- git-bike cp auto-clone https://github.com/LibreService/my_rime.git --mirror' && 
-			echo '- git-bike cp auto-clone https://github.com/gurecn/YuyanIme.git --mirror' && 
-			echo '- git-bike cp auto-clone --mirror -- https://github.com/gurecn/YuyanIme.git yuyan.git' && 
-			echo '- git-bike cp auto-clone --mirror -- https://github.com/crynta/terax-ai.git' && 
-			echo '- git-bike cp auto-clone -- https://github.com/gopasspw/git-credential-gopass.git ~/gopass-src/git-credential-gopass' && 
+			echo '- git-bench cp auto-clone https://github.com/LibreService/my_rime.git --mirror' && 
+			echo '- git-bench cp auto-clone https://github.com/gurecn/YuyanIme.git --mirror' && 
+			echo '- git-bench cp auto-clone --mirror -- https://github.com/gurecn/YuyanIme.git yuyan.git' && 
+			echo '- git-bench cp auto-clone --mirror -- https://github.com/crynta/terax-ai.git' && 
+			echo '- git-bench cp auto-clone -- https://github.com/gopasspw/git-credential-gopass.git ~/gopass-src/git-credential-gopass' && 
 			echo && 
 			echo 'See help:' && 
-			echo '- git-bike help cp auto-clone' && 
-			echo '- git-bike help cp ac' && 
-			echo '- git-bike cp help ac' && 
+			echo '- git-bench help cp auto-clone' && 
+			echo '- git-bench help cp ac' && 
+			echo '- git-bench cp help ac' && 
 			echo && 
 			: ) && 
 		alias a=auto_clone ac=auto_clone auto-clone=auto_clone && auto_clone () 
@@ -483,10 +516,10 @@ alias git-bike=git_bike && git_bike ()
 		
 		eval "$(subs frames codes_head)" && 
 		
-		#. git-bike bare-play up
-		#. git-bike bare-play up origin
-		#. git-bike bare-play up github
-		#. git-bike bare-play up disroot
+		#. git-bench bare-play up
+		#. git-bench bare-play up origin
+		#. git-bench bare-play up github
+		#. git-bench bare-play up disroot
 		update__helper__ () 
 		(
 			echo && 
@@ -499,16 +532,16 @@ alias git-bike=git_bike && git_bike ()
 			echo "- path of worktree dir from tag must be like: 'name.comments-src/tags/<tag-name>'" && 
 			echo && 
 			echo 'Demo:' && 
-			echo '- git-bike bare-play up' && 
-			echo '- git-bike bare-play up origin' && 
-			echo '- git-bike bare-play up github' && 
-			echo '- git-bike bare-play up disroot' && 
+			echo '- git-bench bare-play up' && 
+			echo '- git-bench bare-play up origin' && 
+			echo '- git-bench bare-play up github' && 
+			echo '- git-bench bare-play up disroot' && 
 			echo && 
 			echo 'See help:' && 
-			echo '- git-bike help bare-play update' && 
-			echo '- git-bike help bare-play up' && 
-			echo '- git-bike help bp up' && 
-			echo '- git-bike bp help up' && 
+			echo '- git-bench help bare-play update' && 
+			echo '- git-bench help bare-play up' && 
+			echo '- git-bench help bp up' && 
+			echo '- git-bench bp help up' && 
 			echo && 
 			: ) && 
 		alias up=update && update () 
@@ -547,10 +580,10 @@ alias git-bike=git_bike && git_bike ()
 			done && 
 			: ) && 
 		
-		#. git-bike bare-play worktree add tree master
-		#. git-bike bare-play worktree rm tree master
-		#. git-bike bare-play worktree add tags v1.0.1
-		#. git-bike bare-play worktree rm tags v1.0.1
+		#. git-bench bare-play worktree add tree master
+		#. git-bench bare-play worktree rm tree master
+		#. git-bench bare-play worktree add tags v1.0.1
+		#. git-bench bare-play worktree rm tags v1.0.1
 		worktree__helper__ () 
 		(
 			echo && 
@@ -562,18 +595,18 @@ alias git-bike=git_bike && git_bike ()
 			echo "- the path of worktree dir from tag will be like: 'name.comments-src/tags/<tag-name>'" && 
 			echo && 
 			echo 'Demo:' && 
-			echo '- git-bike bare-play worktree add tree master' && 
-			echo '- git-bike bare-play worktree rm tree master' && 
-			echo '- git-bike bare-play worktree add tags v1.0.1' && 
-			echo '- git-bike bare-play worktree rm tags v1.0.1' && 
-			echo '- git-bike bare-play wt a tags v1.16.1' && 
-			echo '- git-bike bare-play wt a tree master' && 
+			echo '- git-bench bare-play worktree add tree master' && 
+			echo '- git-bench bare-play worktree rm tree master' && 
+			echo '- git-bench bare-play worktree add tags v1.0.1' && 
+			echo '- git-bench bare-play worktree rm tags v1.0.1' && 
+			echo '- git-bench bare-play wt a tags v1.16.1' && 
+			echo '- git-bench bare-play wt a tree master' && 
 			echo && 
 			echo 'See help:' && 
-			echo '- git-bike help bare-play worktree' && 
-			echo '- git-bike help bare-play wt' && 
-			echo '- git-bike help bp wt' && 
-			echo '- git-bike bp help wt' && 
+			echo '- git-bench help bare-play worktree' && 
+			echo '- git-bench help bare-play wt' && 
+			echo '- git-bench help bp wt' && 
+			echo '- git-bench bp help wt' && 
 			echo && 
 			: ) && 
 		alias wt=worktree && worktree () 
@@ -659,7 +692,7 @@ alias git-bike=git_bike && git_bike ()
 	(
 		eval "$(subs frames codes_head)" && 
 		
-		#: git-bike sp all-sync [<workspace> ...]
+		#: git-bench sp all-sync [<workspace> ...]
 		#::	workspace: means the prefix in full name of a repo
 		#..	 like it in so many hubs -- <workspace>/<reponame>. In generally
 		#;;	 a 'workspace' can be the id-name of a(n) user or org.
@@ -679,7 +712,7 @@ alias git-bike=git_bike && git_bike ()
 			: ) && 
 		
 		
-		#: git-bike sp base-upgrade [<gitdir-path> ...]
+		#: git-bench sp base-upgrade [<gitdir-path> ...]
 		#: base_upgrade [<gitdir-path> ...]
 		#: IS_BARE=true base_upgrade [<gitdir-path> ...]
 		#: SHOW_MORE_HINTS=n IS_BARE=y base_upgrade [<gitdir-path> ...]
@@ -723,7 +756,7 @@ alias git-bike=git_bike && git_bike ()
 			: ) && 
 		
 		
-		#: git-bike sp all-push [<git-dir> ...]
+		#: git-bench sp all-push [<git-dir> ...]
 		alias all-push=all_push && all_push () 
 		(
 			echo :: pushing origin to all remotes in: "${@:-.}" :: && 
@@ -775,7 +808,7 @@ alias git-bike=git_bike && git_bike ()
 			: ) 9</dev/tty && 
 		
 		
-		#: git-bike sp all-pull [<git-dir> ...]
+		#: git-bench sp all-pull [<git-dir> ...]
 		alias all-pull=all_pull && all_pull () 
 		(
 			echo :: pulling from origin and all remotes in: "${@:-.}" :: && 
@@ -845,9 +878,10 @@ alias git-bike=git_bike && git_bike ()
 	"$@" && 
 	: ) && 
 
+eval "$(MARK_MORE=GIT_BENCH PKG_SUBS='libs subs lang' libs subs frames codes_tail)" && 
 
 # : \
-git_bike "$@" && :
+git_bench "$@" && :
 
 
 
@@ -869,11 +903,11 @@ git_bike "$@" && :
 
 # git symbolic-ref HEAD #: 查 HEAD 指向、用 cat ./HEAD 也能看到相应信息
 # git symbolic-ref HEAD refs/heads/some-other-branch #: 变 HEAD 指向
-# git config --global -- alias.bike "!/usr/bin/env bash ~/.local/git-bike.sh"
+# git config --global -- alias.bench "!/usr/bin/env bash ~/.local/git-bench.sh"
 
 #### demo -----------------------
 
-#|	$ git-bike cp auto-clone https://github.com/LibreService/my_rime.git --mirror
+#|	$ git-bench cp auto-clone https://github.com/LibreService/my_rime.git --mirror
 #|	:: git cloning in shallow (depth 1) mode ::
 #|	Cloning into bare repository 'my_rime.git'...
 #|	fatal: unable to access 'https://github.com/LibreService/my_rime.git/': Recv failure: Connection was reset
@@ -918,7 +952,7 @@ git_bike "$@" && :
 #|	:: updating in `/mnt/e/rimeweb.pwa-src/my_rime.git` ::
 #|	:: done for repo `my_rime.git`. ::
 
-#|	$ git-bike cp auto-clone https://github.com/gurecn/YuyanIme.git --mirror
+#|	$ git-bench cp auto-clone https://github.com/gurecn/YuyanIme.git --mirror
 #|	:: git cloning in shallow (depth 1) mode ::
 #|	Cloning into bare repository 'YuyanIme.git'...
 #|	remote: Enumerating objects: 295, done.
@@ -939,7 +973,7 @@ git_bike "$@" && :
 #|	:: updating in `/mnt/e/yuyanime.hanzi-src/YuyanIme.git` ::
 #|	:: done for repo `YuyanIme.git`. ::
 
-#|	$ git-bike bare-play up
+#|	$ git-bench bare-play up
 #|	repochk: `/mnt/e/rufus.usbfldr-src/rufus.git` is bare repository ~ true
 #|	:: executing: `checkout --detach` in '../tree/master' ::
 #|	HEAD is now at eedeaea7 [misc] fix multiple small issues
@@ -980,7 +1014,7 @@ git_bike "$@" && :
 #|	upper: checkouted ../tree/master as master
 
 
-#|	$ git-bike help cp ac
+#|	$ git-bench help cp ac
 #|	sub command(s) here:
 #|	- bare-play: means 'bare_play'.
 #|	- bp: means 'bare_play'.
@@ -996,7 +1030,7 @@ git_bike "$@" && :
 #|	sub command: cp ac
 #|	
 #|	Usage:
-#|		 git-bike cp auto-clone [<git-clone-options>] -- <remote-link> [<aim-path>]
+#|		 git-bench cp auto-clone [<git-clone-options>] -- <remote-link> [<aim-path>]
 #|	
 #|	This tool is for when you having a bad internet to your
 #|	 remote repo. It will making a depth=1 shallow clone at the
@@ -1005,19 +1039,19 @@ git_bike "$@" && :
 #|	 All of the downloading works can auto-retry while it failed.
 #|	
 #|	Demo:
-#|	- git-bike cp auto-clone https://github.com/LibreService/my_rime.git --mirror
-#|	- git-bike cp auto-clone https://github.com/gurecn/YuyanIme.git --mirror
-#|	- git-bike cp auto-clone --mirror -- https://github.com/gurecn/YuyanIme.git yuyan.git
-#|	- git-bike cp auto-clone --mirror -- https://github.com/crynta/terax-ai.git
-#|	- git-bike cp auto-clone -- https://github.com/gopasspw/git-credential-gopass.git ~/gopass-src/git-credential-gopass
+#|	- git-bench cp auto-clone https://github.com/LibreService/my_rime.git --mirror
+#|	- git-bench cp auto-clone https://github.com/gurecn/YuyanIme.git --mirror
+#|	- git-bench cp auto-clone --mirror -- https://github.com/gurecn/YuyanIme.git yuyan.git
+#|	- git-bench cp auto-clone --mirror -- https://github.com/crynta/terax-ai.git
+#|	- git-bench cp auto-clone -- https://github.com/gopasspw/git-credential-gopass.git ~/gopass-src/git-credential-gopass
 #|	
 #|	See help:
-#|	- git-bike help cp auto-clone
-#|	- git-bike help cp ac
-#|	- git-bike cp help ac
+#|	- git-bench help cp auto-clone
+#|	- git-bench help cp ac
+#|	- git-bench cp help ac
 #|	
 
-#|	$ git-bike help bare-play up
+#|	$ git-bench help bare-play up
 #|	sub command(s) here:
 #|	- bare-play: means 'bare_play'.
 #|	- bp: means 'bare_play'.
@@ -1042,19 +1076,19 @@ git_bike "$@" && :
 #|	- path of worktree dir from tag must be like: 'name.comments-src/tags/<tag-name>'
 #|	
 #|	Demo:
-#|	- git-bike bare-play up
-#|	- git-bike bare-play up origin
-#|	- git-bike bare-play up github
-#|	- git-bike bare-play up disroot
+#|	- git-bench bare-play up
+#|	- git-bench bare-play up origin
+#|	- git-bench bare-play up github
+#|	- git-bench bare-play up disroot
 #|	
 #|	See help:
-#|	- git-bike help bare-play update
-#|	- git-bike help bare-play up
-#|	- git-bike help bp up
-#|	- git-bike bp help up
+#|	- git-bench help bare-play update
+#|	- git-bench help bare-play up
+#|	- git-bench help bp up
+#|	- git-bench bp help up
 #|	
 
-#|	$ git-bike help bp up
+#|	$ git-bench help bp up
 #|	sub command(s) here:
 #|	- bare-play: means 'bare_play'.
 #|	- bp: means 'bare_play'.
@@ -1079,19 +1113,19 @@ git_bike "$@" && :
 #|	- path of worktree dir from tag must be like: 'name.comments-src/tags/<tag-name>'
 #|	
 #|	Demo:
-#|	- git-bike bare-play up
-#|	- git-bike bare-play up origin
-#|	- git-bike bare-play up github
-#|	- git-bike bare-play up disroot
+#|	- git-bench bare-play up
+#|	- git-bench bare-play up origin
+#|	- git-bench bare-play up github
+#|	- git-bench bare-play up disroot
 #|	
 #|	See help:
-#|	- git-bike help bare-play update
-#|	- git-bike help bare-play up
-#|	- git-bike help bp up
-#|	- git-bike bp help up
+#|	- git-bench help bare-play update
+#|	- git-bench help bare-play up
+#|	- git-bench help bp up
+#|	- git-bench bp help up
 #|	
 
-#|	$ git-bike help bp wt
+#|	$ git-bench help bp wt
 #|	sub command(s) here:
 #|	- bare-play: means 'bare_play'.
 #|	- bp: means 'bare_play'.
@@ -1115,28 +1149,28 @@ git_bike "$@" && :
 #|	- the path of worktree dir from tag will be like: 'name.comments-src/tags/<tag-name>'
 #|	
 #|	Demo:
-#|	- git-bike bare-play worktree add tree master
-#|	- git-bike bare-play worktree rm tree master
-#|	- git-bike bare-play worktree add tags v1.0.1
-#|	- git-bike bare-play worktree rm tags v1.0.1
-#|	- git-bike bare-play wt a tags v1.16.1
-#|	- git-bike bare-play wt a tree master
+#|	- git-bench bare-play worktree add tree master
+#|	- git-bench bare-play worktree rm tree master
+#|	- git-bench bare-play worktree add tags v1.0.1
+#|	- git-bench bare-play worktree rm tags v1.0.1
+#|	- git-bench bare-play wt a tags v1.16.1
+#|	- git-bench bare-play wt a tree master
 #|	
 #|	See help:
-#|	- git-bike help bare-play worktree
-#|	- git-bike help bare-play wt
-#|	- git-bike help bp wt
-#|	- git-bike bp help wt
+#|	- git-bench help bare-play worktree
+#|	- git-bench help bare-play wt
+#|	- git-bench help bp wt
+#|	- git-bench bp help wt
 #|	
 
-#|	$ git-bike bp wt a tags v1.61.1
+#|	$ git-bench bp wt a tags v1.61.1
 #|	repochk: `/mnt/e/gopass.passwd-srcs/cli/gopass.git` is bare repository ~ true
 #|	Contained tags:
 #|	error: malformed object name v1.61.1
 #|	$ echo $?
 #|	129
 
-#|	$ CHOOSE_MODE=All git-bike bp wt a tags v1.16.1
+#|	$ CHOOSE_MODE=All git-bench bp wt a tags v1.16.1
 #|	repochk: `/mnt/e/gopass.passwd-srcs/cli/gopass.git` is bare repository ~ true
 #|	Contained tags:
 #|	-	v1.16.1
@@ -1164,7 +1198,7 @@ git_bike "$@" && :
 #|	../tags/v1.16.1/
 #|	../tags/v1.17.0-rc.1/
 #|	../tags/v1.17.0-rc.2/
-#|	$ CHOOSE_MODE=All git-bike bp wt x tags v1.16.1
+#|	$ CHOOSE_MODE=All git-bench bp wt x tags v1.16.1
 #|	repochk: `/mnt/e/gopass.passwd-srcs/cli/gopass.git` is bare repository ~ true
 #|	Contained tags:
 #|	-	v1.16.1
@@ -1182,7 +1216,7 @@ git_bike "$@" && :
 #|	:: executing: worktree remove ../tags/v1.17.0-rc.2 ::
 #|	ls: cannot access '../tags/*': No such file or directory
 
-#|	$ CHOOSE_MODE=Only git-bike bp wt a tags v1.16.1
+#|	$ CHOOSE_MODE=Only git-bench bp wt a tags v1.16.1
 #|	repochk: `/mnt/e/gopass.passwd-srcs/cli/gopass.git` is bare repository ~ true
 #|	Contained tags:
 #|	-	v1.16.1
@@ -1195,7 +1229,7 @@ git_bike "$@" && :
 #|	Updating files: 100% (652/652), done.
 #|	HEAD is now at f4bb1ded Tag v1.16.1 (#3304)
 #|	../tags/v1.16.1/
-#|	$ git-bike bp wt a tree master
+#|	$ git-bench bp wt a tree master
 #|	repochk: `/mnt/e/gopass.passwd-srcs/cli/gopass.git` is bare repository ~ true
 #|	Contained branches:
 #|	-	master
@@ -1205,7 +1239,7 @@ git_bike "$@" && :
 #|	HEAD is now at f25fc7b4 fix: restore clip flag through fuzzy search in show command (#3466)
 #|	../tree/master/
 
-#|	$ git-bike bp help wt
+#|	$ git-bench bp help wt
 #|	repochk: `/mnt/e/gopass.passwd-srcs/cli/gopass.git` is bare repository ~ true
 #|	sub command(s) here:
 #|	- sub-help: means 'aliases'.
@@ -1222,21 +1256,21 @@ git_bike "$@" && :
 #|	- the path of worktree dir from tag will be like: 'name.comments-src/tags/<tag-name>'
 #|	
 #|	Demo:
-#|	- git-bike bare-play worktree add tree master
-#|	- git-bike bare-play worktree rm tree master
-#|	- git-bike bare-play worktree add tags v1.0.1
-#|	- git-bike bare-play worktree rm tags v1.0.1
-#|	- git-bike bare-play wt a tags v1.16.1
-#|	- git-bike bare-play wt a tree master
+#|	- git-bench bare-play worktree add tree master
+#|	- git-bench bare-play worktree rm tree master
+#|	- git-bench bare-play worktree add tags v1.0.1
+#|	- git-bench bare-play worktree rm tags v1.0.1
+#|	- git-bench bare-play wt a tags v1.16.1
+#|	- git-bench bare-play wt a tree master
 #|	
 #|	See help:
-#|	- git-bike help bare-play worktree
-#|	- git-bike help bare-play wt
-#|	- git-bike help bp wt
-#|	- git-bike bp help wt
+#|	- git-bench help bare-play worktree
+#|	- git-bench help bare-play wt
+#|	- git-bench help bp wt
+#|	- git-bench bp help wt
 #|	
 
-#|	$ git-bike bp wt a tree master
+#|	$ git-bench bp wt a tree master
 #|	repochk: `/mnt/e/gopass.passwd-srcs/browser-ext/gopassbridge.git` is bare repository ~ true
 #|	Contained branches:
 #|	-	dependabot/github_actions/actions/checkout-7
@@ -1251,7 +1285,7 @@ git_bike "$@" && :
 #|	HEAD is now at 5da4522 Merge pull request #342 from gopasspw/dependabot/tools-48090d0390
 #|	../tree/master/
 
-#|	$ git-bike ac https://github.com/t8y2/dbx.git --mirror
+#|	$ git-bench ac https://github.com/t8y2/dbx.git --mirror
 #|	:: git cloning in shallow (depth 1) mode ::
 #|	Cloning into bare repository 'dbx.git'...
 #|	remote: Enumerating objects: 24035, done.
@@ -1305,7 +1339,7 @@ git_bike "$@" && :
 #|	From https://github.com/t8y2/dbx
 #|	   b951d3a5..7a21f258  main       -> main
 #|	:: done for repo `dbx.git`. ::
-#|	$ git-bike bp wt a tags v0.5.41
+#|	$ git-bench bp wt a tags v0.5.41
 #|	repochk: `/mnt/e/dbx.sqlclient.ai-src/dbx.git` is bare repository ~ true
 #|	Contained tags:
 #|	-	agents-latest
@@ -1319,7 +1353,7 @@ git_bike "$@" && :
 #|	Updating files: 100% (1656/1656), done.
 #|	HEAD is now at ba872303 feat(release): bump app version to 0.5.41
 #|	../tags/v0.5.41/
-#|	$ git-bike bp wt a tree main
+#|	$ git-bench bp wt a tree main
 #|	repochk: `/mnt/e/dbx.sqlclient.ai-src/dbx.git` is bare repository ~ true
 #|	Contained branches:
 #|	-	main
@@ -1330,7 +1364,7 @@ git_bike "$@" && :
 #|	Updating files: 100% (1656/1656), done.
 #|	HEAD is now at 7a21f258 feat(sqlCompletion): support SELECT list expand-all-fields completion (#2155)
 #|	../tree/main/
-#|	$ git-bike bp wt x tree main
+#|	$ git-bench bp wt x tree main
 #|	repochk: `/mnt/e/dbx.sqlclient.ai-src/dbx.git` is bare repository ~ true
 #|	Contained branches:
 #|	-	main
@@ -1339,7 +1373,7 @@ git_bike "$@" && :
 #|	:: executing: worktree remove ../tree/main ::
 #|	ls: cannot access '../tree/*': No such file or directory
 
-#|	$ git-bike bp wt a tags v3.1.5
+#|	$ git-bench bp wt a tags v3.1.5
 #|	repochk: `/mnt/e/xed.repoctl.editor.android-src/Xed-Editor.git` is bare repository ~ true
 #|	Contained tags:
 #|	-	sdk-latest
@@ -1366,7 +1400,7 @@ git_bike "$@" && :
 #|	HEAD is now at 3dd223437 Update network_security_config.xml
 #|	../tags/v3.1.5/
 
-#|	$ . ~/git-bike.sh ; git-bike sp all-sync
+#|	$ . ~/git-bench.sh ; git-bench sp all-sync
 #|	:: pulling from origin and all remotes in: ./pure.lexicals/ ::
 #|	repochk: `/mnt/e/repos-testing/pure.lexicals` is inside worktree ~ true
 #|	repochk: `/mnt/e/repos-testing/pure.lexicals` is bare repository ~ false
@@ -1380,7 +1414,7 @@ git_bike "$@" && :
 #|	   d536247..8fbcd08  main       -> origin/main
 #|	Updating d536247..8fbcd08
 #|	Fast-forward
-#|	 .notes/sh3rrs/Subs/.demo/git-bike.sh               | 90 ++++++++++++++--------
+#|	 .notes/sh3rrs/Subs/.demo/git-bench.sh               | 90 ++++++++++++++--------
 #|	 .../readme"                                        | 16 +++-
 #|	 2 files changed, 75 insertions(+), 31 deletions(-)
 #|	base_upgrade: updated in './pure.lexicals/'
@@ -1493,5 +1527,91 @@ git_bike "$@" && :
 #|	:: pushed all remotes in './pure.lexicals.git/' ::
 #|	
 
+#|	$ git-bench help
+#|	sub command(s) here:
+#|	- bare-play: means 'bare_play'.
+#|	- bp: means 'bare_play'.
+#|	- clone-play: means 'clone_play'.
+#|	- cp: means 'clone_play'.
+#|	- rc: means 'repo_chk'.
+#|	- repo-check: means 'repo_chk'.
+#|	- repo-chk: means 'repo_chk'.
+#|	- sp: means 'sync_play'.
+#|	- sub-help: means 'aliases'.
+#|	- sync-play: means 'sync_play'.
 
+#|	$ git-bench help git-bench
+#|	sub command(s) here:
+#|	- bare-play: means 'bare_play'.
+#|	- bp: means 'bare_play'.
+#|	- clone-play: means 'clone_play'.
+#|	- cp: means 'clone_play'.
+#|	- rc: means 'repo_chk'.
+#|	- repo-check: means 'repo_chk'.
+#|	- repo-chk: means 'repo_chk'.
+#|	- sp: means 'sync_play'.
+#|	- sub-help: means 'aliases'.
+#|	- sync-play: means 'sync_play'.
+#|	
+#|	sub command: git-bench
+#|	
+#|	Git bench (also names git bike) is a workbench for git to give levers/wheels with its helpdocs.
+#|	 It's also a demo for `Subs` frame which is a simple helper frame in shell (tested in bash & brush) that can trans alias names
+#|	 as function with a helpdocs feature supported.
+#|	
+#|	See help:
+#|	- git-bench help
+#|	- git-bench help git-bench
+#|	- git-bench help git-bike
+#|	- git-bench help gb
+#|	- help git-bench
+#|	- help git-bike
+#|	- help gb
+#|	
+
+#|	$ help git-bike
+#|	sub command(s) here:
+#|	- gb: means 'git_bench'.
+#|	- git-bench: means 'git_bench'.
+#|	- git-bike: means 'git_bench'.
+#|	- sub-help: means 'aliases'.
+#|	
+#|	sub command: git-bike
+#|	
+#|	Git bench (also names git bike) is a workbench for git to give levers/wheels with its helpdocs.
+#|	 It's also a demo for `Subs` frame which is a simple helper frame in shell (tested in bash & brush) that can trans alias names
+#|	 as function with a helpdocs feature supported.
+#|	
+#|	See help:
+#|	- git-bench help
+#|	- git-bench help git-bench
+#|	- git-bench help git-bike
+#|	- git-bench help gb
+#|	- help git-bench
+#|	- help git-bike
+#|	- help gb
+#|	
+
+#|	$ help gb
+#|	sub command(s) here:
+#|	- gb: means 'git_bench'.
+#|	- git-bench: means 'git_bench'.
+#|	- git-bike: means 'git_bench'.
+#|	- sub-help: means 'aliases'.
+#|	
+#|	sub command: gb
+#|	
+#|	Git bench (also names git bike) is a workbench for git to give levers/wheels with its helpdocs.
+#|	 It's also a demo for `Subs` frame which is a simple helper frame in shell (tested in bash & brush) that can trans alias names
+#|	 as function with a helpdocs feature supported.
+#|	
+#|	See help:
+#|	- git-bench help
+#|	- git-bench help git-bench
+#|	- git-bench help git-bike
+#|	- git-bench help gb
+#|	- help git-bench
+#|	- help git-bike
+#|	- help gb
+#|	
 
