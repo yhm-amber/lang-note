@@ -314,7 +314,7 @@ Libs ()
 
 eval "$(MARK_MORE=GIT_BENCH PKG_SUBS='libs subs lang' libs subs frames codes_head)" && 
 
-git_player__helper__ () 
+git_aide__helper__ () 
 (
 	echo && 
 	echo 'Git Aide Player (also names 'git bench/bike') is an assistant for git to give levers/wheels with its helpdocs.' && 
@@ -333,7 +333,7 @@ git_player__helper__ ()
 	echo '- help gp' && 
 	echo && 
 	: ) && 
-alias gp=git_player git-bike=git_player git-bench=git_player git-aide=git_player git-player=git_player && git_player () 
+alias gp=git_player git-bike=git_aide git-bench=git_aide git-aide=git_aide git-player=git_player git_player=git_aide && git_aide () 
 (
 	# Libs Subs : && 
 	Libs : && 
@@ -405,8 +405,8 @@ alias gp=git_player git-bike=git_player git-bench=git_player git-aide=git_player
 	(
 		eval "$(subs frames codes_head)" && 
 		
-		#: OPTS_CLONE='<git-clone-options>' git-player cp multi-clone <working-dir> [<local-dir>]:<remote-link> [[<local-dir>]:<remote-link> ...]
-		#. OPTS_CLONE=--bare git-player cp m . mabin.sp-src/mabynogion.spells.git:https://github.com/pure-symbols/mabynogion.spells.git pure.lexi-src/pure.lexicals.git:https://github.com/pure-symbols/pure.lexicals.git
+		#: OPTS_CLONE='<git-clone-options>' git-aide cp multi-clone <working-dir> [<local-dir>]:<remote-link> [[<local-dir>]:<remote-link> ...]
+		#. OPTS_CLONE=--bare git-aide cp m . mabin.sp-src/mabynogion.spells.git:https://github.com/pure-symbols/mabynogion.spells.git pure.lexi-src/pure.lexicals.git:https://github.com/pure-symbols/pure.lexicals.git
 		multi_clone__helper__ () 
 		(
 			echo && 
@@ -431,12 +431,12 @@ alias gp=git_player git-bike=git_player git-bench=git_player git-aide=git_player
 			done && 
 			: ) && 
 		
-		#: git-player cp auto-clone [<git-clone-options>] -- <remote-link> [<aim-path>]
+		#: git-aide cp auto-clone [<git-clone-options>] -- <remote-link> [<aim-path>]
 		auto_clone__helper__ () 
 		(
 			echo && 
 			echo 'Usage:' && 
-			echo $'\t' 'git-player cp auto-clone [<git-clone-options>] -- <remote-link> [<aim-path>]' && 
+			echo $'\t' 'git-aide cp auto-clone [<git-clone-options>] -- <remote-link> [<aim-path>]' && 
 			echo && 
 			echo 'This tool is for when you having a bad internet to your' && 
 			echo ' remote repo. It will making a depth=1 shallow clone at the' && 
@@ -519,10 +519,10 @@ alias gp=git_player git-bike=git_player git-bench=git_player git-aide=git_player
 		
 		eval "$(subs frames codes_head)" && 
 		
-		#. git-player bare-play up
-		#. git-player bare-play up origin
-		#. git-player bare-play up github
-		#. git-player bare-play up disroot
+		#. git-aide bare-play up
+		#. git-aide bare-play up origin
+		#. git-aide bare-play up github
+		#. git-aide bare-play up disroot
 		update__helper__ () 
 		(
 			echo && 
@@ -592,10 +592,10 @@ alias gp=git_player git-bike=git_player git-bench=git_player git-aide=git_player
 				done && 
 			: ) && 
 		
-		#. git-player bare-play worktree add tree master
-		#. git-player bare-play worktree rm tree master
-		#. git-player bare-play worktree add tags v1.0.1
-		#. git-player bare-play worktree rm tags v1.0.1
+		#. git-aide bare-play worktree add tree master
+		#. git-aide bare-play worktree rm tree master
+		#. git-aide bare-play worktree add tags v1.0.1
+		#. git-aide bare-play worktree rm tags v1.0.1
 		worktree__helper__ () 
 		(
 			echo && 
@@ -704,7 +704,7 @@ alias gp=git_player git-bike=git_player git-bench=git_player git-aide=git_player
 	(
 		eval "$(subs frames codes_head)" && 
 		
-		#: git-player sp all-sync [<workspace> ...]
+		#: git-aide sp all-sync [<workspace> ...]
 		#::	workspace: means the prefix in full name of a repo
 		#..	 like it in so many hubs -- <workspace>/<reponame>. In generally
 		#;;	 a 'workspace' can be the id-name of a(n) user or org.
@@ -724,7 +724,7 @@ alias gp=git_player git-bike=git_player git-bench=git_player git-aide=git_player
 			: ) && 
 		
 		
-		#: git-player sp base-upgrade [<gitdir-path> ...]
+		#: git-aide sp base-upgrade [<gitdir-path> ...]
 		#: base_upgrade [<gitdir-path> ...]
 		#: IS_BARE=true base_upgrade [<gitdir-path> ...]
 		#: SHOW_MORE_HINTS=n IS_BARE=y base_upgrade [<gitdir-path> ...]
@@ -769,7 +769,7 @@ alias gp=git_player git-bike=git_player git-bench=git_player git-aide=git_player
 			: ) && 
 		
 		
-		#: git-player sp all-push [<git-dir> ...]
+		#: git-aide sp all-push [<git-dir> ...]
 		alias all-push=all_push && all_push () 
 		(
 			echo :: pushing origin to all remotes in: "${@:-.}" :: && 
@@ -821,7 +821,7 @@ alias gp=git_player git-bike=git_player git-bench=git_player git-aide=git_player
 			: ) 9</dev/tty && 
 		
 		
-		#: git-player sp all-pull [<git-dir> ...]
+		#: git-aide sp all-pull [<git-dir> ...]
 		alias all-pull=all_pull && all_pull () 
 		(
 			echo :: pulling from origin and all remotes in: "${@:-.}" :: && 
@@ -894,7 +894,7 @@ alias gp=git_player git-bike=git_player git-bench=git_player git-aide=git_player
 eval "$(MARK_MORE=GIT_BENCH PKG_SUBS='libs subs lang' libs subs frames codes_tail)" && 
 
 # : \
-git_player "$@" && :
+git_aide "$@" && :
 
 
 
@@ -1043,7 +1043,7 @@ git_player "$@" && :
 #|	sub command: cp ac
 #|	
 #|	Usage:
-#|		 git-player cp auto-clone [<git-clone-options>] -- <remote-link> [<aim-path>]
+#|		 git-aide cp auto-clone [<git-clone-options>] -- <remote-link> [<aim-path>]
 #|	
 #|	This tool is for when you having a bad internet to your
 #|	 remote repo. It will making a depth=1 shallow clone at the
@@ -1211,7 +1211,7 @@ git_player "$@" && :
 #|	../tags/v1.16.1/
 #|	../tags/v1.17.0-rc.1/
 #|	../tags/v1.17.0-rc.2/
-#|	$ CHOOSE_MODE=All git-player bp wt x tags v1.16.1
+#|	$ CHOOSE_MODE=All git-aide bp wt x tags v1.16.1
 #|	repochk: `/mnt/e/gopass.passwd-srcs/cli/gopass.git` is bare repository ~ true
 #|	Contained tags:
 #|	-	v1.16.1
@@ -1229,7 +1229,7 @@ git_player "$@" && :
 #|	:: executing: worktree remove ../tags/v1.17.0-rc.2 ::
 #|	ls: cannot access '../tags/*': No such file or directory
 
-#|	$ CHOOSE_MODE=Only git-player bp wt a tags v1.16.1
+#|	$ CHOOSE_MODE=Only git-aide bp wt a tags v1.16.1
 #|	repochk: `/mnt/e/gopass.passwd-srcs/cli/gopass.git` is bare repository ~ true
 #|	Contained tags:
 #|	-	v1.16.1
@@ -1413,7 +1413,7 @@ git_player "$@" && :
 #|	HEAD is now at 3dd223437 Update network_security_config.xml
 #|	../tags/v3.1.5/
 
-#|	$ . ~/git-aide.sh && git-player sp all-sync
+#|	$ . ~/git-aide.sh && git-aide sp all-sync
 #|	:: pulling from origin and all remotes in: ./pure.lexicals/ ::
 #|	repochk: `/mnt/e/repos-testing/pure.lexicals` is inside worktree ~ true
 #|	repochk: `/mnt/e/repos-testing/pure.lexicals` is bare repository ~ false
@@ -1566,7 +1566,7 @@ git_player "$@" && :
 #|	- sub-help: means 'aliases'.
 #|	- sync-play: means 'sync_play'.
 #|	
-#|	sub command: git-player
+#|	sub command: git-aide
 #|	
 #|	Git Aide Player (also names 'git bench/bike') is an assistant for git to give levers/wheels with its helpdocs
 #|	 It's also a demo for `Subs` frame which is a simple helper frame in shell (tested in bash & brush) that can trans alias names
@@ -1586,14 +1586,14 @@ git_player "$@" && :
 
 #|	$ help git-aide
 #|	sub command(s) here:
-#|	- git-aide: means 'git_player'.
-#|	- git-bench: means 'git_player'.
-#|	- git-bike: means 'git_player'.
-#|	- git-player: means 'git_player'.
-#|	- gp: means 'git_player'.
+#|	- git-aide: means 'git_aide'.
+#|	- git-bench: means 'git_aide'.
+#|	- git-bike: means 'git_aide'.
+#|	- git-player: means 'git_aide'.
+#|	- gp: means 'git_aide'.
 #|	- sub-help: means 'aliases'.
 #|	
-#|	sub command: git-player
+#|	sub command: git-aide
 #|	
 #|	Git Aide Player (also names 'git bench/bike') is an assistant for git to give levers/wheels with its helpdocs
 #|	 It's also a demo for `Subs` frame which is a simple helper frame in shell (tested in bash & brush) that can trans alias names
@@ -1613,11 +1613,11 @@ git_player "$@" && :
 
 #|	$ help gp
 #|	sub command(s) here:
-#|	- git-aide: means 'git_player'.
-#|	- git-bench: means 'git_player'.
-#|	- git-bike: means 'git_player'.
-#|	- git-player: means 'git_player'.
-#|	- gp: means 'git_player'.
+#|	- git-aide: means 'git_aide'.
+#|	- git-bench: means 'git_aide'.
+#|	- git-bike: means 'git_aide'.
+#|	- git-player: means 'git_aide'.
+#|	- gp: means 'git_aide'.
 #|	- sub-help: means 'aliases'.
 #|	
 #|	sub command: gp
