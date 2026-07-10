@@ -166,8 +166,8 @@ Libs ()
 				echo '
 					case "$(echo "${'"$NAME_EMBEDDED"':-'"$BOOL_DEFAULT"'}" | tr '"'"'[:lower:]'"'"' '"'"'[:upper:]'"'"')" 
 					in 
-						(Y|YES|T|TRUE) local __'"$NAME_EMBEDDED"'__=true ;; 
-						(N|NO|F|FALSE) local __'"$NAME_EMBEDDED"'__=false ;; 
+						(Y|YES|T|TRUE|O|ON|OK) local __'"$NAME_EMBEDDED"'__=true ;; 
+						(N|NO|F|FALSE|X|OFF|NOT) local __'"$NAME_EMBEDDED"'__=false ;; 
 						(_) 1>&2 echo unknown kwargs '"$NAME_EMBEDDED"': "'"'"'${'"$NAME_EMBEDDED"'}'"'"'": only support true/false. ; return 13 ;; 
 					esac && 
 					: ' && 
@@ -423,7 +423,7 @@ alias gb=git_bench git-bike=git_bench git-bench=git_bench && git_bench ()
 			cd "${WORKING_PATH:-.}" && 
 			while IFS=: read -r -- landing_path remote_link ;
 			do 
-				echo :: executing: '`'cp auto-clone ${OPTS_CLONE} -- "'${remote_link}'" ${landing_path}'`' in "'${PWD}'" :: && 
+				echo :: executing: '`'.bench cp auto-clone ${OPTS_CLONE} -- "'${remote_link}'" ${landing_path}'`' in "'${PWD}'" :: && 
 				auto_clone ${OPTS_CLONE} -- "${remote_link}" ${landing_path} && 
 				:; 
 			done && 
@@ -483,8 +483,9 @@ alias gb=git_bench git-bike=git_bench git-bench=git_bench && git_bench ()
 						: ) && 
 					(
 						echo :: updating in "\`$PWD\`" :: && 
-						while ! ( git remote update && : ) ;
-						do 1>&2 echo tried: "$((++try_update))" for remote update && :; done && 
+						SHOW_MORE_HINTS=y sync_play base_upgrade . && 
+						# while ! ( git remote update && : ) ;
+						# do 1>&2 echo tried: "$((++try_update))" for remote update && :; done && 
 						: ) && 
 					echo :: done for repo "\`${out_dir}\`". :: && 
 					: ) && 
@@ -546,16 +547,23 @@ alias gb=git_bench git-bike=git_bench git-bench=git_bench && git_bench ()
 			: ) && 
 		alias up=update && update () 
 		(
-			find -- ../tree -maxdepth 1 -mindepth 1 -type d | while read -r -- treepath ;
-			do 
-				echo :: executing: '`checkout --detach`' in "'${treepath}'" :: && 
-				(
-					cd "${treepath}" && 
-					git checkout --detach && 
-					: ) && 
-				(1>&2 echo upper: detached "${treepath}") && 
-				:; 
-			done && 
+			_find_in () 
+			(
+				_path="${1}" && shift && 
+				{ ! ( &>/dev/null cd "$_path" ) || find -- "$_path" "$@" ; } && 
+				: ) && 
+			
+			_find_in ../tree -maxdepth 1 -mindepth 1 -type d | 
+				while read -r -- treepath ;
+				do 
+					echo :: executing: '`checkout --detach`' in "'${treepath}'" :: && 
+					(
+						cd "${treepath}" && 
+						git checkout --detach && 
+						: ) && 
+					(1>&2 echo upper: detached "${treepath}") && 
+					:; 
+				done && 
 			
 			echo :: executing: remote update "$@" :: && 
 			while ! ( git remote update "$@" && : ) ;
@@ -567,17 +575,18 @@ alias gb=git_bench git-bike=git_bench git-bench=git_bench && git_bench ()
 					: )'" for remote'(s)' $@ && 
 				: ) && 
 			
-			find -- ../tree -maxdepth 1 -mindepth 1 -type d | while read -r -- treepath ; 
-			do 
-				_branch="$(basename "${treepath}")" && 
-				echo :: executing: '`checkout '"$_branch"'`' in "'${treepath}'" :: && 
-				(
-					cd -- "${treepath}" && 
-					git checkout "$_branch" && 
-					: ) && 
-				(1>&2 echo upper: checkouted "${treepath}" as "$_branch") && 
-				:; 
-			done && 
+			_find_in ../tree -maxdepth 1 -mindepth 1 -type d | 
+				while read -r -- treepath ; 
+				do 
+					_branch="$(basename "${treepath}")" && 
+					echo :: executing: '`checkout '"$_branch"'`' in "'${treepath}'" :: && 
+					(
+						cd -- "${treepath}" && 
+						git checkout "$_branch" && 
+						: ) && 
+					(1>&2 echo upper: checkouted "${treepath}" as "$_branch") && 
+					:; 
+				done && 
 			: ) && 
 		
 		#. git-bench bare-play worktree add tree master
@@ -740,7 +749,8 @@ alias gb=git_bench git-bike=git_bench git-bench=git_bench && git_bench ()
 					while 
 					! if ! "${__IS_BARE__}" ;
 						then git pull ;
-						else git remote update ;
+						else bare_play update ;
+						# else git remote update ;
 					fi ;
 					do 
 						echo base_upgrade: tried: "$((++try_pull_base_upgrade))" for '`'"$(if ! "${__IS_BARE__}" ;
@@ -1614,4 +1624,8 @@ git_bench "$@" && :
 #|	- help git-bike
 #|	- help gb
 #|	
+
+#|	$ . ~/git-bike.sh && OPTS_CLONE=--bare git-bike cp m . mabin.sp-src/mabynogion.spells.git:https://github.com/pure-symbols/mabynogion.spells.git pure.lexi-src/pure.lexicals.git:https://github.com/pure-symbols/pure.lexicals.git :https://github.com/yhm-amber/lang-note.git
+#|	
+
 
