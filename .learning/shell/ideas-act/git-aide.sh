@@ -136,7 +136,13 @@ Libs ()
 			codes_tail () 
 			(
 				echo '
-					alias sub-help=aliases && aliases () ( echo "$__aliases__'"$NAMEMARK_MORE"'" | '"${PKG_SUBS}"' "${@:-help_alias}" && : ) && 
+					alias sub-help=aliases && aliases () 
+					{
+						2>/dev/null builtin aliases "$@" || 
+						( echo "$__aliases__'"$NAMEMARK_MORE"'" | '"${PKG_SUBS}"' "${@:-help_alias}" && : ) || 
+						builtin aliases "$@" || 
+						return $? ; 
+					} && 
 					__aliases_ende__'"$NAMEMARK_MORE"'="$(alias)" && 
 					__aliases__'"$NAMEMARK_MORE"'="$(
 						echo "$__aliases_ende__'"$NAMEMARK_MORE"'" | 
@@ -147,7 +153,7 @@ Libs ()
 						$(aliases cat | SP='"'&&'"' '"${PKG_SUBS}"' alias_fn)
 						$(aliases cat | SP='"'&&'"' '"${PKG_SUBS}"' alias_hp)
 						: " && 
-					help () ( sub-help help_alias "$@" ) && 
+					help () { builtin help "$@" 2>/dev/null || ( sub-help help_alias "$@" ) || builtin help "$@" ; } && 
 					: ' && 
 				: ) && 
 			: :: && 
@@ -1589,9 +1595,9 @@ git_aide "$@" && :
 #|	- git-aide: means 'git_aide'.
 #|	- git-bench: means 'git_aide'.
 #|	- git-bike: means 'git_aide'.
-#|	- git-player: means 'git_aide'.
-#|	- gp: means 'git_aide'.
-#|	- sub-help: means 'aliases'.
+#|	- git-player: means 'git_player'.
+#|	- git_player: means 'git_aide'.
+#|	- gp: means 'git_player'.
 #|	
 #|	sub command: git-aide
 #|	
@@ -1616,9 +1622,9 @@ git_aide "$@" && :
 #|	- git-aide: means 'git_aide'.
 #|	- git-bench: means 'git_aide'.
 #|	- git-bike: means 'git_aide'.
-#|	- git-player: means 'git_aide'.
-#|	- gp: means 'git_aide'.
-#|	- sub-help: means 'aliases'.
+#|	- git-player: means 'git_player'.
+#|	- git_player: means 'git_aide'.
+#|	- gp: means 'git_player'.
 #|	
 #|	sub command: gp
 #|	
@@ -1637,6 +1643,52 @@ git_aide "$@" && :
 #|	- help git-bike
 #|	- help gp
 #|	
+
+#|	$ . ~/git-bike.sh ; help git-aide
+#|	sub command(s) here:
+#|	- git-aide: means 'git_aide'.
+#|	- git-bench: means 'git_aide'.
+#|	- git-bike: means 'git_aide'.
+#|	- git-player: means 'git_player'.
+#|	- git_player: means 'git_aide'.
+#|	- gp: means 'git_player'.
+#|	
+#|	sub command: git-aide
+#|	
+#|	Git Aide Player (also names git bench/bike) is an assistant for git to give levers/wheels with its helpdocs.
+#|	 It's also a demo for `Subs` frame which is a simple helper frame in shell (tested in bash & brush) that can trans alias names
+#|	 as function with a helpdocs feature supported.
+#|	
+#|	See help:
+#|	- git-aide help
+#|	- git-aide help git-aide
+#|	- git-aide help git-bench
+#|	- git-aide help git-bike
+#|	- git-aide help gp
+#|	- help git-aide
+#|	- help git-bench
+#|	- help git-bike
+#|	- help gp
+#|	
+#|	$ . ~/git-aide.sh && help :
+#|	:: :
+#|		Null command.
+#|		
+#|		No effect; the command does nothing.
+#|		
+#|		Exit Status:
+#|		Always succeeds.
+#|	$ . ~/git-bike.sh ; help true ; help false
+#|	true: true
+#|		Return a successful result.
+#|		
+#|		Exit Status:
+#|		Always succeeds.
+#|	false: false
+#|		Return an unsuccessful result.
+#|		
+#|		Exit Status:
+#|		Always fails.
 
 #|	$ . ~/git-aide.sh && OPTS_CLONE=--bare git-aide cp m . mabin.sp-src/mabynogion.spells.git:https://github.com/pure-symbols/mabynogion.spells.git pure.lexi-src/pure.lexicals.git:https://github.com/pure-symbols/pure.lexicals.git :https://github.com/yhm-amber/lang-note.git
 #|	:: executing: `.aide cp auto-clone --bare -- 'https://github.com/pure-symbols/mabynogion.spells.git' mabin.sp-src/mabynogion.spells.git` in '/mnt/e/repos' ::
