@@ -262,7 +262,7 @@ Libs ()
 	
 	_param_tools () 
 	(
-		params_out () 
+		params_roll () 
 		(
 			for x in "$@" ;
 			do "${OUTER_FN:-echo}" "${x}" && :; done && 
@@ -271,9 +271,9 @@ Libs ()
 		params_take () 
 		(
 			head () ( echo "$1" && : ) && 
-			tail () ( shift 1 && params_out "$@" && : ) && 
-			home () ( params_out "$@" | head -n "$(($# - 1))" && : ) && 
-			ende () ( shift "$(($# - 1))" && params_out "$@" && : ) && 
+			tail () ( shift 1 && params_roll "$@" && : ) && 
+			home () ( params_roll "$@" | head -n "$(($# - 1))" && : ) && 
+			ende () ( shift "$(($# - 1))" && params_roll "$@" && : ) && 
 			: :: && 
 			"$@" && 
 			: ) && 
@@ -281,7 +281,7 @@ Libs ()
 		flatten_line () 
 		(
 			while read -r -- line ;
-			do OUTER_FN="${FLATTER_FN:-echo}" "${@:-params_out}" $line && :; done && 
+			do OUTER_FN="${FLATTER_FN:-echo}" "${@:-params_roll}" $line && :; done && 
 			: ) && 
 		
 		: :: && 
@@ -422,7 +422,7 @@ alias gp=git_player git-bike=git_aide git-bench=git_aide git-aide=git_aide git-p
 		alias m=multi_clone mc=multi_clone multi-clone=multi_clone && multi_clone () 
 		(
 			local working_dir="$1" && shift && 
-			_param_tools params_out "$@" | 
+			_param_tools params_roll "$@" | 
 				WORKING_PATH="${working_dir}" OPTS_CLONE="${OPTS_CLONE}" _multi_clone | 
 				cat - && 
 			: ) && 
@@ -438,6 +438,7 @@ alias gp=git_player git-bike=git_aide git-bench=git_aide git-aide=git_aide git-p
 			: ) && 
 		
 		#: git-aide cp auto-clone [<git-clone-options>] -- <remote-link> [<aim-path>]
+		#. MAXTRY_ASKING=999 git-aide cp a https://github.com/denoland/deno.git --mirror
 		auto_clone__helper__ () 
 		(
 			echo && 
@@ -466,8 +467,13 @@ alias gp=git_player git-bike=git_aide git-bench=git_aide git-aide=git_aide git-p
 		alias a=auto_clone ac=auto_clone auto-clone=auto_clone && auto_clone () 
 		(
 			echo :: git cloning in shallow '(depth 1)' mode :: && 
+			eval "$(_cmnd_tools _retry_asking init_codes)" && : 其尝适询 && 
 			while ! ( git clone --progress --depth 1 --no-single-branch "$@" 2>&1 && : ) ;
-			do 1>&2 echo tried: "$((++try_clone))" for clone && :; done | 
+			do 
+				1>&2 echo tried: "$((++try_clone))" for clone && 
+				eval "$(FD_TTY=9 _cmnd_tools _retry_asking body_codes)" && : 其尝适询 && 
+				:; 
+			done | 
 				tee >(cat 1>&2) | 
 				#::	will only out 3 lines (which has "'")
 				#;;	 after keep waiting until EOF
@@ -475,7 +481,7 @@ alias gp=git_player git-bike=git_aide git-bench=git_aide git-aide=git_aide git-p
 				#::	Just a head -n 1 alternative
 				#;;	 but with no SIGPIPE to avoid pipe-broken.
 				ELLIPSIS_SHOW=x LINES_MAX=1 _ctrl_tools _wait_outs 'Cloning into' | 
-				_param_tools flatten_line params_out | 
+				_param_tools flatten_line params_roll | 
 				tail -n 1 | 
 				cut -d "'" -f 2 | 
 				while read -r -- out_dir ;
@@ -497,8 +503,10 @@ alias gp=git_player git-bike=git_aide git-bench=git_aide git-aide=git_aide git-p
 						: ) && 
 					echo :: done for repo "\`${out_dir}\`". :: && 
 					: ) && 
-				break ; done
-			: ) && 
+				break ; done && 
+			echo && 
+			: 使其询必曰问之 && 
+			: ) 9</dev/tty && 
 		
 		: :: && 
 		
@@ -596,6 +604,52 @@ alias gp=git_player git-bike=git_aide git-bench=git_aide git-aide=git_aide git-p
 					(1>&2 echo upper: checkouted "${treepath}" as "$_branch") && 
 					:; 
 				done && 
+			: ) && 
+		
+		#. git-aide bp wts init tree:master tags:v1.0.1 ...
+		#. git-aide bp wts drop tree:master tags:v1.0.1 ...
+		#. (cd deno.git && git-aide bp wts i tree:main tags:v2.9.2)
+		#. (cd deno.git && git-aide bp wts x tree:main tags:v2.9.2)
+		alias wts=worktrees && worktrees () 
+		(
+			case "$1" 
+			in 
+				(i|in|init)  __cmd_sub__=add  && shift ;;
+				(x|rm|drop)  __cmd_sub__=rm   && shift ;;
+				(_) 1>&2 echo Unknown sub cmd in worktrees: "'$1'" && return 16 ;;
+			esac && 
+			
+			_param_tools params_roll "$@" | while IFS=: read -r -- _type _name ;
+			do CHOOSE_MODE="${CHOOSE_MODE:-Only}" worktree "${__cmd_sub__}" "$_type" "$_name" && :; done && 
+			
+			# eval "$(subs frames codes_head)" && 
+			# 
+			# alias i=init in=init && init () 
+			# (
+			# 	_param_tools params_roll "$@" | _init && 
+			# 	: ) && 
+			# _init () 
+			# (
+			# 	while IFS=: read -r -- _type _name ;
+			# 	do CHOOSE_MODE="${CHOOSE_MODE:-Only}" worktree add "${_type}" "${_name}" && :; done && 
+			# 	: ) && 
+			# 
+			# alias x=drop rm=drop && drop () 
+			# (
+			# 	_param_tools params_roll "$@" | _drop && 
+			# 	: ) && 
+			# _drop () 
+			# (
+			# 	while IFS=: read -r -- _type _name ;
+			# 	do CHOOSE_MODE="${CHOOSE_MODE:-Only}" worktree rm "${_type}" "${_name}" && :; done && 
+			# 	: ) && 
+			# 
+			# : :: && 
+			# 
+			# eval "$(subs frames codes_tail)" && 
+			# 
+			# : :: && 
+			# "$@" && 
 			: ) && 
 		
 		#. git-aide bare-play worktree add tree master
@@ -710,13 +764,29 @@ alias gp=git_player git-bike=git_aide git-bench=git_aide git-aide=git_aide git-p
 	(
 		eval "$(subs frames codes_head)" && 
 		
+		#: git-aide sp remotes-add <dir-path> <name>:<URL> [<name>:<URL> ...]
+		alias remotes-add=remotes_add && remotes_add () 
+		(
+			_dir_path="${1:-.}" && shift && 
+			_param_tools params_roll "$@" | OPTS_REMOTE="$OPTS_REMOTE" _remotes_add "$_dir_path" && 
+			: ) && 
+		_remotes_add () 
+		(
+			cd "${1:-.}" && shift && 
+			while IFS=: read -r -- remote_name remote_url ;
+			do 
+				git remote add $OPTS_REMOTE -- "${remote_name}" "${remote_url}" && 
+				:; 
+			done && 
+			: ) && 
+		
 		#: git-aide sp all-sync [<workspace> ...]
 		#::	workspace: means the prefix in full name of a repo
 		#..	 like it in so many hubs -- <workspace>/<reponame>. In generally
 		#;;	 a 'workspace' can be the id-name of a(n) user or org.
 		alias all-sync=all_sync && all_sync () 
 		(
-			_param_tools params_out "${@:-.}" | _all_sync && 
+			_param_tools params_roll "${@:-.}" | _all_sync && 
 			: ) && 
 		
 		_all_sync () 
@@ -736,7 +806,7 @@ alias gp=git_player git-bike=git_aide git-bench=git_aide git-aide=git_aide git-p
 		#: SHOW_MORE_HINTS=n IS_BARE=y base_upgrade [<gitdir-path> ...]
 		alias base-upgrade=base_upgrade && base_upgrade () 
 		(
-			_param_tools params_out "${@:-.}" | IS_BARE="${IS_BARE:-}" _base_upgrade && 
+			_param_tools params_roll "${@:-.}" | IS_BARE="${IS_BARE:-}" _base_upgrade && 
 			: ) && 
 		
 		_base_upgrade () 
@@ -779,7 +849,7 @@ alias gp=git_player git-bike=git_aide git-bench=git_aide git-aide=git_aide git-p
 		alias all-push=all_push && all_push () 
 		(
 			echo :: pushing origin to all remotes in: "${@:-.}" :: && 
-			_param_tools params_out "${@:-.}" | _all_push ${GITPUSH_FLAGS:--v} && 
+			_param_tools params_roll "${@:-.}" | _all_push ${GITPUSH_FLAGS:--v} && 
 			: ) && 
 		
 		_all_push () 
@@ -808,7 +878,7 @@ alias gp=git_player git-bike=git_aide git-bench=git_aide git-aide=git_aide git-p
 						do 
 							: 此下 乃复试探 有询 && 
 							: 其尝回显 && 
-							echo tried: "$((++try_push))" for '`'"$(if ! "${checked_bare}" && : 其显选出 ;
+							1>&2 echo tried: "$((++try_push))" for '`'"$(if ! "${checked_bare}" && : 其显选出 ;
 								then echo "git push $* --branches -- ${git_remote}" ;
 								else echo "git push $* -- ${git_remote} 'refs/heads/*:refs/heads/*'" ;
 							fi)"'`' in "'${gitdir}'" && 
@@ -831,7 +901,7 @@ alias gp=git_player git-bike=git_aide git-bench=git_aide git-aide=git_aide git-p
 		alias all-pull=all_pull && all_pull () 
 		(
 			echo :: pulling from origin and all remotes in: "${@:-.}" :: && 
-			_param_tools params_out "${@:-.}" | _all_pull ${GITPULL_FLAGS:--v} && 
+			_param_tools params_roll "${@:-.}" | _all_pull ${GITPULL_FLAGS:--v} && 
 			: ) && 
 		
 		_all_pull () 
@@ -861,7 +931,7 @@ alias gp=git_player git-bike=git_aide git-bench=git_aide git-aide=git_aide git-p
 						do 
 							: 此下 乃复试探 有询 && 
 							: 其尝回显 && 
-							echo tried: "$((++try_pull))" for '`'"$(if ! "${checked_bare}" && : 其显选出 ;
+							1>&2 echo tried: "$((++try_pull))" for '`'"$(if ! "${checked_bare}" && : 其显选出 ;
 								then echo "git fetch $* -- ${git_remote} 'refs/heads/*:refs/heads/*' '^${_symbref_head}'" ;
 								else echo "git fetch $* -- ${git_remote} 'refs/heads/*:refs/heads/*'" ;
 							fi)"'`' in "'${gitdir}'" && 
