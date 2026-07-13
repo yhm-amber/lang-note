@@ -191,7 +191,8 @@ Libs ()
 	(
 		_returns () ( return $1 ) && 
 		_booled_returns () ( ! _returns $1 ) && 
-		
+		_curr_dir () ( cd "$1" && basename "$(shift ; pwd "$@")" ) && 
+
 		_std_exec () 
 		(
 			#. (echo true | _cmnd_tools _std_exec once) && echo a || echo x
@@ -882,6 +883,79 @@ alias gp=git_player git-bike=git_aide git-bench=git_aide git-aide=git_aide git-p
 			done && 
 			: ) && 
 		
+		#: Pushing full to a remote.
+		#: push_full <git-remote> <git-dir>
+		#. push_full "${git_remote}" "${gitdir}"
+		#. push_full "${git_remote}" . && 
+		#. git-aide sp push-full dr .
+		alias push-full=push_full && push_full () 
+		(
+			local _git_remote="${1:-}" && shift && 
+			local _gitdir="${1:-.}" && { shift ; : ; } && 
+			cd "${_gitdir}" && 
+			# local _symbref_head="$(git symbolic-ref -- HEAD)" && 
+			if test -z "${IS_BARE:-}" ;
+				then local IS_BARE="$(repo_chk bare . echo)" ;
+				else local IS_BARE="${IS_BARE:-}" ;
+			fi && 
+			eval "$(_cmnd_tools _retry_asking init_codes)" && 
+			echo working: push to remote "'${_git_remote}'" for "'$(_curr_dir .)'" && 
+			while 
+			! if ! "${IS_BARE}" && : 其令选行 ;
+				then git push "$@" --branches -- "${_git_remote}" ;
+				else git push "$@" -- "${_git_remote}" 'refs/heads/*:refs/heads/*' ;
+			fi ;
+			do 
+				: 此下 乃复试探 有询 && 
+				: 其尝回显 && 
+				1>&2 echo tried: "$((++try_push))" for '`'"$(if ! "${IS_BARE}" && : 其显选出 ;
+					then echo "git push $* --branches -- ${_git_remote}" ;
+					else echo "git push $* -- ${_git_remote} 'refs/heads/*:refs/heads/*'" ;
+				fi)"'`' in "'$(_curr_dir .)'" && 
+				: 其尝适询 && 
+				eval "$(FD_TTY=9 _cmnd_tools _retry_asking body_codes)" && 
+				:; 
+			done && 
+			echo && 
+			: 使其询必曰问之 && 
+			: ) 9</dev/tty && 
+		
+		#: Pulling full from a remote.
+		#: pull_full <git-remote> <git-dir>
+		#. pull_full "${git_remote}" "${gitdir}"
+		#. pull_full "${git_remote}" . && 
+		#. git-aide sp pull-full dr .
+		alias pull-full=pull_full && pull_full () 
+		(
+			local _git_remote="${1:-}" && shift && 
+			local _gitdir="${1:-.}" && { shift ; : ; } && 
+			cd "${_gitdir}" && 
+			local _symbref_head="$(git symbolic-ref -- HEAD)" && 
+			if test -z "${IS_BARE:-}" ;
+				then local IS_BARE="$(repo_chk bare . echo)" ;
+				else local IS_BARE="${IS_BARE:-}" ;
+			fi && 
+			eval "$(_cmnd_tools _retry_asking init_codes)" && 
+			echo working: pull from remote "'${_git_remote}'" for "'$(_curr_dir .)'" && 
+			while 
+			! if ! "${IS_BARE}" && : 其令选行 ;
+				then git fetch "$@" -- "${_git_remote}" 'refs/heads/*:refs/heads/*' '^'"${_symbref_head}" ;
+				else git fetch "$@" -- "${_git_remote}" 'refs/heads/*:refs/heads/*' ;
+			fi ;
+			do 
+				: 此下 乃复试探 有询 && 
+				: 其尝回显 && 
+				1>&2 echo tried: "$((++try_pull))" for '`'"$(if ! "${IS_BARE}" && : 其显选出 ;
+					then echo "git fetch $* -- ${_git_remote} 'refs/heads/*:refs/heads/*' '^${_symbref_head}'" ;
+					else echo "git fetch $* -- ${_git_remote} 'refs/heads/*:refs/heads/*'" ;
+				fi)"'`' in "'$(_curr_dir .)'" && 
+				: 其尝适询 && 
+				eval "$(FD_TTY=9 _cmnd_tools _retry_asking body_codes)" && 
+				:; 
+			done && 
+			echo && 
+			: 使其询必曰问之 && 
+			: ) 9</dev/tty && 
 		
 		#: git-aide sp all-push [<git-dir> ...]
 		alias all-push=all_push && all_push () 
@@ -906,24 +980,7 @@ alias gp=git_player git-bike=git_aide git-bench=git_aide git-aide=git_aide git-p
 					echo :: pushing all remotes in "'${gitdir}'" :: && 
 					git remote | while read -r -- git_remote ;
 					do 
-						echo working: push to remote "'${git_remote}'" for "'${gitdir}'" && 
-						eval "$(_cmnd_tools _retry_asking init_codes)" && 
-						while 
-						! if ! "${checked_bare}" && : 其令选行 ;
-							then git push "$@" --branches -- "${git_remote}" ;
-							else git push "$@" -- "${git_remote}" 'refs/heads/*:refs/heads/*' ;
-						fi ;
-						do 
-							: 此下 乃复试探 有询 && 
-							: 其尝回显 && 
-							1>&2 echo tried: "$((++try_push))" for '`'"$(if ! "${checked_bare}" && : 其显选出 ;
-								then echo "git push $* --branches -- ${git_remote}" ;
-								else echo "git push $* -- ${git_remote} 'refs/heads/*:refs/heads/*'" ;
-							fi)"'`' in "'${gitdir}'" && 
-							: 其尝适询 && 
-							eval "$(FD_TTY=9 _cmnd_tools _retry_asking body_codes)" && 
-							:; 
-						done && 
+						push_full "${git_remote}" . && 
 						:; 
 					done && 
 					echo :: pushed all remotes in "'${gitdir}'" :: && 
@@ -931,9 +988,7 @@ alias gp=git_player git-bike=git_aide git-bench=git_aide git-aide=git_aide git-p
 				:; 
 			done && 
 			echo && 
-			: 使其询必曰问之 && 
-			: ) 9</dev/tty && 
-		
+			: ) && 
 		
 		#: git-aide sp all-pull [<git-dir> ...]
 		alias all-pull=all_pull && all_pull () 
@@ -958,25 +1013,7 @@ alias gp=git_player git-bike=git_aide git-bench=git_aide git-aide=git_aide git-p
 					echo :: pulling all remotes in "'${gitdir}'" :: && 
 					git remote | while read -r -- git_remote ;
 					do 
-						local _symbref_head="$(git symbolic-ref -- HEAD)" && 
-						echo working: pull from remote "'${git_remote}'" for "'${gitdir}'" && 
-						eval "$(_cmnd_tools _retry_asking init_codes)" && 
-						while 
-						! if ! "${checked_bare}" && : 其令选行 ;
-							then git fetch "$@" -- "${git_remote}" 'refs/heads/*:refs/heads/*' '^'"${_symbref_head}" ;
-							else git fetch "$@" -- "${git_remote}" 'refs/heads/*:refs/heads/*' ;
-						fi ;
-						do 
-							: 此下 乃复试探 有询 && 
-							: 其尝回显 && 
-							1>&2 echo tried: "$((++try_pull))" for '`'"$(if ! "${checked_bare}" && : 其显选出 ;
-								then echo "git fetch $* -- ${git_remote} 'refs/heads/*:refs/heads/*' '^${_symbref_head}'" ;
-								else echo "git fetch $* -- ${git_remote} 'refs/heads/*:refs/heads/*'" ;
-							fi)"'`' in "'${gitdir}'" && 
-							: 其尝适询 && 
-							eval "$(FD_TTY=9 _cmnd_tools _retry_asking body_codes)" && 
-							:; 
-						done && 
+						pull_full "${git_remote}" . && 
 						:; 
 					done && 
 					echo :: pulled all remotes in "'${gitdir}'" :: && 
@@ -984,8 +1021,7 @@ alias gp=git_player git-bike=git_aide git-bench=git_aide git-aide=git_aide git-p
 				:; 
 			done && 
 			echo && 
-			: 使其询必曰问之 && 
-			: ) 9</dev/tty && 
+			: ) && 
 		
 		: :: && 
 		
