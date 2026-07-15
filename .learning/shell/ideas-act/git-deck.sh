@@ -910,7 +910,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 				else local IS_BARE="${IS_BARE:-}" ;
 			fi && 
 			eval "$(_cmnd_tools _retry_asking init_codes)" && 
-			echo working: push to remote "'${_git_remote}'" for "'$(_curr_dir .)'" && 
+			echo working: push to remote "'${_git_remote}'" for "'$(_cmnd_tools _curr_dir .)'" && 
 			while 
 			! if ! "${IS_BARE}" && : 其令选行 ;
 				then git push "$@" --branches -- "${_git_remote}" ;
@@ -922,7 +922,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 				1>&2 echo tried: "$((++try_push))" for '`'"$(if ! "${IS_BARE}" && : 其显选出 ;
 					then echo "git push $* --branches -- ${_git_remote}" ;
 					else echo "git push $* -- ${_git_remote} 'refs/heads/*:refs/heads/*'" ;
-				fi)"'`' in "'$(_curr_dir .)'" && 
+				fi)"'`' in "'$(_cmnd_tools _curr_dir .)'" && 
 				: 其尝适询 && 
 				eval "$(FD_TTY=9 _cmnd_tools _retry_asking body_codes)" && 
 				:; 
@@ -947,7 +947,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 				else local IS_BARE="${IS_BARE:-}" ;
 			fi && 
 			eval "$(_cmnd_tools _retry_asking init_codes)" && 
-			echo working: pull from remote "'${_git_remote}'" for "'$(_curr_dir .)'" && 
+			echo working: pull from remote "'${_git_remote}'" for "'$(_cmnd_tools _curr_dir .)'" && 
 			while 
 			! if ! "${IS_BARE}" && : 其令选行 ;
 				then git fetch "$@" -- "${_git_remote}" 'refs/heads/*:refs/heads/*' '^'"${_symbref_head}" ;
@@ -959,7 +959,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 				1>&2 echo tried: "$((++try_pull))" for '`'"$(if ! "${IS_BARE}" && : 其显选出 ;
 					then echo "git fetch $* -- ${_git_remote} 'refs/heads/*:refs/heads/*' '^${_symbref_head}'" ;
 					else echo "git fetch $* -- ${_git_remote} 'refs/heads/*:refs/heads/*'" ;
-				fi)"'`' in "'$(_curr_dir .)'" && 
+				fi)"'`' in "'$(_cmnd_tools _curr_dir .)'" && 
 				: 其尝适询 && 
 				eval "$(FD_TTY=9 _cmnd_tools _retry_asking body_codes)" && 
 				:; 
