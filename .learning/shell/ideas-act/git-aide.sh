@@ -153,7 +153,13 @@ Libs ()
 						$(aliases cat | SP='"'&&'"' '"${PKG_SUBS}"' alias_fn)
 						$(aliases cat | SP='"'&&'"' '"${PKG_SUBS}"' alias_hp)
 						: " && 
-					help () { builtin help "$@" 2>/dev/null || ( sub-help help_alias "$@" ) || builtin help "$@" ; } && 
+					help () 
+					{ 
+						( _r=8; for _ in "$@"; do builtin help "$@" 2>/dev/null; _r=$?; break; done; exit $_r ) || 
+							( sub-help help_alias "$@" ) || 
+							builtin help "$@" &&
+						:; 
+					} && 
 					: ' && 
 				: ) && 
 			: :: && 
@@ -333,28 +339,24 @@ Libs ()
 } && 
 
 
-eval "$(MARK_MORE=GIT_BENCH PKG_SUBS='libs subs lang' libs subs frames codes_head)" && 
+eval "$(MARK_MORE=GIT_DECK PKG_SUBS='libs subs lang' libs subs frames codes_head)" && 
 
-git_aide__helper__ () 
+git_deck__helper__ () 
 (
 	echo && 
-	echo 'Git Aide Player (also names 'git bench/bike') is an assistant for git to give levers/wheels with its helpdocs.' && 
+	echo 'The *Git Aide Deck* is an assistant for git to give levers/wheels with its helpdocs.' && 
 	echo ' It'"'"'s also a demo for `Subs` frame which is a simple helper frame in shell (tested in bash & brush) that can trans alias names' && 
 	echo ' as function with a helpdocs feature supported.' && 
 	echo && 
 	echo 'See help:' && 
-	echo '- git-aide help' && 
-	echo '- git-aide help git-aide' && 
-	echo '- git-aide help git-bench' && 
-	echo '- git-aide help git-bike' && 
-	echo '- git-aide help gp' && 
-	echo '- help git-aide' && 
-	echo '- help git-bench' && 
-	echo '- help git-bike' && 
-	echo '- help gp' && 
+	echo '- git-deck help' && 
+	echo '- git-deck help git-deck' && 
+	echo '- git-deck help gd' && 
+	echo '- help git-deck' && 
+	echo '- help gd' && 
 	echo && 
 	: ) && 
-alias gp=git_player git-bike=git_aide git-bench=git_aide git-aide=git_aide git-player=git_player git_player=git_aide && git_aide () 
+alias gd=git_deck git-deck=git_deck && git_deck () 
 (
 	# Libs Subs : && 
 	Libs : && 
@@ -426,8 +428,8 @@ alias gp=git_player git-bike=git_aide git-bench=git_aide git-aide=git_aide git-p
 	(
 		eval "$(subs frames codes_head)" && 
 		
-		#: OPTS_CLONE='<git-clone-options>' git-aide cp multi-clone <working-dir> [<local-dir>]:<remote-link> [[<local-dir>]:<remote-link> ...]
-		#. OPTS_CLONE=--bare git-aide cp m . mabin.sp-src/mabynogion.spells.git:https://github.com/pure-symbols/mabynogion.spells.git pure.lexi-src/pure.lexicals.git:https://github.com/pure-symbols/pure.lexicals.git
+		#: OPTS_CLONE='<git-clone-options>' git-deck cp multi-clone <working-dir> [<local-dir>]:<remote-link> [[<local-dir>]:<remote-link> ...]
+		#. OPTS_CLONE=--bare git-deck cp m . mabin.sp-src/mabynogion.spells.git:https://github.com/pure-symbols/mabynogion.spells.git pure.lexi-src/pure.lexicals.git:https://github.com/pure-symbols/pure.lexicals.git
 		multi_clone__helper__ () 
 		(
 			echo && 
@@ -446,20 +448,20 @@ alias gp=git_player git-bike=git_aide git-bench=git_aide git-aide=git_aide git-p
 			cd "${WORKING_PATH:-.}" && 
 			while IFS=: read -r -- landing_path remote_link ;
 			do 
-				echo :: executing: '`'.aide cp auto-clone ${OPTS_CLONE} -- "'${remote_link}'" ${landing_path}'`' at "'${PWD}'" :: && 
+				echo :: executing: '`'.deck cp auto-clone ${OPTS_CLONE} -- "'${remote_link}'" ${landing_path}'`' at "'${PWD}'" :: && 
 				auto_clone ${OPTS_CLONE} -- "${remote_link}" ${landing_path} && 
 				:; 
 			done && 
 			: ) && 
 		
-		#: git-aide cp auto-clone [<git-clone-options>] -- <remote-link> [<aim-path>]
-		#. MAXTRY_ASKING=999 git-aide cp a https://github.com/denoland/deno.git --mirror
-		#. MAXTRY_ASKING=999 git-aide cp a https://github.com/osquery/osquery.git --mirror
+		#: git-deck cp auto-clone [<git-clone-options>] -- <remote-link> [<aim-path>]
+		#. MAXTRY_ASKING=999 git-deck cp a https://github.com/denoland/deno.git --mirror
+		#. MAXTRY_ASKING=999 git-deck cp a https://github.com/osquery/osquery.git --mirror
 		auto_clone__helper__ () 
 		(
 			echo && 
 			echo 'Usage:' && 
-			echo $'\t' 'git-aide cp auto-clone [<git-clone-options>] -- <remote-link> [<aim-path>]' && 
+			echo $'\t' 'git-deck cp auto-clone [<git-clone-options>] -- <remote-link> [<aim-path>]' && 
 			echo && 
 			echo 'This tool is for when you having a bad internet to your' && 
 			echo ' remote repo. It will making a depth=1 shallow clone at the' && 
@@ -468,16 +470,16 @@ alias gp=git_player git-bike=git_aide git-bench=git_aide git-aide=git_aide git-p
 			echo ' All of the downloading works can auto-retry while it failed.' && 
 			echo && 
 			echo 'Demo:' && 
-			echo '- git-aide cp auto-clone https://github.com/LibreService/my_rime.git --mirror' && 
-			echo '- git-aide cp auto-clone https://github.com/gurecn/YuyanIme.git --mirror' && 
-			echo '- git-aide cp auto-clone --mirror -- https://github.com/gurecn/YuyanIme.git yuyan.git' && 
-			echo '- git-aide cp auto-clone --mirror -- https://github.com/crynta/terax-ai.git' && 
-			echo '- git-aide cp auto-clone -- https://github.com/gopasspw/git-credential-gopass.git ~/gopass-src/git-credential-gopass' && 
+			echo '- git-deck cp auto-clone https://github.com/LibreService/my_rime.git --mirror' && 
+			echo '- git-deck cp auto-clone https://github.com/gurecn/YuyanIme.git --mirror' && 
+			echo '- git-deck cp auto-clone --mirror -- https://github.com/gurecn/YuyanIme.git yuyan.git' && 
+			echo '- git-deck cp auto-clone --mirror -- https://github.com/crynta/terax-ai.git' && 
+			echo '- git-deck cp auto-clone -- https://github.com/gopasspw/git-credential-gopass.git ~/gopass-src/git-credential-gopass' && 
 			echo && 
 			echo 'See help:' && 
-			echo '- git-aide help cp auto-clone' && 
-			echo '- git-aide help cp ac' && 
-			echo '- git-aide cp help ac' && 
+			echo '- git-deck help cp auto-clone' && 
+			echo '- git-deck help cp ac' && 
+			echo '- git-deck cp help ac' && 
 			echo && 
 			: ) && 
 		alias a=auto_clone ac=auto_clone auto-clone=auto_clone && auto_clone () 
@@ -549,10 +551,10 @@ alias gp=git_player git-bike=git_aide git-bench=git_aide git-aide=git_aide git-p
 		
 		eval "$(subs frames codes_head)" && 
 		
-		#. git-aide bare-play up
-		#. git-aide bare-play up origin
-		#. git-aide bare-play up github
-		#. git-aide bare-play up disroot
+		#. git-deck bare-play up
+		#. git-deck bare-play up origin
+		#. git-deck bare-play up github
+		#. git-deck bare-play up disroot
 		update__helper__ () 
 		(
 			echo && 
@@ -565,16 +567,16 @@ alias gp=git_player git-bike=git_aide git-bench=git_aide git-aide=git_aide git-p
 			echo "- path of worktree dir from tag must be like: 'name.comments-src/tags/<tag-name>'" && 
 			echo && 
 			echo 'Demo:' && 
-			echo '- git-aide bare-play up' && 
-			echo '- git-aide bare-play up origin' && 
-			echo '- git-aide bare-play up github' && 
-			echo '- git-aide bare-play up disroot' && 
+			echo '- git-deck bare-play up' && 
+			echo '- git-deck bare-play up origin' && 
+			echo '- git-deck bare-play up github' && 
+			echo '- git-deck bare-play up disroot' && 
 			echo && 
 			echo 'See help:' && 
-			echo '- git-aide help bare-play update' && 
-			echo '- git-aide help bare-play up' && 
-			echo '- git-aide help bp up' && 
-			echo '- git-aide bp help up' && 
+			echo '- git-deck help bare-play update' && 
+			echo '- git-deck help bare-play up' && 
+			echo '- git-deck help bp up' && 
+			echo '- git-deck bp help up' && 
 			echo && 
 			: ) && 
 		alias up=update && update () 
@@ -622,12 +624,12 @@ alias gp=git_player git-bike=git_aide git-bench=git_aide git-aide=git_aide git-p
 				done && 
 			: ) && 
 		
-		#. git-aide bp wts init tree:master tags:v1.0.1 ...
-		#. git-aide bp wts drop tree:master tags:v1.0.1 ...
-		#. (cd deno.git && git-aide bp wts i tree:main tags:v2.9.2)
-		#. (cd deno.git && git-aide bp wts x tree:main tags:v2.9.2)
-		#. (cd osquery.git && git-aide bp wts i tree:master tags:5.23.1)
-		#. (cd osquery.git && git-aide bp wts x tree:master tags:5.23.1)
+		#. git-deck bp wts init tree:master tags:v1.0.1 ...
+		#. git-deck bp wts drop tree:master tags:v1.0.1 ...
+		#. (cd deno.git && git-deck bp wts i tree:main tags:v2.9.2)
+		#. (cd deno.git && git-deck bp wts x tree:main tags:v2.9.2)
+		#. (cd osquery.git && git-deck bp wts i tree:master tags:5.23.1)
+		#. (cd osquery.git && git-deck bp wts x tree:master tags:5.23.1)
 		alias wts=worktrees && worktrees () 
 		(
 			case "$1" 
@@ -639,7 +641,7 @@ alias gp=git_player git-bike=git_aide git-bench=git_aide git-aide=git_aide git-p
 			
 			_param_tools params_roll "$@" | while IFS=: read -r -- _type _name ;
 			do 
-				echo :: executing: '`'"CHOOSE_MODE='${CHOOSE_MODE:-Only}' .aide bp worktree ${__cmd_sub__} $_type $_name"'`' at "'${PWD}'" :: && 
+				echo :: executing: '`'"CHOOSE_MODE='${CHOOSE_MODE:-Only}' .deck bp worktree ${__cmd_sub__} $_type $_name"'`' at "'${PWD}'" :: && 
 				CHOOSE_MODE="${CHOOSE_MODE:-Only}" worktree "${__cmd_sub__}" "$_type" "$_name" && 
 				:; 
 			done && 
@@ -674,10 +676,10 @@ alias gp=git_player git-bike=git_aide git-bench=git_aide git-aide=git_aide git-p
 			# "$@" && 
 			: ) && 
 		
-		#. git-aide bare-play worktree add tree master
-		#. git-aide bare-play worktree rm tree master
-		#. git-aide bare-play worktree add tags v1.0.1
-		#. git-aide bare-play worktree rm tags v1.0.1
+		#. git-deck bare-play worktree add tree master
+		#. git-deck bare-play worktree rm tree master
+		#. git-deck bare-play worktree add tags v1.0.1
+		#. git-deck bare-play worktree rm tags v1.0.1
 		worktree__helper__ () 
 		(
 			echo && 
@@ -689,18 +691,18 @@ alias gp=git_player git-bike=git_aide git-bench=git_aide git-aide=git_aide git-p
 			echo "- the path of worktree dir from tag will be like: 'name.comments-src/tags/<tag-name>'" && 
 			echo && 
 			echo 'Demo:' && 
-			echo '- git-aide bare-play worktree add tree master' && 
-			echo '- git-aide bare-play worktree rm tree master' && 
-			echo '- git-aide bare-play worktree add tags v1.0.1' && 
-			echo '- git-aide bare-play worktree rm tags v1.0.1' && 
-			echo '- git-aide bare-play wt a tags v1.16.1' && 
-			echo '- git-aide bare-play wt a tree master' && 
+			echo '- git-deck bare-play worktree add tree master' && 
+			echo '- git-deck bare-play worktree rm tree master' && 
+			echo '- git-deck bare-play worktree add tags v1.0.1' && 
+			echo '- git-deck bare-play worktree rm tags v1.0.1' && 
+			echo '- git-deck bare-play wt a tags v1.16.1' && 
+			echo '- git-deck bare-play wt a tree master' && 
 			echo && 
 			echo 'See help:' && 
-			echo '- git-aide help bare-play worktree' && 
-			echo '- git-aide help bare-play wt' && 
-			echo '- git-aide help bp wt' && 
-			echo '- git-aide bp help wt' && 
+			echo '- git-deck help bare-play worktree' && 
+			echo '- git-deck help bare-play wt' && 
+			echo '- git-deck help bp wt' && 
+			echo '- git-deck bp help wt' && 
 			echo && 
 			: ) && 
 		alias wt=worktree && worktree () 
@@ -786,9 +788,9 @@ alias gp=git_player git-bike=git_aide git-bench=git_aide git-aide=git_aide git-p
 	(
 		eval "$(subs frames codes_head)" && 
 		
-		#: git-aide sp remotes add <dir-path> <name>:<URL> [<name>:<URL> ...]
-		#: git-aide sp remotes rn <dir-path> <name-old>:<name-new> [<name-old>:<name-new> ...]
-		#: git-aide sp remotes rm <dir-path> <name> [<name> ...]
+		#: git-deck sp remotes add <dir-path> <name>:<URL> [<name>:<URL> ...]
+		#: git-deck sp remotes rn <dir-path> <name-old>:<name-new> [<name-old>:<name-new> ...]
+		#: git-deck sp remotes rm <dir-path> <name> [<name> ...]
 		alias rmts=remotes && remotes () 
 		(
 			case "$1" 
@@ -819,10 +821,19 @@ alias gp=git_player git-bike=git_aide git-bench=git_aide git-aide=git_aide git-p
 			: ) && 
 		
 		
-		#: git-aide sp all-sync [<workspace> ...]
+		#: git-deck sp all-sync [<workspace> ...]
 		#::	workspace: means the prefix in full name of a repo
 		#..	 like it in so many hubs -- <workspace>/<reponame>. In generally
 		#;;	 a 'workspace' can be the id-name of a(n) user or org.
+		all_sync__helper__ () 
+		(
+			echo && 
+			echo '... (TODO) ...' && 
+			echo 'Usage: git-deck sp all-sync [<workspace> ...]' && 
+			echo 'Demo: git-deck sp all-sync * # in a dir has only workspace dirs.' && 
+			echo '... (TODO) ...' && 
+			echo && 
+			: ) && 
 		alias all-sync=all_sync && all_sync () 
 		(
 			_param_tools params_roll "${@:-.}" | _all_sync && 
@@ -839,7 +850,7 @@ alias gp=git_player git-bike=git_aide git-bench=git_aide git-aide=git_aide git-p
 			: ) && 
 		
 		
-		#: git-aide sp base-upgrade [<gitdir-path> ...]
+		#: git-deck sp base-upgrade [<gitdir-path> ...]
 		#: base_upgrade [<gitdir-path> ...]
 		#: IS_BARE=true base_upgrade [<gitdir-path> ...]
 		#: SHOW_MORE_HINTS=n IS_BARE=y base_upgrade [<gitdir-path> ...]
@@ -887,7 +898,7 @@ alias gp=git_player git-bike=git_aide git-bench=git_aide git-aide=git_aide git-p
 		#: push_full <git-remote> <git-dir>
 		#. push_full "${git_remote}" "${gitdir}"
 		#. push_full "${git_remote}" . && 
-		#. git-aide sp push-full dr .
+		#. git-deck sp push-full dr .
 		alias push-full=push_full && push_full () 
 		(
 			local _git_remote="${1:-}" && shift && 
@@ -924,7 +935,7 @@ alias gp=git_player git-bike=git_aide git-bench=git_aide git-aide=git_aide git-p
 		#: pull_full <git-remote> <git-dir>
 		#. pull_full "${git_remote}" "${gitdir}"
 		#. pull_full "${git_remote}" . && 
-		#. git-aide sp pull-full dr .
+		#. git-deck sp pull-full dr .
 		alias pull-full=pull_full && pull_full () 
 		(
 			local _git_remote="${1:-}" && shift && 
@@ -957,7 +968,7 @@ alias gp=git_player git-bike=git_aide git-bench=git_aide git-aide=git_aide git-p
 			: 使其询必曰问之 && 
 			: ) 9</dev/tty && 
 		
-		#: git-aide sp all-push [<git-dir> ...]
+		#: git-deck sp all-push [<git-dir> ...]
 		alias all-push=all_push && all_push () 
 		(
 			echo :: pushing origin to all remotes in: "${@:-.}" :: && 
@@ -990,7 +1001,7 @@ alias gp=git_player git-bike=git_aide git-bench=git_aide git-aide=git_aide git-p
 			echo && 
 			: ) && 
 		
-		#: git-aide sp all-pull [<git-dir> ...]
+		#: git-deck sp all-pull [<git-dir> ...]
 		alias all-pull=all_pull && all_pull () 
 		(
 			echo :: pulling from origin and all remotes in: "${@:-.}" :: && 
@@ -1041,10 +1052,10 @@ alias gp=git_player git-bike=git_aide git-bench=git_aide git-aide=git_aide git-p
 	"$@" && 
 	: ) && 
 
-eval "$(MARK_MORE=GIT_BENCH PKG_SUBS='libs subs lang' libs subs frames codes_tail)" && 
+eval "$(MARK_MORE=GIT_DECK PKG_SUBS='libs subs lang' libs subs frames codes_tail)" && 
 
 # : \
-git_aide "$@" && :
+git_deck "$@" && :
 
 
 
@@ -1066,11 +1077,11 @@ git_aide "$@" && :
 
 # git symbolic-ref HEAD #: 查 HEAD 指向、用 cat ./HEAD 也能看到相应信息
 # git symbolic-ref HEAD refs/heads/some-other-branch #: 变 HEAD 指向
-# git config --global -- alias.aide "!/usr/bin/env bash ~/.local/git-aide.sh"
+# git config --global -- alias.deck "!/usr/bin/env bash ~/.local/git-deck.sh"
 
 #### demo -----------------------
 
-#|	$ git-aide cp auto-clone https://github.com/LibreService/my_rime.git --mirror
+#|	$ git-deck cp auto-clone https://github.com/LibreService/my_rime.git --mirror
 #|	:: git cloning in shallow (depth 1) mode ::
 #|	Cloning into bare repository 'my_rime.git'...
 #|	fatal: unable to access 'https://github.com/LibreService/my_rime.git/': Recv failure: Connection was reset
@@ -1115,7 +1126,7 @@ git_aide "$@" && :
 #|	:: updating in `/mnt/e/rimeweb.pwa-src/my_rime.git` ::
 #|	:: done for repo `my_rime.git`. ::
 
-#|	$ git-aide cp auto-clone https://github.com/gurecn/YuyanIme.git --mirror
+#|	$ git-deck cp auto-clone https://github.com/gurecn/YuyanIme.git --mirror
 #|	:: git cloning in shallow (depth 1) mode ::
 #|	Cloning into bare repository 'YuyanIme.git'...
 #|	remote: Enumerating objects: 295, done.
@@ -1136,7 +1147,7 @@ git_aide "$@" && :
 #|	:: updating in `/mnt/e/yuyanime.hanzi-src/YuyanIme.git` ::
 #|	:: done for repo `YuyanIme.git`. ::
 
-#|	$ git-aide bare-play up
+#|	$ git-deck bare-play up
 #|	repochk: `/mnt/e/rufus.usbfldr-src/rufus.git` is bare repository ~ true
 #|	:: executing: `checkout --detach` in '../tree/master' ::
 #|	HEAD is now at eedeaea7 [misc] fix multiple small issues
@@ -1177,7 +1188,7 @@ git_aide "$@" && :
 #|	upper: checkouted ../tree/master as master
 
 
-#|	$ git-aide help cp ac
+#|	$ git-deck help cp ac
 #|	sub command(s) here:
 #|	- bare-play: means 'bare_play'.
 #|	- bp: means 'bare_play'.
@@ -1193,7 +1204,7 @@ git_aide "$@" && :
 #|	sub command: cp ac
 #|	
 #|	Usage:
-#|		 git-aide cp auto-clone [<git-clone-options>] -- <remote-link> [<aim-path>]
+#|		 git-deck cp auto-clone [<git-clone-options>] -- <remote-link> [<aim-path>]
 #|	
 #|	This tool is for when you having a bad internet to your
 #|	 remote repo. It will making a depth=1 shallow clone at the
@@ -1202,19 +1213,19 @@ git_aide "$@" && :
 #|	 All of the downloading works can auto-retry while it failed.
 #|	
 #|	Demo:
-#|	- git-aide cp auto-clone https://github.com/LibreService/my_rime.git --mirror
-#|	- git-aide cp auto-clone https://github.com/gurecn/YuyanIme.git --mirror
-#|	- git-aide cp auto-clone --mirror -- https://github.com/gurecn/YuyanIme.git yuyan.git
-#|	- git-aide cp auto-clone --mirror -- https://github.com/crynta/terax-ai.git
-#|	- git-aide cp auto-clone -- https://github.com/gopasspw/git-credential-gopass.git ~/gopass-src/git-credential-gopass
+#|	- git-deck cp auto-clone https://github.com/LibreService/my_rime.git --mirror
+#|	- git-deck cp auto-clone https://github.com/gurecn/YuyanIme.git --mirror
+#|	- git-deck cp auto-clone --mirror -- https://github.com/gurecn/YuyanIme.git yuyan.git
+#|	- git-deck cp auto-clone --mirror -- https://github.com/crynta/terax-ai.git
+#|	- git-deck cp auto-clone -- https://github.com/gopasspw/git-credential-gopass.git ~/gopass-src/git-credential-gopass
 #|	
 #|	See help:
-#|	- git-aide help cp auto-clone
-#|	- git-aide help cp ac
-#|	- git-aide cp help ac
+#|	- git-deck help cp auto-clone
+#|	- git-deck help cp ac
+#|	- git-deck cp help ac
 #|	
 
-#|	$ git-aide help bare-play up
+#|	$ git-deck help bare-play up
 #|	sub command(s) here:
 #|	- bare-play: means 'bare_play'.
 #|	- bp: means 'bare_play'.
@@ -1239,19 +1250,19 @@ git_aide "$@" && :
 #|	- path of worktree dir from tag must be like: 'name.comments-src/tags/<tag-name>'
 #|	
 #|	Demo:
-#|	- git-aide bare-play up
-#|	- git-aide bare-play up origin
-#|	- git-aide bare-play up github
-#|	- git-aide bare-play up disroot
+#|	- git-deck bare-play up
+#|	- git-deck bare-play up origin
+#|	- git-deck bare-play up github
+#|	- git-deck bare-play up disroot
 #|	
 #|	See help:
-#|	- git-aide help bare-play update
-#|	- git-aide help bare-play up
-#|	- git-aide help bp up
-#|	- git-aide bp help up
+#|	- git-deck help bare-play update
+#|	- git-deck help bare-play up
+#|	- git-deck help bp up
+#|	- git-deck bp help up
 #|	
 
-#|	$ git-aide help bp up
+#|	$ git-deck help bp up
 #|	sub command(s) here:
 #|	- bare-play: means 'bare_play'.
 #|	- bp: means 'bare_play'.
@@ -1276,19 +1287,19 @@ git_aide "$@" && :
 #|	- path of worktree dir from tag must be like: 'name.comments-src/tags/<tag-name>'
 #|	
 #|	Demo:
-#|	- git-aide bare-play up
-#|	- git-aide bare-play up origin
-#|	- git-aide bare-play up github
-#|	- git-aide bare-play up disroot
+#|	- git-deck bare-play up
+#|	- git-deck bare-play up origin
+#|	- git-deck bare-play up github
+#|	- git-deck bare-play up disroot
 #|	
 #|	See help:
-#|	- git-aide help bare-play update
-#|	- git-aide help bare-play up
-#|	- git-aide help bp up
-#|	- git-aide bp help up
+#|	- git-deck help bare-play update
+#|	- git-deck help bare-play up
+#|	- git-deck help bp up
+#|	- git-deck bp help up
 #|	
 
-#|	$ git-aide help bp wt
+#|	$ git-deck help bp wt
 #|	sub command(s) here:
 #|	- bare-play: means 'bare_play'.
 #|	- bp: means 'bare_play'.
@@ -1312,28 +1323,28 @@ git_aide "$@" && :
 #|	- the path of worktree dir from tag will be like: 'name.comments-src/tags/<tag-name>'
 #|	
 #|	Demo:
-#|	- git-aide bare-play worktree add tree master
-#|	- git-aide bare-play worktree rm tree master
-#|	- git-aide bare-play worktree add tags v1.0.1
-#|	- git-aide bare-play worktree rm tags v1.0.1
-#|	- git-aide bare-play wt a tags v1.16.1
-#|	- git-aide bare-play wt a tree master
+#|	- git-deck bare-play worktree add tree master
+#|	- git-deck bare-play worktree rm tree master
+#|	- git-deck bare-play worktree add tags v1.0.1
+#|	- git-deck bare-play worktree rm tags v1.0.1
+#|	- git-deck bare-play wt a tags v1.16.1
+#|	- git-deck bare-play wt a tree master
 #|	
 #|	See help:
-#|	- git-aide help bare-play worktree
-#|	- git-aide help bare-play wt
-#|	- git-aide help bp wt
-#|	- git-aide bp help wt
+#|	- git-deck help bare-play worktree
+#|	- git-deck help bare-play wt
+#|	- git-deck help bp wt
+#|	- git-deck bp help wt
 #|	
 
-#|	$ git-aide bp wt a tags v1.61.1
+#|	$ git-deck bp wt a tags v1.61.1
 #|	repochk: `/mnt/e/gopass.passwd-srcs/cli/gopass.git` is bare repository ~ true
 #|	Contained tags:
 #|	error: malformed object name v1.61.1
 #|	$ echo $?
 #|	129
 
-#|	$ CHOOSE_MODE=All git-aide bp wt a tags v1.16.1
+#|	$ CHOOSE_MODE=All git-deck bp wt a tags v1.16.1
 #|	repochk: `/mnt/e/gopass.passwd-srcs/cli/gopass.git` is bare repository ~ true
 #|	Contained tags:
 #|	-	v1.16.1
@@ -1361,7 +1372,7 @@ git_aide "$@" && :
 #|	../tags/v1.16.1/
 #|	../tags/v1.17.0-rc.1/
 #|	../tags/v1.17.0-rc.2/
-#|	$ CHOOSE_MODE=All git-aide bp wt x tags v1.16.1
+#|	$ CHOOSE_MODE=All git-deck bp wt x tags v1.16.1
 #|	repochk: `/mnt/e/gopass.passwd-srcs/cli/gopass.git` is bare repository ~ true
 #|	Contained tags:
 #|	-	v1.16.1
@@ -1379,7 +1390,7 @@ git_aide "$@" && :
 #|	:: executing: worktree remove ../tags/v1.17.0-rc.2 ::
 #|	ls: cannot access '../tags/*': No such file or directory
 
-#|	$ CHOOSE_MODE=Only git-aide bp wt a tags v1.16.1
+#|	$ CHOOSE_MODE=Only git-deck bp wt a tags v1.16.1
 #|	repochk: `/mnt/e/gopass.passwd-srcs/cli/gopass.git` is bare repository ~ true
 #|	Contained tags:
 #|	-	v1.16.1
@@ -1392,7 +1403,7 @@ git_aide "$@" && :
 #|	Updating files: 100% (652/652), done.
 #|	HEAD is now at f4bb1ded Tag v1.16.1 (#3304)
 #|	../tags/v1.16.1/
-#|	$ git-aide bp wt a tree master
+#|	$ git-deck bp wt a tree master
 #|	repochk: `/mnt/e/gopass.passwd-srcs/cli/gopass.git` is bare repository ~ true
 #|	Contained branches:
 #|	-	master
@@ -1402,7 +1413,7 @@ git_aide "$@" && :
 #|	HEAD is now at f25fc7b4 fix: restore clip flag through fuzzy search in show command (#3466)
 #|	../tree/master/
 
-#|	$ git-aide bp help wt
+#|	$ git-deck bp help wt
 #|	repochk: `/mnt/e/gopass.passwd-srcs/cli/gopass.git` is bare repository ~ true
 #|	sub command(s) here:
 #|	- sub-help: means 'aliases'.
@@ -1419,21 +1430,21 @@ git_aide "$@" && :
 #|	- the path of worktree dir from tag will be like: 'name.comments-src/tags/<tag-name>'
 #|	
 #|	Demo:
-#|	- git-aide bare-play worktree add tree master
-#|	- git-aide bare-play worktree rm tree master
-#|	- git-aide bare-play worktree add tags v1.0.1
-#|	- git-aide bare-play worktree rm tags v1.0.1
-#|	- git-aide bare-play wt a tags v1.16.1
-#|	- git-aide bare-play wt a tree master
+#|	- git-deck bare-play worktree add tree master
+#|	- git-deck bare-play worktree rm tree master
+#|	- git-deck bare-play worktree add tags v1.0.1
+#|	- git-deck bare-play worktree rm tags v1.0.1
+#|	- git-deck bare-play wt a tags v1.16.1
+#|	- git-deck bare-play wt a tree master
 #|	
 #|	See help:
-#|	- git-aide help bare-play worktree
-#|	- git-aide help bare-play wt
-#|	- git-aide help bp wt
-#|	- git-aide bp help wt
+#|	- git-deck help bare-play worktree
+#|	- git-deck help bare-play wt
+#|	- git-deck help bp wt
+#|	- git-deck bp help wt
 #|	
 
-#|	$ git-aide bp wt a tree master
+#|	$ git-deck bp wt a tree master
 #|	repochk: `/mnt/e/gopass.passwd-srcs/browser-ext/gopassbridge.git` is bare repository ~ true
 #|	Contained branches:
 #|	-	dependabot/github_actions/actions/checkout-7
@@ -1448,7 +1459,7 @@ git_aide "$@" && :
 #|	HEAD is now at 5da4522 Merge pull request #342 from gopasspw/dependabot/tools-48090d0390
 #|	../tree/master/
 
-#|	$ git-aide ac https://github.com/t8y2/dbx.git --mirror
+#|	$ git-deck ac https://github.com/t8y2/dbx.git --mirror
 #|	:: git cloning in shallow (depth 1) mode ::
 #|	Cloning into bare repository 'dbx.git'...
 #|	remote: Enumerating objects: 24035, done.
@@ -1502,7 +1513,7 @@ git_aide "$@" && :
 #|	From https://github.com/t8y2/dbx
 #|	   b951d3a5..7a21f258  main       -> main
 #|	:: done for repo `dbx.git`. ::
-#|	$ git-aide bp wt a tags v0.5.41
+#|	$ git-deck bp wt a tags v0.5.41
 #|	repochk: `/mnt/e/dbx.sqlclient.ai-src/dbx.git` is bare repository ~ true
 #|	Contained tags:
 #|	-	agents-latest
@@ -1516,7 +1527,7 @@ git_aide "$@" && :
 #|	Updating files: 100% (1656/1656), done.
 #|	HEAD is now at ba872303 feat(release): bump app version to 0.5.41
 #|	../tags/v0.5.41/
-#|	$ git-aide bp wt a tree main
+#|	$ git-deck bp wt a tree main
 #|	repochk: `/mnt/e/dbx.sqlclient.ai-src/dbx.git` is bare repository ~ true
 #|	Contained branches:
 #|	-	main
@@ -1527,7 +1538,7 @@ git_aide "$@" && :
 #|	Updating files: 100% (1656/1656), done.
 #|	HEAD is now at 7a21f258 feat(sqlCompletion): support SELECT list expand-all-fields completion (#2155)
 #|	../tree/main/
-#|	$ git-aide bp wt x tree main
+#|	$ git-deck bp wt x tree main
 #|	repochk: `/mnt/e/dbx.sqlclient.ai-src/dbx.git` is bare repository ~ true
 #|	Contained branches:
 #|	-	main
@@ -1536,7 +1547,7 @@ git_aide "$@" && :
 #|	:: executing: worktree remove ../tree/main ::
 #|	ls: cannot access '../tree/*': No such file or directory
 
-#|	$ git-aide bp wt a tags v3.1.5
+#|	$ git-deck bp wt a tags v3.1.5
 #|	repochk: `/mnt/e/xed.repoctl.editor.android-src/Xed-Editor.git` is bare repository ~ true
 #|	Contained tags:
 #|	-	sdk-latest
@@ -1563,7 +1574,7 @@ git_aide "$@" && :
 #|	HEAD is now at 3dd223437 Update network_security_config.xml
 #|	../tags/v3.1.5/
 
-#|	$ . ~/git-aide.sh && git-aide sp all-sync
+#|	$ . ~/git-deck.sh && git-deck sp all-sync
 #|	:: pulling from origin and all remotes in: ./pure.lexicals/ ::
 #|	repochk: `/mnt/e/repos-testing/pure.lexicals` is inside worktree ~ true
 #|	repochk: `/mnt/e/repos-testing/pure.lexicals` is bare repository ~ false
@@ -1577,7 +1588,7 @@ git_aide "$@" && :
 #|	   d536247..8fbcd08  main       -> origin/main
 #|	Updating d536247..8fbcd08
 #|	Fast-forward
-#|	 .notes/sh3rrs/Subs/.demo/git-aide.sh               | 90 ++++++++++++++--------
+#|	 .notes/sh3rrs/Subs/.demo/git-deck.sh               | 90 ++++++++++++++--------
 #|	 .../readme"                                        | 16 +++-
 #|	 2 files changed, 75 insertions(+), 31 deletions(-)
 #|	base_up: updated in './pure.lexicals/'
@@ -1690,7 +1701,7 @@ git_aide "$@" && :
 #|	:: pushed all remotes in './pure.lexicals.git/' ::
 #|	
 
-#|	$ git-aide help
+#|	$ git-deck help
 #|	sub command(s) here:
 #|	- bare-play: means 'bare_play'.
 #|	- bp: means 'bare_play'.
@@ -1703,7 +1714,20 @@ git_aide "$@" && :
 #|	- sub-help: means 'aliases'.
 #|	- sync-play: means 'sync_play'.
 
-#|	$ git-aide help git-aide
+#|	$ gd help
+#|	sub command(s) here:
+#|	- bare-play: means 'bare_play'.
+#|	- bp: means 'bare_play'.
+#|	- clone-play: means 'clone_play'.
+#|	- cp: means 'clone_play'.
+#|	- rc: means 'repo_chk'.
+#|	- repo-check: means 'repo_chk'.
+#|	- repo-chk: means 'repo_chk'.
+#|	- sp: means 'sync_play'.
+#|	- sub-help: means 'aliases'.
+#|	- sync-play: means 'sync_play'.
+
+#|	$ git-deck help git-deck
 #|	sub command(s) here:
 #|	- bare-play: means 'bare_play'.
 #|	- bp: means 'bare_play'.
@@ -1716,105 +1740,77 @@ git_aide "$@" && :
 #|	- sub-help: means 'aliases'.
 #|	- sync-play: means 'sync_play'.
 #|	
-#|	sub command: git-aide
+#|	sub command: git-deck
 #|	
-#|	Git Aide Player (also names 'git bench/bike') is an assistant for git to give levers/wheels with its helpdocs
+#|	The *Git Aide Deck* is an assistant for git to give levers/wheels with its helpdocs
 #|	 It's also a demo for `Subs` frame which is a simple helper frame in shell (tested in bash & brush) that can trans alias names
 #|	 as function with a helpdocs feature supported.
 #|	
 #|	See help:
-#|	- git-aide help
-#|	- git-aide help git-aide
-#|	- git-aide help git-bench
-#|	- git-aide help git-bike
-#|	- git-aide help gp
-#|	- help git-aide
-#|	- help git-bench
-#|	- help git-bike
-#|	- help gp
+#|	- git-deck help
+#|	- git-deck help git-deck
+#|	- git-deck help gd
+#|	- help git-deck
+#|	- help gd
 #|	
 
-#|	$ help git-aide
+#|	$ help git-deck
 #|	sub command(s) here:
-#|	- git-aide: means 'git_aide'.
-#|	- git-bench: means 'git_aide'.
-#|	- git-bike: means 'git_aide'.
-#|	- git-player: means 'git_player'.
-#|	- git_player: means 'git_aide'.
-#|	- gp: means 'git_player'.
+#|	- gd: means 'git_deck'.
+#|	- git-deck: means 'git_deck'.
 #|	
-#|	sub command: git-aide
+#|	sub command: git-deck
 #|	
-#|	Git Aide Player (also names 'git bench/bike') is an assistant for git to give levers/wheels with its helpdocs
+#|	The *Git Aide Deck* is an assistant for git to give levers/wheels with its helpdocs
 #|	 It's also a demo for `Subs` frame which is a simple helper frame in shell (tested in bash & brush) that can trans alias names
 #|	 as function with a helpdocs feature supported.
 #|	
 #|	See help:
-#|	- git-aide help
-#|	- git-aide help git-aide
-#|	- git-aide help git-bench
-#|	- git-aide help git-bike
-#|	- git-aide help gp
-#|	- help git-aide
-#|	- help git-bench
-#|	- help git-bike
-#|	- help gp
+#|	- git-deck help
+#|	- git-deck help git-deck
+#|	- git-deck help gd
+#|	- help git-deck
+#|	- help gd
 #|	
 
-#|	$ help gp
+#|	$ help gd
 #|	sub command(s) here:
-#|	- git-aide: means 'git_aide'.
-#|	- git-bench: means 'git_aide'.
-#|	- git-bike: means 'git_aide'.
-#|	- git-player: means 'git_player'.
-#|	- git_player: means 'git_aide'.
-#|	- gp: means 'git_player'.
+#|	- gd: means 'git_deck'.
+#|	- git-deck: means 'git_deck'.
 #|	
-#|	sub command: gp
+#|	sub command: gd
 #|	
-#|	Git Aide Player (also names 'git bench/bike') is an assistant for git to give levers/wheels with its helpdocs
+#|	The *Git Aide Deck* is an assistant for git to give levers/wheels with its helpdocs
 #|	 It's also a demo for `Subs` frame which is a simple helper frame in shell (tested in bash & brush) that can trans alias names
 #|	 as function with a helpdocs feature supported.
 #|	
 #|	See help:
-#|	- git-aide help
-#|	- git-aide help git-aide
-#|	- git-aide help git-bench
-#|	- git-aide help git-bike
-#|	- git-aide help gp
-#|	- help git-aide
-#|	- help git-bench
-#|	- help git-bike
-#|	- help gp
+#|	- git-deck help
+#|	- git-deck help git-deck
+#|	- git-deck help gd
+#|	- help git-deck
+#|	- help gd
 #|	
 
-#|	$ . ~/git-bike.sh ; help git-aide
+#|	$ . ~/git-deck.sh ; help git-deck
 #|	sub command(s) here:
-#|	- git-aide: means 'git_aide'.
-#|	- git-bench: means 'git_aide'.
-#|	- git-bike: means 'git_aide'.
-#|	- git-player: means 'git_player'.
-#|	- git_player: means 'git_aide'.
-#|	- gp: means 'git_player'.
+#|	- gd: means 'git_deck'.
+#|	- git-deck: means 'git_deck'.
 #|	
-#|	sub command: git-aide
+#|	sub command: git-deck
 #|	
-#|	Git Aide Player (also names git bench/bike) is an assistant for git to give levers/wheels with its helpdocs.
+#|	The *Git Aide Deck* is an assistant for git to give levers/wheels with its helpdocs.
 #|	 It's also a demo for `Subs` frame which is a simple helper frame in shell (tested in bash & brush) that can trans alias names
 #|	 as function with a helpdocs feature supported.
 #|	
 #|	See help:
-#|	- git-aide help
-#|	- git-aide help git-aide
-#|	- git-aide help git-bench
-#|	- git-aide help git-bike
-#|	- git-aide help gp
-#|	- help git-aide
-#|	- help git-bench
-#|	- help git-bike
-#|	- help gp
+#|	- git-deck help
+#|	- git-deck help git-deck
+#|	- git-deck help gd
+#|	- help git-deck
+#|	- help gd
 #|	
-#|	$ . ~/git-aide.sh && help :
+#|	$ . ~/git-deck.sh && help :
 #|	:: :
 #|		Null command.
 #|		
@@ -1822,7 +1818,7 @@ git_aide "$@" && :
 #|		
 #|		Exit Status:
 #|		Always succeeds.
-#|	$ . ~/git-bike.sh ; help true ; help false
+#|	$ . ~/git-deck.sh ; help true ; help false
 #|	true: true
 #|		Return a successful result.
 #|		
@@ -1834,8 +1830,8 @@ git_aide "$@" && :
 #|		Exit Status:
 #|		Always fails.
 
-#|	$ . ~/git-aide.sh && OPTS_CLONE=--bare git-aide cp m . mabin.sp-src/mabynogion.spells.git:https://github.com/pure-symbols/mabynogion.spells.git pure.lexi-src/pure.lexicals.git:https://github.com/pure-symbols/pure.lexicals.git :https://github.com/yhm-amber/lang-note.git
-#|	:: executing: `.aide cp auto-clone --bare -- 'https://github.com/pure-symbols/mabynogion.spells.git' mabin.sp-src/mabynogion.spells.git` in '/mnt/e/repos' ::
+#|	$ . ~/git-deck.sh && OPTS_CLONE=--bare git-deck cp m . mabin.sp-src/mabynogion.spells.git:https://github.com/pure-symbols/mabynogion.spells.git pure.lexi-src/pure.lexicals.git:https://github.com/pure-symbols/pure.lexicals.git :https://github.com/yhm-amber/lang-note.git
+#|	:: executing: `.deck cp auto-clone --bare -- 'https://github.com/pure-symbols/mabynogion.spells.git' mabin.sp-src/mabynogion.spells.git` in '/mnt/e/repos' ::
 #|	:: git cloning in shallow (depth 1) mode ::
 #|	Cloning into bare repository 'mabin.sp-src/mabynogion.spells.git'...
 #|	remote: Enumerating objects: 80, done.
@@ -1868,7 +1864,7 @@ git_aide "$@" && :
 #|	upper: updated in '.../mabin.sp-src/mabynogion.spells.git' for remote(s)
 #|	base_up: updated in '.'
 #|	:: done for repo `mabin.sp-src/mabynogion.spells.git`. ::
-#|	:: executing: `.aide cp auto-clone --bare -- 'https://github.com/pure-symbols/pure.lexicals.git' pure.lexi-src/pure.lexicals.git` in '/mnt/e/repos' ::
+#|	:: executing: `.deck cp auto-clone --bare -- 'https://github.com/pure-symbols/pure.lexicals.git' pure.lexi-src/pure.lexicals.git` in '/mnt/e/repos' ::
 #|	:: git cloning in shallow (depth 1) mode ::
 #|	Cloning into bare repository 'pure.lexi-src/pure.lexicals.git'...
 #|	remote: Enumerating objects: 972, done.
@@ -1900,7 +1896,7 @@ git_aide "$@" && :
 #|	upper: updated in '.../pure.lexi-src/pure.lexicals.git' for remote(s)
 #|	base_up: updated in '.'
 #|	:: done for repo `pure.lexi-src/pure.lexicals.git`. ::
-#|	:: executing: `.aide cp auto-clone --bare -- 'https://github.com/yhm-amber/lang-note.git' ` in '/mnt/e/repos' ::
+#|	:: executing: `.deck cp auto-clone --bare -- 'https://github.com/yhm-amber/lang-note.git' ` in '/mnt/e/repos' ::
 #|	:: git cloning in shallow (depth 1) mode ::
 #|	Cloning into bare repository 'lang-note.git'...
 #|	remote: Enumerating objects: 279, done.
@@ -1934,7 +1930,7 @@ git_aide "$@" && :
 #|	:: done for repo `lang-note.git`. ::
 
 
-#|	$ MAXTRY_ASKING=999 git-aide cp a https://github.com/denoland/deno.git --mirror
+#|	$ MAXTRY_ASKING=999 git-deck cp a https://github.com/denoland/deno.git --mirror
 #|	:: git cloning in shallow (depth 1) mode ::
 #|	Cloning into bare repository 'deno.git'...
 #|	remote: Enumerating objects: 307976, done.
@@ -1968,9 +1964,9 @@ git_aide "$@" && :
 #|	base_upgrade: updated in '.'
 #|	:: done for repo `deno.git`. ::
 #|	
-#|	$ (cd deno.git && git-aide bp wts i tree:main tags:v2.9.2)
+#|	$ (cd deno.git && git-deck bp wts i tree:main tags:v2.9.2)
 #|	repochk: `/e/iso/deno.denoland.esrt-src/deno.git` is bare repository ~ true
-#|	:: executing: `CHOOSE_MODE='Only' .aide bp worktree add tree main` at '/e/iso/deno.denoland.esrt-src/deno.git' ::
+#|	:: executing: `CHOOSE_MODE='Only' .deck bp worktree add tree main` at '/e/iso/deno.denoland.esrt-src/deno.git' ::
 #|	Contained branches:
 #|	-	feat/check-native-tsc
 #|	-	feat/graph-aware-lint
@@ -1985,7 +1981,7 @@ git_aide "$@" && :
 #|	Updating files: 100% (14505/14505), done.
 #|	HEAD is now at 786457cc2b feat: support sync-types without node_modules (#35966)
 #|	../tree/main/
-#|	:: executing: `CHOOSE_MODE='Only' .aide bp worktree add tags v2.9.2` at '/e/iso/deno.denoland.esrt-src/deno.git' ::
+#|	:: executing: `CHOOSE_MODE='Only' .deck bp worktree add tags v2.9.2` at '/e/iso/deno.denoland.esrt-src/deno.git' ::
 #|	Contained tags:
 #|	-	v2.9.2
 #|	Choosed tags (choose mode: Only):
@@ -1996,7 +1992,7 @@ git_aide "$@" && :
 #|	HEAD is now at 356c132ed6 2.9.2 (#35865)
 #|	../tags/v2.9.2/
 
-#|	$ MAXTRY_ASKING=999 git-aide cp a https://github.com/osquery/osquery.git --mirror
+#|	$ MAXTRY_ASKING=999 git-deck cp a https://github.com/osquery/osquery.git --mirror
 #|	:: git cloning in shallow (depth 1) mode ::
 #|	Cloning into bare repository 'osquery.git'...
 #|	fatal: unable to access 'https://github.com/osquery/osquery.git/': Recv failure: Connection was reset
@@ -2030,9 +2026,9 @@ git_aide "$@" && :
 #|	base_up: updated in '.'
 #|	:: done for repo `osquery.git`. ::
 #|	
-#|	$ (cd osquery.git && git-aide bp wts i tree:master tags:5.23.1)
+#|	$ (cd osquery.git && git-deck bp wts i tree:master tags:5.23.1)
 #|	repochk: `/e/iso/osquery.sqlsys-src/osquery.git` is bare repository ~ true
-#|	:: executing: `CHOOSE_MODE='Only' .aide bp worktree add tree master` at '/e/iso/osquery.sqlsys-src/osquery.git' ::
+#|	:: executing: `CHOOSE_MODE='Only' .deck bp worktree add tree master` at '/e/iso/osquery.sqlsys-src/osquery.git' ::
 #|	Contained branches:
 #|	-	master
 #|	Choosed branches (choose mode: Only):
@@ -2042,7 +2038,7 @@ git_aide "$@" && :
 #|	Updating files: 100% (2602/2602), done.
 #|	HEAD is now at bf007af07 Update GitHub Actions caching strategy (#8866)
 #|	../tree/master/
-#|	:: executing: `CHOOSE_MODE='Only' .aide bp worktree add tags 5.23.1` at '/e/iso/osquery.sqlsys-src/osquery.git' ::
+#|	:: executing: `CHOOSE_MODE='Only' .deck bp worktree add tags 5.23.1` at '/e/iso/osquery.sqlsys-src/osquery.git' ::
 #|	Contained tags:
 #|	-	5.23.1
 #|	Choosed tags (choose mode: Only):
@@ -2054,7 +2050,7 @@ git_aide "$@" && :
 #|	../tags/5.23.1/
 
 #.	cd -- /mnt/.repo-syncs
-#.	ASKING_MAXTRY=9999 OPTS_CLONE=--bare git-aide cp m . \
+#.	ASKING_MAXTRY=9999 OPTS_CLONE=--bare git-deck cp m . \
 #.		mabin.ls-src/mabynogion.spells.git:https://github.com/pure-symbols/mabynogion.spells.git \
 #.		pure.yph-src/pure.lexicals.git:https://github.com/pure-symbols/pure.lexicals.git \
 #.		pure.symb-grp/pure-symbols.git:https://github.com/pure-symbols/.github.git \
@@ -2062,7 +2058,7 @@ git_aide "$@" && :
 #.		lang.note-src/lang-note.git:https://github.com/yhm-amber/lang-note.git \
 #.		sh3rr.sh-src/sh3rr.git:https://github.com/yhm-amber/sh3rr.git \
 #.		yph.m-grp/yhm-amber.git:https://github.com/yhm-amber/yhm-amber.git
-#|	:: executing: `.aide cp auto-clone --bare -- 'https://github.com/pure-symbols/mabynogion.spells.git' mabin.ls-src/mabynogion.spells.git` at '/e/repos/.syncing' ::
+#|	:: executing: `.deck cp auto-clone --bare -- 'https://github.com/pure-symbols/mabynogion.spells.git' mabin.ls-src/mabynogion.spells.git` at '/e/repos/.syncing' ::
 #|	:: git cloning in shallow (depth 1) mode ::
 #|	Cloning into bare repository 'mabin.ls-src/mabynogion.spells.git'...
 #|	fatal: unable to access 'https://github.com/pure-symbols/mabynogion.spells.git/': Recv failure: Connection was reset
@@ -2124,7 +2120,7 @@ git_aide "$@" && :
 #|	base_up: updated in '.'
 #|	:: done for repo `mabin.ls-src/mabynogion.spells.git`. ::
 #|	
-#|	:: executing: `.aide cp auto-clone --bare -- 'https://github.com/pure-symbols/pure.lexicals.git' pure.yph-src/pure.lexicals.git` at '/e/repos/.syncing' ::
+#|	:: executing: `.deck cp auto-clone --bare -- 'https://github.com/pure-symbols/pure.lexicals.git' pure.yph-src/pure.lexicals.git` at '/e/repos/.syncing' ::
 #|	:: git cloning in shallow (depth 1) mode ::
 #|	Cloning into bare repository 'pure.yph-src/pure.lexicals.git'...
 #|	remote: Enumerating objects: 972, done.
@@ -2159,7 +2155,7 @@ git_aide "$@" && :
 #|	base_up: updated in '.'
 #|	:: done for repo `pure.yph-src/pure.lexicals.git`. ::
 #|	
-#|	:: executing: `.aide cp auto-clone --bare -- 'https://github.com/pure-symbols/.github.git' pure.symb-grp/pure-symbols.git` at '/e/repos/.syncing' ::
+#|	:: executing: `.deck cp auto-clone --bare -- 'https://github.com/pure-symbols/.github.git' pure.symb-grp/pure-symbols.git` at '/e/repos/.syncing' ::
 #|	:: git cloning in shallow (depth 1) mode ::
 #|	Cloning into bare repository 'pure.symb-grp/pure-symbols.git'...
 #|	remote: Enumerating objects: 87, done.
@@ -2194,7 +2190,7 @@ git_aide "$@" && :
 #|	base_up: updated in '.'
 #|	:: done for repo `pure.symb-grp/pure-symbols.git`. ::
 #|	
-#|	:: executing: `.aide cp auto-clone --bare -- 'https://github.com/yhm-amber/container-note.git' contain.note-src/container-note.git` at '/e/repos/.syncing' ::
+#|	:: executing: `.deck cp auto-clone --bare -- 'https://github.com/yhm-amber/container-note.git' contain.note-src/container-note.git` at '/e/repos/.syncing' ::
 #|	:: git cloning in shallow (depth 1) mode ::
 #|	Cloning into bare repository 'contain.note-src/container-note.git'...
 #|	remote: Enumerating objects: 5289, done.
@@ -2249,7 +2245,7 @@ git_aide "$@" && :
 #|	base_up: updated in '.'
 #|	:: done for repo `contain.note-src/container-note.git`. ::
 #|	
-#|	:: executing: `.aide cp auto-clone --bare -- 'https://github.com/yhm-amber/lang-note.git' lang.note-src/lang-note.git` at '/e/repos/.syncing' ::
+#|	:: executing: `.deck cp auto-clone --bare -- 'https://github.com/yhm-amber/lang-note.git' lang.note-src/lang-note.git` at '/e/repos/.syncing' ::
 #|	:: git cloning in shallow (depth 1) mode ::
 #|	Cloning into bare repository 'lang.note-src/lang-note.git'...
 #|	fatal: unable to access 'https://github.com/yhm-amber/lang-note.git/': Failed to connect to github.com port 443 after 21339 ms: Could not connect to server
@@ -2294,7 +2290,7 @@ git_aide "$@" && :
 #|	base_up: updated in '.'
 #|	:: done for repo `lang.note-src/lang-note.git`. ::
 #|	
-#|	:: executing: `.aide cp auto-clone --bare -- 'https://github.com/yhm-amber/sh3rr.git' sh3rr.sh-src/sh3rr.git` at '/e/repos/.syncing' ::
+#|	:: executing: `.deck cp auto-clone --bare -- 'https://github.com/yhm-amber/sh3rr.git' sh3rr.sh-src/sh3rr.git` at '/e/repos/.syncing' ::
 #|	:: git cloning in shallow (depth 1) mode ::
 #|	Cloning into bare repository 'sh3rr.sh-src/sh3rr.git'...
 #|	fatal: unable to access 'https://github.com/yhm-amber/sh3rr.git/': Failed to connect to github.com port 443 after 21353 ms: Could not connect to server
@@ -2353,7 +2349,7 @@ git_aide "$@" && :
 #|	base_up: updated in '.'
 #|	:: done for repo `sh3rr.sh-src/sh3rr.git`. ::
 #|	
-#|	:: executing: `.aide cp auto-clone --bare -- 'https://github.com/yhm-amber/yhm-amber.git' yph.m-grp/yhm-amber.git` at '/e/repos/.syncing' ::
+#|	:: executing: `.deck cp auto-clone --bare -- 'https://github.com/yhm-amber/yhm-amber.git' yph.m-grp/yhm-amber.git` at '/e/repos/.syncing' ::
 #|	:: git cloning in shallow (depth 1) mode ::
 #|	Cloning into bare repository 'yph.m-grp/yhm-amber.git'...
 #|	remote: Enumerating objects: 137, done.
@@ -2398,7 +2394,7 @@ git_aide "$@" && :
 #|	
 
 
-#.	git-aide sp rmts a mabin.ls-src/mabynogion.spells.git \
+#.	git-deck sp rmts a mabin.ls-src/mabynogion.spells.git \
 #.		gh:https://github.com/pure-symbols/mabynogion.spells.git \
 #.		cb:https://codeberg.org/pure-symbols/mabynogion.spells.git \
 #.		dr:https://git.disroot.org/pure.symbols/mabynogion.spells.git \
@@ -2419,7 +2415,7 @@ git_aide "$@" && :
 #|	origin  https://github.com/pure-symbols/mabynogion.spells.git (fetch)
 #|	origin  https://github.com/pure-symbols/mabynogion.spells.git (push)
 
-#.	git-aide sp rmts a pure.yph-src/pure.lexicals.git \
+#.	git-deck sp rmts a pure.yph-src/pure.lexicals.git \
 #.		gh:https://github.com/pure-symbols/pure.lexicals.git \
 #.		cb:https://codeberg.org/pure-symbols/pure.lexicals.git \
 #.		dr:https://git.disroot.org/pure.symbols/pure.lexicals.git \
@@ -2440,7 +2436,7 @@ git_aide "$@" && :
 #|	origin  https://github.com/pure-symbols/pure.lexicals.git (fetch)
 #|	origin  https://github.com/pure-symbols/pure.lexicals.git (push)
 
-#.	git-aide sp rmts a pure.symb-grp/pure-symbols.git \
+#.	git-deck sp rmts a pure.symb-grp/pure-symbols.git \
 #.		gh:https://github.com/pure-symbols/.github.git \
 #.		cb:https://codeberg.org/pure-symbols/pure.symbols.git \
 #.		dr:https://git.disroot.org/pure.symbols/pure.symbols.git \
@@ -2461,7 +2457,7 @@ git_aide "$@" && :
 #|	origin  https://github.com/pure-symbols/.github.git (fetch)
 #|	origin  https://github.com/pure-symbols/.github.git (push)
 
-#.	git-aide sp rmts a contain.note-src/container-note.git \
+#.	git-deck sp rmts a contain.note-src/container-note.git \
 #.		gh:https://github.com/yhm-amber/container-note.git \
 #.		cb:https://codeberg.org/yhm-ypa/container-note.git \
 #.		dr:https://git.disroot.org/ypayhm/container-note.git \
@@ -2482,7 +2478,7 @@ git_aide "$@" && :
 #|	origin  https://github.com/yhm-amber/container-note.git (fetch)
 #|	origin  https://github.com/yhm-amber/container-note.git (push)
 
-#.	git-aide sp rmts a lang.note-src/lang-note.git \
+#.	git-deck sp rmts a lang.note-src/lang-note.git \
 #.		gh:https://github.com/yhm-amber/lang-note.git \
 #.		cb:https://codeberg.org/yhm-ypa/lang-note.git \
 #.		dr:https://git.disroot.org/ypayhm/lang-note.git \
@@ -2503,7 +2499,7 @@ git_aide "$@" && :
 #|	origin  https://github.com/yhm-amber/lang-note.git (fetch)
 #|	origin  https://github.com/yhm-amber/lang-note.git (push)
 
-#.	git-aide sp rmts a sh3rr.sh-src/sh3rr.git \
+#.	git-deck sp rmts a sh3rr.sh-src/sh3rr.git \
 #.		gh:https://github.com/yhm-amber/sh3rr.git \
 #.		cb:https://codeberg.org/yhm-ypa/sh3rr.git \
 #.		dr:https://git.disroot.org/ypayhm/sh3rr.git \
@@ -2524,7 +2520,7 @@ git_aide "$@" && :
 #|	origin  https://github.com/yhm-amber/sh3rr.git (fetch)
 #|	origin  https://github.com/yhm-amber/sh3rr.git (push)
 
-#.	git-aide sp rmts a yph.m-grp/yhm-amber.git \
+#.	git-deck sp rmts a yph.m-grp/yhm-amber.git \
 #.		gh:https://github.com/yhm-amber/yhm-amber.git \
 #.		cb:https://codeberg.org/yhm-ypa/yhm-ypa.git \
 #.		dr:https://git.disroot.org/ypayhm/ypayhm.git \
@@ -2545,7 +2541,7 @@ git_aide "$@" && :
 #|	origin  https://github.com/yhm-amber/yhm-amber.git (fetch)
 #|	origin  https://github.com/yhm-amber/yhm-amber.git (push)
 
-#|	$ git-aide sp all-sync *
+#|	$ git-deck sp all-sync *
 #|	:: pulling from origin and all remotes in: contain.note-src/container-note.git/ ::
 #|	repochk: `/e/repos/.syncing/contain.note-src/container-note.git` is inside worktree ~ false
 #|	repochk: `/e/repos/.syncing/contain.note-src/container-note.git` is inside gitdir ~ true
@@ -2622,13 +2618,13 @@ git_aide "$@" && :
 #| ^C
 
 
-#.	git-aide sp rmts x mabin.ls-src/mabynogion.spells.git fr
-#.	git-aide sp rmts x pure.yph-src/pure.lexicals.git fr
-#.	git-aide sp rmts x pure.symb-grp/pure-symbols.git fr
-#.	git-aide sp rmts x contain.note-src/container-note.git fr
-#.	git-aide sp rmts x lang.note-src/lang-note.git fr
-#.	git-aide sp rmts x sh3rr.sh-src/sh3rr.git fr
-#.	git-aide sp rmts x yph.m-grp/yhm-amber.git fr
+#.	git-deck sp rmts x mabin.ls-src/mabynogion.spells.git fr
+#.	git-deck sp rmts x pure.yph-src/pure.lexicals.git fr
+#.	git-deck sp rmts x pure.symb-grp/pure-symbols.git fr
+#.	git-deck sp rmts x contain.note-src/container-note.git fr
+#.	git-deck sp rmts x lang.note-src/lang-note.git fr
+#.	git-deck sp rmts x sh3rr.sh-src/sh3rr.git fr
+#.	git-deck sp rmts x yph.m-grp/yhm-amber.git fr
 #.	
 #|	:: executing: `git remote remove  -- fr ` at '/e/repos/.syncing/mabin.ls-src/mabynogion.spells.git' ::
 #|	::: Current Remotes Show :::
@@ -2708,7 +2704,7 @@ git_aide "$@" && :
 #|	origin  https://github.com/yhm-amber/yhm-amber.git (push)
 #|	
 
-#|	$ git-aide sp all-sync *
+#|	$ git-deck sp all-sync *
 #|	:: pulling from origin and all remotes in: contain.note-src/container-note.git/ ::
 #|	repochk: `/e/repos/.syncing/contain.note-src/container-note.git` is inside worktree ~ false
 #|	repochk: `/e/repos/.syncing/contain.note-src/container-note.git` is inside gitdir ~ true
