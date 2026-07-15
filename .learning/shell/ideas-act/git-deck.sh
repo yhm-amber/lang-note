@@ -339,12 +339,12 @@ Libs ()
 } && 
 
 
-eval "$(MARK_MORE=GIT_DECK PKG_SUBS='libs subs lang' libs subs frames codes_head)" && 
+eval "$(MARK_MORE=GIT_DECKS PKG_SUBS='libs subs lang' libs subs frames codes_head)" && 
 
-git_deck__helper__ () 
+git_decks__helper__ () 
 (
 	echo && 
-	echo 'The *Git Aide Deck* is an assistant for git to give levers/wheels with its helpdocs.' && 
+	echo 'The *Git Deck Aides* is an assistant for git to give levers/wheels with its helpdocs.' && 
 	echo ' It'"'"'s also a demo for `Subs` frame which is a simple helper frame in shell (tested in bash & brush) that can trans alias names' && 
 	echo ' as function with a helpdocs feature supported.' && 
 	echo && 
@@ -356,7 +356,7 @@ git_deck__helper__ ()
 	echo '- help gd' && 
 	echo && 
 	: ) && 
-alias gd=git_deck git-deck=git_deck && git_deck () 
+alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks () 
 (
 	# Libs Subs : && 
 	Libs : && 
@@ -448,7 +448,7 @@ alias gd=git_deck git-deck=git_deck && git_deck ()
 			cd "${WORKING_PATH:-.}" && 
 			while IFS=: read -r -- landing_path remote_link ;
 			do 
-				echo :: executing: '`'.deck cp auto-clone ${OPTS_CLONE} -- "'${remote_link}'" ${landing_path}'`' at "'${PWD}'" :: && 
+				echo :: executing: '`'.decks cp auto-clone ${OPTS_CLONE} -- "'${remote_link}'" ${landing_path}'`' at "'${PWD}'" :: && 
 				auto_clone ${OPTS_CLONE} -- "${remote_link}" ${landing_path} && 
 				:; 
 			done && 
@@ -641,7 +641,7 @@ alias gd=git_deck git-deck=git_deck && git_deck ()
 			
 			_param_tools params_roll "$@" | while IFS=: read -r -- _type _name ;
 			do 
-				echo :: executing: '`'"CHOOSE_MODE='${CHOOSE_MODE:-Only}' .deck bp worktree ${__cmd_sub__} $_type $_name"'`' at "'${PWD}'" :: && 
+				echo :: executing: '`'"CHOOSE_MODE='${CHOOSE_MODE:-Only}' .decks bp worktree ${__cmd_sub__} $_type $_name"'`' at "'${PWD}'" :: && 
 				CHOOSE_MODE="${CHOOSE_MODE:-Only}" worktree "${__cmd_sub__}" "$_type" "$_name" && 
 				:; 
 			done && 
@@ -1052,10 +1052,10 @@ alias gd=git_deck git-deck=git_deck && git_deck ()
 	"$@" && 
 	: ) && 
 
-eval "$(MARK_MORE=GIT_DECK PKG_SUBS='libs subs lang' libs subs frames codes_tail)" && 
+eval "$(MARK_MORE=GIT_DECKS PKG_SUBS='libs subs lang' libs subs frames codes_tail)" && 
 
 # : \
-git_deck "$@" && :
+git_decks "$@" && :
 
 
 
@@ -1077,7 +1077,7 @@ git_deck "$@" && :
 
 # git symbolic-ref HEAD #: 查 HEAD 指向、用 cat ./HEAD 也能看到相应信息
 # git symbolic-ref HEAD refs/heads/some-other-branch #: 变 HEAD 指向
-# git config --global -- alias.deck "!/usr/bin/env bash ~/.local/git-deck.sh"
+# git config --global -- alias.decks "!/usr/bin/env bash ~/.local/git-deck.sh"
 
 #### demo -----------------------
 
@@ -1742,7 +1742,7 @@ git_deck "$@" && :
 #|	
 #|	sub command: git-deck
 #|	
-#|	The *Git Aide Deck* is an assistant for git to give levers/wheels with its helpdocs
+#|	The *Git Deck Aides* is an assistant for git to give levers/wheels with its helpdocs
 #|	 It's also a demo for `Subs` frame which is a simple helper frame in shell (tested in bash & brush) that can trans alias names
 #|	 as function with a helpdocs feature supported.
 #|	
@@ -1756,12 +1756,13 @@ git_deck "$@" && :
 
 #|	$ help git-deck
 #|	sub command(s) here:
-#|	- gd: means 'git_deck'.
-#|	- git-deck: means 'git_deck'.
+#|	- gd: means 'git_decks'.
+#|	- git-deck: means 'git_decks'.
+#|	- git-decks: means 'git_decks'.
 #|	
 #|	sub command: git-deck
 #|	
-#|	The *Git Aide Deck* is an assistant for git to give levers/wheels with its helpdocs
+#|	The *Git Deck Aides* is an assistant for git to give levers/wheels with its helpdocs
 #|	 It's also a demo for `Subs` frame which is a simple helper frame in shell (tested in bash & brush) that can trans alias names
 #|	 as function with a helpdocs feature supported.
 #|	
@@ -1775,12 +1776,13 @@ git_deck "$@" && :
 
 #|	$ help gd
 #|	sub command(s) here:
-#|	- gd: means 'git_deck'.
-#|	- git-deck: means 'git_deck'.
+#|	- gd: means 'git_decks'.
+#|	- git-deck: means 'git_decks'.
+#|	- git-decks: means 'git_decks'.
 #|	
 #|	sub command: gd
 #|	
-#|	The *Git Aide Deck* is an assistant for git to give levers/wheels with its helpdocs
+#|	The *Git Deck Aides* is an assistant for git to give levers/wheels with its helpdocs
 #|	 It's also a demo for `Subs` frame which is a simple helper frame in shell (tested in bash & brush) that can trans alias names
 #|	 as function with a helpdocs feature supported.
 #|	
@@ -1794,12 +1796,13 @@ git_deck "$@" && :
 
 #|	$ . ~/git-deck.sh ; help git-deck
 #|	sub command(s) here:
-#|	- gd: means 'git_deck'.
-#|	- git-deck: means 'git_deck'.
+#|	- gd: means 'git_decks'.
+#|	- git-deck: means 'git_decks'.
+#|	- git-decks: means 'git_decks'.
 #|	
 #|	sub command: git-deck
 #|	
-#|	The *Git Aide Deck* is an assistant for git to give levers/wheels with its helpdocs.
+#|	The *Git Deck Aides* is an assistant for git to give levers/wheels with its helpdocs.
 #|	 It's also a demo for `Subs` frame which is a simple helper frame in shell (tested in bash & brush) that can trans alias names
 #|	 as function with a helpdocs feature supported.
 #|	
@@ -1831,7 +1834,7 @@ git_deck "$@" && :
 #|		Always fails.
 
 #|	$ . ~/git-deck.sh && OPTS_CLONE=--bare git-deck cp m . mabin.sp-src/mabynogion.spells.git:https://github.com/pure-symbols/mabynogion.spells.git pure.lexi-src/pure.lexicals.git:https://github.com/pure-symbols/pure.lexicals.git :https://github.com/yhm-amber/lang-note.git
-#|	:: executing: `.deck cp auto-clone --bare -- 'https://github.com/pure-symbols/mabynogion.spells.git' mabin.sp-src/mabynogion.spells.git` in '/mnt/e/repos' ::
+#|	:: executing: `.decks cp auto-clone --bare -- 'https://github.com/pure-symbols/mabynogion.spells.git' mabin.sp-src/mabynogion.spells.git` in '/mnt/e/repos' ::
 #|	:: git cloning in shallow (depth 1) mode ::
 #|	Cloning into bare repository 'mabin.sp-src/mabynogion.spells.git'...
 #|	remote: Enumerating objects: 80, done.
@@ -1864,7 +1867,7 @@ git_deck "$@" && :
 #|	upper: updated in '.../mabin.sp-src/mabynogion.spells.git' for remote(s)
 #|	base_up: updated in '.'
 #|	:: done for repo `mabin.sp-src/mabynogion.spells.git`. ::
-#|	:: executing: `.deck cp auto-clone --bare -- 'https://github.com/pure-symbols/pure.lexicals.git' pure.lexi-src/pure.lexicals.git` in '/mnt/e/repos' ::
+#|	:: executing: `.decks cp auto-clone --bare -- 'https://github.com/pure-symbols/pure.lexicals.git' pure.lexi-src/pure.lexicals.git` in '/mnt/e/repos' ::
 #|	:: git cloning in shallow (depth 1) mode ::
 #|	Cloning into bare repository 'pure.lexi-src/pure.lexicals.git'...
 #|	remote: Enumerating objects: 972, done.
@@ -1896,7 +1899,7 @@ git_deck "$@" && :
 #|	upper: updated in '.../pure.lexi-src/pure.lexicals.git' for remote(s)
 #|	base_up: updated in '.'
 #|	:: done for repo `pure.lexi-src/pure.lexicals.git`. ::
-#|	:: executing: `.deck cp auto-clone --bare -- 'https://github.com/yhm-amber/lang-note.git' ` in '/mnt/e/repos' ::
+#|	:: executing: `.decks cp auto-clone --bare -- 'https://github.com/yhm-amber/lang-note.git' ` in '/mnt/e/repos' ::
 #|	:: git cloning in shallow (depth 1) mode ::
 #|	Cloning into bare repository 'lang-note.git'...
 #|	remote: Enumerating objects: 279, done.
@@ -1966,7 +1969,7 @@ git_deck "$@" && :
 #|	
 #|	$ (cd deno.git && git-deck bp wts i tree:main tags:v2.9.2)
 #|	repochk: `/e/iso/deno.denoland.esrt-src/deno.git` is bare repository ~ true
-#|	:: executing: `CHOOSE_MODE='Only' .deck bp worktree add tree main` at '/e/iso/deno.denoland.esrt-src/deno.git' ::
+#|	:: executing: `CHOOSE_MODE='Only' .decks bp worktree add tree main` at '/e/iso/deno.denoland.esrt-src/deno.git' ::
 #|	Contained branches:
 #|	-	feat/check-native-tsc
 #|	-	feat/graph-aware-lint
@@ -1981,7 +1984,7 @@ git_deck "$@" && :
 #|	Updating files: 100% (14505/14505), done.
 #|	HEAD is now at 786457cc2b feat: support sync-types without node_modules (#35966)
 #|	../tree/main/
-#|	:: executing: `CHOOSE_MODE='Only' .deck bp worktree add tags v2.9.2` at '/e/iso/deno.denoland.esrt-src/deno.git' ::
+#|	:: executing: `CHOOSE_MODE='Only' .decks bp worktree add tags v2.9.2` at '/e/iso/deno.denoland.esrt-src/deno.git' ::
 #|	Contained tags:
 #|	-	v2.9.2
 #|	Choosed tags (choose mode: Only):
@@ -2028,7 +2031,7 @@ git_deck "$@" && :
 #|	
 #|	$ (cd osquery.git && git-deck bp wts i tree:master tags:5.23.1)
 #|	repochk: `/e/iso/osquery.sqlsys-src/osquery.git` is bare repository ~ true
-#|	:: executing: `CHOOSE_MODE='Only' .deck bp worktree add tree master` at '/e/iso/osquery.sqlsys-src/osquery.git' ::
+#|	:: executing: `CHOOSE_MODE='Only' .decks bp worktree add tree master` at '/e/iso/osquery.sqlsys-src/osquery.git' ::
 #|	Contained branches:
 #|	-	master
 #|	Choosed branches (choose mode: Only):
@@ -2038,7 +2041,7 @@ git_deck "$@" && :
 #|	Updating files: 100% (2602/2602), done.
 #|	HEAD is now at bf007af07 Update GitHub Actions caching strategy (#8866)
 #|	../tree/master/
-#|	:: executing: `CHOOSE_MODE='Only' .deck bp worktree add tags 5.23.1` at '/e/iso/osquery.sqlsys-src/osquery.git' ::
+#|	:: executing: `CHOOSE_MODE='Only' .decks bp worktree add tags 5.23.1` at '/e/iso/osquery.sqlsys-src/osquery.git' ::
 #|	Contained tags:
 #|	-	5.23.1
 #|	Choosed tags (choose mode: Only):
@@ -2058,7 +2061,7 @@ git_deck "$@" && :
 #.		lang.note-src/lang-note.git:https://github.com/yhm-amber/lang-note.git \
 #.		sh3rr.sh-src/sh3rr.git:https://github.com/yhm-amber/sh3rr.git \
 #.		yph.m-grp/yhm-amber.git:https://github.com/yhm-amber/yhm-amber.git
-#|	:: executing: `.deck cp auto-clone --bare -- 'https://github.com/pure-symbols/mabynogion.spells.git' mabin.ls-src/mabynogion.spells.git` at '/e/repos/.syncing' ::
+#|	:: executing: `.decks cp auto-clone --bare -- 'https://github.com/pure-symbols/mabynogion.spells.git' mabin.ls-src/mabynogion.spells.git` at '/e/repos/.syncing' ::
 #|	:: git cloning in shallow (depth 1) mode ::
 #|	Cloning into bare repository 'mabin.ls-src/mabynogion.spells.git'...
 #|	fatal: unable to access 'https://github.com/pure-symbols/mabynogion.spells.git/': Recv failure: Connection was reset
@@ -2120,7 +2123,7 @@ git_deck "$@" && :
 #|	base_up: updated in '.'
 #|	:: done for repo `mabin.ls-src/mabynogion.spells.git`. ::
 #|	
-#|	:: executing: `.deck cp auto-clone --bare -- 'https://github.com/pure-symbols/pure.lexicals.git' pure.yph-src/pure.lexicals.git` at '/e/repos/.syncing' ::
+#|	:: executing: `.decks cp auto-clone --bare -- 'https://github.com/pure-symbols/pure.lexicals.git' pure.yph-src/pure.lexicals.git` at '/e/repos/.syncing' ::
 #|	:: git cloning in shallow (depth 1) mode ::
 #|	Cloning into bare repository 'pure.yph-src/pure.lexicals.git'...
 #|	remote: Enumerating objects: 972, done.
@@ -2155,7 +2158,7 @@ git_deck "$@" && :
 #|	base_up: updated in '.'
 #|	:: done for repo `pure.yph-src/pure.lexicals.git`. ::
 #|	
-#|	:: executing: `.deck cp auto-clone --bare -- 'https://github.com/pure-symbols/.github.git' pure.symb-grp/pure-symbols.git` at '/e/repos/.syncing' ::
+#|	:: executing: `.decks cp auto-clone --bare -- 'https://github.com/pure-symbols/.github.git' pure.symb-grp/pure-symbols.git` at '/e/repos/.syncing' ::
 #|	:: git cloning in shallow (depth 1) mode ::
 #|	Cloning into bare repository 'pure.symb-grp/pure-symbols.git'...
 #|	remote: Enumerating objects: 87, done.
@@ -2190,7 +2193,7 @@ git_deck "$@" && :
 #|	base_up: updated in '.'
 #|	:: done for repo `pure.symb-grp/pure-symbols.git`. ::
 #|	
-#|	:: executing: `.deck cp auto-clone --bare -- 'https://github.com/yhm-amber/container-note.git' contain.note-src/container-note.git` at '/e/repos/.syncing' ::
+#|	:: executing: `.decks cp auto-clone --bare -- 'https://github.com/yhm-amber/container-note.git' contain.note-src/container-note.git` at '/e/repos/.syncing' ::
 #|	:: git cloning in shallow (depth 1) mode ::
 #|	Cloning into bare repository 'contain.note-src/container-note.git'...
 #|	remote: Enumerating objects: 5289, done.
@@ -2245,7 +2248,7 @@ git_deck "$@" && :
 #|	base_up: updated in '.'
 #|	:: done for repo `contain.note-src/container-note.git`. ::
 #|	
-#|	:: executing: `.deck cp auto-clone --bare -- 'https://github.com/yhm-amber/lang-note.git' lang.note-src/lang-note.git` at '/e/repos/.syncing' ::
+#|	:: executing: `.decks cp auto-clone --bare -- 'https://github.com/yhm-amber/lang-note.git' lang.note-src/lang-note.git` at '/e/repos/.syncing' ::
 #|	:: git cloning in shallow (depth 1) mode ::
 #|	Cloning into bare repository 'lang.note-src/lang-note.git'...
 #|	fatal: unable to access 'https://github.com/yhm-amber/lang-note.git/': Failed to connect to github.com port 443 after 21339 ms: Could not connect to server
@@ -2290,7 +2293,7 @@ git_deck "$@" && :
 #|	base_up: updated in '.'
 #|	:: done for repo `lang.note-src/lang-note.git`. ::
 #|	
-#|	:: executing: `.deck cp auto-clone --bare -- 'https://github.com/yhm-amber/sh3rr.git' sh3rr.sh-src/sh3rr.git` at '/e/repos/.syncing' ::
+#|	:: executing: `.decks cp auto-clone --bare -- 'https://github.com/yhm-amber/sh3rr.git' sh3rr.sh-src/sh3rr.git` at '/e/repos/.syncing' ::
 #|	:: git cloning in shallow (depth 1) mode ::
 #|	Cloning into bare repository 'sh3rr.sh-src/sh3rr.git'...
 #|	fatal: unable to access 'https://github.com/yhm-amber/sh3rr.git/': Failed to connect to github.com port 443 after 21353 ms: Could not connect to server
@@ -2349,7 +2352,7 @@ git_deck "$@" && :
 #|	base_up: updated in '.'
 #|	:: done for repo `sh3rr.sh-src/sh3rr.git`. ::
 #|	
-#|	:: executing: `.deck cp auto-clone --bare -- 'https://github.com/yhm-amber/yhm-amber.git' yph.m-grp/yhm-amber.git` at '/e/repos/.syncing' ::
+#|	:: executing: `.decks cp auto-clone --bare -- 'https://github.com/yhm-amber/yhm-amber.git' yph.m-grp/yhm-amber.git` at '/e/repos/.syncing' ::
 #|	:: git cloning in shallow (depth 1) mode ::
 #|	Cloning into bare repository 'yph.m-grp/yhm-amber.git'...
 #|	remote: Enumerating objects: 137, done.
