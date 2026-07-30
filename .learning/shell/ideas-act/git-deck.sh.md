@@ -1815,6 +1815,7 @@ git-deck sp all-sync *
 ##### daily
 
 ~~~ sh
+# ASKING_MAXTRY=9 git-deck sp all-sync *
 git-deck sp all-sync *
 
 #|	:: pulling from origin and all remotes in: contain.note-src/container-note.git/ ::
