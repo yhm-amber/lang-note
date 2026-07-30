@@ -144,7 +144,7 @@ Libs ()
 				(o|out|outside|outter)   _help_ctrl=''   ;; 
 				(_) 1>&2 echo '[ERROR]: subs: frames: EVAL_PLACE: only support `inside` or `outside`.' ; return 7 ;; 
 			esac && 
-
+			
 			: 亓可别名 去别承体 && 
 			: 亓可助令 略别详体 && 
 			
@@ -227,7 +227,7 @@ Libs ()
 		_returns () ( return $1 ) && 
 		_booled_returns () ( ! _returns $1 ) && 
 		_curr_dir () ( cd "$1" && basename "$(shift ; pwd "$@")" ) && 
-
+		
 		_std_exec () 
 		(
 			#. (echo true | _cmnd_tools _std_exec once) && echo a || echo x
@@ -250,6 +250,14 @@ Libs ()
 		
 		#. eval "$(FD_TTY=9 _cmnd_tools _retry_asking init_codes)" && 
 		#. eval "$(FD_TTY=9 _cmnd_tools _retry_asking body_codes)" && 
+		#. ... 9</dev/tty
+		#. :
+		#.	_taste_asking () 
+		#.	(
+		#.		eval "$(FD_TTY=9 _cmnd_tools _retry_asking init_codes)" && 
+		#.		while true; do echo x ; eval "$(FD_TTY=9 _cmnd_tools _retry_asking body_codes)" && :; done
+		#.		: ) 9</dev/tty && 
+		#.	:
 		_retry_asking () 
 		(
 			PKG_ASKING="${PKG_ASKING:-_cmnd_tools _retry_asking}" && 
@@ -266,7 +274,7 @@ Libs ()
 			__chunk_verifier () 
 			(
 				echo '
-					echo :: try-asking: rested times of push trying: "$((_rests_tryasking))". && 
+					echo :: try-asking: rested times of that trying: "$((_rests_tryasking))". && 
 					if _cmnd_tools _booled_returns "$((_rests_tryasking < 0))" ; 
 						then echo :: try-asking: Break. ; break ;
 						else echo :: try-asking: Then: "$((--_rests_tryasking))" ;
@@ -276,7 +284,7 @@ Libs ()
 			__chunk_asktiming () 
 			(
 				echo '
-					_cmnd_tools _booled_returns "$((_rests_tryasking == 0))" && 
+					_cmnd_tools _booled_returns "$((_rests_tryasking '"${*:-== 0}"'))" && 
 					: ' && 
 				: ) && 
 			
@@ -289,13 +297,11 @@ Libs ()
 			body_codes () 
 			(
 				echo '
-					if eval "$('"${PKG_ASKING}"' __chunk_asktiming)" ; 
+					if eval "$('"${PKG_ASKING}"' __chunk_asktiming == 0)" ; 
 					then 
 						eval "$('"${PKG_ASKING}"' __chunk_asker)" && 
-						(
-							eval "$('"${PKG_ASKING}"' __chunk_asktiming)" && 
-							eval "$('"${PKG_ASKING}"' __chunk_verifier)" && 
-							: ) && 
+						eval "$('"${PKG_ASKING}"' __chunk_asktiming \< 0)" && 
+						eval "$('"${PKG_ASKING}"' __chunk_verifier)" && 
 						:; 
 					else 
 						eval "$('"${PKG_ASKING}"' __chunk_verifier)" && 
@@ -1731,7 +1737,7 @@ git_decks "$@" && :
 #|	tried: 1 for `git push -v -- origin 'refs/heads/*:refs/heads/*'` in './pure.lexicals.git/'
 #|	:: try-asking: How many times you want to retry then ? :: 0
 #|	:: try-asking: you inputed '0' as 0.
-#|	:: try-asking: rested times of push trying: -1.
+#|	:: try-asking: rested times of that trying: -1.
 #|	:: try-asking: Break.
 #|	:: pushed all remotes in './pure.lexicals.git/' ::
 #|	
@@ -2035,7 +2041,7 @@ git_decks "$@" && :
 #|	Cloning into bare repository 'osquery.git'...
 #|	fatal: unable to access 'https://github.com/osquery/osquery.git/': Recv failure: Connection was reset
 #|	tried: 1 for clone
-#|	:: try-asking: rested times of push trying: 999.
+#|	:: try-asking: rested times of that trying: 999.
 #|	:: try-asking: Then: 998
 #|	Cloning into bare repository 'osquery.git'...
 #|	remote: Enumerating objects: 81081, done.
@@ -2101,32 +2107,32 @@ git_decks "$@" && :
 #|	Cloning into bare repository 'mabin.ls-src/mabynogion.spells.git'...
 #|	fatal: unable to access 'https://github.com/pure-symbols/mabynogion.spells.git/': Recv failure: Connection was reset
 #|	tried: 1 for clone
-#|	:: try-asking: rested times of push trying: 9999.
+#|	:: try-asking: rested times of that trying: 9999.
 #|	:: try-asking: Then: 9998
 #|	Cloning into bare repository 'mabin.ls-src/mabynogion.spells.git'...
 #|	fatal: unable to access 'https://github.com/pure-symbols/mabynogion.spells.git/': Recv failure: Connection was reset
 #|	tried: 2 for clone
-#|	:: try-asking: rested times of push trying: 9998.
+#|	:: try-asking: rested times of that trying: 9998.
 #|	:: try-asking: Then: 9997
 #|	Cloning into bare repository 'mabin.ls-src/mabynogion.spells.git'...
 #|	fatal: unable to access 'https://github.com/pure-symbols/mabynogion.spells.git/': Recv failure: Connection was reset
 #|	tried: 3 for clone
-#|	:: try-asking: rested times of push trying: 9997.
+#|	:: try-asking: rested times of that trying: 9997.
 #|	:: try-asking: Then: 9996
 #|	Cloning into bare repository 'mabin.ls-src/mabynogion.spells.git'...
 #|	fatal: unable to access 'https://github.com/pure-symbols/mabynogion.spells.git/': Recv failure: Connection was reset
 #|	tried: 4 for clone
-#|	:: try-asking: rested times of push trying: 9996.
+#|	:: try-asking: rested times of that trying: 9996.
 #|	:: try-asking: Then: 9995
 #|	Cloning into bare repository 'mabin.ls-src/mabynogion.spells.git'...
 #|	fatal: unable to access 'https://github.com/pure-symbols/mabynogion.spells.git/': Failed to connect to github.com port 443 after 21328 ms: Could not connect to server
 #|	tried: 5 for clone
-#|	:: try-asking: rested times of push trying: 9995.
+#|	:: try-asking: rested times of that trying: 9995.
 #|	:: try-asking: Then: 9994
 #|	Cloning into bare repository 'mabin.ls-src/mabynogion.spells.git'...
 #|	fatal: unable to access 'https://github.com/pure-symbols/mabynogion.spells.git/': Failed to connect to github.com port 443 after 21298 ms: Could not connect to server
 #|	tried: 6 for clone
-#|	:: try-asking: rested times of push trying: 9994.
+#|	:: try-asking: rested times of that trying: 9994.
 #|	:: try-asking: Then: 9993
 #|	Cloning into bare repository 'mabin.ls-src/mabynogion.spells.git'...
 #|	remote: Enumerating objects: 80, done.
@@ -2288,12 +2294,12 @@ git_decks "$@" && :
 #|	Cloning into bare repository 'lang.note-src/lang-note.git'...
 #|	fatal: unable to access 'https://github.com/yhm-amber/lang-note.git/': Failed to connect to github.com port 443 after 21339 ms: Could not connect to server
 #|	tried: 1 for clone
-#|	:: try-asking: rested times of push trying: 9999.
+#|	:: try-asking: rested times of that trying: 9999.
 #|	:: try-asking: Then: 9998
 #|	Cloning into bare repository 'lang.note-src/lang-note.git'...
 #|	fatal: unable to access 'https://github.com/yhm-amber/lang-note.git/': Failed to connect to github.com port 443 after 21365 ms: Could not connect to server
 #|	tried: 2 for clone
-#|	:: try-asking: rested times of push trying: 9998.
+#|	:: try-asking: rested times of that trying: 9998.
 #|	:: try-asking: Then: 9997
 #|	Cloning into bare repository 'lang.note-src/lang-note.git'...
 #|	remote: Enumerating objects: 279, done.
@@ -2333,22 +2339,22 @@ git_decks "$@" && :
 #|	Cloning into bare repository 'sh3rr.sh-src/sh3rr.git'...
 #|	fatal: unable to access 'https://github.com/yhm-amber/sh3rr.git/': Failed to connect to github.com port 443 after 21353 ms: Could not connect to server
 #|	tried: 1 for clone
-#|	:: try-asking: rested times of push trying: 9999.
+#|	:: try-asking: rested times of that trying: 9999.
 #|	:: try-asking: Then: 9998
 #|	Cloning into bare repository 'sh3rr.sh-src/sh3rr.git'...
 #|	fatal: unable to access 'https://github.com/yhm-amber/sh3rr.git/': Failed to connect to github.com port 443 after 21335 ms: Could not connect to server
 #|	tried: 2 for clone
-#|	:: try-asking: rested times of push trying: 9998.
+#|	:: try-asking: rested times of that trying: 9998.
 #|	:: try-asking: Then: 9997
 #|	Cloning into bare repository 'sh3rr.sh-src/sh3rr.git'...
 #|	fatal: unable to access 'https://github.com/yhm-amber/sh3rr.git/': Failed to connect to github.com port 443 after 21329 ms: Could not connect to server
 #|	tried: 3 for clone
-#|	:: try-asking: rested times of push trying: 9997.
+#|	:: try-asking: rested times of that trying: 9997.
 #|	:: try-asking: Then: 9996
 #|	Cloning into bare repository 'sh3rr.sh-src/sh3rr.git'...
 #|	fatal: unable to access 'https://github.com/yhm-amber/sh3rr.git/': Failed to connect to github.com port 443 after 21294 ms: Could not connect to server
 #|	tried: 4 for clone
-#|	:: try-asking: rested times of push trying: 9996.
+#|	:: try-asking: rested times of that trying: 9996.
 #|	:: try-asking: Then: 9995
 #|	Cloning into bare repository 'sh3rr.sh-src/sh3rr.git'...
 #|	remote: Enumerating objects: 58, done.
@@ -2767,7 +2773,7 @@ git_decks "$@" && :
 #|	tried: 1 for `git fetch -v -- cb 'refs/heads/*:refs/heads/*'` in 'contain.note-src/container-note.git/'
 #|	:: try-asking: How many times you want to retry then ? :: 0
 #|	:: try-asking: you inputed '0' as 0.
-#|	:: try-asking: rested times of push trying: -1.
+#|	:: try-asking: rested times of that trying: -1.
 #|	:: try-asking: Break.
 #|	working: pull from remote 'dr' for 'contain.note-src/container-note.git/'
 #|	POST git-upload-pack (165 bytes)
@@ -2777,7 +2783,7 @@ git_decks "$@" && :
 #|	tried: 2 for `git fetch -v -- dr 'refs/heads/*:refs/heads/*'` in 'contain.note-src/container-note.git/'
 #|	:: try-asking: How many times you want to retry then ? :: 0
 #|	:: try-asking: you inputed '0' as 0.
-#|	:: try-asking: rested times of push trying: -1.
+#|	:: try-asking: rested times of that trying: -1.
 #|	:: try-asking: Break.
 #|	working: pull from remote 'gh' for 'contain.note-src/container-note.git/'
 #|	POST git-upload-pack (165 bytes)
@@ -3180,7 +3186,7 @@ git_decks "$@" && :
 #|	 ! [rejected]        main       -> main  (non-fast-forward)
 #|	 = [up to date]      main       -> cb/main
 #|	tried: 2 for `git fetch -v -- cb 'refs/heads/*:refs/heads/*'` in 'pure.yph-src/pure.lexicals.git/'
-#|	:: try-asking: rested times of push trying: 1.
+#|	:: try-asking: rested times of that trying: 1.
 #|	:: try-asking: Then: 0
 #|	POST git-upload-pack (165 bytes)
 #|	From https://codeberg.org/pure-symbols/pure.lexicals
@@ -3189,7 +3195,7 @@ git_decks "$@" && :
 #|	tried: 3 for `git fetch -v -- cb 'refs/heads/*:refs/heads/*'` in 'pure.yph-src/pure.lexicals.git/'
 #|	:: try-asking: How many times you want to retry then ? :: 1
 #|	:: try-asking: you inputed '1' as 1.
-#|	:: try-asking: rested times of push trying: 0.
+#|	:: try-asking: rested times of that trying: 0.
 #|	:: try-asking: Then: -1
 #|	POST git-upload-pack (165 bytes)
 #|	From https://codeberg.org/pure-symbols/pure.lexicals
@@ -3203,7 +3209,7 @@ git_decks "$@" && :
 #|	 ! [rejected]        main       -> main  (non-fast-forward)
 #|	 = [up to date]      main       -> cb/main
 #|	tried: 5 for `git fetch -v -- cb 'refs/heads/*:refs/heads/*'` in 'pure.yph-src/pure.lexicals.git/'
-#|	:: try-asking: rested times of push trying: -1.
+#|	:: try-asking: rested times of that trying: -1.
 #|	:: try-asking: Break.
 #|	working: pull from remote 'dr' for 'pure.yph-src/pure.lexicals.git/'
 #|	POST git-upload-pack (165 bytes)
@@ -3218,14 +3224,14 @@ git_decks "$@" && :
 #|	 ! [rejected]        main       -> main  (non-fast-forward)
 #|	 = [up to date]      main       -> dr/main
 #|	tried: 7 for `git fetch -v -- dr 'refs/heads/*:refs/heads/*'` in 'pure.yph-src/pure.lexicals.git/'
-#|	:: try-asking: rested times of push trying: 2.
+#|	:: try-asking: rested times of that trying: 2.
 #|	:: try-asking: Then: 1
 #|	POST git-upload-pack (165 bytes)
 #|	From https://git.disroot.org/pure.symbols/pure.lexicals
 #|	 ! [rejected]        main       -> main  (non-fast-forward)
 #|	 = [up to date]      main       -> dr/main
 #|	tried: 8 for `git fetch -v -- dr 'refs/heads/*:refs/heads/*'` in 'pure.yph-src/pure.lexicals.git/'
-#|	:: try-asking: rested times of push trying: 1.
+#|	:: try-asking: rested times of that trying: 1.
 #|	:: try-asking: Then: 0
 #|	POST git-upload-pack (165 bytes)
 #|	From https://git.disroot.org/pure.symbols/pure.lexicals
@@ -3239,7 +3245,7 @@ git_decks "$@" && :
 #|	 ! [rejected]        main       -> main  (non-fast-forward)
 #|	 = [up to date]      main       -> dr/main
 #|	tried: 10 for `git fetch -v -- dr 'refs/heads/*:refs/heads/*'` in 'pure.yph-src/pure.lexicals.git/'
-#|	:: try-asking: rested times of push trying: -1.
+#|	:: try-asking: rested times of that trying: -1.
 #|	:: try-asking: Break.
 #|	working: pull from remote 'gh' for 'pure.yph-src/pure.lexicals.git/'
 #|	POST git-upload-pack (165 bytes)
