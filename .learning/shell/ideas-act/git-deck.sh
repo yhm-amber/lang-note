@@ -293,7 +293,7 @@ Libs ()
 			init_codes () 
 			(
 				echo '
-					local _rests_tryasking="${MAXTRY_ASKING:-${ASKING_MAXTRY:-0}}" && 
+					local _rests_tryasking="${ASKING_MAXTRY:-${MAXTRY_ASKING:-0}}" && 
 					: ' && 
 				: ) && 
 			body_codes () 
@@ -493,8 +493,8 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 			: ) && 
 		
 		#: git-deck cp auto-clone [<git-clone-options>] -- <remote-link> [<aim-path>]
-		#. MAXTRY_ASKING=999 git-deck cp a https://github.com/denoland/deno.git --mirror
-		#. MAXTRY_ASKING=999 git-deck cp a https://github.com/osquery/osquery.git --mirror
+		#. ASKING_MAXTRY=999 git-deck cp a https://github.com/denoland/deno.git --mirror
+		#. ASKING_MAXTRY=999 git-deck cp a https://github.com/osquery/osquery.git --mirror
 		auto_clone__helper__ () 
 		(
 			echo && 
@@ -873,7 +873,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 			echo && 
 			echo 'Demo:' && 
 			echo '- git-deck sp all-sync *  # in a dir has only workspace dirs.' && 
-			echo '- MAXTRY_ASKING=9 git-deck sp all-sync *  # To taking control if net is not very good.' && 
+			echo '- ASKING_MAXTRY=9 git-deck sp all-sync *  # To taking control if net is not very good.' && 
 			echo && 
 			echo '... (TODO) ...' && 
 			echo && 
