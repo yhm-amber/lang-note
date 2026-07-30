@@ -277,7 +277,7 @@ Libs ()
 			(
 				echo '
 					echo :: try-asking: rested times of that trying: "$((_rests_tryasking))". && 
-					if _cmnd_tools _booled_returns "$((_rests_tryasking < 0))" ; 
+					if eval "$('"${PKG_ASKING}"' __chunk_chktiming)" ; 
 						then echo :: try-asking: Break. ; break ;
 						else echo :: try-asking: Then: "$((--_rests_tryasking))" ;
 					fi && 
@@ -286,7 +286,13 @@ Libs ()
 			__chunk_asktiming () 
 			(
 				echo '
-					_cmnd_tools _booled_returns "$((_rests_tryasking '"${*:-== 0}"'))" && 
+					_cmnd_tools _booled_returns "$((_rests_tryasking == 0))" && 
+					: ' && 
+				: ) && 
+			__chunk_chktiming () 
+			(
+				echo '
+					_cmnd_tools _booled_returns "$((_rests_tryasking < 0))" && 
 					: ' && 
 				: ) && 
 			
@@ -299,10 +305,10 @@ Libs ()
 			body_codes () 
 			(
 				echo '
-					if eval "$('"${PKG_ASKING}"' __chunk_asktiming == 0)" ; 
+					if eval "$('"${PKG_ASKING}"' __chunk_asktiming)" ; 
 					then 
 						eval "$('"${PKG_ASKING}"' __chunk_asker)" && 
-						eval "$('"${PKG_ASKING}"' __chunk_asktiming \< 0)" && 
+						eval "$('"${PKG_ASKING}"' __chunk_chktiming)" && 
 						eval "$('"${PKG_ASKING}"' __chunk_verifier)" && 
 						:; 
 					else 
