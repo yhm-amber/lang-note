@@ -206,7 +206,7 @@ Libs ()
 				local NAME_EMBEDDED="${1:-${NAME_EMBEDDED:-}}" && 
 				local BOOL_DEFAULT="${2:-${BOOL_DEFAULT:-}}" && 
 				echo '
-					case "$(echo "${'"$NAME_EMBEDDED"':-'"$BOOL_DEFAULT"'}" | tr '"'"'[:lower:]'"'"' '"'"'[:upper:]'"'"')" 
+					case "$(echo "${'"$NAME_EMBEDDED"':-'"$BOOL_DEFAULT"'}" | tr -- '"'"'[:lower:]'"'"' '"'"'[:upper:]'"'"')" 
 					in 
 						(Y|YES|T|TRUE|O|ON|OK) local __'"$NAME_EMBEDDED"'__=true ;; 
 						(N|NO|F|FALSE|X|OFF|NOT) local __'"$NAME_EMBEDDED"'__=false ;; 
@@ -257,12 +257,21 @@ Libs ()
 		#.	_taste_asking () 
 		#.	(
 		#.		eval "$(FD_TTY=9 _cmnd_tools _retry_asking init_codes)" && 
-		#.		while true; do echo x ; eval "$(FD_TTY=9 _cmnd_tools _retry_asking body_codes)" && :; done
+		#.		while true; do echo x ; eval "$(FD_TTY=9 _cmnd_tools _retry_asking body_codes)" && :; done && 
+		#.		: ) 9</dev/tty && 
+		#.	:
+		#.	_taste_asking_x () 
+		#.	(
+		#.		0< <(
+		#.			eval "$(FD_TTY=9 _cmnd_tools _retry_asking init_codes)" && 
+		#.			while true; do echo x ; 1>&2 eval "$(FD_TTY=9 _cmnd_tools _retry_asking body_codes)" && :; done && 
+		#.			: ) awk '{print "~~~",$0}' && 
 		#.		: ) 9</dev/tty && 
 		#.	:
 		_retry_asking () 
 		(
 			PKG_ASKING="${PKG_ASKING:-_cmnd_tools _retry_asking}" && 
+		#.	:
 			FD_TTY="${FD_TTY:-${TTY_FD:-9}}" && 
 			
 			: 其尝适询 && 
@@ -533,7 +542,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 			while ! ( git clone --progress --depth 1 --no-single-branch "$@" 2>&1 && : ) ;
 			do 
 				1>&2 echo tried: "$((++try_clone))" for clone && 
-				eval "$(FD_TTY=9 _cmnd_tools _retry_asking body_codes)" && : 其尝适询 && 
+				1>&2 eval "$(FD_TTY=9 _cmnd_tools _retry_asking body_codes)" && : 其尝适询 && 
 				:; 
 			done | 
 				tee >(cat 1>&2) | 
@@ -810,8 +819,9 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 						echo $? 1>&6 ;
 					} | 
 					cat - 1>&7 && 
-					:;
-			} 6>&1 && : ) && : ) 7>&1 && 
+				:;
+			} 6>&1 && : ) && 
+			: ) 7>&1 && 
 		
 		: :: && 
 		
@@ -944,6 +954,166 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 			done && 
 			: ) && 
 		
+		alias rmt=remote && remote () 
+		(
+			has () 
+			(
+				for rmt in "$@" ;
+				do 
+					if git config --get "remote.${rmt}.url" > >(
+						1>&2 awk -v rmt="'${rmt}'" -v show=existed: -- '{ print show,rmt,$0 }' && 
+						: ) ;
+						then echo "${rmt}" ;
+						else { 1>&2 echo unfound: "'${rmt}'" '<undefined>' ; return 59 ; } ;
+					fi && 
+					:; 
+				done && 
+				: ) && 
+			
+			_chkhas_codes () 
+			(
+				_emb_name="${1:-CHECK_REMOTE_EXISTS}" && 
+				echo '
+					eval "$(subs kwargs as_bool '"$_emb_name"' y)" && 
+					if "$__'"$_emb_name"'__" ;
+						then { has "$@" 1>/dev//null || return $? ; } ;
+						else : ;
+					fi && 
+					: ' && 
+				: ) && 
+			
+			#: [LIST_WITH_LOCAL=<y|N>] list_heads [<remote> ...]
+			list_heads () 
+			(
+				# { set -o pipefail -e || :; } && 
+				eval "$(_chkhas_codes CHECK_REMOTE_EXISTS)" && 
+				for rmt in "$@" ;
+				do 
+					: 各支所執 && 
+					while ! git ls-remote -- "${rmt}" 'refs/heads/*' ;
+					do 1>&2 echo fail: "$((++_retried_ls_remote))" retried ls remote "'${rmt}'" ; 
+					done | 
+						awk -- '
+							{ ref = $2; oid = $1; print oid,from,ref }
+							BEGIN { OFS = "\t"; from = "'"${rmt}"'" }' | 
+						cat - && 
+					:; 
+				done && 
+				if eval "$(subs kwargs as_bool LIST_WITH_LOCAL no)" '&&' '$__LIST_WITH_LOCAL__' ;
+					then git for-each-ref --format=$'%(objectname)\t.local\t%(refname)' -- 'refs/heads/*' ;
+					else : ;
+				fi && 
+				: ) && 
+			
+			#: corresp_local [<remote> ...]
+			corresp_local () 
+			(
+				eval "$(_chkhas_codes CHECK_REMOTE_EXISTS)" && 
+				for rmt in "$@" ;
+				do 
+					join -t $'\t' -1 3 -2 3 -o '0,2.1,1.1' -a 1 -a 2 -e '_' -- <(
+						CHECK_REMOTE_EXISTS=x LIST_WITH_LOCAL=y list_heads | sort -k 3 -t $'\t') <(
+						CHECK_REMOTE_EXISTS=x list_heads "${rmt}" | sort -k 3 -t $'\t') | 
+						awk -- '
+							{ print from, $0 }
+							BEGIN { OFS = "\t"; from = "'"${rmt}"'" }' | 
+						cat - && 
+					:;
+				done && 
+				: ) && 
+			
+			#: rmt necessity check <pull|push> [<remote> ...] | rmt necessity apply <remote>
+			#: rmt necessity verific <remote> <pull|push>
+			necessity () 
+			(
+				verific () 
+				(
+					local remote="$1" && { shift || { 1>&2 echo Error: need to specify remote in param-1 ; return 26 ; } ; } && 
+					local rqtype="$1" && { shift || { 1>&2 echo Error: need to specify 'pull|push' in param-2 ; return 26 ; } ; } && 
+					
+					return $(
+					shopt -u -q -- extglob ;
+					{
+						{ check "${rqtype}" "${remote}" ; } | 
+							{ apply "${remote}" || echo $? 1>&6 ; } | 
+							cat - 1>&7 && 
+						:;
+					} 6>&1 && : ) && 
+					: ) 7>&1 && 
+				
+				check () 
+				(
+					case "$(echo "${1}" | tr -- '[:upper:]' '[:lower:]')" 
+					in 
+						(pull)   __sub_mark__=pull  && shift ;; 
+						(push)   __sub_mark__=push  && shift ;; 
+						(_) 1>&2 echo Unknown sub cmd in necessity check: "'$1'" '(only support pull|push).' && return 16 ;;
+					esac && 
+					
+					_esc_codes () 
+					(
+						echo '{ echo "$_rmt" '"$*"' ; break ; }' && 
+						: ) && 
+					
+					eval "$(_chkhas_codes CHECK_REMOTE_EXISTS)" && 
+					for rmt in "$@" ;
+					do 
+						CHECK_REMOTE_EXISTS=x corresp_local "${rmt}" | while read -r -- _rmt ref_path hash_remote hash_local ;
+						do 
+							echo "_rmt:$_rmt" "ref_path:$ref_path" "hash_remote:$hash_remote" "hash_local:$hash_local" | 
+								awk -v OFS='\t' -- '{ $NF = $NF; print "chking:",$0 }' | 
+								awk -F : -v OFS=': ' -- '{ $NF = $NF; print }' | 
+								1>&2 cat - && 
+							: 为头者过 同者过 && 
+							{ 1>&2 test "$ref_path" != HEAD || continue ; } && 
+							{ 1>&2 test "${hash_local}" != "${hash_remote}" || continue ; } && 
+							: 取者 此不空 遠須祖舊抑或空者 可过 否則留 && 
+							: 去者 遠不空 此須祖舊抑或空者 可过 否則留 && 
+							case "$__sub_mark__" 
+							in 
+								(pull)
+									{ 1>&2 test -n "${hash_remote}" || continue ; } && 
+									{ 1>&2 test "${hash_remote}" != '_' || continue ; } && 
+									{ 1>&2 test -n "${hash_local}" || eval "$(_esc_codes $?)" ; } && 
+									{ 1>&2 test "${hash_local}" != '_' || eval "$(_esc_codes $?)" ; } && 
+									{ 1>&2 git merge-base --is-ancestor "${hash_remote}" "${hash_local}" || eval "$(_esc_codes $?)" ; } && 
+									: ;; 
+								(push)
+									{ 1>&2 test -n "${hash_local}" || continue ; } && 
+									{ 1>&2 test "${hash_local}" != '_' || continue ; } && 
+									{ 1>&2 test -n "${hash_remote}" || eval "$(_esc_codes $?)" ; } && 
+									{ 1>&2 test "${hash_remote}" != '_' || eval "$(_esc_codes $?)" ; } && 
+									{ 1>&2 git merge-base --is-ancestor "${hash_local}" "${hash_remote}" || eval "$(_esc_codes $?)" ; } && 
+									: ;; 
+							esac && 
+							:; 
+						done && 
+						:; 
+					done && 
+					: ) && 
+				
+				apply () 
+				(
+					local rmt="${1}" && 
+					{ shift || { 1>&2 echo Error: must input a remote name to param-1. ; return 26 ; } ; } && 
+					while read -r -- remote_name return_code ;
+					do 
+						if test "${remote_name}" = "${rmt}" ;
+							then return "${return_code}" ;
+							else : ;
+						fi && 
+						:; 
+					done && 
+					: ) && 
+				
+				: :: && 
+				"$@" && 
+				: ) && 
+			
+			: :: && 
+			"$@" && 
+			: ) && 
+		
 		#: Pushing full to a remote.
 		#: push_full <git-remote> <git-dir>
 		#. push_full "${git_remote}" "${gitdir}"
@@ -959,21 +1129,24 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 				then local IS_BARE="$(repo_chk bare . echo)" ;
 				else local IS_BARE="${IS_BARE:-}" ;
 			fi && 
-			eval "$(_cmnd_tools _retry_asking init_codes)" && 
+			eval "$(_cmnd_tools _retry_asking init_codes)" && : 此尝适询 && 
 			echo working: push to remote "'${_git_remote}'" for "'$(_cmnd_tools _curr_dir .)'" && 
 			while 
-			! if ! "${IS_BARE}" && : 其令选行 ;
+			! { 
+			if ! "${IS_BARE}" && : 其令选行 ;
 				then git push "$@" --branches -- "${_git_remote}" ;
 				else git push "$@" -- "${_git_remote}" 'refs/heads/*:refs/heads/*' ;
-			fi ;
+			fi || 
+				remote necessity verific "${_git_remote}" push && 
+			:; } ;
 			do 
 				: 此下 乃复试探 有询 && 
-				: 其尝回显 && 
+				: 曰回显 && 
 				1>&2 echo tried: "$((++try_push))" for '`'"$(if ! "${IS_BARE}" && : 其显选出 ;
 					then echo "git push $* --branches -- ${_git_remote}" ;
 					else echo "git push $* -- ${_git_remote} 'refs/heads/*:refs/heads/*'" ;
 				fi)"'`' in "'$(_cmnd_tools _curr_dir .)'" && 
-				: 其尝适询 && 
+				: 尝适询 && 
 				eval "$(FD_TTY=9 _cmnd_tools _retry_asking body_codes)" && 
 				:; 
 			done && 
@@ -996,21 +1169,24 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 				then local IS_BARE="$(repo_chk bare . echo)" ;
 				else local IS_BARE="${IS_BARE:-}" ;
 			fi && 
-			eval "$(_cmnd_tools _retry_asking init_codes)" && 
+			eval "$(_cmnd_tools _retry_asking init_codes)" && : 此尝适询 && 
 			echo working: pull from remote "'${_git_remote}'" for "'$(_cmnd_tools _curr_dir .)'" && 
 			while 
-			! if ! "${IS_BARE}" && : 其令选行 ;
+			! { 
+			if ! "${IS_BARE}" && : 其令选行 ;
 				then git fetch "$@" -- "${_git_remote}" 'refs/heads/*:refs/heads/*' '^'"${_symbref_head}" ;
 				else git fetch "$@" -- "${_git_remote}" 'refs/heads/*:refs/heads/*' ;
-			fi ;
+			fi || 
+				remote necessity verific "${_git_remote}" pull && 
+			:; } ;
 			do 
 				: 此下 乃复试探 有询 && 
-				: 其尝回显 && 
+				: 曰回显 && 
 				1>&2 echo tried: "$((++try_pull))" for '`'"$(if ! "${IS_BARE}" && : 其显选出 ;
 					then echo "git fetch $* -- ${_git_remote} 'refs/heads/*:refs/heads/*' '^${_symbref_head}'" ;
 					else echo "git fetch $* -- ${_git_remote} 'refs/heads/*:refs/heads/*'" ;
 				fi)"'`' in "'$(_cmnd_tools _curr_dir .)'" && 
-				: 其尝适询 && 
+				: 尝适询 && 
 				eval "$(FD_TTY=9 _cmnd_tools _retry_asking body_codes)" && 
 				:; 
 			done && 
@@ -1041,7 +1217,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 					echo :: pushing all remotes in "'${gitdir}'" :: && 
 					git remote | while read -r -- git_remote ;
 					do 
-						push_full "${git_remote}" . && 
+						push_full "${git_remote}" . "$@" && 
 						:; 
 					done && 
 					echo :: pushed all remotes in "'${gitdir}'" :: && 
@@ -1074,7 +1250,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 					echo :: pulling all remotes in "'${gitdir}'" :: && 
 					git remote | while read -r -- git_remote ;
 					do 
-						pull_full "${git_remote}" . && 
+						pull_full "${git_remote}" . "$@" && 
 						:; 
 					done && 
 					echo :: pulled all remotes in "'${gitdir}'" :: && 
