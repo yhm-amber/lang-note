@@ -1058,14 +1058,16 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 						echo '
 							{ 
 								{ _rsc='"${1:-\$?}"' ; echo "$_rmt" "$_rsc" ; } ; 
-								{ 1>&2 HEAD_HINT=chked var_shower _rsc _rmt ref_path ; break ; } ; 
+								{ _keep_by='"${2:-}"' ; } ;
+								{ 1>&2 HEAD_HINT=keep var_shower _keep_by _rsc _rmt ref_path ; break ; } ; 
 							}' && 
 						: ) && 
 					_cnt_codes () 
 					(
 						echo '
 							{ 
-								{ _rsc='"${1:-\$?}"' ; _pass_by='"${2:-}"' ; } ; 
+								{ _rsc='"${1:-\$?}"' ; } ; 
+								{ _pass_by='"${2:-}"' ; } ;
 								{ 1>&2 HEAD_HINT=pass var_shower _pass_by _rsc _rmt ref_path ; continue ; } ; 
 							}' && 
 						: ) && 
@@ -1094,25 +1096,25 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 						do 
 							1>&2 var_shower _rmt ref_path hash_remote hash_local && 
 							: 为头者过 同者过 && 
-							{ 1>&2 test "$ref_path" != HEAD || eval "$(_cnt_codes $? .IS_HEAD)" ; } && 
-							{ 1>&2 test "${hash_local}" != "${hash_remote}" || eval "$(_cnt_codes $? .EQUAL_HASH)" ; } && 
+							{ 1>&2 test "$ref_path" != HEAD || eval "$(_cnt_codes $? EVN_HEADING.REF_MARK)" ; } && 
+							{ 1>&2 test "${hash_local}" != "${hash_remote}" || eval "$(_cnt_codes $? EVN_EQUAL.BOTH_HASH)" ; } && 
 							: 取者 此不空 須遠为先或空而此为后者 可过 否則留作业之 && 
 							: 去者 遠不空 須此为先或空而遠为后者 可过 否則留作业之 && 
 							case "$__sub_mark__" 
 							in 
 								(pull)
-									{ 1>&2 test -n "${hash_remote}" || eval "$(_cnt_codes $? BLK.RMT_HASH)" ; } && 
-									{ 1>&2 test "${hash_remote}" != '_' || eval "$(_cnt_codes $? BLKD.RMT_HASH)" ; } && 
-									{ 1>&2 test -n "${hash_local}" || eval "$(_esc_codes $?)" ; } && 
-									{ 1>&2 test "${hash_local}" != '_' || eval "$(_esc_codes $?)" ; } && 
-									{ 1>&2 git merge-base --is-ancestor "${hash_remote}" "${hash_local}" || eval "$(_esc_codes $?)" ; } && 
+									{ 1>&2 test -n "${hash_remote}" || eval "$(_cnt_codes $? ERR_BLAK.RMT_HASH)" ; } && 
+									{ 1>&2 test "${hash_remote}" != '_' || eval "$(_cnt_codes $? ODD_NONE.RMT_HASH)" ; } && 
+									{ 1>&2 test -n "${hash_local}" || eval "$(_esc_codes $? :::ERR_BLAK.LCO_HASH)" ; } && 
+									{ 1>&2 test "${hash_local}" != '_' || eval "$(_esc_codes $? :::ODD_NONE.LCO_HASH)" ; } && 
+									{ 1>&2 git merge-base --is-ancestor "${hash_remote}" "${hash_local}" || eval "$(_esc_codes $? :::ODD_LATE.LCO_HASH)" ; } && 
 									: ;; 
 								(push)
-									{ 1>&2 test -n "${hash_local}" || eval "$(_cnt_codes $? BLK.LCO_HASH)" ; } && 
-									{ 1>&2 test "${hash_local}" != '_' || eval "$(_cnt_codes $? BLKD.LCO_HASH)" ; } && 
-									{ 1>&2 test -n "${hash_remote}" || eval "$(_esc_codes $?)" ; } && 
-									{ 1>&2 test "${hash_remote}" != '_' || eval "$(_esc_codes $?)" ; } && 
-									{ 1>&2 git merge-base --is-ancestor "${hash_local}" "${hash_remote}" || eval "$(_esc_codes $?)" ; } && 
+									{ 1>&2 test -n "${hash_local}" || eval "$(_cnt_codes $? ERR_BLAK.LCO_HASH)" ; } && 
+									{ 1>&2 test "${hash_local}" != '_' || eval "$(_cnt_codes $? ODD_NONE.LCO_HASH)" ; } && 
+									{ 1>&2 test -n "${hash_remote}" || eval "$(_esc_codes $? :::ERR_BLAK.RMT_HASH)" ; } && 
+									{ 1>&2 test "${hash_remote}" != '_' || eval "$(_esc_codes $? :::ODD_NONE.RMT_HASH)" ; } && 
+									{ 1>&2 git merge-base --is-ancestor "${hash_local}" "${hash_remote}" || eval "$(_esc_codes $? :::ODD_LATE.RMT_HASH)" ; } && 
 									: ;; 
 							esac && 
 							:; 
