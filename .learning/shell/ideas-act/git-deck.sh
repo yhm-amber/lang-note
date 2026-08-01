@@ -1108,6 +1108,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 									{ 1>&2 test -n "${hash_local}" || eval "$(_esc_codes $? @@@ERR_BLAK.LCO_HASH)" ; } && 
 									{ 1>&2 test "${hash_local}" != '_' || eval "$(_esc_codes $? @@@ODD_NONE.LCO_HASH)" ; } && 
 									{ 1>&2 git merge-base --is-ancestor "${hash_remote}" "${hash_local}" || eval "$(_esc_codes $? @@@ODD_LATE.LCO_HASH)" ; } && 
+									{ 1>&2 false || eval "$(_cnt_codes $? ODD_FFRES.LCO_HASH)" ; } && 
 									: ;; 
 								(push)
 									{ 1>&2 test -n "${hash_local}" || eval "$(_cnt_codes $? ERR_BLAK.LCO_HASH)" ; } && 
@@ -1115,6 +1116,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 									{ 1>&2 test -n "${hash_remote}" || eval "$(_esc_codes $? @@@ERR_BLAK.RMT_HASH)" ; } && 
 									{ 1>&2 test "${hash_remote}" != '_' || eval "$(_esc_codes $? @@@ODD_NONE.RMT_HASH)" ; } && 
 									{ 1>&2 git merge-base --is-ancestor "${hash_local}" "${hash_remote}" || eval "$(_esc_codes $? @@@ODD_LATE.RMT_HASH)" ; } && 
+									{ 1>&2 false || eval "$(_cnt_codes $? ODD_FFRES.RMT_HASH)" ; } && 
 									: ;; 
 							esac && 
 							:; 
