@@ -1066,7 +1066,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 						echo '
 							{ 
 								{ _rsc='"${1:-\$?}"' ; _pass_by='"${2:-}"' ; } ; 
-								{ 1>&2 HEAD_HINT=pass var_shower _rsc _rmt ref_path ; continue ; } ; 
+								{ 1>&2 HEAD_HINT=pass var_shower _pass_by _rsc _rmt ref_path ; continue ; } ; 
 							}' && 
 						: ) && 
 					
