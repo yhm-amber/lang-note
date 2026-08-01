@@ -2551,3 +2551,177 @@ git-deck sp all-sync *
 #|	:: pushed all remotes in 'yph.m-grp/yhm-amber.git/' ::
 #|	
 ~~~
+
+#### `sp rmt nec deno`
+
+~~~ sh
+necessity check pull origin
+#|	existed: 'origin' https://github.com/denoland/deno.git
+#|	fatal: unable to access 'https://github.com/denoland/deno.git/': Failed to connect to github.com port 443 after 21301 ms: Could not connect to server
+#|	fail: 1 retried ls remote 'origin'
+#|	fatal: unable to access 'https://github.com/denoland/deno.git/': SSL/TLS connection timeout
+#|	fail: 2 retried ls remote 'origin'
+#|	fatal: unable to access 'https://github.com/denoland/deno.git/': Recv failure: Connection was reset
+#|	fail: 3 retried ls remote 'origin'
+#|	fatal: unable to access 'https://github.com/denoland/deno.git/': Failed to connect to github.com port 443 after 21400 ms: Could not connect to server
+#|	fail: 4 retried ls remote 'origin'
+#|	fatal: unable to access 'https://github.com/denoland/deno.git/': Recv failure: Connection was reset
+#|	fail: 5 retried ls remote 'origin'
+#|	fatal: unable to access 'https://github.com/denoland/deno.git/': Failed to connect to github.com port 443 after 24133 ms: Could not connect to server
+#|	fail: 6 retried ls remote 'origin'
+#|	chking: 	_rmt: origin	ref_path: refs/heads/add_otel_cache_instrumentation	hash_remote: 9b4af15bbc56b2ec489fd79433f4e6a8bd75b756	hash_local: 9b4af15bbc56b2ec489fd79433f4e6a8bd75b756
+#|	chking: 	_rmt: origin	ref_path: refs/heads/andrewthauer/node-pty-fs-write-raw-fd	hash_remote: 0b82505203487bdcc26e11ac9430cb8cc2d70ea0	hash_local: _
+#|	origin 1
+
+necessity check push origin
+#|	existed: 'origin' https://github.com/denoland/deno.git
+#|	fatal: unable to access 'https://github.com/denoland/deno.git/': SSL/TLS connection timeout
+#|	fail: 1 retried ls remote 'origin'
+#|	fatal: unable to access 'https://github.com/denoland/deno.git/': Failed to connect to github.com port 443 after 21347 ms: Could not connect to server
+#|	fail: 2 retried ls remote 'origin'
+#|	chking: 	_rmt: origin	ref_path: refs/heads/add_otel_cache_instrumentation	hash_remote: 9b4af15bbc56b2ec489fd79433f4e6a8bd75b756	hash_local: 9b4af15bbc56b2ec489fd79433f4e6a8bd75b756
+#|	chking: 	_rmt: origin	ref_path: refs/heads/andrewthauer/node-pty-fs-write-raw-fd	hash_remote: 0b82505203487bdcc26e11ac9430cb8cc2d70ea0	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/apidocsupdates	hash_remote: a064691e66bc43da00f56bb23fcc8924e996f9e6	hash_local: a064691e66bc43da00f56bb23fcc8924e996f9e6
+#|	chking: 	_rmt: origin	ref_path: refs/heads/auto-clean	hash_remote: 0fa9059f4d7366c480c6dab4c280c7c5eb6c1f96	hash_local: 0fa9059f4d7366c480c6dab4c280c7c5eb6c1f96
+#|	chking: 	_rmt: origin	ref_path: refs/heads/auto-config	hash_remote: fe326df0db5442f1ae5da23e3777513baf849262	hash_local: fe326df0db5442f1ae5da23e3777513baf849262
+#|	chking: 	_rmt: origin	ref_path: refs/heads/bartlomieju/refactor/rolldown-bundle	hash_remote: 00b67f06d4c54c5fcd28a72c3f82a175634d5d2f	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/better-upgrades-2	hash_remote: f20fff6f48743ce5b1cc55c22f30423a49bc024a	hash_local: f20fff6f48743ce5b1cc55c22f30423a49bc024a
+#|	chking: 	_rmt: origin	ref_path: refs/heads/bi/check-desktop-lib	hash_remote: 4bbc4919a373ded15ba33ffadc071771d46f315a	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/bi/check-doctests	hash_remote: e5f560dc9d419d0476ec139c69fb82d49e6e87f2	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/bi/check-node-type-refs	hash_remote: f07516d446c73758c660e47d56266f54aee5098e	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/bi/check-skiplibcheck-align	hash_remote: 8b5ebc50fd7a94c60ac1a363291920aeda7dc067	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/bi/tsc-overlay	hash_remote: c2e8b8da206d3c9013db73f32353e5470191787f	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/build/lzld-macos-startup	hash_remote: 537e547b3c3082c194b1e26b1d14c2c076da0508	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/bundle-v2	hash_remote: ae831b111fca2453e3dad6139e3d7653c55177c4	hash_local: ae831b111fca2453e3dad6139e3d7653c55177c4
+#|	chking: 	_rmt: origin	ref_path: refs/heads/child_process_shim	hash_remote: 12f146494910ac72d8e250103b03b397bf8cc9d6	hash_local: 12f146494910ac72d8e250103b03b397bf8cc9d6
+#|	chking: 	_rmt: origin	ref_path: refs/heads/chore(ops)-update-docs-on-fast-calls	hash_remote: ff37cc046153a58cfc8d6b2dba5049e114463cc9	hash_local: ff37cc046153a58cfc8d6b2dba5049e114463cc9
+#|	chking: 	_rmt: origin	ref_path: refs/heads/chore/bump-laufey-gcm-fix	hash_remote: 7396255dc80da6d03f45b0a09b371397a250dba7	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/chore/ignore-esm-loader-internal-tests	hash_remote: 3a563eee0bceccbe510df52e3fb584377a384602	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/chore/node-compat-skill-pr-prefix	hash_remote: b56d4bd51620d553954e9492839c1eb5b5c24ca2	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/chore/track-deno_lint-main	hash_remote: 7ce38e67bd64490d97f841d43879147ca27e1b7f	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/chore_fix_node_compat_test_workflow	hash_remote: 74455a40803503d2686d60ae481c3645dbbba087	hash_local: 74455a40803503d2686d60ae481c3645dbbba087
+#|	chking: 	_rmt: origin	ref_path: refs/heads/chore_fix_node_compat_test_workflow_again	hash_remote: 1dc1ddcb00883905c7087af9d3a00a041387af9d	hash_local: 1dc1ddcb00883905c7087af9d3a00a041387af9d
+#|	chking: 	_rmt: origin	ref_path: refs/heads/chore_npm_publish_improve	hash_remote: 2dfd344f5e4d51e7681204abc3f2773061a3ecdc	hash_local: 2dfd344f5e4d51e7681204abc3f2773061a3ecdc
+#|	chking: 	_rmt: origin	ref_path: refs/heads/ci_fix_npm_publish	hash_remote: e9e511538186dadc7122e1e73b26b04bcce7dd20	hash_local: e9e511538186dadc7122e1e73b26b04bcce7dd20
+#|	chking: 	_rmt: origin	ref_path: refs/heads/claude/bun-file-deno-research-gwfgx8	hash_remote: 44a4b4610aa1726f1d5ee7c0a115005459030576	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/claude/deno-26336-e2rd0q	hash_remote: f233dd3e1bac280832e435827e1ff847eea0f49b	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/claude/deno-compile-time-TA9v7	hash_remote: a7c3376b4716333b21e2a104428532de4279bfb2	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/claude/deno-dom-api-research-5vv5ih	hash_remote: c12595b764fe07993af26f358ddb1699cddc403a	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/claude/deno-issue-20152-i1d2hz	hash_remote: 9e1e8c59be83187e920f02c9ec00f613557707fa	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/claude/fix-deno-issue-32929-xlVPU	hash_remote: 336a2aab63ea0b057aceb5958fe1e3978e7ef9cc	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/claude/testing-framework-comparison-i2y2j1	hash_remote: 6d821b979de300d731394310dca0156c007ea581	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/cleanup/native-tcp-connect	hash_remote: b65f6226839fde0416508b071c440b2823424b51	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/cleanup_bindings_rs	hash_remote: b5f73a6258ceae6fb6660624123b6d55c859da9a	hash_local: b5f73a6258ceae6fb6660624123b6d55c859da9a
+#|	chking: 	_rmt: origin	ref_path: refs/heads/codegen-ci	hash_remote: 70a3dd69d01ca9d4f6f203b5b80e0c7236b908c0	hash_local: 70a3dd69d01ca9d4f6f203b5b80e0c7236b908c0
+#|	chking: 	_rmt: origin	ref_path: refs/heads/coderabbitai/docstrings/d704ca2	hash_remote: a095a1d8145a7a8d4ff0a4d64d287a095f086912	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/codex/aged-4c3d66f0-fcc	hash_remote: 157eecd8a46922610ce4979960802ab5e581c956	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/color-depth	hash_remote: cce800e3a97244f2e71f488dfd79369f77b0b046	hash_local: cce800e3a97244f2e71f488dfd79369f77b0b046
+#|	chking: 	_rmt: origin	ref_path: refs/heads/compass	hash_remote: 1cffda520b4b3562a265b1ecb3ccf619cbcb5843	hash_local: 1cffda520b4b3562a265b1ecb3ccf619cbcb5843
+#|	chking: 	_rmt: origin	ref_path: refs/heads/compression-hot-fix	hash_remote: 69af418487ed5e7b51a9e1258b10bdf4925c4340	hash_local: 69af418487ed5e7b51a9e1258b10bdf4925c4340
+#|	chking: 	_rmt: origin	ref_path: refs/heads/copilot/add-easy-uninstall-command	hash_remote: 99492990be91372d61e4eb4ab1f7bca8317cbdfb	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/copilot/add-node-process-execve-support	hash_remote: 31bf7e21e08528cb350a8abe911ec11bd410bc0c	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/copilot/fix-deno-publish-ci-issue	hash_remote: e585c4d95fd3f4385736e507ca7c68218f741bad	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/copilot/fix-dx-npm-tsx-panic	hash_remote: 20e827e9bd63422cd826e0ed650f2e401b253dc6	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/copilot/fix-panic-forgejo-actions	hash_remote: 2ec709989cd34f90c309db4e704a1290fb57dcaf	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/copilot/sub-pr-32509	hash_remote: 1bac93ad62dfaffc6b151fc92284ec105c7550e0	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/copilot/update-wpt-job-comment	hash_remote: 79ce092269805736a88995e79f3f309f2155a8ba	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/cpu-prof	hash_remote: 23a1ba509c78b1d658e02c499c4d80b1116637d6	hash_local: 23a1ba509c78b1d658e02c499c4d80b1116637d6
+#|	chking: 	_rmt: origin	ref_path: refs/heads/debug-ci	hash_remote: 8152490068f7198851edf3f55270ff08f8f30ecb	hash_local: 8152490068f7198851edf3f55270ff08f8f30ecb
+#|	chking: 	_rmt: origin	ref_path: refs/heads/debug-ci2	hash_remote: a95e3f118af593d7c9ce5af734342c7867e50517	hash_local: a95e3f118af593d7c9ce5af734342c7867e50517
+#|	chking: 	_rmt: origin	ref_path: refs/heads/defork/webgpu-globals-deferral	hash_remote: 8c41089bca1f8c801838af2c7d1410e6736a96d9	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/DENB-29802-10	hash_remote: 807c6d67784f7b54c6100e36e45c78031c177021	hash_local: 807c6d67784f7b54c6100e36e45c78031c177021
+#|	chking: 	_rmt: origin	ref_path: refs/heads/DENB-29802-3	hash_remote: 93460dfa17dbb23126e372638497deeac9049539	hash_local: 93460dfa17dbb23126e372638497deeac9049539
+#|	chking: 	_rmt: origin	ref_path: refs/heads/DENB-29802-5	hash_remote: b1c70308e97228e104b9df33ea25e5e3c40de746	hash_local: b1c70308e97228e104b9df33ea25e5e3c40de746
+#|	chking: 	_rmt: origin	ref_path: refs/heads/DENB-29802-parallel/test-stream-finished.js	hash_remote: b5df174549c20b65d6095c782740c6503b35cce6	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/DENB-29802-parallel/test-stream-readable-async-iterators.js	hash_remote: 93145c76c8dd1696037e42f9a613870be74bdd95	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/DENB-29802-parallel-test-stream-pipeline.js	hash_remote: cfe67e72aafaa3d0e901969dc9b80a9217ac7a6f	hash_local: cfe67e72aafaa3d0e901969dc9b80a9217ac7a6f
+#|	chking: 	_rmt: origin	ref_path: refs/heads/DENB-29802-test-issue-test-stream-pipeline-http2	hash_remote: 49130b6a0b544fbf665cbdbf2840b4841d7dda0a	hash_local: 49130b6a0b544fbf665cbdbf2840b4841d7dda0a
+#|	chking: 	_rmt: origin	ref_path: refs/heads/DENB-29802-test-stream2-httpclient-response-end.js-2	hash_remote: 96b935a5d8c9cba3d49c14bf86bc0466f2029a47	hash_local: 96b935a5d8c9cba3d49c14bf86bc0466f2029a47
+#|	chking: 	_rmt: origin	ref_path: refs/heads/DENB-29802-test-stream2-stderr-sync	hash_remote: 24772082f27faf5678aedf338f2e29ea7fd61a3f	hash_local: 24772082f27faf5678aedf338f2e29ea7fd61a3f
+#|	chking: 	_rmt: origin	ref_path: refs/heads/DENB-29802-test-stream-pipeline-process	hash_remote: bb09263e959adaccd5c3e9537d9a42609aa4b3b9	hash_local: bb09263e959adaccd5c3e9537d9a42609aa4b3b9
+#|	chking: 	_rmt: origin	ref_path: refs/heads/DENB-29942	hash_remote: 886474bfa94cc1d326e991be7ce88f80f155e608	hash_local: 886474bfa94cc1d326e991be7ce88f80f155e608
+#|	chking: 	_rmt: origin	ref_path: refs/heads/deno_server_require_real_response	hash_remote: a85823c94497e41d82565c78c338f3fbcfecf35b	hash_local: a85823c94497e41d82565c78c338f3fbcfecf35b
+#|	chking: 	_rmt: origin	ref_path: refs/heads/deno-check-green	hash_remote: 2f9ca696e76821494050152a8cad3c29ce17dd0b	hash_local: 2f9ca696e76821494050152a8cad3c29ce17dd0b
+#|	chking: 	_rmt: origin	ref_path: refs/heads/deno-lts-plumbing	hash_remote: a9defb14509d984899c99b362d5720fcd752980d	hash_local: 107fccd252f1a5c779c0e9f9377d454f2e93943e
+#|	fatal: Not a valid commit name a9defb14509d984899c99b362d5720fcd752980d
+#|	origin 128
+~~~
+
+~~~ sh
+gd sp remote necessity verific origin pull ; echo ~~~ $?
+#|	existed: 'origin' https://github.com/denoland/deno.git
+#|	chking: 	_rmt: origin	ref_path: refs/heads/add_otel_cache_instrumentation	hash_remote: 9b4af15bbc56b2ec489fd79433f4e6a8bd75b756	hash_local: 9b4af15bbc56b2ec489fd79433f4e6a8bd75b756
+#|	chking: 	_rmt: origin	ref_path: refs/heads/andrewthauer/node-pty-fs-write-raw-fd	hash_remote: 0b82505203487bdcc26e11ac9430cb8cc2d70ea0	hash_local: _
+#|	~~~ 1
+
+gd sp remote necessity verific origin push ; echo ~~~ $?
+#|	existed: 'origin' https://github.com/denoland/deno.git
+#|	chking: 	_rmt: origin	ref_path: refs/heads/add_otel_cache_instrumentation	hash_remote: 9b4af15bbc56b2ec489fd79433f4e6a8bd75b756	hash_local: 9b4af15bbc56b2ec489fd79433f4e6a8bd75b756
+#|	chking: 	_rmt: origin	ref_path: refs/heads/andrewthauer/node-pty-fs-write-raw-fd	hash_remote: 0b82505203487bdcc26e11ac9430cb8cc2d70ea0	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/apidocsupdates	hash_remote: a064691e66bc43da00f56bb23fcc8924e996f9e6	hash_local: a064691e66bc43da00f56bb23fcc8924e996f9e6
+#|	chking: 	_rmt: origin	ref_path: refs/heads/auto-clean	hash_remote: 0fa9059f4d7366c480c6dab4c280c7c5eb6c1f96	hash_local: 0fa9059f4d7366c480c6dab4c280c7c5eb6c1f96
+#|	chking: 	_rmt: origin	ref_path: refs/heads/auto-config	hash_remote: fe326df0db5442f1ae5da23e3777513baf849262	hash_local: fe326df0db5442f1ae5da23e3777513baf849262
+#|	chking: 	_rmt: origin	ref_path: refs/heads/bartlomieju/refactor/rolldown-bundle	hash_remote: 00b67f06d4c54c5fcd28a72c3f82a175634d5d2f	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/better-upgrades-2	hash_remote: f20fff6f48743ce5b1cc55c22f30423a49bc024a	hash_local: f20fff6f48743ce5b1cc55c22f30423a49bc024a
+#|	chking: 	_rmt: origin	ref_path: refs/heads/bi/check-desktop-lib	hash_remote: 4bbc4919a373ded15ba33ffadc071771d46f315a	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/bi/check-doctests	hash_remote: e5f560dc9d419d0476ec139c69fb82d49e6e87f2	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/bi/check-node-type-refs	hash_remote: f07516d446c73758c660e47d56266f54aee5098e	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/bi/check-skiplibcheck-align	hash_remote: 8b5ebc50fd7a94c60ac1a363291920aeda7dc067	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/bi/tsc-overlay	hash_remote: c2e8b8da206d3c9013db73f32353e5470191787f	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/build/lzld-macos-startup	hash_remote: 537e547b3c3082c194b1e26b1d14c2c076da0508	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/bundle-v2	hash_remote: ae831b111fca2453e3dad6139e3d7653c55177c4	hash_local: ae831b111fca2453e3dad6139e3d7653c55177c4
+#|	chking: 	_rmt: origin	ref_path: refs/heads/child_process_shim	hash_remote: 12f146494910ac72d8e250103b03b397bf8cc9d6	hash_local: 12f146494910ac72d8e250103b03b397bf8cc9d6
+#|	chking: 	_rmt: origin	ref_path: refs/heads/chore(ops)-update-docs-on-fast-calls	hash_remote: ff37cc046153a58cfc8d6b2dba5049e114463cc9	hash_local: ff37cc046153a58cfc8d6b2dba5049e114463cc9
+#|	chking: 	_rmt: origin	ref_path: refs/heads/chore/bump-laufey-gcm-fix	hash_remote: 7396255dc80da6d03f45b0a09b371397a250dba7	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/chore/ignore-esm-loader-internal-tests	hash_remote: 3a563eee0bceccbe510df52e3fb584377a384602	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/chore/node-compat-skill-pr-prefix	hash_remote: b56d4bd51620d553954e9492839c1eb5b5c24ca2	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/chore/track-deno_lint-main	hash_remote: 7ce38e67bd64490d97f841d43879147ca27e1b7f	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/chore_fix_node_compat_test_workflow	hash_remote: 74455a40803503d2686d60ae481c3645dbbba087	hash_local: 74455a40803503d2686d60ae481c3645dbbba087
+#|	chking: 	_rmt: origin	ref_path: refs/heads/chore_fix_node_compat_test_workflow_again	hash_remote: 1dc1ddcb00883905c7087af9d3a00a041387af9d	hash_local: 1dc1ddcb00883905c7087af9d3a00a041387af9d
+#|	chking: 	_rmt: origin	ref_path: refs/heads/chore_npm_publish_improve	hash_remote: 2dfd344f5e4d51e7681204abc3f2773061a3ecdc	hash_local: 2dfd344f5e4d51e7681204abc3f2773061a3ecdc
+#|	chking: 	_rmt: origin	ref_path: refs/heads/ci_fix_npm_publish	hash_remote: e9e511538186dadc7122e1e73b26b04bcce7dd20	hash_local: e9e511538186dadc7122e1e73b26b04bcce7dd20
+#|	chking: 	_rmt: origin	ref_path: refs/heads/claude/bun-file-deno-research-gwfgx8	hash_remote: 44a4b4610aa1726f1d5ee7c0a115005459030576	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/claude/deno-26336-e2rd0q	hash_remote: f233dd3e1bac280832e435827e1ff847eea0f49b	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/claude/deno-compile-time-TA9v7	hash_remote: a7c3376b4716333b21e2a104428532de4279bfb2	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/claude/deno-dom-api-research-5vv5ih	hash_remote: c12595b764fe07993af26f358ddb1699cddc403a	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/claude/deno-issue-20152-i1d2hz	hash_remote: 9e1e8c59be83187e920f02c9ec00f613557707fa	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/claude/fix-deno-issue-32929-xlVPU	hash_remote: 336a2aab63ea0b057aceb5958fe1e3978e7ef9cc	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/claude/testing-framework-comparison-i2y2j1	hash_remote: 6d821b979de300d731394310dca0156c007ea581	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/cleanup/native-tcp-connect	hash_remote: b65f6226839fde0416508b071c440b2823424b51	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/cleanup_bindings_rs	hash_remote: b5f73a6258ceae6fb6660624123b6d55c859da9a	hash_local: b5f73a6258ceae6fb6660624123b6d55c859da9a
+#|	chking: 	_rmt: origin	ref_path: refs/heads/codegen-ci	hash_remote: 70a3dd69d01ca9d4f6f203b5b80e0c7236b908c0	hash_local: 70a3dd69d01ca9d4f6f203b5b80e0c7236b908c0
+#|	chking: 	_rmt: origin	ref_path: refs/heads/coderabbitai/docstrings/d704ca2	hash_remote: a095a1d8145a7a8d4ff0a4d64d287a095f086912	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/codex/aged-4c3d66f0-fcc	hash_remote: 157eecd8a46922610ce4979960802ab5e581c956	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/color-depth	hash_remote: cce800e3a97244f2e71f488dfd79369f77b0b046	hash_local: cce800e3a97244f2e71f488dfd79369f77b0b046
+#|	chking: 	_rmt: origin	ref_path: refs/heads/compass	hash_remote: 1cffda520b4b3562a265b1ecb3ccf619cbcb5843	hash_local: 1cffda520b4b3562a265b1ecb3ccf619cbcb5843
+#|	chking: 	_rmt: origin	ref_path: refs/heads/compression-hot-fix	hash_remote: 69af418487ed5e7b51a9e1258b10bdf4925c4340	hash_local: 69af418487ed5e7b51a9e1258b10bdf4925c4340
+#|	chking: 	_rmt: origin	ref_path: refs/heads/copilot/add-easy-uninstall-command	hash_remote: 99492990be91372d61e4eb4ab1f7bca8317cbdfb	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/copilot/add-node-process-execve-support	hash_remote: 31bf7e21e08528cb350a8abe911ec11bd410bc0c	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/copilot/fix-deno-publish-ci-issue	hash_remote: e585c4d95fd3f4385736e507ca7c68218f741bad	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/copilot/fix-dx-npm-tsx-panic	hash_remote: 20e827e9bd63422cd826e0ed650f2e401b253dc6	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/copilot/fix-panic-forgejo-actions	hash_remote: 2ec709989cd34f90c309db4e704a1290fb57dcaf	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/copilot/sub-pr-32509	hash_remote: 1bac93ad62dfaffc6b151fc92284ec105c7550e0	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/copilot/update-wpt-job-comment	hash_remote: 79ce092269805736a88995e79f3f309f2155a8ba	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/cpu-prof	hash_remote: 23a1ba509c78b1d658e02c499c4d80b1116637d6	hash_local: 23a1ba509c78b1d658e02c499c4d80b1116637d6
+#|	chking: 	_rmt: origin	ref_path: refs/heads/debug-ci	hash_remote: 8152490068f7198851edf3f55270ff08f8f30ecb	hash_local: 8152490068f7198851edf3f55270ff08f8f30ecb
+#|	chking: 	_rmt: origin	ref_path: refs/heads/debug-ci2	hash_remote: a95e3f118af593d7c9ce5af734342c7867e50517	hash_local: a95e3f118af593d7c9ce5af734342c7867e50517
+#|	chking: 	_rmt: origin	ref_path: refs/heads/defork/webgpu-globals-deferral	hash_remote: 8c41089bca1f8c801838af2c7d1410e6736a96d9	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/DENB-29802-10	hash_remote: 807c6d67784f7b54c6100e36e45c78031c177021	hash_local: 807c6d67784f7b54c6100e36e45c78031c177021
+#|	chking: 	_rmt: origin	ref_path: refs/heads/DENB-29802-3	hash_remote: 93460dfa17dbb23126e372638497deeac9049539	hash_local: 93460dfa17dbb23126e372638497deeac9049539
+#|	chking: 	_rmt: origin	ref_path: refs/heads/DENB-29802-5	hash_remote: b1c70308e97228e104b9df33ea25e5e3c40de746	hash_local: b1c70308e97228e104b9df33ea25e5e3c40de746
+#|	chking: 	_rmt: origin	ref_path: refs/heads/DENB-29802-parallel/test-stream-finished.js	hash_remote: b5df174549c20b65d6095c782740c6503b35cce6	hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/DENB-29802-parallel/test-stream-readable-async-iterators.js	hash_remote: 93145c76c8dd1696037e42f9a613870be74bdd95hash_local: _
+#|	chking: 	_rmt: origin	ref_path: refs/heads/DENB-29802-parallel-test-stream-pipeline.js	hash_remote: cfe67e72aafaa3d0e901969dc9b80a9217ac7a6f	hash_local: cfe67e72aafaa3d0e901969dc9b80a9217ac7a6f
+#|	chking: 	_rmt: origin	ref_path: refs/heads/DENB-29802-test-issue-test-stream-pipeline-http2	hash_remote: 49130b6a0b544fbf665cbdbf2840b4841d7dda0a	hash_local: 49130b6a0b544fbf665cbdbf2840b4841d7dda0a
+#|	chking: 	_rmt: origin	ref_path: refs/heads/DENB-29802-test-stream2-httpclient-response-end.js-2	hash_remote: 96b935a5d8c9cba3d49c14bf86bc0466f2029a47	hash_local: 96b935a5d8c9cba3d49c14bf86bc0466f2029a47
+#|	chking: 	_rmt: origin	ref_path: refs/heads/DENB-29802-test-stream2-stderr-sync	hash_remote: 24772082f27faf5678aedf338f2e29ea7fd61a3f	hash_local: 24772082f27faf5678aedf338f2e29ea7fd61a3f
+#|	chking: 	_rmt: origin	ref_path: refs/heads/DENB-29802-test-stream-pipeline-process	hash_remote: bb09263e959adaccd5c3e9537d9a42609aa4b3b9	hash_local: bb09263e959adaccd5c3e9537d9a42609aa4b3b9
+#|	chking: 	_rmt: origin	ref_path: refs/heads/DENB-29942	hash_remote: 886474bfa94cc1d326e991be7ce88f80f155e608	hash_local: 886474bfa94cc1d326e991be7ce88f80f155e608
+#|	chking: 	_rmt: origin	ref_path: refs/heads/deno_server_require_real_response	hash_remote: a85823c94497e41d82565c78c338f3fbcfecf35b	hash_local: a85823c94497e41d82565c78c338f3fbcfecf35b
+#|	chking: 	_rmt: origin	ref_path: refs/heads/deno-check-green	hash_remote: 2f9ca696e76821494050152a8cad3c29ce17dd0b	hash_local: 2f9ca696e76821494050152a8cad3c29ce17dd0b
+#|	chking: 	_rmt: origin	ref_path: refs/heads/deno-lts-plumbing	hash_remote: a9defb14509d984899c99b362d5720fcd752980d	hash_local: 107fccd252f1a5c779c0e9f9377d454f2e93943e
+#|	fatal: Not a valid commit name a9defb14509d984899c99b362d5720fcd752980d
+#|	~~~ 128
+~~~
+
+
