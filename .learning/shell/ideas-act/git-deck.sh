@@ -1031,12 +1031,13 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 				verific () 
 				(
 					local remote="$1" && { shift || { 1>&2 echo Error: need to specify remote in param-1 ; return 26 ; } ; } && 
-					local rqtype="$1" && { shift || { 1>&2 echo Error: need to specify 'pull|push' in param-2 ; return 26 ; } ; } && 
+					local trmode="$1" && { shift || { 1>&2 echo Error: need to specify 'pull|push' in param-2 ; return 26 ; } ; } && 
 					
+					echo ::: chking: verificing the necessity of remote "'${remote}'" for "*${trmode}ing*" works.
 					return $(
 					shopt -u -q -- extglob ;
 					{
-						{ check "${rqtype}" "${remote}" ; } | 
+						{ check "${trmode}" "${remote}" ; } | 
 							{ apply "${remote}" || echo $? 1>&6 ; } | 
 							cat - 1>&7 && 
 						:;
