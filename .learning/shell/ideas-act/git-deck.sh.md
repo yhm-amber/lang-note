@@ -1815,7 +1815,6 @@ git-deck sp all-sync *
 ##### daily
 
 ~~~ sh
-# ASKING_MAXTRY=9 git-deck sp all-sync *
 git-deck sp all-sync *
 
 #|	:: pulling from origin and all remotes in: contain.note-src/container-note.git/ ::
@@ -2552,6 +2551,951 @@ git-deck sp all-sync *
 #|	
 ~~~
 
+~~~ sh
+ASKING_MAXTRY=9 git-deck sp all-sync *
+
+#|	:: pulling from origin and all remotes in: contain.note-src/container-note.git/ ::
+#|	repochk: `/e/repos/.syncing/contain.note-src/container-note.git` is inside worktree ~ false
+#|	repochk: `/e/repos/.syncing/contain.note-src/container-note.git` is inside gitdir ~ true
+#|	repochk: `/e/repos/.syncing/contain.note-src/container-note.git` is bare repository ~ true
+#|	base_up: update from remote for 'contain.note-src/container-note.git/'
+#|	repochk: `/e/repos/.syncing/contain.note-src/container-note.git` is bare repository ~ true
+#|	:: executing: remote update ::
+#|	Fetching origin
+#|	From https://github.com/yhm-amber/container-note
+#|	 * branch              HEAD       -> FETCH_HEAD
+#|	Fetching gh
+#|	Fetching cb
+#|	Fetching dr
+#|	upper: updated in '.../contain.note-src/container-note.git' for remote(s)
+#|	base_up: updated in 'contain.note-src/container-note.git/'
+#|	:: pulling all remotes in 'contain.note-src/container-note.git/' ::
+#|	repochk: `/e/repos/.syncing/contain.note-src/container-note.git` is bare repository ~ true
+#|	working: pull from remote 'cb' for 'container-note.git'
+#|	POST git-upload-pack (165 bytes)
+#|	From https://codeberg.org/yhm-ypa/container-note
+#|	 = [up to date]        main       -> main
+#|	 = [up to date]        main       -> cb/main
+#|	
+#|	repochk: `/e/repos/.syncing/contain.note-src/container-note.git` is bare repository ~ true
+#|	working: pull from remote 'dr' for 'container-note.git'
+#|	POST git-upload-pack (165 bytes)
+#|	From https://git.disroot.org/ypayhm/container-note
+#|	 = [up to date]        main       -> main
+#|	 = [up to date]        main       -> dr/main
+#|	
+#|	repochk: `/e/repos/.syncing/contain.note-src/container-note.git` is bare repository ~ true
+#|	working: pull from remote 'gh' for 'container-note.git'
+#|	POST git-upload-pack (165 bytes)
+#|	From https://github.com/yhm-amber/container-note
+#|	 = [up to date]        main       -> main
+#|	 = [up to date]        main       -> gh/main
+#|	
+#|	repochk: `/e/repos/.syncing/contain.note-src/container-note.git` is bare repository ~ true
+#|	working: pull from remote 'origin' for 'container-note.git'
+#|	POST git-upload-pack (165 bytes)
+#|	From https://github.com/yhm-amber/container-note
+#|	 = [up to date]        main       -> main
+#|	
+#|	:: pulled all remotes in 'contain.note-src/container-note.git/' ::
+#|	
+#|	:: pushing origin to all remotes in: contain.note-src/container-note.git/ ::
+#|	repochk: `/e/repos/.syncing/contain.note-src/container-note.git` is inside worktree ~ false
+#|	repochk: `/e/repos/.syncing/contain.note-src/container-note.git` is inside gitdir ~ true
+#|	repochk: `/e/repos/.syncing/contain.note-src/container-note.git` is bare repository ~ true
+#|	base_up: update from remote for 'contain.note-src/container-note.git/'
+#|	repochk: `/e/repos/.syncing/contain.note-src/container-note.git` is bare repository ~ true
+#|	:: executing: remote update ::
+#|	Fetching origin
+#|	From https://github.com/yhm-amber/container-note
+#|	 * branch              HEAD       -> FETCH_HEAD
+#|	Fetching gh
+#|	Fetching cb
+#|	Fetching dr
+#|	upper: updated in '.../contain.note-src/container-note.git' for remote(s)
+#|	base_up: updated in 'contain.note-src/container-note.git/'
+#|	:: pushing all remotes in 'contain.note-src/container-note.git/' ::
+#|	repochk: `/e/repos/.syncing/contain.note-src/container-note.git` is bare repository ~ true
+#|	working: push to remote 'cb' for 'container-note.git'
+#|	Pushing to https://codeberg.org/yhm-ypa/container-note.git
+#|	To https://codeberg.org/yhm-ypa/container-note.git
+#|	 = [up to date]        main -> main
+#|	updating local tracking ref 'refs/remotes/cb/main'
+#|	Everything up-to-date
+#|	
+#|	repochk: `/e/repos/.syncing/contain.note-src/container-note.git` is bare repository ~ true
+#|	working: push to remote 'dr' for 'container-note.git'
+#|	Pushing to https://git.disroot.org/ypayhm/container-note.git
+#|	To https://git.disroot.org/ypayhm/container-note.git
+#|	 = [up to date]        main -> main
+#|	updating local tracking ref 'refs/remotes/dr/main'
+#|	Everything up-to-date
+#|	
+#|	repochk: `/e/repos/.syncing/contain.note-src/container-note.git` is bare repository ~ true
+#|	working: push to remote 'gh' for 'container-note.git'
+#|	Pushing to https://github.com/yhm-amber/container-note.git
+#|	To https://github.com/yhm-amber/container-note.git
+#|	 = [up to date]        main -> main
+#|	updating local tracking ref 'refs/remotes/gh/main'
+#|	Everything up-to-date
+#|	
+#|	repochk: `/e/repos/.syncing/contain.note-src/container-note.git` is bare repository ~ true
+#|	working: push to remote 'origin' for 'container-note.git'
+#|	Pushing to https://github.com/yhm-amber/container-note.git
+#|	To https://github.com/yhm-amber/container-note.git
+#|	 = [up to date]        main -> main
+#|	Everything up-to-date
+#|	
+#|	:: pushed all remotes in 'contain.note-src/container-note.git/' ::
+#|	
+#|	:: pulling from origin and all remotes in: lang.note-src/lang-note.git/ ::
+#|	repochk: `/e/repos/.syncing/lang.note-src/lang-note.git` is inside worktree ~ false
+#|	repochk: `/e/repos/.syncing/lang.note-src/lang-note.git` is inside gitdir ~ true
+#|	repochk: `/e/repos/.syncing/lang.note-src/lang-note.git` is bare repository ~ true
+#|	base_up: update from remote for 'lang.note-src/lang-note.git/'
+#|	repochk: `/e/repos/.syncing/lang.note-src/lang-note.git` is bare repository ~ true
+#|	:: executing: remote update ::
+#|	Fetching origin
+#|	remote: Enumerating objects: 11, done.
+#|	remote: Counting objects: 100% (11/11), done.
+#|	remote: Compressing objects: 100% (6/6), done.
+#|	remote: Total 6 (delta 4), reused 0 (delta 0), pack-reused 0 (from 0)
+#|	Unpacking objects: 100% (6/6), 1.28 KiB | 3.00 KiB/s, done.
+#|	From https://github.com/yhm-amber/lang-note
+#|	 * branch            HEAD       -> FETCH_HEAD
+#|	Fetching gh
+#|	From https://github.com/yhm-amber/lang-note
+#|	   7b511ed..1b4a001  main       -> gh/main
+#|	Fetching cb
+#|	Fetching dr
+#|	upper: updated in '.../lang.note-src/lang-note.git' for remote(s)
+#|	base_up: updated in 'lang.note-src/lang-note.git/'
+#|	:: pulling all remotes in 'lang.note-src/lang-note.git/' ::
+#|	repochk: `/e/repos/.syncing/lang.note-src/lang-note.git` is bare repository ~ true
+#|	working: pull from remote 'cb' for 'lang-note.git'
+#|	POST git-upload-pack (165 bytes)
+#|	From https://codeberg.org/yhm-ypa/lang-note
+#|	 = [up to date]      main       -> main
+#|	 = [up to date]      main       -> cb/main
+#|	
+#|	repochk: `/e/repos/.syncing/lang.note-src/lang-note.git` is bare repository ~ true
+#|	working: pull from remote 'dr' for 'lang-note.git'
+#|	POST git-upload-pack (165 bytes)
+#|	From https://git.disroot.org/ypayhm/lang-note
+#|	 = [up to date]      main       -> main
+#|	 = [up to date]      main       -> dr/main
+#|	
+#|	repochk: `/e/repos/.syncing/lang.note-src/lang-note.git` is bare repository ~ true
+#|	working: pull from remote 'gh' for 'lang-note.git'
+#|	POST git-upload-pack (165 bytes)
+#|	From https://github.com/yhm-amber/lang-note
+#|	   7b511ed..1b4a001  main       -> main
+#|	 = [up to date]      main       -> gh/main
+#|	
+#|	repochk: `/e/repos/.syncing/lang.note-src/lang-note.git` is bare repository ~ true
+#|	working: pull from remote 'origin' for 'lang-note.git'
+#|	POST git-upload-pack (165 bytes)
+#|	From https://github.com/yhm-amber/lang-note
+#|	 = [up to date]      main       -> main
+#|	
+#|	:: pulled all remotes in 'lang.note-src/lang-note.git/' ::
+#|	
+#|	:: pushing origin to all remotes in: lang.note-src/lang-note.git/ ::
+#|	repochk: `/e/repos/.syncing/lang.note-src/lang-note.git` is inside worktree ~ false
+#|	repochk: `/e/repos/.syncing/lang.note-src/lang-note.git` is inside gitdir ~ true
+#|	repochk: `/e/repos/.syncing/lang.note-src/lang-note.git` is bare repository ~ true
+#|	base_up: update from remote for 'lang.note-src/lang-note.git/'
+#|	repochk: `/e/repos/.syncing/lang.note-src/lang-note.git` is bare repository ~ true
+#|	:: executing: remote update ::
+#|	Fetching origin
+#|	From https://github.com/yhm-amber/lang-note
+#|	 * branch            HEAD       -> FETCH_HEAD
+#|	Fetching gh
+#|	Fetching cb
+#|	Fetching dr
+#|	upper: updated in '.../lang.note-src/lang-note.git' for remote(s)
+#|	base_up: updated in 'lang.note-src/lang-note.git/'
+#|	:: pushing all remotes in 'lang.note-src/lang-note.git/' ::
+#|	repochk: `/e/repos/.syncing/lang.note-src/lang-note.git` is bare repository ~ true
+#|	working: push to remote 'cb' for 'lang-note.git'
+#|	Pushing to https://codeberg.org/yhm-ypa/lang-note.git
+#|	Enumerating objects: 11, done.
+#|	Counting objects: 100% (11/11), done.
+#|	Delta compression using up to 16 threads
+#|	Compressing objects: 100% (6/6), done.
+#|	Writing objects: 100% (6/6), 1.58 KiB | 538.00 KiB/s, done.
+#|	Total 6 (delta 4), reused 0 (delta 0), pack-reused 0 (from 0)
+#|	POST git-receive-pack (1798 bytes)
+#|	To https://codeberg.org/yhm-ypa/lang-note.git
+#|	   7b511ed..1b4a001  main -> main
+#|	updating local tracking ref 'refs/remotes/cb/main'
+#|	
+#|	repochk: `/e/repos/.syncing/lang.note-src/lang-note.git` is bare repository ~ true
+#|	working: push to remote 'dr' for 'lang-note.git'
+#|	Pushing to https://git.disroot.org/ypayhm/lang-note.git
+#|	Enumerating objects: 11, done.
+#|	Counting objects: 100% (11/11), done.
+#|	Delta compression using up to 16 threads
+#|	Compressing objects: 100% (6/6), done.
+#|	Writing objects: 100% (6/6), 1.58 KiB | 538.00 KiB/s, done.
+#|	Total 6 (delta 4), reused 0 (delta 0), pack-reused 0 (from 0)
+#|	POST git-receive-pack (1798 bytes)
+#|	To https://git.disroot.org/ypayhm/lang-note.git
+#|	   7b511ed..1b4a001  main -> main
+#|	updating local tracking ref 'refs/remotes/dr/main'
+#|	
+#|	repochk: `/e/repos/.syncing/lang.note-src/lang-note.git` is bare repository ~ true
+#|	working: push to remote 'gh' for 'lang-note.git'
+#|	Pushing to https://github.com/yhm-amber/lang-note.git
+#|	To https://github.com/yhm-amber/lang-note.git
+#|	 = [up to date]      main -> main
+#|	updating local tracking ref 'refs/remotes/gh/main'
+#|	Everything up-to-date
+#|	
+#|	repochk: `/e/repos/.syncing/lang.note-src/lang-note.git` is bare repository ~ true
+#|	working: push to remote 'origin' for 'lang-note.git'
+#|	Pushing to https://github.com/yhm-amber/lang-note.git
+#|	To https://github.com/yhm-amber/lang-note.git
+#|	 = [up to date]      main -> main
+#|	Everything up-to-date
+#|	
+#|	:: pushed all remotes in 'lang.note-src/lang-note.git/' ::
+#|	
+#|	:: pulling from origin and all remotes in: mabin.ls-src/mabynogion.spells.git/ ::
+#|	repochk: `/e/repos/.syncing/mabin.ls-src/mabynogion.spells.git` is inside worktree ~ false
+#|	repochk: `/e/repos/.syncing/mabin.ls-src/mabynogion.spells.git` is inside gitdir ~ true
+#|	repochk: `/e/repos/.syncing/mabin.ls-src/mabynogion.spells.git` is bare repository ~ true
+#|	base_up: update from remote for 'mabin.ls-src/mabynogion.spells.git/'
+#|	repochk: `/e/repos/.syncing/mabin.ls-src/mabynogion.spells.git` is bare repository ~ true
+#|	:: executing: remote update ::
+#|	Fetching origin
+#|	From https://github.com/pure-symbols/mabynogion.spells
+#|	 * branch            HEAD       -> FETCH_HEAD
+#|	Fetching gh
+#|	Fetching cb
+#|	Fetching dr
+#|	upper: updated in '.../mabin.ls-src/mabynogion.spells.git' for remote(s)
+#|	base_up: updated in 'mabin.ls-src/mabynogion.spells.git/'
+#|	:: pulling all remotes in 'mabin.ls-src/mabynogion.spells.git/' ::
+#|	repochk: `/e/repos/.syncing/mabin.ls-src/mabynogion.spells.git` is bare repository ~ true
+#|	working: pull from remote 'cb' for 'mabynogion.spells.git'
+#|	POST git-upload-pack (165 bytes)
+#|	From https://codeberg.org/pure-symbols/mabynogion.spells
+#|	 = [up to date]      base       -> base
+#|	 = [up to date]      main       -> main
+#|	 = [up to date]      myrddin.R  -> myrddin.R
+#|	 = [up to date]      tylluan.sh -> tylluan.sh
+#|	 = [up to date]      base       -> cb/base
+#|	 = [up to date]      main       -> cb/main
+#|	 = [up to date]      myrddin.R  -> cb/myrddin.R
+#|	 = [up to date]      tylluan.sh -> cb/tylluan.sh
+#|	
+#|	repochk: `/e/repos/.syncing/mabin.ls-src/mabynogion.spells.git` is bare repository ~ true
+#|	working: pull from remote 'dr' for 'mabynogion.spells.git'
+#|	POST git-upload-pack (165 bytes)
+#|	From https://git.disroot.org/pure.symbols/mabynogion.spells
+#|	 = [up to date]      base       -> base
+#|	 = [up to date]      main       -> main
+#|	 = [up to date]      myrddin.R  -> myrddin.R
+#|	 = [up to date]      tylluan.sh -> tylluan.sh
+#|	 = [up to date]      base       -> dr/base
+#|	 = [up to date]      main       -> dr/main
+#|	 = [up to date]      myrddin.R  -> dr/myrddin.R
+#|	 = [up to date]      tylluan.sh -> dr/tylluan.sh
+#|	
+#|	repochk: `/e/repos/.syncing/mabin.ls-src/mabynogion.spells.git` is bare repository ~ true
+#|	working: pull from remote 'gh' for 'mabynogion.spells.git'
+#|	POST git-upload-pack (165 bytes)
+#|	From https://github.com/pure-symbols/mabynogion.spells
+#|	 = [up to date]      base       -> base
+#|	 = [up to date]      main       -> main
+#|	 = [up to date]      myrddin.R  -> myrddin.R
+#|	 = [up to date]      tylluan.sh -> tylluan.sh
+#|	 = [up to date]      base       -> gh/base
+#|	 = [up to date]      main       -> gh/main
+#|	 = [up to date]      myrddin.R  -> gh/myrddin.R
+#|	 = [up to date]      tylluan.sh -> gh/tylluan.sh
+#|	
+#|	repochk: `/e/repos/.syncing/mabin.ls-src/mabynogion.spells.git` is bare repository ~ true
+#|	working: pull from remote 'origin' for 'mabynogion.spells.git'
+#|	POST git-upload-pack (165 bytes)
+#|	From https://github.com/pure-symbols/mabynogion.spells
+#|	 = [up to date]      base       -> base
+#|	 = [up to date]      main       -> main
+#|	 = [up to date]      myrddin.R  -> myrddin.R
+#|	 = [up to date]      tylluan.sh -> tylluan.sh
+#|	
+#|	:: pulled all remotes in 'mabin.ls-src/mabynogion.spells.git/' ::
+#|	
+#|	:: pushing origin to all remotes in: mabin.ls-src/mabynogion.spells.git/ ::
+#|	repochk: `/e/repos/.syncing/mabin.ls-src/mabynogion.spells.git` is inside worktree ~ false
+#|	repochk: `/e/repos/.syncing/mabin.ls-src/mabynogion.spells.git` is inside gitdir ~ true
+#|	repochk: `/e/repos/.syncing/mabin.ls-src/mabynogion.spells.git` is bare repository ~ true
+#|	base_up: update from remote for 'mabin.ls-src/mabynogion.spells.git/'
+#|	repochk: `/e/repos/.syncing/mabin.ls-src/mabynogion.spells.git` is bare repository ~ true
+#|	:: executing: remote update ::
+#|	Fetching origin
+#|	From https://github.com/pure-symbols/mabynogion.spells
+#|	 * branch            HEAD       -> FETCH_HEAD
+#|	Fetching gh
+#|	Fetching cb
+#|	Fetching dr
+#|	upper: updated in '.../mabin.ls-src/mabynogion.spells.git' for remote(s)
+#|	base_up: updated in 'mabin.ls-src/mabynogion.spells.git/'
+#|	:: pushing all remotes in 'mabin.ls-src/mabynogion.spells.git/' ::
+#|	repochk: `/e/repos/.syncing/mabin.ls-src/mabynogion.spells.git` is bare repository ~ true
+#|	working: push to remote 'cb' for 'mabynogion.spells.git'
+#|	Pushing to https://codeberg.org/pure-symbols/mabynogion.spells.git
+#|	To https://codeberg.org/pure-symbols/mabynogion.spells.git
+#|	 = [up to date]      base -> base
+#|	 = [up to date]      main -> main
+#|	 = [up to date]      myrddin.R -> myrddin.R
+#|	 = [up to date]      tylluan.sh -> tylluan.sh
+#|	updating local tracking ref 'refs/remotes/cb/base'
+#|	updating local tracking ref 'refs/remotes/cb/main'
+#|	updating local tracking ref 'refs/remotes/cb/myrddin.R'
+#|	updating local tracking ref 'refs/remotes/cb/tylluan.sh'
+#|	Everything up-to-date
+#|	
+#|	repochk: `/e/repos/.syncing/mabin.ls-src/mabynogion.spells.git` is bare repository ~ true
+#|	working: push to remote 'dr' for 'mabynogion.spells.git'
+#|	Pushing to https://git.disroot.org/pure.symbols/mabynogion.spells.git
+#|	To https://git.disroot.org/pure.symbols/mabynogion.spells.git
+#|	 = [up to date]      base -> base
+#|	 = [up to date]      main -> main
+#|	 = [up to date]      myrddin.R -> myrddin.R
+#|	 = [up to date]      tylluan.sh -> tylluan.sh
+#|	updating local tracking ref 'refs/remotes/dr/base'
+#|	updating local tracking ref 'refs/remotes/dr/main'
+#|	updating local tracking ref 'refs/remotes/dr/myrddin.R'
+#|	updating local tracking ref 'refs/remotes/dr/tylluan.sh'
+#|	Everything up-to-date
+#|	
+#|	repochk: `/e/repos/.syncing/mabin.ls-src/mabynogion.spells.git` is bare repository ~ true
+#|	working: push to remote 'gh' for 'mabynogion.spells.git'
+#|	Pushing to https://github.com/pure-symbols/mabynogion.spells.git
+#|	To https://github.com/pure-symbols/mabynogion.spells.git
+#|	 = [up to date]      base -> base
+#|	 = [up to date]      main -> main
+#|	 = [up to date]      myrddin.R -> myrddin.R
+#|	 = [up to date]      tylluan.sh -> tylluan.sh
+#|	updating local tracking ref 'refs/remotes/gh/base'
+#|	updating local tracking ref 'refs/remotes/gh/main'
+#|	updating local tracking ref 'refs/remotes/gh/myrddin.R'
+#|	updating local tracking ref 'refs/remotes/gh/tylluan.sh'
+#|	Everything up-to-date
+#|	
+#|	repochk: `/e/repos/.syncing/mabin.ls-src/mabynogion.spells.git` is bare repository ~ true
+#|	working: push to remote 'origin' for 'mabynogion.spells.git'
+#|	Pushing to https://github.com/pure-symbols/mabynogion.spells.git
+#|	To https://github.com/pure-symbols/mabynogion.spells.git
+#|	 = [up to date]      base -> base
+#|	 = [up to date]      main -> main
+#|	 = [up to date]      myrddin.R -> myrddin.R
+#|	 = [up to date]      tylluan.sh -> tylluan.sh
+#|	Everything up-to-date
+#|	
+#|	:: pushed all remotes in 'mabin.ls-src/mabynogion.spells.git/' ::
+#|	
+#|	:: pulling from origin and all remotes in: pure.symb-grp/pure-symbols.git/ ::
+#|	repochk: `/e/repos/.syncing/pure.symb-grp/pure-symbols.git` is inside worktree ~ false
+#|	repochk: `/e/repos/.syncing/pure.symb-grp/pure-symbols.git` is inside gitdir ~ true
+#|	repochk: `/e/repos/.syncing/pure.symb-grp/pure-symbols.git` is bare repository ~ true
+#|	base_up: update from remote for 'pure.symb-grp/pure-symbols.git/'
+#|	repochk: `/e/repos/.syncing/pure.symb-grp/pure-symbols.git` is bare repository ~ true
+#|	:: executing: remote update ::
+#|	Fetching origin
+#|	fatal: unable to access 'https://github.com/pure-symbols/.github.git/': Recv failure: Connection was reset
+#|	error: could not fetch origin
+#|	Fetching gh
+#|	fatal: unable to access 'https://github.com/pure-symbols/.github.git/': Failed to connect to github.com port 443 after 21350 ms: Could not connect to server
+#|	error: could not fetch gh
+#|	Fetching cb
+#|	Fetching dr
+#|	tried: 1 for remote update
+#|	Fetching origin
+#|	fatal: unable to access 'https://github.com/pure-symbols/.github.git/': Failed to connect to github.com port 443 after 21381 ms: Could not connect to server
+#|	error: could not fetch origin
+#|	Fetching gh
+#|	fatal: unable to access 'https://github.com/pure-symbols/.github.git/': Recv failure: Connection was reset
+#|	error: could not fetch gh
+#|	Fetching cb
+#|	Fetching dr
+#|	tried: 2 for remote update
+#|	Fetching origin
+#|	fatal: unable to access 'https://github.com/pure-symbols/.github.git/': Failed to connect to github.com port 443 after 22362 ms: Could not connect to server
+#|	error: could not fetch origin
+#|	Fetching gh
+#|	fatal: unable to access 'https://github.com/pure-symbols/.github.git/': Recv failure: Connection was reset
+#|	error: could not fetch gh
+#|	Fetching cb
+#|	Fetching dr
+#|	tried: 3 for remote update
+#|	Fetching origin
+#|	fatal: unable to access 'https://github.com/pure-symbols/.github.git/': Failed to connect to github.com port 443 after 21368 ms: Could not connect to server
+#|	error: could not fetch origin
+#|	Fetching gh
+#|	fatal: unable to access 'https://github.com/pure-symbols/.github.git/': Recv failure: Connection was reset
+#|	error: could not fetch gh
+#|	Fetching cb
+#|	Fetching dr
+#|	tried: 4 for remote update
+#|	Fetching origin
+#|	fatal: unable to access 'https://github.com/pure-symbols/.github.git/': Failed to connect to github.com port 443 after 21367 ms: Could not connect to server
+#|	error: could not fetch origin
+#|	Fetching gh
+#|	fatal: unable to access 'https://github.com/pure-symbols/.github.git/': Empty reply from server
+#|	error: could not fetch gh
+#|	Fetching cb
+#|	Fetching dr
+#|	tried: 5 for remote update
+#|	Fetching origin
+#|	fatal: unable to access 'https://github.com/pure-symbols/.github.git/': Failed to connect to github.com port 443 after 21414 ms: Could not connect to server
+#|	error: could not fetch origin
+#|	Fetching gh
+#|	fatal: unable to access 'https://github.com/pure-symbols/.github.git/': Recv failure: Connection was reset
+#|	error: could not fetch gh
+#|	Fetching cb
+#|	Fetching dr
+#|	tried: 6 for remote update
+#|	Fetching origin
+#|	fatal: unable to access 'https://github.com/pure-symbols/.github.git/': Recv failure: Connection was reset
+#|	error: could not fetch origin
+#|	Fetching gh
+#|	fatal: unable to access 'https://github.com/pure-symbols/.github.git/': Recv failure: Connection was reset
+#|	error: could not fetch gh
+#|	Fetching cb
+#|	Fetching dr
+#|	tried: 7 for remote update
+#|	Fetching origin
+#|	fatal: unable to access 'https://github.com/pure-symbols/.github.git/': Failed to connect to github.com port 443 after 21434 ms: Could not connect to server
+#|	error: could not fetch origin
+#|	Fetching gh
+#|	fatal: unable to access 'https://github.com/pure-symbols/.github.git/': Failed to connect to github.com port 443 after 22308 ms: Could not connect to server
+#|	error: could not fetch gh
+#|	Fetching cb
+#|	Fetching dr
+#|	tried: 8 for remote update
+#|	Fetching origin
+#|	fatal: unable to access 'https://github.com/pure-symbols/.github.git/': Failed to connect to github.com port 443 after 21331 ms: Could not connect to server
+#|	error: could not fetch origin
+#|	Fetching gh
+#|	fatal: unable to access 'https://github.com/pure-symbols/.github.git/': Recv failure: Connection was reset
+#|	error: could not fetch gh
+#|	Fetching cb
+#|	Fetching dr
+#|	tried: 9 for remote update
+#|	Fetching origin
+#|	fatal: unable to access 'https://github.com/pure-symbols/.github.git/': Failed to connect to github.com port 443 after 21367 ms: Could not connect to server
+#|	error: could not fetch origin
+#|	Fetching gh
+#|	fatal: unable to access 'https://github.com/pure-symbols/.github.git/': Failed to connect to github.com port 443 after 21333 ms: Could not connect to server
+#|	error: could not fetch gh
+#|	Fetching cb
+#|	Fetching dr
+#|	tried: 10 for remote update
+#|	Fetching origin
+#|	fatal: unable to access 'https://github.com/pure-symbols/.github.git/': Recv failure: Connection was reset
+#|	error: could not fetch origin
+#|	Fetching gh
+#|	fatal: unable to access 'https://github.com/pure-symbols/.github.git/': Recv failure: Connection was reset
+#|	error: could not fetch gh
+#|	Fetching cb
+#|	Fetching dr
+#|	tried: 11 for remote update
+#|	Fetching origin
+#|	From https://github.com/pure-symbols/.github
+#|	 * branch            HEAD       -> FETCH_HEAD
+#|	Fetching gh
+#|	Fetching cb
+#|	Fetching dr
+#|	fatal: unable to access 'https://git.disroot.org/pure.symbols/pure.symbols.git/': Failed to connect to git.disroot.org port 443 after 24109 ms: Could not connect to server
+#|	error: could not fetch dr
+#|	tried: 12 for remote update
+#|	Fetching origin
+#|	From https://github.com/pure-symbols/.github
+#|	 * branch            HEAD       -> FETCH_HEAD
+#|	Fetching gh
+#|	Fetching cb
+#|	Fetching dr
+#|	upper: updated in '.../pure.symb-grp/pure-symbols.git' for remote(s)
+#|	base_up: updated in 'pure.symb-grp/pure-symbols.git/'
+#|	:: pulling all remotes in 'pure.symb-grp/pure-symbols.git/' ::
+#|	repochk: `/e/repos/.syncing/pure.symb-grp/pure-symbols.git` is bare repository ~ true
+#|	working: pull from remote 'cb' for 'pure-symbols.git'
+#|	POST git-upload-pack (165 bytes)
+#|	From https://codeberg.org/pure-symbols/pure.symbols
+#|	 = [up to date]      main       -> main
+#|	 = [up to date]      main       -> cb/main
+#|	
+#|	repochk: `/e/repos/.syncing/pure.symb-grp/pure-symbols.git` is bare repository ~ true
+#|	working: pull from remote 'dr' for 'pure-symbols.git'
+#|	POST git-upload-pack (165 bytes)
+#|	From https://git.disroot.org/pure.symbols/pure.symbols
+#|	 = [up to date]      main       -> main
+#|	 = [up to date]      main       -> dr/main
+#|	
+#|	repochk: `/e/repos/.syncing/pure.symb-grp/pure-symbols.git` is bare repository ~ true
+#|	working: pull from remote 'gh' for 'pure-symbols.git'
+#|	POST git-upload-pack (165 bytes)
+#|	From https://github.com/pure-symbols/.github
+#|	 = [up to date]      main       -> main
+#|	 = [up to date]      main       -> gh/main
+#|	
+#|	repochk: `/e/repos/.syncing/pure.symb-grp/pure-symbols.git` is bare repository ~ true
+#|	working: pull from remote 'origin' for 'pure-symbols.git'
+#|	POST git-upload-pack (165 bytes)
+#|	From https://github.com/pure-symbols/.github
+#|	 = [up to date]      main       -> main
+#|	
+#|	:: pulled all remotes in 'pure.symb-grp/pure-symbols.git/' ::
+#|	
+#|	:: pushing origin to all remotes in: pure.symb-grp/pure-symbols.git/ ::
+#|	repochk: `/e/repos/.syncing/pure.symb-grp/pure-symbols.git` is inside worktree ~ false
+#|	repochk: `/e/repos/.syncing/pure.symb-grp/pure-symbols.git` is inside gitdir ~ true
+#|	repochk: `/e/repos/.syncing/pure.symb-grp/pure-symbols.git` is bare repository ~ true
+#|	base_up: update from remote for 'pure.symb-grp/pure-symbols.git/'
+#|	repochk: `/e/repos/.syncing/pure.symb-grp/pure-symbols.git` is bare repository ~ true
+#|	:: executing: remote update ::
+#|	Fetching origin
+#|	From https://github.com/pure-symbols/.github
+#|	 * branch            HEAD       -> FETCH_HEAD
+#|	base_up: updated in 'pure.symb-grp/pure-symbols.git/'
+#|	Fetching gh
+#|	repochk: `/e/repos/.syncing/pure.symb-grp/pure-symbols.git` is bare repository ~ true
+#|	Fetching cb
+#|	Pushing to https://codeberg.org/pure-symbols/pure.symbols.git
+#|	Fetching dr
+#|	 = [up to date]      main -> main
+#|	upper: updated in '.../pure.symb-grp/pure-symbols.git' for remote(s)
+#|	
+#|	:: pushing all remotes in 'pure.symb-grp/pure-symbols.git/' ::
+#|	Everything up-to-daterepochk: `/e/repos/.syncing/pure.symb-grp/pure-symbols.git` is bare repository ~ true
+#|	working: push to remote 'cb' for 'pure-symbols.git'
+#|	Pushing to https://git.disroot.org/pure.symbols/pure.symbols.git
+#|	To https://codeberg.org/pure-symbols/pure.symbols.git
+#|	 = [up to date]      main -> main
+#|	updating local tracking ref 'refs/remotes/cb/main'
+#|	
+#|	
+#|	Everything up-to-daterepochk: `/e/repos/.syncing/pure.symb-grp/pure-symbols.git` is bare repository ~ true
+#|	working: push to remote 'dr' for 'pure-symbols.git'
+#|	Pushing to https://github.com/pure-symbols/.github.git
+#|	To https://git.disroot.org/pure.symbols/pure.symbols.git
+#|	 = [up to date]      main -> main
+#|	updating local tracking ref 'refs/remotes/dr/main'
+#|	
+#|	
+#|	working: push to remote 'gh' for 'pure-symbols.git'
+#|	working: push to remote 'origin' for 'pure-symbols.git'
+#|	To https://github.com/pure-symbols/.github.git
+#|	To https://github.com/pure-symbols/.github.git
+#|	updating local tracking ref 'refs/remotes/gh/main'
+#|	
+#|	Everything up-to-date
+#|	Everything up-to-date
+#|	repochk: `/e/repos/.syncing/pure.symb-grp/pure-symbols.git` is bare repository ~ true
+#|	:: pushed all remotes in 'pure.symb-grp/pure-symbols.git/' :::: pulling from origin and all remotes in: pure.yph-src/pure.lexicals.git/ ::
+#|	Pushing to https://github.com/pure-symbols/.github.git
+#|	repochk: `/e/repos/.syncing/pure.yph-src/pure.lexicals.git` is inside gitdir ~ true
+#|	 = [up to date]      main -> main
+#|	base_up: update from remote for 'pure.yph-src/pure.lexicals.git/'
+#|	
+#|	:: executing: remote update ::
+#|	
+#|	remote: Enumerating objects: 20, done.
+#|	repochk: `/e/repos/.syncing/pure.yph-src/pure.lexicals.git` is inside worktree ~ false
+#|	remote: Compressing objects: 100% (14/14), done.
+#|	repochk: `/e/repos/.syncing/pure.yph-src/pure.lexicals.git` is bare repository ~ true
+#|	Unpacking objects: 100% (14/14), 4.86 KiB | 4.00 KiB/s, done.
+#|	repochk: `/e/repos/.syncing/pure.yph-src/pure.lexicals.git` is bare repository ~ true
+#|	 * branch            HEAD       -> FETCH_HEAD
+#|	Fetching origin
+#|	From https://github.com/pure-symbols/pure.lexicals
+#|	remote: Counting objects: 100% (20/20), done.
+#|	Fetching cb
+#|	remote: Total 14 (delta 10), reused 0 (delta 0), pack-reused 0 (from 0)
+#|	upper: updated in '.../pure.yph-src/pure.lexicals.git' for remote(s)
+#|	From https://github.com/pure-symbols/pure.lexicals
+#|	:: pulling all remotes in 'pure.yph-src/pure.lexicals.git/' ::
+#|	Fetching gh
+#|	working: pull from remote 'cb' for 'pure.lexicals.git'
+#|	   1ed7fc7..d09ba1d  main       -> gh/main
+#|	From https://codeberg.org/pure-symbols/pure.lexicals
+#|	Fetching dr
+#|	
+#|	base_up: updated in 'pure.yph-src/pure.lexicals.git/'
+#|	repochk: `/e/repos/.syncing/pure.yph-src/pure.lexicals.git` is bare repository ~ true
+#|	working: pull from remote 'dr' for 'pure.lexicals.git'
+#|	POST git-upload-pack (165 bytes)
+#|	From https://git.disroot.org/pure.symbols/pure.lexicals
+#|	 = [up to date]      main       -> main
+#|	
+#|	 = [up to date]      main       -> cb/main
+#|	repochk: `/e/repos/.syncing/pure.yph-src/pure.lexicals.git` is bare repository ~ true
+#|	working: pull from remote 'gh' for 'pure.lexicals.git'
+#|	POST git-upload-pack (165 bytes)
+#|	From https://github.com/pure-symbols/pure.lexicals
+#|	 = [up to date]      main       -> main
+#|	
+#|	 = [up to date]      main       -> dr/main
+#|	 = [up to date]      main       -> gh/mainrepochk: `/e/repos/.syncing/pure.yph-src/pure.lexicals.git` is bare repository ~ true
+#|	repochk: `/e/repos/.syncing/pure.yph-src/pure.lexicals.git` is bare repository ~ true
+#|	POST git-upload-pack (165 bytes)
+#|	POST git-upload-pack (165 bytes)
+#|	
+#|	   1ed7fc7..d09ba1d  main       -> main
+#|	 = [up to date]      main       -> main
+#|	
+#|	:: pulled all remotes in 'pure.yph-src/pure.lexicals.git/' :::: pushing origin to all remotes in: pure.yph-src/pure.lexicals.git/ ::
+#|	working: pull from remote 'origin' for 'pure.lexicals.git'
+#|	repochk: `/e/repos/.syncing/pure.yph-src/pure.lexicals.git` is inside gitdir ~ true
+#|	From https://github.com/pure-symbols/pure.lexicals
+#|	base_up: update from remote for 'pure.yph-src/pure.lexicals.git/'
+#|	
+#|	:: executing: remote update ::
+#|	
+#|	From https://github.com/pure-symbols/pure.lexicals
+#|	repochk: `/e/repos/.syncing/pure.yph-src/pure.lexicals.git` is inside worktree ~ false
+#|	Fetching gh
+#|	repochk: `/e/repos/.syncing/pure.yph-src/pure.lexicals.git` is bare repository ~ true
+#|	Fetching dr
+#|	repochk: `/e/repos/.syncing/pure.yph-src/pure.lexicals.git` is bare repository ~ true
+#|	base_up: updated in 'pure.yph-src/pure.lexicals.git/'
+#|	Fetching origin
+#|	repochk: `/e/repos/.syncing/pure.yph-src/pure.lexicals.git` is bare repository ~ true
+#|	 * branch            HEAD       -> FETCH_HEAD
+#|	Pushing to https://codeberg.org/pure-symbols/pure.lexicals.git
+#|	Fetching cb
+#|	Counting objects: 100% (20/20), done.
+#|	upper: updated in '.../pure.yph-src/pure.lexicals.git' for remote(s)
+#|	Compressing objects: 100% (14/14), done.
+#|	:: pushing all remotes in 'pure.yph-src/pure.lexicals.git/' ::
+#|	Total 14 (delta 10), reused 0 (delta 0), pack-reused 0 (from 0)
+#|	working: push to remote 'cb' for 'pure.lexicals.git'
+#|	To https://codeberg.org/pure-symbols/pure.lexicals.git
+#|	Enumerating objects: 20, done.
+#|	
+#|	Delta compression using up to 16 threads
+#|	Writing objects: 100% (14/14), 7.73 KiB | 344.00 KiB/s, done.
+#|	working: push to remote 'dr' for 'pure.lexicals.git'
+#|	POST git-receive-pack (8097 bytes)
+#|	Enumerating objects: 20, done.
+#|	   1ed7fc7..d09ba1d  main -> main
+#|	Delta compression using up to 16 threads
+#|	updating local tracking ref 'refs/remotes/cb/main'
+#|	Writing objects: 100% (14/14), 7.73 KiB | 316.00 KiB/s, done.
+#|	repochk: `/e/repos/.syncing/pure.yph-src/pure.lexicals.git` is bare repository ~ true
+#|	POST git-receive-pack (8097 bytes)
+#|	Pushing to https://git.disroot.org/pure.symbols/pure.lexicals.git
+#|	To https://git.disroot.org/pure.symbols/pure.lexicals.git
+#|	Counting objects: 100% (20/20), done.
+#|	
+#|	Compressing objects: 100% (14/14), done.
+#|	updating local tracking ref 'refs/remotes/dr/main'repochk: `/e/repos/.syncing/pure.yph-src/pure.lexicals.git` is bare repository ~ true
+#|	Total 14 (delta 10), reused 0 (delta 0), pack-reused 0 (from 0)
+#|	Pushing to https://github.com/pure-symbols/pure.lexicals.git
+#|	remote: Checking connectivity: 14, done.
+#|	 = [up to date]      main -> main
+#|	   1ed7fc7..d09ba1d  main -> main
+#|	
+#|	
+#|	working: push to remote 'gh' for 'pure.lexicals.git'
+#|	working: push to remote 'origin' for 'pure.lexicals.git'
+#|	To https://github.com/pure-symbols/pure.lexicals.git
+#|	To https://github.com/pure-symbols/pure.lexicals.git
+#|	updating local tracking ref 'refs/remotes/gh/main'
+#|	
+#|	Everything up-to-date
+#|	Everything up-to-date
+#|	repochk: `/e/repos/.syncing/pure.yph-src/pure.lexicals.git` is bare repository ~ true
+#|	Pushing to https://github.com/pure-symbols/pure.lexicals.git
+#|	repochk: `/e/repos/.syncing/sh3rr.sh-src/sh3rr.git` is inside worktree ~ false
+#|	 = [up to date]      main -> main
+#|	repochk: `/e/repos/.syncing/sh3rr.sh-src/sh3rr.git` is bare repository ~ true
+#|	
+#|	repochk: `/e/repos/.syncing/sh3rr.sh-src/sh3rr.git` is bare repository ~ true
+#|	:: pushed all remotes in 'pure.yph-src/pure.lexicals.git/' ::
+#|	Fetching origin
+#|	:: pulling from origin and all remotes in: sh3rr.sh-src/sh3rr.git/ ::
+#|	error: could not fetch origin
+#|	repochk: `/e/repos/.syncing/sh3rr.sh-src/sh3rr.git` is inside gitdir ~ true
+#|	fatal: unable to access 'https://github.com/yhm-amber/sh3rr.git/': Recv failure: Connection was reset
+#|	base_up: update from remote for 'sh3rr.sh-src/sh3rr.git/'
+#|	Fetching cb
+#|	:: executing: remote update ::
+#|	tried: 1 for remote update
+#|	fatal: unable to access 'https://github.com/yhm-amber/sh3rr.git/': SSL/TLS connection timeout
+#|	fatal: unable to access 'https://github.com/yhm-amber/sh3rr.git/': Recv failure: Connection was reset
+#|	Fetching gh
+#|	Fetching gh
+#|	error: could not fetch gh
+#|	error: could not fetch gh
+#|	Fetching dr
+#|	Fetching dr
+#|	Fetching origin
+#|	Fetching origin
+#|	error: could not fetch origin
+#|	 * branch            HEAD       -> FETCH_HEAD
+#|	fatal: unable to access 'https://github.com/yhm-amber/sh3rr.git/': SSL/TLS connection timeout
+#|	Fetching cb
+#|	Fetching cb
+#|	upper: updated in '.../sh3rr.sh-src/sh3rr.git' for remote(s)
+#|	tried: 2 for remote update
+#|	:: pulling all remotes in 'sh3rr.sh-src/sh3rr.git/' ::
+#|	From https://github.com/yhm-amber/sh3rr
+#|	working: pull from remote 'cb' for 'sh3rr.git'
+#|	Fetching gh
+#|	From https://codeberg.org/yhm-ypa/sh3rr
+#|	Fetching dr
+#|	
+#|	base_up: updated in 'sh3rr.sh-src/sh3rr.git/'
+#|	repochk: `/e/repos/.syncing/sh3rr.sh-src/sh3rr.git` is bare repository ~ true
+#|	working: pull from remote 'dr' for 'sh3rr.git'
+#|	POST git-upload-pack (165 bytes)
+#|	From https://git.disroot.org/ypayhm/sh3rr
+#|	 = [up to date]      main       -> main
+#|	
+#|	 = [up to date]      main       -> cb/main
+#|	repochk: `/e/repos/.syncing/sh3rr.sh-src/sh3rr.git` is bare repository ~ true
+#|	working: pull from remote 'gh' for 'sh3rr.git'
+#|	POST git-upload-pack (165 bytes)
+#|	From https://github.com/yhm-amber/sh3rr
+#|	 = [up to date]      main       -> main
+#|	
+#|	 = [up to date]      main       -> dr/main
+#|	 = [up to date]      main       -> gh/mainrepochk: `/e/repos/.syncing/sh3rr.sh-src/sh3rr.git` is bare repository ~ true
+#|	repochk: `/e/repos/.syncing/sh3rr.sh-src/sh3rr.git` is bare repository ~ true
+#|	POST git-upload-pack (165 bytes)
+#|	POST git-upload-pack (165 bytes)
+#|	
+#|	 = [up to date]      main       -> main
+#|	 = [up to date]      main       -> main
+#|	
+#|	working: pull from remote 'origin' for 'sh3rr.git'
+#|	repochk: `/e/repos/.syncing/sh3rr.sh-src/sh3rr.git` is inside worktree ~ false
+#|	From https://github.com/yhm-amber/sh3rr
+#|	repochk: `/e/repos/.syncing/sh3rr.sh-src/sh3rr.git` is bare repository ~ true
+#|	
+#|	repochk: `/e/repos/.syncing/sh3rr.sh-src/sh3rr.git` is bare repository ~ true
+#|	:: pulled all remotes in 'sh3rr.sh-src/sh3rr.git/' ::
+#|	Fetching origin
+#|	:: pushing origin to all remotes in: sh3rr.sh-src/sh3rr.git/ ::
+#|	error: could not fetch origin
+#|	repochk: `/e/repos/.syncing/sh3rr.sh-src/sh3rr.git` is inside gitdir ~ true
+#|	Fetching cb
+#|	base_up: update from remote for 'sh3rr.sh-src/sh3rr.git/'
+#|	tried: 1 for remote update
+#|	:: executing: remote update ::
+#|	From https://github.com/yhm-amber/sh3rr
+#|	fatal: unable to access 'https://github.com/yhm-amber/sh3rr.git/': Failed to connect to github.com port 443 after 25134 ms: Could not connect to server
+#|	Fetching gh
+#|	Fetching gh
+#|	Fetching dr
+#|	Fetching dr
+#|	base_up: updated in 'sh3rr.sh-src/sh3rr.git/'
+#|	Fetching origin
+#|	repochk: `/e/repos/.syncing/sh3rr.sh-src/sh3rr.git` is bare repository ~ true
+#|	 * branch            HEAD       -> FETCH_HEAD
+#|	Pushing to https://codeberg.org/yhm-ypa/sh3rr.git
+#|	Fetching cb
+#|	 = [up to date]      main -> main
+#|	upper: updated in '.../sh3rr.sh-src/sh3rr.git' for remote(s)
+#|	
+#|	:: pushing all remotes in 'sh3rr.sh-src/sh3rr.git/' ::
+#|	Everything up-to-daterepochk: `/e/repos/.syncing/sh3rr.sh-src/sh3rr.git` is bare repository ~ true
+#|	working: push to remote 'cb' for 'sh3rr.git'
+#|	Pushing to https://git.disroot.org/ypayhm/sh3rr.git
+#|	To https://codeberg.org/yhm-ypa/sh3rr.git
+#|	 = [up to date]      main -> main
+#|	updating local tracking ref 'refs/remotes/cb/main'
+#|	
+#|	
+#|	Everything up-to-daterepochk: `/e/repos/.syncing/sh3rr.sh-src/sh3rr.git` is bare repository ~ true
+#|	working: push to remote 'dr' for 'sh3rr.git'
+#|	Pushing to https://github.com/yhm-amber/sh3rr.git
+#|	To https://git.disroot.org/ypayhm/sh3rr.git
+#|	 = [up to date]      main -> main
+#|	updating local tracking ref 'refs/remotes/dr/main'
+#|	
+#|	
+#|	working: push to remote 'gh' for 'sh3rr.git'
+#|	working: push to remote 'origin' for 'sh3rr.git'
+#|	To https://github.com/yhm-amber/sh3rr.git
+#|	To https://github.com/yhm-amber/sh3rr.git
+#|	updating local tracking ref 'refs/remotes/gh/main'
+#|	
+#|	Everything up-to-date
+#|	Everything up-to-date
+#|	repochk: `/e/repos/.syncing/sh3rr.sh-src/sh3rr.git` is bare repository ~ true
+#|	Pushing to https://github.com/yhm-amber/sh3rr.git
+#|	repochk: `/e/repos/.syncing/yph.m-grp/yhm-amber.git` is inside worktree ~ false
+#|	 = [up to date]      main -> main
+#|	repochk: `/e/repos/.syncing/yph.m-grp/yhm-amber.git` is bare repository ~ true
+#|	
+#|	repochk: `/e/repos/.syncing/yph.m-grp/yhm-amber.git` is bare repository ~ true
+#|	:: pushed all remotes in 'sh3rr.sh-src/sh3rr.git/' ::
+#|	Fetching origin
+#|	:: pulling from origin and all remotes in: yph.m-grp/yhm-amber.git/ ::
+#|	 * branch            HEAD       -> FETCH_HEAD
+#|	repochk: `/e/repos/.syncing/yph.m-grp/yhm-amber.git` is inside gitdir ~ true
+#|	Fetching cb
+#|	base_up: update from remote for 'yph.m-grp/yhm-amber.git/'
+#|	upper: updated in '.../yph.m-grp/yhm-amber.git' for remote(s)
+#|	:: executing: remote update ::
+#|	:: pulling all remotes in 'yph.m-grp/yhm-amber.git/' ::
+#|	From https://github.com/yhm-amber/yhm-amber
+#|	working: pull from remote 'cb' for 'yhm-amber.git'
+#|	Fetching gh
+#|	From https://codeberg.org/yhm-ypa/yhm-ypa
+#|	Fetching dr
+#|	
+#|	base_up: updated in 'yph.m-grp/yhm-amber.git/'
+#|	repochk: `/e/repos/.syncing/yph.m-grp/yhm-amber.git` is bare repository ~ true
+#|	working: pull from remote 'dr' for 'yhm-amber.git'
+#|	POST git-upload-pack (165 bytes)
+#|	From https://git.disroot.org/ypayhm/ypayhm
+#|	 = [up to date]      main       -> main
+#|	
+#|	 = [up to date]      main       -> cb/main
+#|	repochk: `/e/repos/.syncing/yph.m-grp/yhm-amber.git` is bare repository ~ true
+#|	working: pull from remote 'gh' for 'yhm-amber.git'
+#|	POST git-upload-pack (165 bytes)
+#|	From https://github.com/yhm-amber/yhm-amber
+#|	 = [up to date]      main       -> main
+#|	
+#|	 = [up to date]      main       -> dr/main
+#|	 = [up to date]      main       -> gh/mainrepochk: `/e/repos/.syncing/yph.m-grp/yhm-amber.git` is bare repository ~ true
+#|	repochk: `/e/repos/.syncing/yph.m-grp/yhm-amber.git` is bare repository ~ true
+#|	POST git-upload-pack (165 bytes)
+#|	POST git-upload-pack (165 bytes)
+#|	
+#|	 = [up to date]      main       -> main
+#|	 = [up to date]      main       -> main
+#|	
+#|	:: pulled all remotes in 'yph.m-grp/yhm-amber.git/' :::: pushing origin to all remotes in: yph.m-grp/yhm-amber.git/ ::
+#|	working: pull from remote 'origin' for 'yhm-amber.git'
+#|	repochk: `/e/repos/.syncing/yph.m-grp/yhm-amber.git` is inside gitdir ~ true
+#|	From https://github.com/yhm-amber/yhm-amber
+#|	base_up: update from remote for 'yph.m-grp/yhm-amber.git/'
+#|	
+#|	:: executing: remote update ::
+#|	
+#|	From https://github.com/yhm-amber/yhm-amber
+#|	repochk: `/e/repos/.syncing/yph.m-grp/yhm-amber.git` is inside worktree ~ false
+#|	Fetching gh
+#|	repochk: `/e/repos/.syncing/yph.m-grp/yhm-amber.git` is bare repository ~ true
+#|	Fetching dr
+#|	repochk: `/e/repos/.syncing/yph.m-grp/yhm-amber.git` is bare repository ~ true
+#|	base_up: updated in 'yph.m-grp/yhm-amber.git/'
+#|	Fetching origin
+#|	repochk: `/e/repos/.syncing/yph.m-grp/yhm-amber.git` is bare repository ~ true
+#|	 * branch            HEAD       -> FETCH_HEAD
+#|	Pushing to https://codeberg.org/yhm-ypa/yhm-ypa.git
+#|	Fetching cb
+#|	 = [up to date]      main -> main
+#|	upper: updated in '.../yph.m-grp/yhm-amber.git' for remote(s)
+#|	
+#|	:: pushing all remotes in 'yph.m-grp/yhm-amber.git/' ::
+#|	Everything up-to-daterepochk: `/e/repos/.syncing/yph.m-grp/yhm-amber.git` is bare repository ~ true
+#|	working: push to remote 'cb' for 'yhm-amber.git'
+#|	Pushing to https://git.disroot.org/ypayhm/ypayhm.git
+#|	To https://codeberg.org/yhm-ypa/yhm-ypa.git
+#|	 = [up to date]      main -> main
+#|	updating local tracking ref 'refs/remotes/cb/main'
+#|	
+#|	
+#|	Everything up-to-daterepochk: `/e/repos/.syncing/yph.m-grp/yhm-amber.git` is bare repository ~ true
+#|	working: push to remote 'dr' for 'yhm-amber.git'
+#|	Pushing to https://github.com/yhm-amber/yhm-amber.git
+#|	To https://git.disroot.org/ypayhm/ypayhm.git
+#|	::: chking: verificing the necessity of remote 'gh' for *pushing* works.
+#|	updating local tracking ref 'refs/remotes/dr/main'
+#|	fatal: unable to access 'https://github.com/yhm-amber/yhm-amber.git/': Failed to connect to github.com port 443 after 22416 ms: Could not connect to server
+#|	
+#|	fatal: unable to access 'https://github.com/yhm-amber/yhm-amber.git/': Recv failure: Connection was reset
+#|	working: push to remote 'gh' for 'yhm-amber.git'
+#|	fatal: unable to access 'https://github.com/yhm-amber/yhm-amber.git/': Recv failure: Connection was reset
+#|	fatal: unable to access 'https://github.com/yhm-amber/yhm-amber.git/': Recv failure: Connection was reset
+#|	fatal: unable to access 'https://github.com/yhm-amber/yhm-amber.git/': Failed to connect to github.com port 443 after 21383 ms: Could not connect to server
+#|	existed: 'gh' https://github.com/yhm-amber/yhm-amber.git
+#|	fatal: unable to access 'https://github.com/yhm-amber/yhm-amber.git/': Failed to connect to github.com port 443 after 21423 ms: Could not connect to server
+#|	fail: 1 retried ls remote 'gh'
+#|	fatal: unable to access 'https://github.com/yhm-amber/yhm-amber.git/': Failed to connect to github.com port 443 after 21331 ms: Could not connect to server
+#|	fail: 2 retried ls remote 'gh'
+#|	fatal: unable to access 'https://github.com/yhm-amber/yhm-amber.git/': Failed to connect to github.com port 443 after 21332 ms: Could not connect to server
+#|	fail: 3 retried ls remote 'gh'
+#|	
+#|	fail: 4 retried ls remote 'gh'
+#|	chking: 	_rmt: gh	ref_path: refs/heads/main	hash_remote: 9a45653d41cdb21bd95f40f57ef96f7aa2b20873	hash_local: 9a45653d41cdb21bd95f40f57ef96f7aa2b20873repochk: `/e/repos/.syncing/yph.m-grp/yhm-amber.git` is bare repository ~ true
+#|	fail: 5 retried ls remote 'gh'
+#|	Pushing to https://github.com/yhm-amber/yhm-amber.git
+#|	fail: 6 retried ls remote 'gh'
+#|	::: chking: verificing the necessity of remote 'origin' for *pushing* works.
+#|	fail: 7 retried ls remote 'gh'
+#|	fatal: unable to access 'https://github.com/yhm-amber/yhm-amber.git/': Failed to connect to github.com port 443 after 21345 ms: Could not connect to server
+#|	
+#|	
+#|	working: push to remote 'origin' for 'yhm-amber.git'
+#|	chking: 	_rmt: origin	ref_path: refs/heads/main	hash_remote: 9a45653d41cdb21bd95f40f57ef96f7aa2b20873	hash_local: 9a45653d41cdb21bd95f40f57ef96f7aa2b20873
+#|	fatal: unable to access 'https://github.com/yhm-amber/yhm-amber.git/': Failed to connect to github.com port 443 after 21395 ms: Could not connect to server
+#|	existed: 'origin' https://github.com/yhm-amber/yhm-amber.git
+#|	fail: 1 retried ls remote 'origin'
+#|	
+#|	:: pushed all remotes in 'yph.m-grp/yhm-amber.git/' ::
+#|	
+~~~
+
+##### Summary
+
+~~~ sh
+#: clone
+cd -- /mnt/.repo-syncs
+ASKING_MAXTRY=9999 OPTS_CLONE=--bare git-deck cp m . \
+	mabin.ls-src/mabynogion.spells.git:https://github.com/pure-symbols/mabynogion.spells.git \
+	pure.yph-src/pure.lexicals.git:https://github.com/pure-symbols/pure.lexicals.git \
+	pure.symb-grp/pure-symbols.git:https://github.com/pure-symbols/.github.git \
+	contain.note-src/container-note.git:https://github.com/yhm-amber/container-note.git \
+	lang.note-src/lang-note.git:https://github.com/yhm-amber/lang-note.git \
+	sh3rr.sh-src/sh3rr.git:https://github.com/yhm-amber/sh3rr.git \
+	yph.m-grp/yhm-amber.git:https://github.com/yhm-amber/yhm-amber.git
+
+#: remotes
+git-deck sp rmts a mabin.ls-src/mabynogion.spells.git \
+	gh:https://github.com/pure-symbols/mabynogion.spells.git \
+	cb:https://codeberg.org/pure-symbols/mabynogion.spells.git \
+	dr:https://git.disroot.org/pure.symbols/mabynogion.spells.git
+git-deck sp rmts a pure.yph-src/pure.lexicals.git \
+	gh:https://github.com/pure-symbols/pure.lexicals.git \
+	cb:https://codeberg.org/pure-symbols/pure.lexicals.git \
+	dr:https://git.disroot.org/pure.symbols/pure.lexicals.git
+git-deck sp rmts a pure.symb-grp/pure-symbols.git \
+	gh:https://github.com/pure-symbols/.github.git \
+	cb:https://codeberg.org/pure-symbols/pure.symbols.git \
+	dr:https://git.disroot.org/pure.symbols/pure.symbols.git
+git-deck sp rmts a contain.note-src/container-note.git \
+	gh:https://github.com/yhm-amber/container-note.git \
+	cb:https://codeberg.org/yhm-ypa/container-note.git \
+	dr:https://git.disroot.org/ypayhm/container-note.git
+git-deck sp rmts a lang.note-src/lang-note.git \
+	gh:https://github.com/yhm-amber/lang-note.git \
+	cb:https://codeberg.org/yhm-ypa/lang-note.git \
+	dr:https://git.disroot.org/ypayhm/lang-note.git
+git-deck sp rmts a sh3rr.sh-src/sh3rr.git \
+	gh:https://github.com/yhm-amber/sh3rr.git \
+	cb:https://codeberg.org/yhm-ypa/sh3rr.git \
+	dr:https://git.disroot.org/ypayhm/sh3rr.git
+git-deck sp rmts a yph.m-grp/yhm-amber.git \
+	gh:https://github.com/yhm-amber/yhm-amber.git \
+	cb:https://codeberg.org/yhm-ypa/yhm-ypa.git \
+	dr:https://git.disroot.org/ypayhm/ypayhm.git
+~~~
+
+~~~ sh
+#: daily
+ASKING_MAXTRY=9 git-deck sp all-sync *
+~~~
+
 #### `sp rmt nec deno`
 
 ~~~ sh
@@ -2723,5 +3667,4 @@ gd sp remote necessity verific origin push ; echo ~~~ $?
 #|	fatal: Not a valid commit name a9defb14509d984899c99b362d5720fcd752980d
 #|	~~~ 128
 ~~~
-
 
