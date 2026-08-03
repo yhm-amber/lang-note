@@ -1354,22 +1354,23 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 			: ) && 
 		
 		
-		#. flow mirrors https://github.com/chad/iroh-drop.git iroh-drop.chad.iroh-src 20260801 tree:main tags:v0.1.3
-		#. eval "$(gd flow m a https://github.com/chad/iroh-drop.git iroh-drop.chad.iroh-src 20260801 tree:main tags:v0.1.3)"
-		#. eval "$(gd flow m a https://github.com/n0-computer/noq.git noq.quic-rs.n0computer-src 20260730 tree:main tags:noq-v1.1.0)"
-		#. eval "$(gd flow m a https://github.com/n0-computer/sendme.git sendme.iroh-filesend.n0computer-src 20260725 tree:main tags:v0.36.0)"
-		#. eval "$(gd flow m h https://github.com/n0-computer/dumbpipe.git dumbpipe.iroh-pipe.n0computer-srcs/cli _ tree:main tags:v0.39.0)"
-		#. eval "$(gd flow m h https://github.com/n0-computer/dumbpipe.dev.git dumbpipe.iroh-pipe.n0computer-srcs/web _ tree:main)"
+		#: gd flow mirrors <all|home|ende> <repo-link> <path-into> <lastup-date> [<tree:|tags:> ...]
+		#. gd flow mirrors all https://github.com/chad/iroh-drop.git iroh-drop.chad.iroh-src 20260801 tree:main tags:v0.1.3
+		#. ASKING_MAXTRY=11 eval "$(gd flow m a https://github.com/chad/iroh-drop.git iroh-drop.chad.iroh-src 20260801 tree:main tags:v0.1.3)"
+		#. ASKING_MAXTRY=11 eval "$(gd flow m a https://github.com/n0-computer/noq.git noq.quic-rs.n0computer-src 20260730 tree:main tags:noq-v1.1.0)"
+		#. ASKING_MAXTRY=11 eval "$(gd flow m a https://github.com/n0-computer/sendme.git sendme.iroh-filesend.n0computer-src 20260725 tree:main tags:v0.36.0)"
+		#. ASKING_MAXTRY=9 eval "$(gd flow m h https://github.com/n0-computer/dumbpipe.git dumbpipe.iroh-pipe.n0computer-srcs/cli _ tree:main tags:v0.39.0)"
+		#. ASKING_MAXTRY=9 eval "$(gd flow m h https://github.com/n0-computer/dumbpipe.dev.git dumbpipe.iroh-pipe.n0computer-srcs/web _ tree:main)"
 		#. eval "$(gd flow m e _ dumbpipe.iroh-pipe.n0computer-srcs 20260720)"
-		#. eval "$(gd flow m a https://github.com/n0-computer/pigeons.git pigeons.iroh-ssh.n0computer-src 20260803 tree:main tags:v0.2.1)"
-		#. eval "$(gd flow m a https://github.com/n0-computer/n0-mainline.git n0mainline.dht-iroh.n0computer-lib 20260803 tree:main tags:v0.6.0)"
-		#. eval "$(gd flow m h https://github.com/n0-computer/iroh.git iroh.quic-traversal.n0computer-srcs/main _ tree:main tags:v1.0.3)"
-		#. eval "$(gd flow m h https://github.com/n0-computer/iroh.computer.git iroh.quic-traversal.n0computer-srcs/site _ tree:main)"
-		#. eval "$(gd flow m h https://github.com/n0-computer/docs.iroh.computer.git iroh.quic-traversal.n0computer-srcs/docs _ tree:main)"
-		#. eval "$(gd flow m h https://github.com/n0-computer/iroh-examples.git iroh.quic-traversal.n0computer-srcs/examples _ tree:main)"
-		#. eval "$(gd flow m h https://github.com/n0-computer/n0-dns-resolver.git iroh.quic-traversal.n0computer-srcs/dns _ tree:main)"
-		#. eval "$(gd flow m h https://github.com/n0-computer/iroh-ping.git iroh.quic-traversal.n0computer-srcs/qs _ tree:main tags:v1.0.0)"
-		#. eval "$(gd flow m h https://github.com/n0-computer/net-tools.git iroh.quic-traversal.n0computer-srcs/netif _ tree:main tags:netwatch-v0.19.1 tags:portmapper-v0.19.1)"
+		#. ASKING_MAXTRY=11 eval "$(gd flow m a https://github.com/n0-computer/pigeons.git pigeons.iroh-ssh.n0computer-src 20260803 tree:main tags:v0.2.1)"
+		#. ASKING_MAXTRY=11 eval "$(gd flow m a https://github.com/n0-computer/n0-mainline.git n0mainline.dht-iroh.n0computer-lib 20260803 tree:main tags:v0.6.0)"
+		#. ASKING_MAXTRY=9 eval "$(gd flow m h https://github.com/n0-computer/iroh.git iroh.quic-traversal.n0computer-srcs/main _ tree:main tags:v1.0.3)"
+		#. ASKING_MAXTRY=9 eval "$(gd flow m h https://github.com/n0-computer/iroh.computer.git iroh.quic-traversal.n0computer-srcs/site _ tree:main)"
+		#. ASKING_MAXTRY=9 eval "$(gd flow m h https://github.com/n0-computer/docs.iroh.computer.git iroh.quic-traversal.n0computer-srcs/docs _ tree:main)"
+		#. ASKING_MAXTRY=9 eval "$(gd flow m h https://github.com/n0-computer/iroh-examples.git iroh.quic-traversal.n0computer-srcs/examples _ tree:main)"
+		#. ASKING_MAXTRY=9 eval "$(gd flow m h https://github.com/n0-computer/n0-dns-resolver.git iroh.quic-traversal.n0computer-srcs/dns _ tree:main)"
+		#. ASKING_MAXTRY=9 eval "$(gd flow m h https://github.com/n0-computer/iroh-ping.git iroh.quic-traversal.n0computer-srcs/qs _ tree:main tags:v1.0.0)"
+		#. ASKING_MAXTRY=9 eval "$(gd flow m h https://github.com/n0-computer/net-tools.git iroh.quic-traversal.n0computer-srcs/netif _ tree:main tags:netwatch-v0.19.1 tags:portmapper-v0.19.1)"
 		#. eval "$(gd flow m e _ iroh.quic-traversal.n0computer-srcs 20260731)"
 		alias m=mirrors mirrors=mirror_codes && mirror_codes () 
 		(
@@ -1378,7 +1379,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 			
 			{ REPO_LINK="$1" && shift ; } && 
 			{ PATH_INTO="$1" && shift ; } && 
-			{ LAST_UPDATE="$1" && shift ; } && 
+			{ LASTUP_DATE="$1" && shift ; } && 
 			
 			codes_home () 
 			(
@@ -1387,7 +1388,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 				: ) && 
 			codes_ende () 
 			(
-				echo 'din . 	'"txzb3 ${PATH_INTO} ${LAST_UPDATE}"' && '"$*" && 
+				echo 'din . 	'"txzb3 ${PATH_INTO} ${LASTUP_DATE}"' && '"$*" && 
 				: ) && 
 			
 			case "${WORKING_TYPE}" 
