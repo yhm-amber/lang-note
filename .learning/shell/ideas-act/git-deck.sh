@@ -1372,6 +1372,9 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 		#. ASKING_MAXTRY=9 eval "$(gd flow m h https://github.com/n0-computer/iroh-ping.git iroh.quic-traversal.n0computer-srcs/qs _ tree:main tags:v1.0.0)"
 		#. ASKING_MAXTRY=9 eval "$(gd flow m h https://github.com/n0-computer/net-tools.git iroh.quic-traversal.n0computer-srcs/netif _ tree:main tags:netwatch-v0.19.1 tags:portmapper-v0.19.1)"
 		#. eval "$(gd flow m e _ iroh.quic-traversal.n0computer-srcs 20260731)"
+		#. ASKING_MAXTRY=6 eval "$(gd flow m h https://github.com/OrcaSlicer/OrcaSlicer.git orcaslicer.gcode-gener.3dprinter-slicing.slic3r-srcs/main _ tree:main tags:v2.4.2)"
+		#. ASKING_MAXTRY=6 eval "$(gd flow m h https://github.com/OrcaSlicer/OrcaSlicer_WIKI.git orcaslicer.gcode-gener.3dprinter-slicing.slic3r-srcs/wiki _ tree:main)"
+		#. eval "$(gd flow m e _ orcaslicer.gcode-gener.3dprinter-slicing.slic3r-srcs 20260803)"
 		alias m=mirrors mirrors=mirror_codes && mirror_codes () 
 		(
 			tool_codes '&&' && 
