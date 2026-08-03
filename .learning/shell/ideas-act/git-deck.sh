@@ -434,7 +434,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 		(
 			{ cd "${1:-.}" && shift 1 ; } && 
 			git rev-parse --is-inside-git-dir | 
-				tee >( "${__SHOW_HINTS__}" && 1>&2 _cmnd_tools _std_exec once echo repochk: "\`$PWD\`" 'is inside gitdir ~' ) | 
+				tee >( "${__SHOW_HINTS__}" && 1>&2 _cmnd_tools _std_exec once echo repochk: "\`$(pwd)\`" 'is inside gitdir ~' ) | 
 				_cmnd_tools _std_exec once "$@" && 
 			: ) && 
 		
@@ -442,7 +442,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 		(
 			{ cd "${1:-.}" && shift 1 ; } && 
 			git rev-parse --is-inside-work-tree | 
-				tee >( "${__SHOW_HINTS__}" && 1>&2 _cmnd_tools _std_exec once echo repochk: "\`$PWD\`" 'is inside worktree ~' ) | 
+				tee >( "${__SHOW_HINTS__}" && 1>&2 _cmnd_tools _std_exec once echo repochk: "\`$(pwd)\`" 'is inside worktree ~' ) | 
 				_cmnd_tools _std_exec once "$@" && 
 			: ) && 
 		
@@ -450,7 +450,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 		(
 			{ cd "${1:-.}" && shift 1 ; } && 
 			git rev-parse --is-bare-repository | 
-				tee >( "${__SHOW_HINTS__}" && 1>&2 _cmnd_tools _std_exec once echo repochk: "\`$PWD\`" 'is bare repository ~' ) | 
+				tee >( "${__SHOW_HINTS__}" && 1>&2 _cmnd_tools _std_exec once echo repochk: "\`$(pwd)\`" 'is bare repository ~' ) | 
 				_cmnd_tools _std_exec once "$@" && 
 			: ) && 
 		
@@ -458,7 +458,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 		(
 			{ cd "${1:-.}" && shift 1 ; } && 
 			git rev-parse --is-shallow-repository | 
-				tee >( "${__SHOW_HINTS__}" && 1>&2 _cmnd_tools _std_exec once echo repochk: "\`$PWD\`" 'is shallow repository ~' ) | 
+				tee >( "${__SHOW_HINTS__}" && 1>&2 _cmnd_tools _std_exec once echo repochk: "\`$(pwd)\`" 'is shallow repository ~' ) | 
 				_cmnd_tools _std_exec once "$@" && 
 			: ) && 
 		
@@ -501,7 +501,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 			cd "${WORKING_PATH:-.}" && 
 			while IFS=: read -r -- landing_path remote_link ;
 			do 
-				echo :: executing: '`'.decks cp auto-clone ${OPTS_CLONE} -- "'${remote_link}'" ${landing_path}'`' at "'${PWD}'" :: && 
+				echo :: executing: '`'.decks cp auto-clone ${OPTS_CLONE} -- "'${remote_link}'" ${landing_path}'`' at "'$(pwd)'" :: && 
 				auto_clone ${OPTS_CLONE} -- "${remote_link}" ${landing_path} && 
 				:; 
 			done && 
@@ -558,16 +558,16 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 				while read -r -- out_dir ;
 				do 
 				(
-					echo :: change workdir to "\`${out_dir}\`" from "\`$PWD\`" to unshallow fetch :: && 
+					echo :: change workdir to "\`${out_dir}\`" from "\`$(pwd)\`" to unshallow fetch :: && 
 					cd "${out_dir}" && 
 					(
-						echo :: unshallowing in "\`$PWD\`" :: && 
+						echo :: unshallowing in "\`$(pwd)\`" :: && 
 						repo_chk shallow . && 
 						while ! ( git fetch --unshallow --all && : ) ;
 						do 1>&2 echo tried: "$((++try_unshallow))" for unshallow && :; done && 
 						: ) && 
 					(
-						echo :: updating in "\`$PWD\`" :: && 
+						echo :: updating in "\`$(pwd)\`" :: && 
 						SHOW_MORE_HINTS=y sync_play base_upgrade . && 
 						# while ! ( git remote update && : ) ;
 						# do 1>&2 echo tried: "$((++try_update))" for remote update && :; done && 
@@ -658,7 +658,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 			do 1>&2 echo tried: "$((++try_update))" for remote update && :; done && 
 			(
 				1>&2 echo upper: updated in "'.../$(
-					read -r -- pwd < <(echo "$PWD") && 
+					read -r -- pwd < <(echo "$(pwd)") && 
 					echo "$(dirname "$pwd" | xargs basename)/$(basename "$pwd")" && 
 					: )'" for remote'(s)' $@ && 
 				: ) && 
@@ -694,7 +694,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 			
 			_param_tools params_roll "$@" | while IFS=: read -r -- _type _name ;
 			do 
-				echo :: executing: '`'"CHOOSE_MODE='${CHOOSE_MODE:-Only}' .decks bp worktree ${__cmd_sub__} $_type $_name"'`' at "'${PWD}'" :: && 
+				echo :: executing: '`'"CHOOSE_MODE='${CHOOSE_MODE:-Only}' .decks bp worktree ${__cmd_sub__} $_type $_name"'`' at "'$(pwd)'" :: && 
 				CHOOSE_MODE="${CHOOSE_MODE:-Only}" worktree "${__cmd_sub__}" "$_type" "$_name" && 
 				:; 
 			done && 
@@ -862,7 +862,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 			
 			_param_tools params_roll "$@" | while IFS=: read -r -- a b ;
 			do 
-				echo :: executing: '`'"git remote ${__cmd_sub__} $OPTS_REMOTE -- ${a} ${b}"'`' at "'${PWD}'" :: && 
+				echo :: executing: '`'"git remote ${__cmd_sub__} $OPTS_REMOTE -- ${a} ${b}"'`' at "'$(pwd)'" :: && 
 				git remote "${__cmd_sub__}" $OPTS_REMOTE -- ${a} ${b} && 
 				:; 
 			done && 
@@ -1291,6 +1291,147 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 				:; 
 			done && 
 			echo && 
+			: ) && 
+		
+		: :: && 
+		
+		eval "$(subs frames codes_tail)" && 
+		
+		: :: && 
+		"$@" && 
+		: ) && 
+	
+	
+	flow_play__helper__ () 
+	(
+		echo && 
+		echo 'Just for some working-flow demo. You can eval them as you like, or just copy them.' && 
+		echo && 
+		: ) && 
+	alias flow=flow_play flow-play=flow_play && flow_play () 
+	(
+		eval "$(subs frames codes_head)" && 
+		
+		alias t=tools tools=tool_codes && tool_codes () 
+		(
+			echo '
+				Mcd () { mkdir -p -- "$1" && cd "$1" && :; } && 
+				Din () 
+				{ 
+					{ _dir="${1}" && shift ; } && 
+					{ Mcd "$_dir" && 1>&2 echo Dir now in: "'"'"'$(pwd)'"'"'" ... ; } && 
+					"$@" && 
+					:; 
+				} && 
+				din () ( Din "$@" ) && 
+				
+				_code_txz_params () 
+				(
+					echo '"'"'
+						_source_name="${1}" && 
+						_aim_name="${1}"-"${2:-00000000}" && 
+						_txz_ext="${3:-tar.xz}" && 
+						: '"'"' && 
+					: ) && 
+				txz () 
+				(
+					eval "$(_code_txz_params)" && 
+					tar -cf- -- "$_source_name" |
+						xz -9 -- - > "$_aim_name"."$_txz_ext" && 
+					: ) && 
+				txzb3 ()
+				(
+					txz "$@" && 
+					eval "$(_code_txz_params)" && 
+					b3sum -- "$_aim_name"."$_txz_ext" | while read -r -- _hash _tmp ;
+					do 
+						mv "$_tmp" "$_aim_name - b3_$_hash"."$_txz_ext" && 
+						:;
+					break ; done && 
+					b3sum -- "$_source_name"-*."$_txz_ext" && 
+					: ) && 
+				: '"$*" && 
+			: ) && 
+		
+		
+		#. flow mirrors https://github.com/chad/iroh-drop.git iroh-drop.chad.iroh-src 20260801 tree:main tags:v0.1.3
+		#. eval "$(gd flow m a https://github.com/chad/iroh-drop.git iroh-drop.chad.iroh-src 20260801 tree:main tags:v0.1.3)"
+		#. eval "$(gd flow m a https://github.com/n0-computer/noq.git noq.quic-rs.n0computer-src 20260730 tree:main tags:noq-v1.1.0)"
+		#. eval "$(gd flow m a https://github.com/n0-computer/sendme.git sendme.iroh-filesend.n0computer-src 20260725 tree:main tags:v0.36.0)"
+		#. eval "$(gd flow m h https://github.com/n0-computer/dumbpipe.git dumbpipe.iroh-pipe.n0computer-srcs/cli _ tree:main tags:v0.39.0)"
+		#. eval "$(gd flow m h https://github.com/n0-computer/dumbpipe.dev.git dumbpipe.iroh-pipe.n0computer-srcs/web _ tree:main)"
+		#. eval "$(gd flow m e _ dumbpipe.iroh-pipe.n0computer-srcs 20260720)"
+		#. eval "$(gd flow m a https://github.com/n0-computer/pigeons.git pigeons.iroh-ssh.n0computer-src 20260803 tree:main tags:v0.2.1)"
+		#. eval "$(gd flow m a https://github.com/n0-computer/n0-mainline.git n0mainline.dht-iroh.n0computer-lib 20260803 tree:main tags:v0.6.0)"
+		#. eval "$(gd flow m h https://github.com/n0-computer/iroh.git iroh.quic-traversal.n0computer-srcs/main _ tree:main tags:v1.0.3)"
+		#. eval "$(gd flow m h https://github.com/n0-computer/iroh.computer.git iroh.quic-traversal.n0computer-srcs/site _ tree:main)"
+		#. eval "$(gd flow m h https://github.com/n0-computer/docs.iroh.computer.git iroh.quic-traversal.n0computer-srcs/docs _ tree:main)"
+		#. eval "$(gd flow m h https://github.com/n0-computer/iroh-examples.git iroh.quic-traversal.n0computer-srcs/examples _ tree:main)"
+		#. eval "$(gd flow m h https://github.com/n0-computer/n0-dns-resolver.git iroh.quic-traversal.n0computer-srcs/dns _ tree:main)"
+		#. eval "$(gd flow m h https://github.com/n0-computer/iroh-ping.git iroh.quic-traversal.n0computer-srcs/qs _ tree:main tags:v1.0.0)"
+		#. eval "$(gd flow m h https://github.com/n0-computer/net-tools.git iroh.quic-traversal.n0computer-srcs/netif _ tree:main tags:netwatch-v0.19.1 tags:portmapper-v0.19.1)"
+		#. eval "$(gd flow m e _ iroh.quic-traversal.n0computer-srcs 20260731)"
+		alias m=mirrors mirrors=mirror_codes && mirror_codes () 
+		(
+			tool_codes '&&' && 
+			{ WORKING_TYPE="$1" && shift ; } && 
+			
+			{ REPO_LINK="$1" && shift ; } && 
+			{ PATH_INTO="$1" && shift ; } && 
+			{ LAST_UPDATE="$1" && shift ; } && 
+			
+			codes_home () 
+			(
+				echo 'din '"${PATH_INTO}"' 	'"git-deck cp a --mirror -- ${REPO_LINK}"' && ' && 
+				echo 'din '"${PATH_INTO}/$(basename "${REPO_LINK}")"' 	'"git-deck bp wts i $*"' && ' && 
+				: ) && 
+			codes_ende () 
+			(
+				echo 'din . 	'"txzb3 ${PATH_INTO} ${LAST_UPDATE}"' && '"$*" && 
+				: ) && 
+			
+			case "${WORKING_TYPE}" 
+			in 
+				(home|h) codes_home "$@" && echo : ;; 
+				(ende|e) codes_ende : ;; 
+				(a|all) codes_home "$@" && codes_ende : ;; 
+				(_) 1>&2 echo Unknown working type: "'${WORKING_TYPE}'", only '`'home/ende/all'`' supported. && return 16 ;;
+			esac && 
+			
+			: ) && 
+		
+		
+		#. flow syncs init /mnt/repos/.syncing/pure-symbols https://github.com/pure-symbols/mabynogion.spells.git gh:https://github.com/pure-symbols/mabynogion.spells.git cb:https://codeberg.org/pure-symbols/mabynogion.spells.git dr:https://git.disroot.org/pure.symbols/mabynogion.spells.git
+		#. flow syncs daily /mnt/repos/.syncing/pure-symbols
+		alias s=syncs syncs=sync_codes && sync_codes () 
+		(
+			tool_codes '&&' && 
+			{ WORKING_TYPE="$1" && shift ; } && 
+			{ WORKING_DIR="$1" && shift ; } && 
+			
+			codes_init () 
+			(
+				{ CLONE_LINK="$1" && shift ; } && 
+				echo ': clone repo && ' && 
+				echo 'din '"${WORKING_DIR}"' 	 '"git-deck cp a --bare -- ${CLONE_LINK}"' && ' && 
+				echo ': add remotes && ' && 
+				echo 'din '"${WORKING_DIR}"' 	 '"git-deck sp rmts a $(basename "${CLONE_LINK}")"' \' && 
+				for rmt_pair in "$@" ;
+				do echo $'\t' "$rmt_pair" '\' && :; done && 
+				echo '&& :' && 
+				: ) && 
+			codes_daily () 
+			(
+				echo 'din '"${WORKING_DIR}"' 	 git-deck sp all-sync .' && 
+				: ) && 
+			
+			case "${WORKING_TYPE}" 
+			in 
+				(i|ini|init) codes_init  "$@" ;; 
+				(d|dy|daily) codes_daily "$@" ;; 
+				(_) 1>&2 echo Unknown working type: "'${WORKING_TYPE}'", only '`'init/daily'`' supported. && return 16 ;;
+			esac && 
+			
 			: ) && 
 		
 		: :: && 
