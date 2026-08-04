@@ -1319,7 +1319,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 				Din () 
 				{ 
 					{ _dir="${1}" && shift ; } && 
-					{ Mcd "$_dir" && 1>&2 echo Dir now in: "'"'"'$(pwd)'"'"'" ... ; } && 
+					{ Mcd "$_dir" && 1>&2 echo : Dir now in: "'"'"'$(pwd)'"'"'" ... ; } && 
 					"$@" && 
 					:; 
 				} && 
@@ -1364,17 +1364,39 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 		#. eval "$(gd flow m e _ dumbpipe.iroh-pipe.n0computer-srcs 20260720)"
 		#. ASKING_MAXTRY=11 eval "$(gd flow m a https://github.com/n0-computer/pigeons.git pigeons.iroh-ssh.n0computer-src 20260803 tree:main tags:v0.2.1)"
 		#. ASKING_MAXTRY=11 eval "$(gd flow m a https://github.com/n0-computer/n0-mainline.git n0mainline.dht-iroh.n0computer-lib 20260803 tree:main tags:v0.6.0)"
-		#. ASKING_MAXTRY=9 eval "$(gd flow m h https://github.com/n0-computer/iroh.git iroh.quic-traversal.n0computer-srcs/main _ tree:main tags:v1.0.3)"
-		#. ASKING_MAXTRY=9 eval "$(gd flow m h https://github.com/n0-computer/iroh.computer.git iroh.quic-traversal.n0computer-srcs/site _ tree:main)"
-		#. ASKING_MAXTRY=9 eval "$(gd flow m h https://github.com/n0-computer/docs.iroh.computer.git iroh.quic-traversal.n0computer-srcs/docs _ tree:main)"
-		#. ASKING_MAXTRY=9 eval "$(gd flow m h https://github.com/n0-computer/iroh-examples.git iroh.quic-traversal.n0computer-srcs/examples _ tree:main)"
-		#. ASKING_MAXTRY=9 eval "$(gd flow m h https://github.com/n0-computer/n0-dns-resolver.git iroh.quic-traversal.n0computer-srcs/dns _ tree:main)"
-		#. ASKING_MAXTRY=9 eval "$(gd flow m h https://github.com/n0-computer/iroh-ping.git iroh.quic-traversal.n0computer-srcs/qs _ tree:main tags:v1.0.0)"
-		#. ASKING_MAXTRY=9 eval "$(gd flow m h https://github.com/n0-computer/net-tools.git iroh.quic-traversal.n0computer-srcs/netif _ tree:main tags:netwatch-v0.19.1 tags:portmapper-v0.19.1)"
+		#. ASKING_MAXTRY=999 eval "$(gd flow m h https://github.com/n0-computer/iroh.git iroh.quic-traversal.n0computer-srcs/main _ tree:main tags:v1.0.3)"
+		#. ASKING_MAXTRY=999 eval "$(gd flow m h https://github.com/n0-computer/iroh.computer.git iroh.quic-traversal.n0computer-srcs/site _ tree:main)"
+		#. ASKING_MAXTRY=999 eval "$(gd flow m h https://github.com/n0-computer/docs.iroh.computer.git iroh.quic-traversal.n0computer-srcs/docs _ tree:main)"
+		#. ASKING_MAXTRY=999 eval "$(gd flow m h https://github.com/n0-computer/iroh-examples.git iroh.quic-traversal.n0computer-srcs/examples _ tree:main)"
+		#. ASKING_MAXTRY=999 eval "$(gd flow m h https://github.com/n0-computer/n0-dns-resolver.git iroh.quic-traversal.n0computer-srcs/dns _ tree:main)"
+		#. ASKING_MAXTRY=999 eval "$(gd flow m h https://github.com/n0-computer/iroh-ping.git iroh.quic-traversal.n0computer-srcs/qs _ tree:main tags:v1.0.0)"
+		#. ASKING_MAXTRY=999 eval "$(gd flow m h https://github.com/n0-computer/net-tools.git iroh.quic-traversal.n0computer-srcs/netif _ tree:main tags:netwatch-v0.19.1 tags:portmapper-v0.19.1)"
 		#. eval "$(gd flow m e _ iroh.quic-traversal.n0computer-srcs 20260731)"
-		#. ASKING_MAXTRY=6 eval "$(gd flow m h https://github.com/OrcaSlicer/OrcaSlicer.git orcaslicer.gcode-gener.3dprinter-slicing.slic3r-srcs/main _ tree:main tags:v2.4.2)"
-		#. ASKING_MAXTRY=6 eval "$(gd flow m h https://github.com/OrcaSlicer/OrcaSlicer_WIKI.git orcaslicer.gcode-gener.3dprinter-slicing.slic3r-srcs/wiki _ tree:main)"
+		#. ASKING_MAXTRY=66 eval "$(gd flow m h https://github.com/OrcaSlicer/OrcaSlicer.git orcaslicer.gcode-gener.3dprinter-slicing.slic3r-srcs/main _ tree:main tags:v2.4.2)"
+		#. ASKING_MAXTRY=66 eval "$(gd flow m h https://github.com/OrcaSlicer/OrcaSlicer_WIKI.git orcaslicer.gcode-gener.3dprinter-slicing.slic3r-srcs/wiki _ tree:main)"
 		#. eval "$(gd flow m e _ orcaslicer.gcode-gener.3dprinter-slicing.slic3r-srcs 20260803)"
+		#. ASKING_MAXTRY=8 eval "$(gd flow m h https://github.com/6tail/tyme4ts.git tyme.6tail.date.multilang-libs/ts _ tree:master tags:v1.5.2)"
+		#. ASKING_MAXTRY=8 eval "$(gd flow m h https://github.com/6tail/tyme4rs.git tyme.6tail.date.multilang-libs/rs _ tree:master tags:v1.4.3)"
+		#. ASKING_MAXTRY=8 eval "$(gd flow m h https://github.com/6tail/tyme4py.git tyme.6tail.date.multilang-libs/py _ tree:master tags:v1.5.0)"
+		#. ASKING_MAXTRY=8 eval "$(gd flow m h https://github.com/6tail/tyme4go.git tyme.6tail.date.multilang-libs/go _ tree:master tags:v1.5.0)"
+		#. ASKING_MAXTRY=8 eval "$(gd flow m h https://github.com/6tail/tyme4kt.git tyme.6tail.date.multilang-libs/kt _ tree:master tags:v1.5.0)"
+		#. ASKING_MAXTRY=8 eval "$(gd flow m h https://github.com/6tail/tyme4dart.git tyme.6tail.date.multilang-libs/dart _ tree:master tags:v1.5.0)"
+		#. ASKING_MAXTRY=8 eval "$(gd flow m h https://github.com/6tail/tyme4swift.git tyme.6tail.date.multilang-libs/swift _ tree:master tags:v1.5.0)"
+		#. ASKING_MAXTRY=8 eval "$(gd flow m h https://github.com/6tail/tyme4net.git tyme.6tail.date.multilang-libs/dotnet _ tree:master tags:v1.5.0)"
+		#. ASKING_MAXTRY=8 eval "$(gd flow m h https://github.com/6tail/tyme4oh.git tyme.6tail.date.multilang-libs/openharmony _ tree:master tags:v1.5.2)"
+		#. ASKING_MAXTRY=8 eval "$(gd flow m h https://github.com/6tail/tyme4php.git tyme.6tail.date.multilang-libs/php _ tree:master tags:v1.5.0)"
+		#. ASKING_MAXTRY=8 eval "$(gd flow m h https://github.com/6tail/tyme4j.git tyme.6tail.date.multilang-libs/java _ tree:master tags:v1.5.1)"
+		#. ASKING_MAXTRY=8 eval "$(gd flow m h https://github.com/6tail/tyme4cpp.git tyme.6tail.date.multilang-libs/cpp _ tree:master tags:v1.2.0)"
+		#. eval "$(gd flow m e _ tyme.6tail.date.multilang-libs 20260615)"
+		#. ASKING_MAXTRY=888 eval "$(gd flow m h https://github.com/EmulatorJS/EmulatorJS.git emulatorjs.libretro.gameplat-srcs/main _ tree:main tags:v4.2.3)"
+		#. ASKING_MAXTRY=888 eval "$(gd flow m h https://github.com/EmulatorJS/emulatorjs.org.git emulatorjs.libretro.gameplat-srcs/site _ tree:main)"
+		#. ASKING_MAXTRY=888 eval "$(gd flow m h https://github.com/libretro/RetroArch.git emulatorjs.libretro.gameplat-srcs/_frnt _ tree:master tags:v1.22.2)"
+		#. ASKING_MAXTRY=888 eval "$(gd flow m h https://github.com/libretro/libretro-fceumm.git emulatorjs.libretro.gameplat-srcs/_core _ tree:master)"
+		#. eval "$(gd flow m e _ emulatorjs.libretro.gameplat-srcs 20260721)"
+		#. ASKING_MAXTRY=1111 eval "$(gd flow m h https://github.com/pranshuparmar/witr.git witr.process-racer.pranshuparmar-srcs/go _ tree:main tags:v0.3.3)"
+		#. ASKING_MAXTRY=1111 eval "$(gd flow m h https://github.com/rewrite-everything-in-rust/witr-rs.git witr.process-racer.pranshuparmar-srcs/.rw-rs _ tree:main tags:v0.1.2)"
+		#. eval "$(gd flow m e _ witr.process-racer.pranshuparmar-srcs 20260731)"
+		#. ASKING_MAXTRY=1122 eval "$(gd flow m a https://github.com/crynta/terax-ai.git terax.term.editor.ai-src 20260804 tree:main tags:v0.8.6)"
 		alias m=mirrors mirrors=mirror_codes && mirror_codes () 
 		(
 			tool_codes '&&' && 
@@ -1405,8 +1427,10 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 			: ) && 
 		
 		
-		#. flow syncs init /mnt/repos/.syncing/pure-symbols https://github.com/pure-symbols/mabynogion.spells.git gh:https://github.com/pure-symbols/mabynogion.spells.git cb:https://codeberg.org/pure-symbols/mabynogion.spells.git dr:https://git.disroot.org/pure.symbols/mabynogion.spells.git
-		#. flow syncs daily /mnt/repos/.syncing/pure-symbols
+		#. gd flow syncs init /mnt/repos/.syncing/pure-symbols https://github.com/pure-symbols/mabynogion.spells.git gh:https://github.com/pure-symbols/mabynogion.spells.git cb:https://codeberg.org/pure-symbols/mabynogion.spells.git dr:https://git.disroot.org/pure.symbols/mabynogion.spells.git
+		#. gd flow syncs daily /mnt/repos/.syncing/pure-symbols
+		#. ASKING_MAXTRY=8 eval "$(gd flow syncs init ./.sy/pure-symbols https://github.com/pure-symbols/mabynogion.spells.git gh:https://github.com/pure-symbols/mabynogion.spells.git cb:https://codeberg.org/pure-symbols/mabynogion.spells.git dr:https://git.disroot.org/pure.symbols/mabynogion.spells.git)"
+		#. ASKING_MAXTRY=8 eval "$(gd flow syncs daily ./.sy/pure-symbols)"
 		alias s=syncs syncs=sync_codes && sync_codes () 
 		(
 			tool_codes '&&' && 
@@ -1422,7 +1446,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 				echo 'din '"${WORKING_DIR}"' 	 '"git-deck sp rmts a $(basename "${CLONE_LINK}")"' \' && 
 				for rmt_pair in "$@" ;
 				do echo $'\t' "$rmt_pair" '\' && :; done && 
-				echo '&& :' && 
+				echo $'\t' '&& :' && 
 				: ) && 
 			codes_daily () 
 			(
