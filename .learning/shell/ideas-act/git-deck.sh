@@ -1393,10 +1393,16 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 		#. ASKING_MAXTRY=888 eval "$(gd flow m h https://github.com/libretro/RetroArch.git emulatorjs.libretro.gameplat-srcs/_frnt _ tree:master tags:v1.22.2)"
 		#. ASKING_MAXTRY=888 eval "$(gd flow m h https://github.com/libretro/libretro-fceumm.git emulatorjs.libretro.gameplat-srcs/_core _ tree:master)"
 		#. eval "$(gd flow m e _ emulatorjs.libretro.gameplat-srcs 20260721)"
-		#. ASKING_MAXTRY=1111 eval "$(gd flow m h https://github.com/pranshuparmar/witr.git witr.process-racer.pranshuparmar-srcs/go _ tree:main tags:v0.3.3)"
-		#. ASKING_MAXTRY=1111 eval "$(gd flow m h https://github.com/rewrite-everything-in-rust/witr-rs.git witr.process-racer.pranshuparmar-srcs/.rw-rs _ tree:main tags:v0.1.2)"
-		#. eval "$(gd flow m e _ witr.process-racer.pranshuparmar-srcs 20260731)"
+		#. ASKING_MAXTRY=1111 eval "$(gd flow m h https://github.com/pranshuparmar/witr.git witr.whyrunning-tracer.pranshuparmar-srcs/go _ tree:main tags:v0.3.3)"
+		#. ASKING_MAXTRY=1111 eval "$(gd flow m h https://github.com/rewrite-everything-in-rust/witr-rs.git witr.whyrunning-tracer.pranshuparmar-srcs/.rw-rs _ tree:main tags:v0.1.2)"
+		#. eval "$(gd flow m e _ witr.whyrunning-tracer.pranshuparmar-srcs 20260731)"
 		#. ASKING_MAXTRY=1122 eval "$(gd flow m a https://github.com/crynta/terax-ai.git terax.term.editor.ai-src 20260804 tree:main tags:v0.8.6)"
+		#. ASKING_MAXTRY=11 eval "$(gd flow m a https://github.com/lyogavin/airllm.git airllm.gpumem-less.lyogavin-lib 20260729 tree:main tags:v3.1.0)"
+		#. ASKING_MAXTRY=33 eval "$(gd flow m a https://github.com/huggingface/chat-ui.git huggingchat.agent-wui.llm.huggingface-src 20260805 tree:main tags:v0.10.0)"
+		#. ASKING_MAXTRY=33 eval "$(gd flow m a https://github.com/huggingface/candle.git candle.ml-frame.huggingface-lib 20260805 tree:main tags:0.11.0)"
+		#. ASKING_MAXTRY=33 eval "$(gd flow m a https://github.com/huggingface/tokenizers.git tokenizers.llm-tokenize.huggingface-lib 20260805 tree:main tags:v0.23.1)"
+		#. ASKING_MAXTRY=33 eval "$(gd flow m a https://github.com/safetensors/safetensors.git safetensors.store-distribute.tensors.huggingface-lib 20260616 tree:main tags:v0.8.0)"
+		#. ASKING_MAXTRY=9 eval "$(gd flow m a https://github.com/afshinm/zerobox.git /zerobox.sandboxcli-src 20260518 tree:main tags:v0.3.3)"
 		alias m=mirrors mirrors=mirror_codes && mirror_codes () 
 		(
 			tool_codes '&&' && 
@@ -1408,12 +1414,12 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 			
 			codes_home () 
 			(
-				echo 'din '"${PATH_INTO}"' 	'"git-deck cp a --mirror -- ${REPO_LINK}"' && ' && 
-				echo 'din '"${PATH_INTO}/$(basename "${REPO_LINK}")"' 	'"git-deck bp wts i $*"' && ' && 
+				echo din "${PATH_INTO}" $'\t' "git-deck cp a --mirror -- ${REPO_LINK}" '&& ' && 
+				echo din "${PATH_INTO}/$(basename "${REPO_LINK}")" $'\t' "git-deck bp wts i $*" '&& ' && 
 				: ) && 
 			codes_ende () 
 			(
-				echo 'din . 	'"txzb3 ${PATH_INTO} ${LASTUP_DATE}"' && '"$*" && 
+				echo 'din .' $'\t' "txzb3 ${PATH_INTO} ${LASTUP_DATE}"' && '"$*" && 
 				: ) && 
 			
 			case "${WORKING_TYPE}" 
@@ -1440,17 +1446,17 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 			codes_init () 
 			(
 				{ CLONE_LINK="$1" && shift ; } && 
-				echo ': clone repo && ' && 
-				echo 'din '"${WORKING_DIR}"' 	 '"git-deck cp a --bare -- ${CLONE_LINK}"' && ' && 
-				echo ': add remotes && ' && 
-				echo 'din '"${WORKING_DIR}"' 	 '"git-deck sp rmts a $(basename "${CLONE_LINK}")"' \' && 
+				echo : clone repo '&& ' && 
+				echo din "${WORKING_DIR}" $'\t' "git-deck cp a --bare -- ${CLONE_LINK}"' && ' && 
+				echo : add remotes '&& ' && 
+				echo din "${WORKING_DIR}" $'\t' "git-deck sp rmts a $(basename "${CLONE_LINK}")"' \' && 
 				for rmt_pair in "$@" ;
 				do echo $'\t' "$rmt_pair" '\' && :; done && 
 				echo $'\t' '&& :' && 
 				: ) && 
 			codes_daily () 
 			(
-				echo 'din '"${WORKING_DIR}"' 	 git-deck sp all-sync .' && 
+				echo din "${WORKING_DIR}" $'\t' 'git-deck sp all-sync .' && 
 				: ) && 
 			
 			case "${WORKING_TYPE}" 
