@@ -904,7 +904,11 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 			while read -r -- workspace ;
 			do 
 				ls -1 -d -- "${workspace}"/* | while read -r -- gitpath ;
-				do all_pull "${gitpath}" && all_push "${gitpath}" && :; done && 
+				do 
+					SKIP_BASEUP=y all_pull "${gitpath}" && 
+					SKIP_BASEUP=y all_push "${gitpath}" && 
+					:; 
+				done && 
 				:; 
 			done && 
 			: ) && 
@@ -1244,7 +1248,10 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 					repo_chk gitdir "${gitdir}" && 
 					: ) && 
 				local checked_bare="$(repo_chk bare "${gitdir}" echo)" && 
-				SHOW_MORE_HINTS=no IS_BARE="$checked_bare" base_upgrade "${gitdir}" && 
+				if eval "$(subs kwargs as_bool SKIP_BASEUP no)" '&&' '${__SKIP_BASEUP__}' ;
+					then : ; 
+					else SHOW_MORE_HINTS=no IS_BARE="$checked_bare" base_upgrade "${gitdir}" ; 
+				fi && 
 				(
 					cd "${gitdir}" && 
 					echo :: pushing all remotes in "'${gitdir}'" :: && 
@@ -1277,7 +1284,10 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 					repo_chk gitdir "${gitdir}" && 
 					: ) && 
 				local checked_bare="$(repo_chk bare "${gitdir}" echo)" && 
-				SHOW_MORE_HINTS=no IS_BARE="$checked_bare" base_upgrade "${gitdir}" && 
+				if eval "$(subs kwargs as_bool SKIP_BASEUP no)" '&&' '${__SKIP_BASEUP__}' ;
+					then : ; 
+					else SHOW_MORE_HINTS=no IS_BARE="$checked_bare" base_upgrade "${gitdir}" ; 
+				fi && 
 				(
 					cd "${gitdir}" && 
 					echo :: pulling all remotes in "'${gitdir}'" :: && 
@@ -1420,6 +1430,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 		#. ASKING_MAXTRY=99 eval "$(gd flow m a https://github.com/Gaurav-Gosain/golars.git golars.cli-df.polars.go-src 20260425 tree:main tags:v0.1.8)"
 		#. ASKING_MAXTRY=99 eval "$(gd flow m a https://github.com/Gaurav-Gosain/gollama.git gollama.llm-cli.go-src 20241224 tree:main tags:v1.0.3)"
 		#. ASKING_MAXTRY=668 eval "$(gd flow m a https://github.com/medialab/xan.git xan.olap-cli.csv.medialab-src 20260731 tree:master tags:0.60.0)"
+		#. ASKING_MAXTRY=997 eval "$(gd flow m a https://github.com/netbootxyz/netboot.xyz.git netboot.xyz-src 20260806 tree:development tags:3.0.2)"
 		alias m=mirrors mirrors=mirror_codes && mirror_codes () 
 		(
 			tool_codes '&&' && 
