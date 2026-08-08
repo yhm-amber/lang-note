@@ -1406,6 +1406,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 		#. ASKING_MAXTRY=1111 eval "$(gd flow m h https://github.com/pranshuparmar/witr.git witr.whyrunning-tracer.pranshuparmar-srcs/go _ tree:main tags:v0.3.3)"
 		#. ASKING_MAXTRY=1111 eval "$(gd flow m h https://github.com/rewrite-everything-in-rust/witr-rs.git witr.whyrunning-tracer.pranshuparmar-srcs/.rw-rs _ tree:main tags:v0.1.2)"
 		#. eval "$(gd flow m e _ witr.whyrunning-tracer.pranshuparmar-srcs 20260731)"
+		#. ASKING_MAXTRY=999 eval "$(gd flow m a https://github.com/Hmbown/CodeWhale.git codewhale.coding-agent.whale-src 20260807 tree:main tags:v0.9.3)"
 		#. ASKING_MAXTRY=1122 eval "$(gd flow m a https://github.com/crynta/terax-ai.git terax.term.editor.ai-src 20260804 tree:main tags:v0.8.6)"
 		#. ASKING_MAXTRY=11 eval "$(gd flow m a https://github.com/lyogavin/airllm.git airllm.gpumem-less.lyogavin-lib 20260729 tree:main tags:v3.1.0)"
 		#. ASKING_MAXTRY=33 eval "$(gd flow m a https://github.com/huggingface/chat-ui.git huggingchat.agent-wui.llm.huggingface-src 20260805 tree:main tags:v0.10.0)"
@@ -1431,6 +1432,14 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 		#. ASKING_MAXTRY=99 eval "$(gd flow m a https://github.com/Gaurav-Gosain/gollama.git gollama.llm-cli.go-src 20241224 tree:main tags:v1.0.3)"
 		#. ASKING_MAXTRY=668 eval "$(gd flow m a https://github.com/medialab/xan.git xan.olap-cli.csv.medialab-src 20260731 tree:master tags:0.60.0)"
 		#. ASKING_MAXTRY=997 eval "$(gd flow m a https://github.com/netbootxyz/netboot.xyz.git netboot.xyz-src 20260806 tree:development tags:3.0.2)"
+		#. ASKING_MAXTRY=777 eval "$(gd flow m a https://github.com/sayanarijit/xplr.git xplr.file-expl.tui-src 20260806 tree:main tags:v1.1.0)"
+		#. ASKING_MAXTRY=898 eval "$(gd flow m a https://github.com/spacedriveapp/spacedrive.git spacedrive.file-expl.spaceui-src 20260729 tree:main tags:0.4.3)"
+		#. ASKING_MAXTRY=898 eval "$(gd flow m a https://github.com/spacedriveapp/spacebot.git spacebot.agent-harness.spaceui-src 20260510 tree:main tags:v0.5.0)"
+		#. ASKING_MAXTRY=699 eval "$(gd flow m a https://github.com/sxyazi/yazi.git yazi.file-expl.tui-src 20260807 tree:main tags:v26.5.6)"
+		#. ASKING_MAXTRY=666 eval "$(gd flow m a https://github.com/Skallwar/suckit.git suckit.web-scrap.cli-src 20260312 tree:master tags:v0.2.0)"
+		#. ASKING_MAXTRY=868 eval "$(gd flow m a https://github.com/earendil-works/pi.git pi.agent-harness.tui-src 20260807 tree:main tags:v0.84.1)"
+		#. ASKING_MAXTRY=999 eval "$(gd flow m a https://github.com/zerx-lab/zap.git zap.terminal-sim.zerxlab-src 20260709 tree:main tags:v2026.07.09.1)"
+		#. ASKING_MAXTRY=999 eval "$(gd flow m a https://github.com/zerx-lab/FluxDown.git fluxdown.dm.zerxlab-src 20260806 tree:main tags:v0.3.2)"
 		alias m=mirrors mirrors=mirror_codes && mirror_codes () 
 		(
 			tool_codes '&&' && 
