@@ -1436,10 +1436,29 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 		#. ASKING_MAXTRY=898 eval "$(gd flow m a https://github.com/spacedriveapp/spacedrive.git spacedrive.file-expl.spaceui-src 20260729 tree:main tags:0.4.3)"
 		#. ASKING_MAXTRY=898 eval "$(gd flow m a https://github.com/spacedriveapp/spacebot.git spacebot.agent-harness.spaceui-src 20260510 tree:main tags:v0.5.0)"
 		#. ASKING_MAXTRY=699 eval "$(gd flow m a https://github.com/sxyazi/yazi.git yazi.file-expl.tui-src 20260807 tree:main tags:v26.5.6)"
-		#. ASKING_MAXTRY=666 eval "$(gd flow m a https://github.com/Skallwar/suckit.git suckit.web-scrap.cli-src 20260312 tree:master tags:v0.2.0)"
 		#. ASKING_MAXTRY=868 eval "$(gd flow m a https://github.com/earendil-works/pi.git pi.agent-harness.tui-src 20260807 tree:main tags:v0.84.1)"
 		#. ASKING_MAXTRY=999 eval "$(gd flow m a https://github.com/zerx-lab/zap.git zap.terminal-sim.zerxlab-src 20260709 tree:main tags:v2026.07.09.1)"
 		#. ASKING_MAXTRY=999 eval "$(gd flow m a https://github.com/zerx-lab/FluxDown.git fluxdown.dm.zerxlab-src 20260806 tree:main tags:v0.3.2)"
+		#. ASKING_MAXTRY=696 eval "$(gd flow m a https://github.com/xifangczy/cat-catch.git catcatch.sniffer.m3u8.addnweb-src 20260805 tree:master tags:2.7.2)"
+		#. ASKING_MAXTRY=666 eval "$(gd flow m a https://github.com/eight04/ComicCrawler.git comiccrawler.scrap.gui-src 20260520 tree:master tags:v2025.3.24)"
+		#. ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/gleam.git       gleam.beam-typed.lang-srcs/'impl ⭐️' _ tree:main tags:v1.18.1)"
+		#. ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/stdlib.git       gleam.beam-typed.lang-srcs/'std 🎁' _ tree:main tags:v1.0.5)"
+		#. ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/playground.git  gleam.beam-typed.lang-srcs/'play 🥨' _ tree:main)"
+		#. ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/erlang.git     gleam.beam-typed.lang-srcs/'erl-compatable 🐙' _ tree:main tags:v1.2.0)"
+		#. ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/otp.git     gleam.beam-typed.lang-srcs/'otp-coresubtyping 📫' _ tree:main tags:v1.2.0)"
+		#. ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/javascript.git  gleam.beam-typed.lang-srcs/'js-compatable 🌼' _ tree:main tags:v1.0.1)"
+		#. ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/website.git                   gleam.beam-typed.lang-srcs/'.site 🏡' _  tree:main)"
+		#. ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/cookbook.git                  gleam.beam-typed.lang-srcs/'.book 👩🏾‍🍳' _  tree:main)"
+		#. ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/language-tour.git             gleam.beam-typed.lang-srcs/'.tour 👩🏽‍💻' _  tree:main)"
+		#. ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/awesome-gleam.git             gleam.beam-typed.lang-srcs/'.awes 💯' _  tree:main)"
+		#. ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/example-lisp-interpreter.git  gleam.beam-typed.lang-srcs/'.sexp 👾' _  tree:main)"
+		#. ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/tree-sitter-gleam.git   gleam.beam-typed.lang-srcs/'parser-bind 🌳' _ tree:main tags:v1.1.0)"
+		#. ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/crypto.git  gleam.beam-typed.lang-srcs/offilibs/'.hash ⛓️' _ tree:main tags:v1.6.0)"
+		#. ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/regexp.git  gleam.beam-typed.lang-srcs/offilibs/'.regx 📇' _ tree:main tags:v1.1.1)"
+		#. ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/deque.git   gleam.beam-typed.lang-srcs/offilibs/'.dque 🚃' _ tree:main tags:v1.0.0)"
+		#. ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/time.git    gleam.beam-typed.lang-srcs/offilibs/'.dque 🕰️' _ tree:main tags:v1.8.0)"
+		#. eval "$(gd flow m e _ gleam.beam-typed.lang-srcs 20260806)"
+		#. ASKING_MAXTRY=667 eval "$(gd flow m a https://github.com/YueMiyuki/Risuko.git risuko.dm-src 20260724 tree:master tags:v0.6.0)"
 		alias m=mirrors mirrors=mirror_codes && mirror_codes () 
 		(
 			tool_codes '&&' && 
@@ -1451,12 +1470,12 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 			
 			codes_home () 
 			(
-				echo din "${PATH_INTO}" $'\t' "git-deck cp a --mirror -- ${REPO_LINK}" '&& ' && 
-				echo din "${PATH_INTO}/$(basename "${REPO_LINK}")" $'\t' "git-deck bp wts i $*" '&& ' && 
+				echo din "'${PATH_INTO}'" $'\t' "git-deck cp a --mirror -- ${REPO_LINK}" '&& ' && 
+				echo din "'${PATH_INTO}'/$(basename "${REPO_LINK}")" $'\t' "git-deck bp wts i $*" '&& ' && 
 				: ) && 
 			codes_ende () 
 			(
-				echo 'din .' $'\t' "txzb3 ${PATH_INTO} ${LASTUP_DATE}"' && '"$*" && 
+				echo 'din .' $'\t' "txzb3 '${PATH_INTO}' ${LASTUP_DATE}"' && '"$*" && 
 				: ) && 
 			
 			case "${WORKING_TYPE}" 
