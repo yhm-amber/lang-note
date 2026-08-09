@@ -563,8 +563,8 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 					(
 						echo :: unshallowing in "\`$(pwd)\`" :: && 
 						repo_chk shallow . && 
-						while ! ( git fetch --unshallow --all && : ) ;
-						do 1>&2 echo tried: "$((++try_unshallow))" for unshallow && :; done && 
+						while ! ( unshallow --all && : ) ;
+						do 1>&2 echo tried: "$((++try_unshallow))" for unshallow in cp. && :; done && 
 						: ) && 
 					(
 						echo :: updating in "\`$(pwd)\`" :: && 
@@ -572,12 +572,39 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 						# while ! ( git remote update && : ) ;
 						# do 1>&2 echo tried: "$((++try_update))" for remote update && :; done && 
 						: ) && 
+					(
+						git prune --expire now --dry-run && 
+						git prune --expire now && 
+						: ) && 
 					echo :: done for repo "\`${out_dir}\`". :: && 
 					: ) && 
 				break ; done && 
 			echo && 
 			: 使其询必曰问之 && 
 			: ) 9</dev/tty && 
+		
+		alias u=unshallow && unshallow () 
+		(
+			{
+				1>&2 echo unshallowing:: git fetch --deepen 65536 "$@" && 
+				while repo_chk shallow . ;
+				do git fetch --deepen 65536 "$@" && :; done && 
+				:; 
+			} && 
+			{
+				if repo_chk shallow . ;
+				then 
+					1>&2 echo unshallowing:: git fetch --unshallow "$@" && 
+					while ! ( git fetch --unshallow "$@" && : ) ;
+					do 1>&2 echo tried: "$((++try_unshallow))" for unshallow && :; done && 
+					:; 
+				else 
+					1>&2 echo unshallowing:: :done && 
+					:; 
+				fi && 
+				:; 
+			} && 
+			: )
 		
 		: :: && 
 		
@@ -1414,16 +1441,16 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 		#. ASKING_MAXTRY=33 eval "$(gd flow m a https://github.com/huggingface/tokenizers.git tokenizers.llm-tokenize.huggingface-lib 20260805 tree:main tags:v0.23.1)"
 		#. ASKING_MAXTRY=33 eval "$(gd flow m a https://github.com/safetensors/safetensors.git safetensors.store-distribute.tensors.huggingface-lib 20260616 tree:main tags:v0.8.0)"
 		#. ASKING_MAXTRY=9 eval "$(gd flow m a https://github.com/afshinm/zerobox.git zerobox.sandboxcli-src 20260518 tree:main tags:v0.3.3)"
-		#. ASKING_MAXTRY=666 eval "$(gd flow m h https://github.com/bytecodealliance/wasmtime.git wasmtime.wasi.cranelift-srcs/wasmtime _ tree:main tags:v47.0.3)"
-		#. ASKING_MAXTRY=666 eval "$(gd flow m h https://github.com/tessi/wasmex.git wasmtime.wasi.cranelift-srcs/lib-ex _ tree:main tags:v0.14.0)"
-		#. ASKING_MAXTRY=666 eval "$(gd flow m h https://github.com/bytecodealliance/wasmtime-py.git wasmtime.wasi.cranelift-srcs/lib-py _ tree:main tags:47.0.1)"
-		#. ASKING_MAXTRY=666 eval "$(gd flow m h https://github.com/bytecodealliance/wasmtime-go.git wasmtime.wasi.cranelift-srcs/lib-go _ tree:main tags:47.0.0)"
-		#. eval "$(gd flow m e _ wasmtime.wasi.cranelift-srcs 20260806)"
+		#. ASKING_MAXTRY=666 eval "$(gd flow m h https://github.com/bytecodealliance/wasmtime.git wasmtime.cranelift.wasi-srcs/wasmtime _ tree:main tags:v47.0.3)"
+		#. ASKING_MAXTRY=666 eval "$(gd flow m h https://github.com/tessi/wasmex.git wasmtime.cranelift.wasi-srcs/lib-ex _ tree:main tags:v0.14.0)"
+		#. ASKING_MAXTRY=666 eval "$(gd flow m h https://github.com/bytecodealliance/wasmtime-py.git wasmtime.cranelift.wasi-srcs/lib-py _ tree:main tags:47.0.1)"
+		#. ASKING_MAXTRY=666 eval "$(gd flow m h https://github.com/bytecodealliance/wasmtime-go.git wasmtime.cranelift.wasi-srcs/lib-go _ tree:main tags:47.0.0)"
+		#. eval "$(gd flow m e _ wasmtime.cranelift.wasi-srcs 20260808)"
 		#. ASKING_MAXTRY=667 eval "$(gd flow m h https://github.com/wasmerio/wasmer.git wasmer.webc.wasix-srcs/wasmer _ tree:main tags:v7.2.1)"
 		#. ASKING_MAXTRY=667 eval "$(gd flow m h https://github.com/wasmerio/wasmer-python.git wasmer.webc.wasix-srcs/lib-py _ tree:master tags:1.1.1)"
 		#. ASKING_MAXTRY=667 eval "$(gd flow m h https://github.com/wasmerio/wasmer-ocaml.git wasmer.webc.wasix-srcs/lib-ml _ tree:master tags:v1.2.1+dunefix)"
 		#. ASKING_MAXTRY=667 eval "$(gd flow m h https://github.com/wasmerio/wasmer-go.git wasmer.webc.wasix-srcs/lib-go _ tree:master tags:v1.0.4)"
-		#. eval "$(gd flow m e _ wasmer.webc.wasix-srcs 20260806)"
+		#. eval "$(gd flow m e _ wasmer.webc.wasix-srcs 20260807)"
 		#. ASKING_MAXTRY=66 eval "$(gd flow m h https://github.com/WebAssembly/WASI.git wasi.std.wit-srcs/wasi _ tree:main tags:v0.3.0)"
 		#. ASKING_MAXTRY=66 eval "$(gd flow m h https://github.com/wasix-org/wasix-witx.git wasi.std.wit-srcs/wasix _ tree:main)"
 		#. eval "$(gd flow m e _ wasi.std.wit-srcs 20260806)"
