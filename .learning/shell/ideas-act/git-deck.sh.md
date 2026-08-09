@@ -4021,7 +4021,7 @@ ASKING_MAXTRY=888 eval "$(gd flow m h https://github.com/EmulatorJS/EmulatorJS.g
 ASKING_MAXTRY=888 eval "$(gd flow m h https://github.com/EmulatorJS/emulatorjs.org.git emulatorjs.libretro.gameplat-srcs/site _ tree:main)"
 ASKING_MAXTRY=888 eval "$(gd flow m h https://github.com/libretro/RetroArch.git emulatorjs.libretro.gameplat-srcs/_frnt _ tree:master tags:v1.22.2)"
 ASKING_MAXTRY=888 eval "$(gd flow m h https://github.com/libretro/libretro-fceumm.git emulatorjs.libretro.gameplat-srcs/_core _ tree:master)"
-eval "$(gd flow m e _ emulatorjs.libretro.gameplat-srcs 20260721)"
+eval "$(gd flow m e _ emulatorjs.libretro.gameplat-srcs 20260808)"
 ~~~
 
 ### (slicer) OrcaSlicer
