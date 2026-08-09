@@ -2,8 +2,6 @@
 
 ## Demo
 
-
-
 ### Help
 
 #### `help gd`
@@ -3781,6 +3779,18 @@ ASKING_MAXTRY=798 eval "$(gd flow m h https://github.com/gleam-lang/fetch.git   
 ASKING_MAXTRY=798 eval "$(gd flow m h https://github.com/gleam-lang/example-todomvc.git         gleam.http.net-libs/'gleam_todomvc.exp 📝' _ tree:main)"
 ASKING_MAXTRY=798 eval "$(gd flow m h https://github.com/gleam-lang/example-echo-server.git  gleam.http.net-libs/'gleam_echoserver.exp 🔗' _ tree:main)"
 eval "$(gd flow m e _ gleam.http.net-libs 20251002)"
+~~~
+
+### (lang) MoonBit
+
+~~~ sh
+ASKING_MAXTRY=679 eval "$(gd flow m h https://github.com/moonbitlang/moon.git              moonbit.wasm.lang-srcs/clis _ tree:main)"
+ASKING_MAXTRY=679 eval "$(gd flow m h https://github.com/moonbitlang/moonbit-compiler.git  moonbit.wasm.lang-srcs/impl _ tree:main tags:v0.10.6+80dc50f24)"
+ASKING_MAXTRY=679 eval "$(gd flow m h https://github.com/moonbitlang/moonbit-docs.git      moonbit.wasm.lang-srcs/docs _ tree:main)"
+ASKING_MAXTRY=679 eval "$(gd flow m h https://github.com/moonbitlang/core.git  moonbit.wasm.lang-srcs/stdcore _ tree:main)"
+ASKING_MAXTRY=679 eval "$(gd flow m h https://github.com/moonbitlang/x.git     moonbit.wasm.lang-srcs/expcore _ tree:main tags:v0.4.45)"
+ASKING_MAXTRY=679 eval "$(gd flow m h https://github.com/moonbitlang/awesome-moonbit.git   moonbit.wasm.lang-srcs/.awesomes _ tree:main)"
+eval "$(gd flow m e _ moonbit.wasm.lang-srcs 20260807)"
 ~~~
 
 ### (lang) Parser
