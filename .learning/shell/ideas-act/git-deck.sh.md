@@ -3834,7 +3834,7 @@ ASKING_MAXTRY=668 eval "$(gd flow m a https://github.com/medialab/xan.git xan.ol
 ~~~ sh
 ASKING_MAXTRY=1111 eval "$(gd flow m h https://github.com/pranshuparmar/witr.git witr.whyrunning-tracer.pranshuparmar-srcs/go _ tree:main tags:v0.3.3)"
 ASKING_MAXTRY=1111 eval "$(gd flow m h https://github.com/rewrite-everything-in-rust/witr-rs.git witr.whyrunning-tracer.pranshuparmar-srcs/.rw-rs _ tree:main tags:v0.1.2)"
-eval "$(gd flow m e _ witr.whyrunning-tracer.pranshuparmar-srcs 20260731)"
+eval "$(gd flow m e _ witr.whyrunning-tracer.pranshuparmar-srcs 20260808)"
 ~~~
 
 ### (ai) Agent
@@ -3932,7 +3932,7 @@ ASKING_MAXTRY=999 eval "$(gd flow m h https://github.com/n0-computer/iroh-exampl
 ASKING_MAXTRY=999 eval "$(gd flow m h https://github.com/n0-computer/n0-dns-resolver.git iroh.quic-traversal.n0computer-srcs/dns _ tree:main)"
 ASKING_MAXTRY=999 eval "$(gd flow m h https://github.com/n0-computer/iroh-ping.git iroh.quic-traversal.n0computer-srcs/qs _ tree:main tags:v1.0.0)"
 ASKING_MAXTRY=999 eval "$(gd flow m h https://github.com/n0-computer/net-tools.git iroh.quic-traversal.n0computer-srcs/netif _ tree:main tags:netwatch-v0.19.1 tags:portmapper-v0.19.1)"
-eval "$(gd flow m e _ iroh.quic-traversal.n0computer-srcs 20260731)"
+eval "$(gd flow m e _ iroh.quic-traversal.n0computer-srcs 20260804)"
 ~~~
 
 apps
