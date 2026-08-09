@@ -563,8 +563,8 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 					(
 						echo :: unshallowing in "\`$(pwd)\`" :: && 
 						repo_chk shallow . && 
-						while ! ( unshallow --all && : ) ;
-						do 1>&2 echo tried: "$((++try_unshallow))" for unshallow in cp. && :; done && 
+						while ! ( auto_unshallow --all && : ) ;
+						do 1>&2 echo tried: "$((++try_unshallow))" for auto unshallow. && :; done && 
 						: ) && 
 					(
 						echo :: updating in "\`$(pwd)\`" :: && 
@@ -583,12 +583,13 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 			: 使其询必曰问之 && 
 			: ) 9</dev/tty && 
 		
-		alias u=unshallow && unshallow () 
+		alias u=auto_unshallow au=auto_unshallow && auto_unshallow () 
 		(
+			AUTO_UNSHALLOW_DEEPEN="${AUTO_UNSHALLOW_DEEPEN:-65536}" && 
 			{
-				1>&2 echo unshallowing:: git fetch --deepen 65536 "$@" && 
+				1>&2 echo unshallowing:: git fetch --deepen "$AUTO_UNSHALLOW_DEEPEN" "$@" && 
 				while repo_chk shallow . ;
-				do git fetch --deepen 65536 "$@" && :; done && 
+				do git fetch --deepen "$AUTO_UNSHALLOW_DEEPEN" "$@" && :; done && 
 				:; 
 			} && 
 			{
@@ -1369,6 +1370,12 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 						_aim_name="${1}"-"${2:-00000000}" && 
 						_txz_ext="${3:-tar.xz}" && 
 						: '"'"' && 
+					: ) && 
+				untxz () 
+				(
+					_txz_file="${1}" && 
+					xz --decompress --stdout -- "$_txz_file" | 
+						tar -xf- && 
 					: ) && 
 				txz () 
 				(
