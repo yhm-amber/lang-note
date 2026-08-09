@@ -3953,11 +3953,11 @@ eval "$(gd flow m e _ wasi.std.wit-srcs 20260806)"
 wasmtime
 
 ~~~ sh
-ASKING_MAXTRY=666 eval "$(gd flow m h https://github.com/bytecodealliance/wasmtime.git wasmtime.wasi.cranelift-srcs/wasmtime _ tree:main tags:v47.0.3)"
-ASKING_MAXTRY=666 eval "$(gd flow m h https://github.com/tessi/wasmex.git wasmtime.wasi.cranelift-srcs/lib-ex _ tree:main tags:v0.14.0)"
-ASKING_MAXTRY=666 eval "$(gd flow m h https://github.com/bytecodealliance/wasmtime-py.git wasmtime.wasi.cranelift-srcs/lib-py _ tree:main tags:47.0.1)"
-ASKING_MAXTRY=666 eval "$(gd flow m h https://github.com/bytecodealliance/wasmtime-go.git wasmtime.wasi.cranelift-srcs/lib-go _ tree:main tags:47.0.0)"
-eval "$(gd flow m e _ wasmtime.wasi.cranelift-srcs 20260806)"
+ASKING_MAXTRY=666 eval "$(gd flow m h https://github.com/bytecodealliance/wasmtime.git wasmtime.cranelift.wasi-srcs/wasmtime _ tree:main tags:v47.0.3)"
+ASKING_MAXTRY=666 eval "$(gd flow m h https://github.com/tessi/wasmex.git wasmtime.cranelift.wasi-srcs/lib-ex _ tree:main tags:v0.14.0)"
+ASKING_MAXTRY=666 eval "$(gd flow m h https://github.com/bytecodealliance/wasmtime-py.git wasmtime.cranelift.wasi-srcs/lib-py _ tree:main tags:47.0.1)"
+ASKING_MAXTRY=666 eval "$(gd flow m h https://github.com/bytecodealliance/wasmtime-go.git wasmtime.cranelift.wasi-srcs/lib-go _ tree:main tags:47.0.0)"
+eval "$(gd flow m e _ wasmtime.cranelift.wasi-srcs 20260808)"
 ~~~
 
 wasmer
@@ -3967,7 +3967,7 @@ ASKING_MAXTRY=667 eval "$(gd flow m h https://github.com/wasmerio/wasmer.git was
 ASKING_MAXTRY=667 eval "$(gd flow m h https://github.com/wasmerio/wasmer-python.git wasmer.webc.wasix-srcs/lib-py _ tree:master tags:1.1.1)"
 ASKING_MAXTRY=667 eval "$(gd flow m h https://github.com/wasmerio/wasmer-ocaml.git wasmer.webc.wasix-srcs/lib-ml _ tree:master tags:v1.2.1+dunefix)"
 ASKING_MAXTRY=667 eval "$(gd flow m h https://github.com/wasmerio/wasmer-go.git wasmer.webc.wasix-srcs/lib-go _ tree:master tags:v1.0.4)"
-eval "$(gd flow m e _ wasmer.webc.wasix-srcs 20260806)"
+eval "$(gd flow m e _ wasmer.webc.wasix-srcs 20260807)"
 ~~~
 
 ### (net) Download Manager
