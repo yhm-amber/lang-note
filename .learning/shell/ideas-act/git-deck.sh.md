@@ -3780,7 +3780,7 @@ ASKING_MAXTRY=798 eval "$(gd flow m h https://github.com/gleam-lang/elli.git    
 ASKING_MAXTRY=798 eval "$(gd flow m h https://github.com/gleam-lang/fetch.git       gleam.http.net-libs/'js_fetch.req 📡' _ tree:main tags:v1.4.0)"
 ASKING_MAXTRY=798 eval "$(gd flow m h https://github.com/gleam-lang/example-todomvc.git         gleam.http.net-libs/'gleam_todomvc.exp 📝' _ tree:main)"
 ASKING_MAXTRY=798 eval "$(gd flow m h https://github.com/gleam-lang/example-echo-server.git  gleam.http.net-libs/'gleam_echoserver.exp 🔗' _ tree:main)"
-eval "$(gd flow m e _ gleam.http.net-libs 20260808)"
+eval "$(gd flow m e _ gleam.http.net-libs 20251002)"
 ~~~
 
 ### (lang) Parser
