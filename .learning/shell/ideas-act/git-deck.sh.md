@@ -3694,7 +3694,7 @@ gd sp remote necessity verific origin push ; echo ~~~ $?
 ~~~
 
 
-## Flow Rec Init
+## Flow Rec
 
 ### (sys) Booter
 
