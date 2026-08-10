@@ -1591,9 +1591,11 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 			
 			codes_daily () 
 			(
+				eval "$(subs frames codes_head)" && 
+				
 				#: gd flow mirrors daily cl <working-path>
 				#. gd flow mirrors daily cl iroh.quic-traversal.n0computer-srcs
-				cl () 
+				alias c=cl && cl () 
 				(
 					{ WORKING_DIR="$1" && shift ; } && 
 					{ _cmnd_tools _assert_path "${WORKING_DIR}" || return $? ; } && 
@@ -1608,7 +1610,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 				
 				#: gd flow mirrors daily up <working-path>
 				#. gd flow mirrors daily up iroh-drop.chad.iroh-src
-				up () 
+				alias u=up && up () 
 				(
 					{ WORKING_DIR="$1" && shift ; } && 
 					{ _cmnd_tools _assert_path "${WORKING_DIR}" || return $? ; } && 
@@ -1629,6 +1631,8 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 					# echo done '&& :' && 
 					
 					: ) && 
+				
+				eval "$(subs frames codes_tail)" && 
 				
 				: :: && 
 				"$@" && 
