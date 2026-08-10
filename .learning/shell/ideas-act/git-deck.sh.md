@@ -3694,7 +3694,7 @@ gd sp remote necessity verific origin push ; echo ~~~ $?
 ~~~
 
 
-## Flow Rec
+## Flow Rec Init
 
 ### (sys) Booter
 
@@ -3707,7 +3707,7 @@ gd sp remote necessity verific origin push ; echo ~~~ $?
 (iPXE) netboot
 
 ~~~ sh
-ASKING_MAXTRY=997 eval "$(gd flow m a https://github.com/netbootxyz/netboot.xyz.git netboot.xyz-src 20260806 tree:development tags:3.0.2)"
+ASKING_MAXTRY=997 eval "$(gd flow m i a https://github.com/netbootxyz/netboot.xyz.git netboot.xyz-src 20260806 tree:development tags:3.0.2)"
 ~~~
 
 ### (file) Explorer
@@ -3715,19 +3715,19 @@ ASKING_MAXTRY=997 eval "$(gd flow m a https://github.com/netbootxyz/netboot.xyz.
 (tui) xplr
 
 ~~~ sh
-ASKING_MAXTRY=777 eval "$(gd flow m a https://github.com/sayanarijit/xplr.git xplr.file-expl.tui-src 20260806 tree:main tags:v1.1.0)"
+ASKING_MAXTRY=777 eval "$(gd flow m i a https://github.com/sayanarijit/xplr.git xplr.file-expl.tui-src 20260806 tree:main tags:v1.1.0)"
 ~~~
 
 (tui) yazi
 
 ~~~ sh
-ASKING_MAXTRY=699 eval "$(gd flow m a https://github.com/sxyazi/yazi.git yazi.file-expl.tui-src 20260807 tree:main tags:v26.5.6)"
+ASKING_MAXTRY=699 eval "$(gd flow m i a https://github.com/sxyazi/yazi.git yazi.file-expl.tui-src 20260807 tree:main tags:v26.5.6)"
 ~~~
 
 (wui) spacedrive
 
 ~~~ sh
-ASKING_MAXTRY=898 eval "$(gd flow m a https://github.com/spacedriveapp/spacedrive.git spacedrive.file-expl.spaceui-src 20260729 tree:main tags:0.4.3)"
+ASKING_MAXTRY=898 eval "$(gd flow m i a https://github.com/spacedriveapp/spacedrive.git spacedrive.file-expl.spaceui-src 20260729 tree:main tags:0.4.3)"
 ~~~
 
 ### (lang) Gleam
@@ -3735,62 +3735,62 @@ ASKING_MAXTRY=898 eval "$(gd flow m a https://github.com/spacedriveapp/spacedriv
 lang
 
 ~~~ sh
-ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/gleam.git       gleam.beam-typed.lang-srcs/'impl ⭐️' _ tree:main tags:v1.18.1)"
-ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/stdlib.git       gleam.beam-typed.lang-srcs/'std 🎁' _ tree:main tags:v1.0.5)"
-ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/playground.git  gleam.beam-typed.lang-srcs/'play 🥨' _ tree:main)"
-ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/erlang.git     gleam.beam-typed.lang-srcs/'erl-compatable 🐙' _ tree:main tags:v1.2.0)"
-ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/otp.git     gleam.beam-typed.lang-srcs/'otp-coresubtyping 📫' _ tree:main tags:v1.2.0)"
-ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/javascript.git  gleam.beam-typed.lang-srcs/'js-compatable 🌼' _ tree:main tags:v1.0.1)"
-ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/website.git                   gleam.beam-typed.lang-srcs/'.site 🏡' _  tree:main)"
-ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/cookbook.git                  gleam.beam-typed.lang-srcs/'.book 👩🏾‍🍳' _  tree:main)"
-ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/language-tour.git             gleam.beam-typed.lang-srcs/'.tour 👩🏽‍💻' _  tree:main)"
-ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/awesome-gleam.git             gleam.beam-typed.lang-srcs/'.awes 💯' _  tree:main)"
-ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/example-lisp-interpreter.git  gleam.beam-typed.lang-srcs/'.sexp 👾' _  tree:main)"
-ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/tree-sitter-gleam.git   gleam.beam-typed.lang-srcs/'parser-bind 🌳' _ tree:main tags:v1.1.0)"
-ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/crypto.git  gleam.beam-typed.lang-srcs/offilibs/'.hash ⛓️' _ tree:main tags:v1.6.0)"
-ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/regexp.git  gleam.beam-typed.lang-srcs/offilibs/'.regx 📇' _ tree:main tags:v1.1.1)"
-ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/deque.git   gleam.beam-typed.lang-srcs/offilibs/'.dque 🚃' _ tree:main tags:v1.0.0)"
-ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/time.git    gleam.beam-typed.lang-srcs/offilibs/'.dque 🕰️' _ tree:main tags:v1.8.0)"
-eval "$(gd flow m e _ gleam.beam-typed.lang-srcs 20260806)"
+ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/gleam.git       gleam.beam-typed.lang-srcs/'impl ⭐️' _ tree:main tags:v1.18.1)"
+ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/stdlib.git       gleam.beam-typed.lang-srcs/'std 🎁' _ tree:main tags:v1.0.5)"
+ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/playground.git  gleam.beam-typed.lang-srcs/'play 🥨' _ tree:main)"
+ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/erlang.git     gleam.beam-typed.lang-srcs/'erl-compatable 🐙' _ tree:main tags:v1.2.0)"
+ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/otp.git     gleam.beam-typed.lang-srcs/'otp-coresubtyping 📫' _ tree:main tags:v1.2.0)"
+ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/javascript.git  gleam.beam-typed.lang-srcs/'js-compatable 🌼' _ tree:main tags:v1.0.1)"
+ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/website.git                   gleam.beam-typed.lang-srcs/'.site 🏡' _  tree:main)"
+ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/cookbook.git                  gleam.beam-typed.lang-srcs/'.book 👩🏾‍🍳' _  tree:main)"
+ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/language-tour.git             gleam.beam-typed.lang-srcs/'.tour 👩🏽‍💻' _  tree:main)"
+ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/awesome-gleam.git             gleam.beam-typed.lang-srcs/'.awes 💯' _  tree:main)"
+ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/example-lisp-interpreter.git  gleam.beam-typed.lang-srcs/'.sexp 👾' _  tree:main)"
+ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/tree-sitter-gleam.git   gleam.beam-typed.lang-srcs/'parser-bind 🌳' _ tree:main tags:v1.1.0)"
+ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/crypto.git  gleam.beam-typed.lang-srcs/offilibs/'.hash ⛓️' _ tree:main tags:v1.6.0)"
+ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/regexp.git  gleam.beam-typed.lang-srcs/offilibs/'.regx 📇' _ tree:main tags:v1.1.1)"
+ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/deque.git   gleam.beam-typed.lang-srcs/offilibs/'.dque 🚃' _ tree:main tags:v1.0.0)"
+ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/time.git    gleam.beam-typed.lang-srcs/offilibs/'.dque 🕰️' _ tree:main tags:v1.8.0)"
+eval "$(gd flow m i e _ gleam.beam-typed.lang-srcs 20260806)"
 ~~~
 
 supports
 
 ~~~ sh
-ASKING_MAXTRY=796 eval "$(gd flow m h https://github.com/gleam-lang/developer-survey.git  gleam.lang.dev-supports/'community-learn 🗺' _ tree:main tags:v1.13.0)"
-ASKING_MAXTRY=796 eval "$(gd flow m h https://github.com/gleam-lang/gleam-mode.git    gleam.lang.dev-supports/'sys-emacs 🏫' _ tree:main tags:v1.0.0)"
-ASKING_MAXTRY=796 eval "$(gd flow m h https://github.com/gleam-lang/zed-gleam.git     gleam.lang.dev-supports/'editor-zed 🪒' _ tree:main tags:v0.5.1)"
-ASKING_MAXTRY=796 eval "$(gd flow m h https://github.com/gleam-lang/vscode-gleam.git  gleam.lang.dev-supports/'editor-vscode 📟' _ tree:main tags:v2.12.0)"
-eval "$(gd flow m e _ gleam.lang.dev-supports 20260808)"
+ASKING_MAXTRY=796 eval "$(gd flow m i h https://github.com/gleam-lang/developer-survey.git  gleam.lang.dev-supports/'community-learn 🗺' _ tree:main tags:v1.13.0)"
+ASKING_MAXTRY=796 eval "$(gd flow m i h https://github.com/gleam-lang/gleam-mode.git    gleam.lang.dev-supports/'sys-emacs 🏫' _ tree:main tags:v1.0.0)"
+ASKING_MAXTRY=796 eval "$(gd flow m i h https://github.com/gleam-lang/zed-gleam.git     gleam.lang.dev-supports/'editor-zed 🪒' _ tree:main tags:v0.5.1)"
+ASKING_MAXTRY=796 eval "$(gd flow m i h https://github.com/gleam-lang/vscode-gleam.git  gleam.lang.dev-supports/'editor-vscode 📟' _ tree:main tags:v2.12.0)"
+eval "$(gd flow m i e _ gleam.lang.dev-supports 20260808)"
 ~~~
 
 http
 
 ~~~ sh
-ASKING_MAXTRY=798 eval "$(gd flow m h https://github.com/gleam-lang/json.git  gleam.http.net-libs/'gleam_json.dat 🐑' _ tree:main tags:v3.1.0)"
-ASKING_MAXTRY=798 eval "$(gd flow m h https://github.com/gleam-lang/http.git  gleam.http.net-libs/'gleam_http.dat 🕸️' _ tree:main tags:v4.3.0)"
-ASKING_MAXTRY=798 eval "$(gd flow m h https://github.com/rawhat/mist.git          gleam.http.net-libs/'gleam_mist.svc 🌫' _ tree:main tags:v6.0.3)"
-ASKING_MAXTRY=798 eval "$(gd flow m h https://github.com/gleam-lang/httpd.git      gleam.http.net-libs/'erl_httpd.svc 🛰️' _ tree:main)"
-ASKING_MAXTRY=798 eval "$(gd flow m h https://github.com/gleam-lang/httpc.git      gleam.http.net-libs/'erl_httpc.req 📡' _ tree:main tags:v5.0.0)"
-ASKING_MAXTRY=798 eval "$(gd flow m h https://github.com/gleam-lang/hackney.git  gleam.http.net-libs/'erl_hackney.req 🪝' _ tree:main tags:v1.4.0)"
-ASKING_MAXTRY=798 eval "$(gd flow m h https://github.com/gleam-lang/cowboy.git    gleam.http.net-libs/'erl_cowboy.svc 🤠' _ tree:main tags:v1.1.0)"
-ASKING_MAXTRY=798 eval "$(gd flow m h https://github.com/gleam-lang/elli.git        gleam.http.net-libs/'erl_elli.svc 🍛' _ tree:main tags:v3.0.0)"
-ASKING_MAXTRY=798 eval "$(gd flow m h https://github.com/gleam-lang/fetch.git       gleam.http.net-libs/'js_fetch.req 📡' _ tree:main tags:v1.4.0)"
-ASKING_MAXTRY=798 eval "$(gd flow m h https://github.com/gleam-lang/example-todomvc.git         gleam.http.net-libs/'gleam_todomvc.exp 📝' _ tree:main)"
-ASKING_MAXTRY=798 eval "$(gd flow m h https://github.com/gleam-lang/example-echo-server.git  gleam.http.net-libs/'gleam_echoserver.exp 🔗' _ tree:main)"
-eval "$(gd flow m e _ gleam.http.net-libs 20251002)"
+ASKING_MAXTRY=798 eval "$(gd flow m i h https://github.com/gleam-lang/json.git  gleam.http.net-libs/'gleam_json.dat 🐑' _ tree:main tags:v3.1.0)"
+ASKING_MAXTRY=798 eval "$(gd flow m i h https://github.com/gleam-lang/http.git  gleam.http.net-libs/'gleam_http.dat 🕸️' _ tree:main tags:v4.3.0)"
+ASKING_MAXTRY=798 eval "$(gd flow m i h https://github.com/rawhat/mist.git          gleam.http.net-libs/'gleam_mist.svc 🌫' _ tree:main tags:v6.0.3)"
+ASKING_MAXTRY=798 eval "$(gd flow m i h https://github.com/gleam-lang/httpd.git      gleam.http.net-libs/'erl_httpd.svc 🛰️' _ tree:main)"
+ASKING_MAXTRY=798 eval "$(gd flow m i h https://github.com/gleam-lang/httpc.git      gleam.http.net-libs/'erl_httpc.req 📡' _ tree:main tags:v5.0.0)"
+ASKING_MAXTRY=798 eval "$(gd flow m i h https://github.com/gleam-lang/hackney.git  gleam.http.net-libs/'erl_hackney.req 🪝' _ tree:main tags:v1.4.0)"
+ASKING_MAXTRY=798 eval "$(gd flow m i h https://github.com/gleam-lang/cowboy.git    gleam.http.net-libs/'erl_cowboy.svc 🤠' _ tree:main tags:v1.1.0)"
+ASKING_MAXTRY=798 eval "$(gd flow m i h https://github.com/gleam-lang/elli.git        gleam.http.net-libs/'erl_elli.svc 🍛' _ tree:main tags:v3.0.0)"
+ASKING_MAXTRY=798 eval "$(gd flow m i h https://github.com/gleam-lang/fetch.git       gleam.http.net-libs/'js_fetch.req 📡' _ tree:main tags:v1.4.0)"
+ASKING_MAXTRY=798 eval "$(gd flow m i h https://github.com/gleam-lang/example-todomvc.git         gleam.http.net-libs/'gleam_todomvc.exp 📝' _ tree:main)"
+ASKING_MAXTRY=798 eval "$(gd flow m i h https://github.com/gleam-lang/example-echo-server.git  gleam.http.net-libs/'gleam_echoserver.exp 🔗' _ tree:main)"
+eval "$(gd flow m i e _ gleam.http.net-libs 20251002)"
 ~~~
 
 ### (lang) MoonBit
 
 ~~~ sh
-ASKING_MAXTRY=679 eval "$(gd flow m h https://github.com/moonbitlang/moon.git              moonbit.wasm.lang-srcs/clis _ tree:main)"
-ASKING_MAXTRY=679 eval "$(gd flow m h https://github.com/moonbitlang/moonbit-compiler.git  moonbit.wasm.lang-srcs/impl _ tree:main tags:v0.10.6+80dc50f24)"
-ASKING_MAXTRY=679 eval "$(gd flow m h https://github.com/moonbitlang/moonbit-docs.git      moonbit.wasm.lang-srcs/docs _ tree:main)"
-ASKING_MAXTRY=679 eval "$(gd flow m h https://github.com/moonbitlang/core.git  moonbit.wasm.lang-srcs/stdcore _ tree:main)"
-ASKING_MAXTRY=679 eval "$(gd flow m h https://github.com/moonbitlang/x.git     moonbit.wasm.lang-srcs/expcore _ tree:main tags:v0.4.45)"
-ASKING_MAXTRY=679 eval "$(gd flow m h https://github.com/moonbitlang/awesome-moonbit.git   moonbit.wasm.lang-srcs/.awesomes _ tree:main)"
-eval "$(gd flow m e _ moonbit.wasm.lang-srcs 20260807)"
+ASKING_MAXTRY=679 eval "$(gd flow m i h https://github.com/moonbitlang/moon.git              moonbit.wasm.lang-srcs/clis _ tree:main)"
+ASKING_MAXTRY=679 eval "$(gd flow m i h https://github.com/moonbitlang/moonbit-compiler.git  moonbit.wasm.lang-srcs/impl _ tree:main tags:v0.10.6+80dc50f24)"
+ASKING_MAXTRY=679 eval "$(gd flow m i h https://github.com/moonbitlang/moonbit-docs.git      moonbit.wasm.lang-srcs/docs _ tree:main)"
+ASKING_MAXTRY=679 eval "$(gd flow m i h https://github.com/moonbitlang/core.git  moonbit.wasm.lang-srcs/stdcore _ tree:main)"
+ASKING_MAXTRY=679 eval "$(gd flow m i h https://github.com/moonbitlang/x.git     moonbit.wasm.lang-srcs/expcore _ tree:main tags:v0.4.45)"
+ASKING_MAXTRY=679 eval "$(gd flow m i h https://github.com/moonbitlang/awesome-moonbit.git   moonbit.wasm.lang-srcs/.awesomes _ tree:main)"
+eval "$(gd flow m i e _ moonbit.wasm.lang-srcs 20260807)"
 ~~~
 
 ### (lang) Parser
@@ -3798,7 +3798,7 @@ eval "$(gd flow m e _ moonbit.wasm.lang-srcs 20260807)"
 (General Lang Parser) tree-sitter
 
 ~~~ sh
-ASKING_MAXTRY=666 eval "$(gd flow m a https://github.com/tree-sitter/tree-sitter.git  tree-sitter.parsing-system.langtool-src 20260808 tree:master tags:v0.26.11)"
+ASKING_MAXTRY=666 eval "$(gd flow m i a https://github.com/tree-sitter/tree-sitter.git  tree-sitter.parsing-system.langtool-src 20260808 tree:master tags:v0.26.11)"
 ~~~
 
 ### (simu) Terminal
@@ -3806,13 +3806,13 @@ ASKING_MAXTRY=666 eval "$(gd flow m a https://github.com/tree-sitter/tree-sitter
 tuios
 
 ~~~ sh
-ASKING_MAXTRY=99 eval "$(gd flow m a https://github.com/Gaurav-Gosain/tuios.git tuios.tui-multiplexer.go-src 20260801 tree:main tags:v0.7.0)"
+ASKING_MAXTRY=99 eval "$(gd flow m i a https://github.com/Gaurav-Gosain/tuios.git tuios.tui-multiplexer.go-src 20260801 tree:main tags:v0.7.0)"
 ~~~
 
 zap
 
 ~~~ sh
-ASKING_MAXTRY=999 eval "$(gd flow m a https://github.com/zerx-lab/zap.git zap.terminal-sim.zerxlab-src 20260709 tree:main tags:v2026.07.09.1)"
+ASKING_MAXTRY=999 eval "$(gd flow m i a https://github.com/zerx-lab/zap.git zap.terminal-sim.zerxlab-src 20260709 tree:main tags:v2026.07.09.1)"
 ~~~
 
 ### (cli) Data
@@ -3820,21 +3820,21 @@ ASKING_MAXTRY=999 eval "$(gd flow m a https://github.com/zerx-lab/zap.git zap.te
 (polars) Golars
 
 ~~~ sh
-ASKING_MAXTRY=99 eval "$(gd flow m a https://github.com/Gaurav-Gosain/golars.git golars.cli-df.polars.go-src 20260425 tree:main tags:v0.1.8)"
+ASKING_MAXTRY=99 eval "$(gd flow m i a https://github.com/Gaurav-Gosain/golars.git golars.cli-df.polars.go-src 20260425 tree:main tags:v0.1.8)"
 ~~~
 
 (csv) Xan
 
 ~~~ sh
-ASKING_MAXTRY=668 eval "$(gd flow m a https://github.com/medialab/xan.git xan.olap-cli.csv.medialab-src 20260731 tree:master tags:0.60.0)"
+ASKING_MAXTRY=668 eval "$(gd flow m i a https://github.com/medialab/xan.git xan.olap-cli.csv.medialab-src 20260731 tree:master tags:0.60.0)"
 ~~~
 
 ### (sys) Witr
 
 ~~~ sh
-ASKING_MAXTRY=1111 eval "$(gd flow m h https://github.com/pranshuparmar/witr.git witr.whyrunning-tracer.pranshuparmar-srcs/go _ tree:main tags:v0.3.3)"
-ASKING_MAXTRY=1111 eval "$(gd flow m h https://github.com/rewrite-everything-in-rust/witr-rs.git witr.whyrunning-tracer.pranshuparmar-srcs/.rw-rs _ tree:main tags:v0.1.2)"
-eval "$(gd flow m e _ witr.whyrunning-tracer.pranshuparmar-srcs 20260808)"
+ASKING_MAXTRY=1111 eval "$(gd flow m i h https://github.com/pranshuparmar/witr.git witr.whyrunning-tracer.pranshuparmar-srcs/go _ tree:main tags:v0.3.3)"
+ASKING_MAXTRY=1111 eval "$(gd flow m i h https://github.com/rewrite-everything-in-rust/witr-rs.git witr.whyrunning-tracer.pranshuparmar-srcs/.rw-rs _ tree:main tags:v0.1.2)"
+eval "$(gd flow m i e _ witr.whyrunning-tracer.pranshuparmar-srcs 20260808)"
 ~~~
 
 ### (ai) Agent
@@ -3842,49 +3842,49 @@ eval "$(gd flow m e _ witr.whyrunning-tracer.pranshuparmar-srcs 20260808)"
 (optim) AirLLM
 
 ~~~ sh
-ASKING_MAXTRY=11 eval "$(gd flow m a https://github.com/lyogavin/airllm.git airllm.gpumem-less.lyogavin-lib 20260729 tree:main tags:v3.1.0)"
+ASKING_MAXTRY=11 eval "$(gd flow m i a https://github.com/lyogavin/airllm.git airllm.gpumem-less.lyogavin-lib 20260729 tree:main tags:v3.1.0)"
 ~~~
 
 (tui harness coding-assistant) CodeWhale
 
 ~~~ sh
-ASKING_MAXTRY=999 eval "$(gd flow m a https://github.com/Hmbown/CodeWhale.git codewhale.coding-agent.whale-src 20260807 tree:main tags:v0.9.3)"
+ASKING_MAXTRY=999 eval "$(gd flow m i a https://github.com/Hmbown/CodeWhale.git codewhale.coding-agent.whale-src 20260807 tree:main tags:v0.9.3)"
 ~~~
 
 (wui harness ai-bot) SpaceBot
 
 ~~~ sh
-ASKING_MAXTRY=898 eval "$(gd flow m a https://github.com/spacedriveapp/spacebot.git spacebot.agent-harness.spaceui-src 20260510 tree:main tags:v0.5.0)"
+ASKING_MAXTRY=898 eval "$(gd flow m i a https://github.com/spacedriveapp/spacebot.git spacebot.agent-harness.spaceui-src 20260510 tree:main tags:v0.5.0)"
 ~~~
 
 (wui harness terminal-editor) Terax
 
 ~~~ sh
-ASKING_MAXTRY=1122 eval "$(gd flow m a https://github.com/crynta/terax-ai.git terax.term.editor.ai-src 20260804 tree:main tags:v0.8.6)"
+ASKING_MAXTRY=1122 eval "$(gd flow m i a https://github.com/crynta/terax-ai.git terax.term.editor.ai-src 20260804 tree:main tags:v0.8.6)"
 ~~~
 
 (wui harness plg-growing) Pi
 
 ~~~ sh
-ASKING_MAXTRY=868 eval "$(gd flow m a https://github.com/earendil-works/pi.git pi.agent-harness.tui-src 20260807 tree:main tags:v0.84.1)"
+ASKING_MAXTRY=868 eval "$(gd flow m i a https://github.com/earendil-works/pi.git pi.agent-harness.tui-src 20260807 tree:main tags:v0.84.1)"
 ~~~
 
 (wui) HuggingChat
 
 ~~~ sh
-ASKING_MAXTRY=33 eval "$(gd flow m a https://github.com/huggingface/chat-ui.git huggingchat.agent-wui.llm.huggingface-src 20260805 tree:main tags:v0.10.0)"
+ASKING_MAXTRY=33 eval "$(gd flow m i a https://github.com/huggingface/chat-ui.git huggingchat.agent-wui.llm.huggingface-src 20260805 tree:main tags:v0.10.0)"
 ~~~
 
 (llm) Tokenizers
 
 ~~~ sh
-ASKING_MAXTRY=33 eval "$(gd flow m a https://github.com/huggingface/tokenizers.git tokenizers.llm-tokenize.huggingface-lib 20260805 tree:main tags:v0.23.1)"
+ASKING_MAXTRY=33 eval "$(gd flow m i a https://github.com/huggingface/tokenizers.git tokenizers.llm-tokenize.huggingface-lib 20260805 tree:main tags:v0.23.1)"
 ~~~
 
 (ollama) gollama
 
 ~~~ sh
-ASKING_MAXTRY=99 eval "$(gd flow m a https://github.com/Gaurav-Gosain/gollama.git gollama.llm-cli.go-src 20241224 tree:main tags:v1.0.3)"
+ASKING_MAXTRY=99 eval "$(gd flow m i a https://github.com/Gaurav-Gosain/gollama.git gollama.llm-cli.go-src 20241224 tree:main tags:v1.0.3)"
 ~~~
 
 ### (ai) Machine Leaning
@@ -3892,32 +3892,32 @@ ASKING_MAXTRY=99 eval "$(gd flow m a https://github.com/Gaurav-Gosain/gollama.gi
 Hugging Libs
 
 ~~~ sh
-ASKING_MAXTRY=33 eval "$(gd flow m a https://github.com/huggingface/candle.git candle.ml-frame.huggingface-lib 20260805 tree:main tags:0.11.0)"
-ASKING_MAXTRY=33 eval "$(gd flow m a https://github.com/safetensors/safetensors.git safetensors.store-distribute.tensors.huggingface-lib 20260616 tree:main tags:v0.8.0)"
+ASKING_MAXTRY=33 eval "$(gd flow m i a https://github.com/huggingface/candle.git candle.ml-frame.huggingface-lib 20260805 tree:main tags:0.11.0)"
+ASKING_MAXTRY=33 eval "$(gd flow m i a https://github.com/safetensors/safetensors.git safetensors.store-distribute.tensors.huggingface-lib 20260616 tree:main tags:v0.8.0)"
 ~~~
 
 ### (mask) zerobox
 
 ~~~ sh
-ASKING_MAXTRY=9 eval "$(gd flow m a https://github.com/afshinm/zerobox.git zerobox.sandboxcli-src 20260518 tree:main tags:v0.3.3)"
+ASKING_MAXTRY=9 eval "$(gd flow m i a https://github.com/afshinm/zerobox.git zerobox.sandboxcli-src 20260518 tree:main tags:v0.3.3)"
 ~~~
 
 ### (cal) Tyme
 
 ~~~ sh
-ASKING_MAXTRY=8 eval "$(gd flow m h https://github.com/6tail/tyme4ts.git tyme.6tail.date.multilang-libs/ts _ tree:master tags:v1.5.2)"
-ASKING_MAXTRY=8 eval "$(gd flow m h https://github.com/6tail/tyme4rs.git tyme.6tail.date.multilang-libs/rs _ tree:master tags:v1.4.3)"
-ASKING_MAXTRY=8 eval "$(gd flow m h https://github.com/6tail/tyme4py.git tyme.6tail.date.multilang-libs/py _ tree:master tags:v1.5.0)"
-ASKING_MAXTRY=8 eval "$(gd flow m h https://github.com/6tail/tyme4go.git tyme.6tail.date.multilang-libs/go _ tree:master tags:v1.5.0)"
-ASKING_MAXTRY=8 eval "$(gd flow m h https://github.com/6tail/tyme4kt.git tyme.6tail.date.multilang-libs/kt _ tree:master tags:v1.5.0)"
-ASKING_MAXTRY=8 eval "$(gd flow m h https://github.com/6tail/tyme4dart.git tyme.6tail.date.multilang-libs/dart _ tree:master tags:v1.5.0)"
-ASKING_MAXTRY=8 eval "$(gd flow m h https://github.com/6tail/tyme4swift.git tyme.6tail.date.multilang-libs/swift _ tree:master tags:v1.5.0)"
-ASKING_MAXTRY=8 eval "$(gd flow m h https://github.com/6tail/tyme4net.git tyme.6tail.date.multilang-libs/dotnet _ tree:master tags:v1.5.0)"
-ASKING_MAXTRY=8 eval "$(gd flow m h https://github.com/6tail/tyme4oh.git tyme.6tail.date.multilang-libs/openharmony _ tree:master tags:v1.5.2)"
-ASKING_MAXTRY=8 eval "$(gd flow m h https://github.com/6tail/tyme4php.git tyme.6tail.date.multilang-libs/php _ tree:master tags:v1.5.0)"
-ASKING_MAXTRY=8 eval "$(gd flow m h https://github.com/6tail/tyme4j.git tyme.6tail.date.multilang-libs/java _ tree:master tags:v1.5.1)"
-ASKING_MAXTRY=8 eval "$(gd flow m h https://github.com/6tail/tyme4cpp.git tyme.6tail.date.multilang-libs/cpp _ tree:master tags:v1.2.0)"
-eval "$(gd flow m e _ tyme.6tail.date.multilang-libs 20260615)"
+ASKING_MAXTRY=8 eval "$(gd flow m i h https://github.com/6tail/tyme4ts.git tyme.6tail.date.multilang-libs/ts _ tree:master tags:v1.5.2)"
+ASKING_MAXTRY=8 eval "$(gd flow m i h https://github.com/6tail/tyme4rs.git tyme.6tail.date.multilang-libs/rs _ tree:master tags:v1.4.3)"
+ASKING_MAXTRY=8 eval "$(gd flow m i h https://github.com/6tail/tyme4py.git tyme.6tail.date.multilang-libs/py _ tree:master tags:v1.5.0)"
+ASKING_MAXTRY=8 eval "$(gd flow m i h https://github.com/6tail/tyme4go.git tyme.6tail.date.multilang-libs/go _ tree:master tags:v1.5.0)"
+ASKING_MAXTRY=8 eval "$(gd flow m i h https://github.com/6tail/tyme4kt.git tyme.6tail.date.multilang-libs/kt _ tree:master tags:v1.5.0)"
+ASKING_MAXTRY=8 eval "$(gd flow m i h https://github.com/6tail/tyme4dart.git tyme.6tail.date.multilang-libs/dart _ tree:master tags:v1.5.0)"
+ASKING_MAXTRY=8 eval "$(gd flow m i h https://github.com/6tail/tyme4swift.git tyme.6tail.date.multilang-libs/swift _ tree:master tags:v1.5.0)"
+ASKING_MAXTRY=8 eval "$(gd flow m i h https://github.com/6tail/tyme4net.git tyme.6tail.date.multilang-libs/dotnet _ tree:master tags:v1.5.0)"
+ASKING_MAXTRY=8 eval "$(gd flow m i h https://github.com/6tail/tyme4oh.git tyme.6tail.date.multilang-libs/openharmony _ tree:master tags:v1.5.2)"
+ASKING_MAXTRY=8 eval "$(gd flow m i h https://github.com/6tail/tyme4php.git tyme.6tail.date.multilang-libs/php _ tree:master tags:v1.5.0)"
+ASKING_MAXTRY=8 eval "$(gd flow m i h https://github.com/6tail/tyme4j.git tyme.6tail.date.multilang-libs/java _ tree:master tags:v1.5.1)"
+ASKING_MAXTRY=8 eval "$(gd flow m i h https://github.com/6tail/tyme4cpp.git tyme.6tail.date.multilang-libs/cpp _ tree:master tags:v1.2.0)"
+eval "$(gd flow m i e _ tyme.6tail.date.multilang-libs 20260615)"
 ~~~
 
 ### (net) Iroh
@@ -3925,29 +3925,29 @@ eval "$(gd flow m e _ tyme.6tail.date.multilang-libs 20260615)"
 iroh
 
 ~~~ sh
-ASKING_MAXTRY=999 eval "$(gd flow m h https://github.com/n0-computer/iroh.git iroh.quic-traversal.n0computer-srcs/main _ tree:main tags:v1.0.3)"
-ASKING_MAXTRY=999 eval "$(gd flow m h https://github.com/n0-computer/iroh.computer.git iroh.quic-traversal.n0computer-srcs/site _ tree:main)"
-ASKING_MAXTRY=999 eval "$(gd flow m h https://github.com/n0-computer/docs.iroh.computer.git iroh.quic-traversal.n0computer-srcs/docs _ tree:main)"
-ASKING_MAXTRY=999 eval "$(gd flow m h https://github.com/n0-computer/iroh-examples.git iroh.quic-traversal.n0computer-srcs/examples _ tree:main)"
-ASKING_MAXTRY=999 eval "$(gd flow m h https://github.com/n0-computer/n0-dns-resolver.git iroh.quic-traversal.n0computer-srcs/dns _ tree:main)"
-ASKING_MAXTRY=999 eval "$(gd flow m h https://github.com/n0-computer/iroh-ping.git iroh.quic-traversal.n0computer-srcs/qs _ tree:main tags:v1.0.0)"
-ASKING_MAXTRY=999 eval "$(gd flow m h https://github.com/n0-computer/net-tools.git iroh.quic-traversal.n0computer-srcs/netif _ tree:main tags:netwatch-v0.19.1 tags:portmapper-v0.19.1)"
-eval "$(gd flow m e _ iroh.quic-traversal.n0computer-srcs 20260804)"
+ASKING_MAXTRY=999 eval "$(gd flow m i h https://github.com/n0-computer/iroh.git iroh.quic-traversal.n0computer-srcs/main _ tree:main tags:v1.0.3)"
+ASKING_MAXTRY=999 eval "$(gd flow m i h https://github.com/n0-computer/iroh.computer.git iroh.quic-traversal.n0computer-srcs/site _ tree:main)"
+ASKING_MAXTRY=999 eval "$(gd flow m i h https://github.com/n0-computer/docs.iroh.computer.git iroh.quic-traversal.n0computer-srcs/docs _ tree:main)"
+ASKING_MAXTRY=999 eval "$(gd flow m i h https://github.com/n0-computer/iroh-examples.git iroh.quic-traversal.n0computer-srcs/examples _ tree:main)"
+ASKING_MAXTRY=999 eval "$(gd flow m i h https://github.com/n0-computer/n0-dns-resolver.git iroh.quic-traversal.n0computer-srcs/dns _ tree:main)"
+ASKING_MAXTRY=999 eval "$(gd flow m i h https://github.com/n0-computer/iroh-ping.git iroh.quic-traversal.n0computer-srcs/qs _ tree:main tags:v1.0.0)"
+ASKING_MAXTRY=999 eval "$(gd flow m i h https://github.com/n0-computer/net-tools.git iroh.quic-traversal.n0computer-srcs/netif _ tree:main tags:netwatch-v0.19.1 tags:portmapper-v0.19.1)"
+eval "$(gd flow m i e _ iroh.quic-traversal.n0computer-srcs 20260804)"
 ~~~
 
 apps
 
 ~~~ sh
-ASKING_MAXTRY=11 eval "$(gd flow m a https://github.com/chad/iroh-drop.git iroh-drop.chad.iroh-src 20260801 tree:main tags:v0.1.3)"
-ASKING_MAXTRY=11 eval "$(gd flow m a https://github.com/n0-computer/noq.git noq.quic-rs.n0computer-src 20260730 tree:main tags:noq-v1.1.0)"
-ASKING_MAXTRY=11 eval "$(gd flow m a https://github.com/n0-computer/sendme.git sendme.iroh-filesend.n0computer-src 20260725 tree:main tags:v0.36.0)"
+ASKING_MAXTRY=11 eval "$(gd flow m i a https://github.com/chad/iroh-drop.git iroh-drop.chad.iroh-src 20260801 tree:main tags:v0.1.3)"
+ASKING_MAXTRY=11 eval "$(gd flow m i a https://github.com/n0-computer/noq.git noq.quic-rs.n0computer-src 20260730 tree:main tags:noq-v1.1.0)"
+ASKING_MAXTRY=11 eval "$(gd flow m i a https://github.com/n0-computer/sendme.git sendme.iroh-filesend.n0computer-src 20260725 tree:main tags:v0.36.0)"
 
-ASKING_MAXTRY=9 eval "$(gd flow m h https://github.com/n0-computer/dumbpipe.git dumbpipe.iroh-pipe.n0computer-srcs/cli _ tree:main tags:v0.39.0)"
-ASKING_MAXTRY=9 eval "$(gd flow m h https://github.com/n0-computer/dumbpipe.dev.git dumbpipe.iroh-pipe.n0computer-srcs/web _ tree:main)"
-eval "$(gd flow m e _ dumbpipe.iroh-pipe.n0computer-srcs 20260720)"
+ASKING_MAXTRY=9 eval "$(gd flow m i h https://github.com/n0-computer/dumbpipe.git dumbpipe.iroh-pipe.n0computer-srcs/cli _ tree:main tags:v0.39.0)"
+ASKING_MAXTRY=9 eval "$(gd flow m i h https://github.com/n0-computer/dumbpipe.dev.git dumbpipe.iroh-pipe.n0computer-srcs/web _ tree:main)"
+eval "$(gd flow m i e _ dumbpipe.iroh-pipe.n0computer-srcs 20260720)"
 
-ASKING_MAXTRY=11 eval "$(gd flow m a https://github.com/n0-computer/pigeons.git pigeons.iroh-ssh.n0computer-src 20260803 tree:main tags:v0.2.1)"
-ASKING_MAXTRY=11 eval "$(gd flow m a https://github.com/n0-computer/n0-mainline.git n0mainline.dht-iroh.n0computer-lib 20260803 tree:main tags:v0.6.0)"
+ASKING_MAXTRY=11 eval "$(gd flow m i a https://github.com/n0-computer/pigeons.git pigeons.iroh-ssh.n0computer-src 20260803 tree:main tags:v0.2.1)"
+ASKING_MAXTRY=11 eval "$(gd flow m i a https://github.com/n0-computer/n0-mainline.git n0mainline.dht-iroh.n0computer-lib 20260803 tree:main tags:v0.6.0)"
 ~~~
 
 ### (rtm) WASI
@@ -3955,29 +3955,29 @@ ASKING_MAXTRY=11 eval "$(gd flow m a https://github.com/n0-computer/n0-mainline.
 wasi
 
 ~~~ sh
-ASKING_MAXTRY=66 eval "$(gd flow m h https://github.com/WebAssembly/WASI.git wasi.std.wit-srcs/wasi _ tree:main tags:v0.3.0)"
-ASKING_MAXTRY=66 eval "$(gd flow m h https://github.com/wasix-org/wasix-witx.git wasi.std.wit-srcs/wasix _ tree:main)"
-eval "$(gd flow m e _ wasi.std.wit-srcs 20260806)"
+ASKING_MAXTRY=66 eval "$(gd flow m i h https://github.com/WebAssembly/WASI.git wasi.std.wit-srcs/wasi _ tree:main tags:v0.3.0)"
+ASKING_MAXTRY=66 eval "$(gd flow m i h https://github.com/wasix-org/wasix-witx.git wasi.std.wit-srcs/wasix _ tree:main)"
+eval "$(gd flow m i e _ wasi.std.wit-srcs 20260806)"
 ~~~
 
 wasmtime
 
 ~~~ sh
-ASKING_MAXTRY=666 eval "$(gd flow m h https://github.com/bytecodealliance/wasmtime.git wasmtime.cranelift.wasi-srcs/wasmtime _ tree:main tags:v47.0.3)"
-ASKING_MAXTRY=666 eval "$(gd flow m h https://github.com/tessi/wasmex.git wasmtime.cranelift.wasi-srcs/lib-ex _ tree:main tags:v0.14.0)"
-ASKING_MAXTRY=666 eval "$(gd flow m h https://github.com/bytecodealliance/wasmtime-py.git wasmtime.cranelift.wasi-srcs/lib-py _ tree:main tags:47.0.1)"
-ASKING_MAXTRY=666 eval "$(gd flow m h https://github.com/bytecodealliance/wasmtime-go.git wasmtime.cranelift.wasi-srcs/lib-go _ tree:main tags:v47.0.0)"
-eval "$(gd flow m e _ wasmtime.cranelift.wasi-srcs 20260810)"
+ASKING_MAXTRY=666 eval "$(gd flow m i h https://github.com/bytecodealliance/wasmtime.git wasmtime.cranelift.wasi-srcs/wasmtime _ tree:main tags:v47.0.3)"
+ASKING_MAXTRY=666 eval "$(gd flow m i h https://github.com/tessi/wasmex.git wasmtime.cranelift.wasi-srcs/lib-ex _ tree:main tags:v0.14.0)"
+ASKING_MAXTRY=666 eval "$(gd flow m i h https://github.com/bytecodealliance/wasmtime-py.git wasmtime.cranelift.wasi-srcs/lib-py _ tree:main tags:47.0.1)"
+ASKING_MAXTRY=666 eval "$(gd flow m i h https://github.com/bytecodealliance/wasmtime-go.git wasmtime.cranelift.wasi-srcs/lib-go _ tree:main tags:v47.0.0)"
+eval "$(gd flow m i e _ wasmtime.cranelift.wasi-srcs 20260810)"
 ~~~
 
 wasmer
 
 ~~~ sh
-ASKING_MAXTRY=667 eval "$(gd flow m h https://github.com/wasmerio/wasmer.git wasmer.webc.wasix-srcs/wasmer _ tree:main tags:v7.2.1)"
-ASKING_MAXTRY=667 eval "$(gd flow m h https://github.com/wasmerio/wasmer-python.git wasmer.webc.wasix-srcs/lib-py _ tree:master tags:1.1.1)"
-ASKING_MAXTRY=667 eval "$(gd flow m h https://github.com/wasmerio/wasmer-ocaml.git wasmer.webc.wasix-srcs/lib-ml _ tree:master tags:v1.2.1+dunefix)"
-ASKING_MAXTRY=667 eval "$(gd flow m h https://github.com/wasmerio/wasmer-go.git wasmer.webc.wasix-srcs/lib-go _ tree:master tags:v1.0.4)"
-eval "$(gd flow m e _ wasmer.webc.wasix-srcs 20260807)"
+ASKING_MAXTRY=667 eval "$(gd flow m i h https://github.com/wasmerio/wasmer.git wasmer.webc.wasix-srcs/wasmer _ tree:main tags:v7.2.1)"
+ASKING_MAXTRY=667 eval "$(gd flow m i h https://github.com/wasmerio/wasmer-python.git wasmer.webc.wasix-srcs/lib-py _ tree:master tags:1.1.1)"
+ASKING_MAXTRY=667 eval "$(gd flow m i h https://github.com/wasmerio/wasmer-ocaml.git wasmer.webc.wasix-srcs/lib-ml _ tree:master tags:v1.2.1+dunefix)"
+ASKING_MAXTRY=667 eval "$(gd flow m i h https://github.com/wasmerio/wasmer-go.git wasmer.webc.wasix-srcs/lib-go _ tree:master tags:v1.0.4)"
+eval "$(gd flow m i e _ wasmer.webc.wasix-srcs 20260807)"
 ~~~
 
 ### (net) Download Manager
@@ -3985,13 +3985,13 @@ eval "$(gd flow m e _ wasmer.webc.wasix-srcs 20260807)"
 FluxDown
 
 ~~~ sh
-ASKING_MAXTRY=999 eval "$(gd flow m a https://github.com/zerx-lab/FluxDown.git fluxdown.dm.zerxlab-src 20260806 tree:main tags:v0.3.2)"
+ASKING_MAXTRY=999 eval "$(gd flow m i a https://github.com/zerx-lab/FluxDown.git fluxdown.dm.zerxlab-src 20260806 tree:main tags:v0.3.2)"
 ~~~
 
 Risuko
 
 ~~~ sh
-ASKING_MAXTRY=676 eval "$(gd flow m a https://github.com/YueMiyuki/Risuko.git risuko.dm-src 20260724 tree:master tags:v0.6.0)"
+ASKING_MAXTRY=676 eval "$(gd flow m i a https://github.com/YueMiyuki/Risuko.git risuko.dm-src 20260724 tree:master tags:v0.6.0)"
 ~~~
 
 ### (net) Sniffer
@@ -3999,36 +3999,36 @@ ASKING_MAXTRY=676 eval "$(gd flow m a https://github.com/YueMiyuki/Risuko.git ri
 suckit
 
 ~~~ sh
-ASKING_MAXTRY=666 eval "$(gd flow m a https://github.com/Skallwar/suckit.git suckit.web-scrap.cli-src 20260312 tree:master tags:v0.2.0)"
+ASKING_MAXTRY=666 eval "$(gd flow m i a https://github.com/Skallwar/suckit.git suckit.web-scrap.cli-src 20260312 tree:master tags:v0.2.0)"
 ~~~
 
 catcatch
 
 ~~~ sh
-ASKING_MAXTRY=696 eval "$(gd flow m a https://github.com/xifangczy/cat-catch.git catcatch.sniffer.m3u8.addnweb-src 20260805 tree:master tags:2.7.2)"
+ASKING_MAXTRY=696 eval "$(gd flow m i a https://github.com/xifangczy/cat-catch.git catcatch.sniffer.m3u8.addnweb-src 20260805 tree:master tags:2.7.2)"
 ~~~
 
 comiccrawler
 
 ~~~ sh
-ASKING_MAXTRY=666 eval "$(gd flow m a https://github.com/eight04/ComicCrawler.git comiccrawler.scrap.gui-src 20260520 tree:master tags:v2025.3.24)"
+ASKING_MAXTRY=666 eval "$(gd flow m i a https://github.com/eight04/ComicCrawler.git comiccrawler.scrap.gui-src 20260520 tree:master tags:v2025.3.24)"
 ~~~
 
 ### (emu) EmulatorJS
 
 ~~~ sh
-ASKING_MAXTRY=888 eval "$(gd flow m h https://github.com/EmulatorJS/EmulatorJS.git emulatorjs.libretro.gameplat-srcs/main _ tree:main tags:v4.2.3)"
-ASKING_MAXTRY=888 eval "$(gd flow m h https://github.com/EmulatorJS/emulatorjs.org.git emulatorjs.libretro.gameplat-srcs/site _ tree:main)"
-ASKING_MAXTRY=888 eval "$(gd flow m h https://github.com/libretro/RetroArch.git emulatorjs.libretro.gameplat-srcs/_frnt _ tree:master tags:v1.22.2)"
-ASKING_MAXTRY=888 eval "$(gd flow m h https://github.com/libretro/libretro-fceumm.git emulatorjs.libretro.gameplat-srcs/_core _ tree:master)"
-eval "$(gd flow m e _ emulatorjs.libretro.gameplat-srcs 20260808)"
+ASKING_MAXTRY=888 eval "$(gd flow m i h https://github.com/EmulatorJS/EmulatorJS.git emulatorjs.libretro.gameplat-srcs/main _ tree:main tags:v4.2.3)"
+ASKING_MAXTRY=888 eval "$(gd flow m i h https://github.com/EmulatorJS/emulatorjs.org.git emulatorjs.libretro.gameplat-srcs/site _ tree:main)"
+ASKING_MAXTRY=888 eval "$(gd flow m i h https://github.com/libretro/RetroArch.git emulatorjs.libretro.gameplat-srcs/_frnt _ tree:master tags:v1.22.2)"
+ASKING_MAXTRY=888 eval "$(gd flow m i h https://github.com/libretro/libretro-fceumm.git emulatorjs.libretro.gameplat-srcs/_core _ tree:master)"
+eval "$(gd flow m i e _ emulatorjs.libretro.gameplat-srcs 20260808)"
 ~~~
 
 ### (slicer) OrcaSlicer
 
 ~~~ sh
-ASKING_MAXTRY=66 eval "$(gd flow m h https://github.com/OrcaSlicer/OrcaSlicer.git orcaslicer.gcode-gener.3dprinter-slicing.slic3r-srcs/main _ tree:main tags:v2.4.2)"
-ASKING_MAXTRY=66 eval "$(gd flow m h https://github.com/OrcaSlicer/OrcaSlicer_WIKI.git orcaslicer.gcode-gener.3dprinter-slicing.slic3r-srcs/wiki _ tree:main)"
-eval "$(gd flow m e _ orcaslicer.gcode-gener.3dprinter-slicing.slic3r-srcs 20260803)"
+ASKING_MAXTRY=66 eval "$(gd flow m i h https://github.com/OrcaSlicer/OrcaSlicer.git orcaslicer.gcode-gener.3dprinter-slicing.slic3r-srcs/main _ tree:main tags:v2.4.2)"
+ASKING_MAXTRY=66 eval "$(gd flow m i h https://github.com/OrcaSlicer/OrcaSlicer_WIKI.git orcaslicer.gcode-gener.3dprinter-slicing.slic3r-srcs/wiki _ tree:main)"
+eval "$(gd flow m i e _ orcaslicer.gcode-gener.3dprinter-slicing.slic3r-srcs 20260803)"
 ~~~
 
