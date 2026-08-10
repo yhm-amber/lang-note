@@ -3966,7 +3966,7 @@ wasmtime
 ASKING_MAXTRY=666 eval "$(gd flow m h https://github.com/bytecodealliance/wasmtime.git wasmtime.cranelift.wasi-srcs/wasmtime _ tree:main tags:v47.0.3)"
 ASKING_MAXTRY=666 eval "$(gd flow m h https://github.com/tessi/wasmex.git wasmtime.cranelift.wasi-srcs/lib-ex _ tree:main tags:v0.14.0)"
 ASKING_MAXTRY=666 eval "$(gd flow m h https://github.com/bytecodealliance/wasmtime-py.git wasmtime.cranelift.wasi-srcs/lib-py _ tree:main tags:47.0.1)"
-ASKING_MAXTRY=666 eval "$(gd flow m h https://github.com/bytecodealliance/wasmtime-go.git wasmtime.cranelift.wasi-srcs/lib-go _ tree:main tags:47.0.0)"
+ASKING_MAXTRY=666 eval "$(gd flow m h https://github.com/bytecodealliance/wasmtime-go.git wasmtime.cranelift.wasi-srcs/lib-go _ tree:main tags:v47.0.0)"
 eval "$(gd flow m e _ wasmtime.cranelift.wasi-srcs 20260808)"
 ~~~
 
