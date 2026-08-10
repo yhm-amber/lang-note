@@ -196,11 +196,11 @@ Libs ()
 			"$@" && 
 			: ) && 
 		
-		#. eval "$(_frame_kwargs as_bool SHOW_HINTS y)" && 
-		#. eval "$(_frame_kwargs as_bool IS_BARE '')" && 
 		_frame_kwargs () 
 		(
-			as_bool () 
+			#. eval "$(codes_bool SHOW_HINTS y)" && 
+			#. eval "$(codes_bool IS_BARE '')" && 
+			codes_bool () 
 			(
 				: 其音嵌之 其出用之 && 
 				local NAME_EMBEDDED="${1:-${NAME_EMBEDDED:-}}" && 
@@ -214,6 +214,36 @@ Libs ()
 					esac && 
 					: ' && 
 				: ) && 
+			
+			#. chooser_bool SKIP_BARE_UPWEAR no 'bare_play updator' '_cmnd_tools _run_identity' && 
+			#. $(chooser_bool SKIP_BARE_UPWEAR no 'bare_play updator' '_cmnd_tools _run_identity') && 
+			chooser_bool () 
+			(
+				: 其能分之 其用择之 && 
+				local BOOL_NAME_EMBEDDED="${1:-${BOOL_NAME_EMBEDDED:-}}" && 
+				local BOOL_DEFAULT="${2:-${BOOL_DEFAULT:-}}" && 
+				{ shift 2 ; :; } && 
+				local _echo_A="${1:-}" && shift && 
+				local _echo_B="${1:-}" && shift && 
+				if eval "
+				$(codes_bool "${BOOL_NAME_EMBEDDED}" "${BOOL_DEFAULT}")" '&&' '
+				$__'"$BOOL_NAME_EMBEDDED"'__' ;
+					then echo "${_echo_A}" ;
+					else echo "${_echo_B}" ;
+				fi && 
+				: ) && 
+			
+			#. if "$(as_bool SHOW_HINTS y)" ; then ...; else ...; fi && 
+			#. if "$(as_bool IS_BARE '')" ; then ...; else ...; fi && 
+			as_bool () 
+			(
+				: 嵌亓音 出亓内 用以得 && 
+				local NAME_EMBEDDED="${1:-${NAME_EMBEDDED:-}}" && 
+				local BOOL_DEFAULT="${2:-${BOOL_DEFAULT:-}}" && 
+				eval "$(codes_bool "${NAME_EMBEDDED}" "${BOOL_DEFAULT}")" && 
+				eval echo '$__'"${NAME_EMBEDDED}"'__' && 
+				: )
+			
 			: :: && 
 			"$@" && 
 			: ) && 
@@ -228,7 +258,12 @@ Libs ()
 	(
 		_returns () ( return $1 ) && 
 		_booled_returns () ( ! _returns $1 ) && 
-		_curr_dir () ( cd "$1" && basename "$(shift ; pwd "$@")" ) && 
+		_curr_dir () ( cd "${1:-.}" && basename "$(shift ; pwd "$@")" ) && 
+		_curr_ellipath () ( cd "${1:-.}" && echo ".../$(
+			read -r -- pwd < <(echo "$(shift ; pwd "$@")") && 
+			echo "$(dirname "$pwd" | xargs basename)/$(basename "$pwd")" && 
+			: )" ) && 
+		_run_identity () ( "$@" ) && 
 		
 		_std_exec () 
 		(
@@ -428,7 +463,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 	(
 		eval "$(subs frames codes_head)" && 
 		
-		eval "$(subs kwargs as_bool SHOW_HINTS yes)" && 
+		eval "$(subs kwargs codes_bool SHOW_HINTS yes)" && 
 		
 		alias gitdir=gitdir && gitdir () 
 		(
@@ -501,7 +536,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 			cd "${WORKING_PATH:-.}" && 
 			while IFS=: read -r -- landing_path remote_link ;
 			do 
-				echo :: executing: '`'.decks cp auto-clone ${OPTS_CLONE} -- "'${remote_link}'" ${landing_path}'`' at "'$(pwd)'" :: && 
+				echo :: executing: '`'git-decks cp auto-clone ${OPTS_CLONE} -- "'${remote_link}'" ${landing_path}'`' at "'$(pwd)'" :: && 
 				auto_clone ${OPTS_CLONE} -- "${remote_link}" ${landing_path} && 
 				:; 
 			done && 
@@ -568,9 +603,8 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 						: ) && 
 					(
 						echo :: updating in "\`$(pwd)\`" :: && 
-						SHOW_MORE_HINTS=y sync_play base_upgrade . && 
-						# while ! ( git remote update && : ) ;
-						# do 1>&2 echo tried: "$((++try_update))" for remote update && :; done && 
+						# SHOW_MORE_HINTS=y sync_play base_upgrade . && 
+						IS_BARE= sync_play pull_full 'origin' . && 
 						: ) && 
 					(
 						git prune --expire now --dry-run && 
@@ -640,8 +674,9 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 		(
 			echo && 
 			echo 'Using for update bare repo. It will detach worktree dir(s)' && 
-			echo ' which by branch(es), then remote update in automatically retrying,' && 
-			echo ' then checkout these worktree dir(s) backing to their branch(es)' && 
+			echo ' which by branch(es), then remote update and full branches pull if' && 
+			echo ' at least one remote you specified, then checkout these worktree dir(s)' && 
+			echo ' backing to their branch(es)' && 
 			echo && 
 			echo "Bare dir here MUST in a special named dir like: 'name.comments-src'. And:" && 
 			echo "- path of worktree dir from branch must be like: 'name.comments-src/tree/<branch-name>'" && 
@@ -662,6 +697,44 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 			: ) && 
 		alias up=update && update () 
 		(
+			_bare_up () 
+			(
+				while ! ( git remote update "$@" && : ) ;
+				do 1>&2 echo tried: "$((++try_update))" for remote update && :; done && 
+				for _rmt in "$@" ;
+				do IS_BARE=y sync_play pull_full "$_rmt" . && :; done && 
+				: ) && 
+			updator _bare_up "$@" && 
+			: ) && 
+		
+		#. git-deck bare-play upper git remote update
+		#. git-deck bare-play upper git remote update origin
+		#. git-deck bare-play upper sync_play pull_full disroot .
+		updator__helper__ () 
+		(
+			echo && 
+			echo 'Support for update bare repo. It will detach worktree dir(s)' && 
+			echo ' which by branch(es), then run command you gives in automatically retrying,' && 
+			echo ' then checkout these worktree dir(s) backing to their branch(es)' && 
+			echo && 
+			echo "Bare dir here MUST in a special named dir like: 'name.comments-src'. And:" && 
+			echo "- path of worktree dir from branch must be like: 'name.comments-src/tree/<branch-name>'" && 
+			echo "- path of worktree dir from tag must be like: 'name.comments-src/tags/<tag-name>'" && 
+			echo && 
+			echo 'Demo:' && 
+			echo '- git-deck bare-play upper git remote update' && 
+			echo '- git-deck bare-play upper git remote update origin' && 
+			echo '- git-deck bare-play upper sync_play pull_full disroot .' && 
+			echo && 
+			echo 'See help:' && 
+			echo '- git-deck help bare-play updator' && 
+			echo '- git-deck help bare-play upper' && 
+			echo '- git-deck help bp upper' && 
+			echo '- git-deck bp help upper' && 
+			echo && 
+			: ) && 
+		alias upper=updator && updator () 
+		(
 			_find_in () 
 			(
 				_path="${1}" && shift && 
@@ -681,15 +754,10 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 					:; 
 				done && 
 			
-			echo :: executing: remote update "$@" :: && 
-			while ! ( git remote update "$@" && : ) ;
-			do 1>&2 echo tried: "$((++try_update))" for remote update && :; done && 
-			(
-				1>&2 echo upper: updated in "'.../$(
-					read -r -- pwd < <(echo "$(pwd)") && 
-					echo "$(dirname "$pwd" | xargs basename)/$(basename "$pwd")" && 
-					: )'" for remote'(s)' $@ && 
-				: ) && 
+			echo :: executing inputed: '`'"$*"'`' :: && 
+			while ! ( SKIP_BARE_UPWEAR=y _cmnd_tools _run_identity "$@" && : ) ;
+			do 1>&2 echo tried: "$((++try_update))" for '`'"$*"'`' && :; done && 
+			1>&2 echo upper: updated in "'$(_cmnd_tools _curr_ellipath)'" by executing: '`'"$*"'`' && 
 			
 			_find_in ../tree -maxdepth 1 -mindepth 1 -type d | 
 				while read -r -- treepath ; 
@@ -722,7 +790,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 			
 			_param_tools params_roll "$@" | while IFS=: read -r -- _type _name ;
 			do 
-				echo :: executing: '`'"CHOOSE_MODE='${CHOOSE_MODE:-Only}' .decks bp worktree ${__cmd_sub__} $_type $_name"'`' at "'$(pwd)'" :: && 
+				echo :: executing: '`'"CHOOSE_MODE='${CHOOSE_MODE:-Only}' git-decks bp worktree ${__cmd_sub__} $_type $_name"'`' at "'$(pwd)'" :: && 
 				CHOOSE_MODE="${CHOOSE_MODE:-Only}" worktree "${__cmd_sub__}" "$_type" "$_name" && 
 				:; 
 			done && 
@@ -965,13 +1033,13 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 						then local IS_BARE="$(repo_chk bare . echo)" ;
 						else local IS_BARE="${IS_BARE:-}" ;
 					fi && 
-					eval "$(subs kwargs as_bool IS_BARE '')" && 
+					eval "$(subs kwargs codes_bool IS_BARE '')" && 
 					echo base_up: update from remote for "'${gitdir}'" && 
 					while 
 					! if ! "${__IS_BARE__}" ;
 						then git pull ;
-						else bare_play update ;
-						# else git remote update ;
+						# else bare_play update ;
+						else bare_play updator git remote update ;
 					fi ;
 					do 
 						echo base_up: tried: "$((++try_pull_base_upgrade))" for '`'"$(if ! "${__IS_BARE__}" ;
@@ -1006,7 +1074,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 			(
 				_emb_name="${1:-CHECK_REMOTE_EXISTS}" && 
 				echo '
-					eval "$(subs kwargs as_bool '"$_emb_name"' y)" && 
+					eval "$(subs kwargs codes_bool '"$_emb_name"' y)" && 
 					if "$__'"$_emb_name"'__" ;
 						then { has "$@" 1>/dev//null || return $? ; } ;
 						else : ;
@@ -1031,7 +1099,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 						cat - && 
 					:; 
 				done && 
-				if eval "$(subs kwargs as_bool LIST_WITH_LOCAL no)" '&&' '$__LIST_WITH_LOCAL__' ;
+				if eval "$(subs kwargs codes_bool LIST_WITH_LOCAL no)" '&&' '$__LIST_WITH_LOCAL__' ;
 					then git for-each-ref --format=$'%(objectname)\t.local\t%(refname)' -- 'refs/heads/*' ;
 					else : ;
 				fi && 
@@ -1240,7 +1308,9 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 			! { 
 			if ! "${IS_BARE}" && : 其令选行 ;
 				then git fetch "$@" -- "${_git_remote}" 'refs/heads/*:refs/heads/*' '^'"${_symbref_head}" ;
-				else git fetch "$@" -- "${_git_remote}" 'refs/heads/*:refs/heads/*' ;
+				else $(
+					subs kwargs chooser_bool SKIP_BARE_UPWEAR no '_cmnd_tools _run_identity' 'bare_play updator' && 
+					: ) git fetch "$@" -- "${_git_remote}" 'refs/heads/*:refs/heads/*' ;
 			fi || 
 				remote necessity verific "${_git_remote}" pull && 
 			:; } ;
@@ -1276,7 +1346,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 					repo_chk gitdir "${gitdir}" && 
 					: ) && 
 				local checked_bare="$(repo_chk bare "${gitdir}" echo)" && 
-				if eval "$(subs kwargs as_bool SKIP_BASEUP no)" '&&' '${__SKIP_BASEUP__}' ;
+				if eval "$(subs kwargs codes_bool SKIP_BASEUP no)" '&&' '${__SKIP_BASEUP__}' ;
 					then : ; 
 					else SHOW_MORE_HINTS=no IS_BARE="$checked_bare" base_upgrade "${gitdir}" ; 
 				fi && 
@@ -1312,7 +1382,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 					repo_chk gitdir "${gitdir}" && 
 					: ) && 
 				local checked_bare="$(repo_chk bare "${gitdir}" echo)" && 
-				if eval "$(subs kwargs as_bool SKIP_BASEUP no)" '&&' '${__SKIP_BASEUP__}' ;
+				if eval "$(subs kwargs codes_bool SKIP_BASEUP no)" '&&' '${__SKIP_BASEUP__}' ;
 					then : ; 
 					else SHOW_MORE_HINTS=no IS_BARE="$checked_bare" base_upgrade "${gitdir}" ; 
 				fi && 
@@ -1349,6 +1419,33 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 	alias flow=flow_play flow-play=flow_play && flow_play () 
 	(
 		eval "$(subs frames codes_head)" && 
+		
+		#. eval "$(_frame head_codes)" && 
+		#. eval "$(_frame tail_codes)" && 
+		_frame () 
+		(
+			head_codes () 
+			(
+				echo '
+					{ WORKING_TYPE="$1" && shift ; } && 
+					: ' && 
+				: ) && 
+			
+			tail_codes () 
+			(
+				echo '
+					case "${WORKING_TYPE}" 
+					in 
+						(i|ini|init) codes_init  "$@" ;; 
+						(d|dy|daily) codes_daily "$@" ;; 
+						(_) 1>&2 echo Unknown working type: "'"'"'${WORKING_TYPE}'"'"'", only '"'"'`'"'"'init/daily'"'"'`'"'"' supported. && return 16 ;;
+					esac && 
+					: ' && 
+				: ) && 
+			
+			: :: && 
+			"$@" && 
+			: ) && 
 		
 		alias t=tools tools=tool_codes && tool_codes () 
 		(
@@ -1398,128 +1495,99 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 			: ) && 
 		
 		
-		#: gd flow mirrors <all|home|ende> <repo-link> <path-into> <lastup-date> [<tree:|tags:> ...]
-		#. gd flow mirrors all https://github.com/chad/iroh-drop.git iroh-drop.chad.iroh-src 20260801 tree:main tags:v0.1.3
-		#. ASKING_MAXTRY=11 eval "$(gd flow m a https://github.com/chad/iroh-drop.git iroh-drop.chad.iroh-src 20260801 tree:main tags:v0.1.3)"
-		#. ASKING_MAXTRY=11 eval "$(gd flow m a https://github.com/n0-computer/noq.git noq.quic-rs.n0computer-src 20260730 tree:main tags:noq-v1.1.0)"
-		#. ASKING_MAXTRY=11 eval "$(gd flow m a https://github.com/n0-computer/sendme.git sendme.iroh-filesend.n0computer-src 20260725 tree:main tags:v0.36.0)"
-		#. ASKING_MAXTRY=9 eval "$(gd flow m h https://github.com/n0-computer/dumbpipe.git dumbpipe.iroh-pipe.n0computer-srcs/cli _ tree:main tags:v0.39.0)"
-		#. ASKING_MAXTRY=9 eval "$(gd flow m h https://github.com/n0-computer/dumbpipe.dev.git dumbpipe.iroh-pipe.n0computer-srcs/web _ tree:main)"
-		#. eval "$(gd flow m e _ dumbpipe.iroh-pipe.n0computer-srcs 20260720)"
-		#. ASKING_MAXTRY=11 eval "$(gd flow m a https://github.com/n0-computer/pigeons.git pigeons.iroh-ssh.n0computer-src 20260803 tree:main tags:v0.2.1)"
-		#. ASKING_MAXTRY=11 eval "$(gd flow m a https://github.com/n0-computer/n0-mainline.git n0mainline.dht-iroh.n0computer-lib 20260803 tree:main tags:v0.6.0)"
-		#. ASKING_MAXTRY=999 eval "$(gd flow m h https://github.com/n0-computer/iroh.git iroh.quic-traversal.n0computer-srcs/main _ tree:main tags:v1.0.3)"
-		#. ASKING_MAXTRY=999 eval "$(gd flow m h https://github.com/n0-computer/iroh.computer.git iroh.quic-traversal.n0computer-srcs/site _ tree:main)"
-		#. ASKING_MAXTRY=999 eval "$(gd flow m h https://github.com/n0-computer/docs.iroh.computer.git iroh.quic-traversal.n0computer-srcs/docs _ tree:main)"
-		#. ASKING_MAXTRY=999 eval "$(gd flow m h https://github.com/n0-computer/iroh-examples.git iroh.quic-traversal.n0computer-srcs/examples _ tree:main)"
-		#. ASKING_MAXTRY=999 eval "$(gd flow m h https://github.com/n0-computer/n0-dns-resolver.git iroh.quic-traversal.n0computer-srcs/dns _ tree:main)"
-		#. ASKING_MAXTRY=999 eval "$(gd flow m h https://github.com/n0-computer/iroh-ping.git iroh.quic-traversal.n0computer-srcs/qs _ tree:main tags:v1.0.0)"
-		#. ASKING_MAXTRY=999 eval "$(gd flow m h https://github.com/n0-computer/net-tools.git iroh.quic-traversal.n0computer-srcs/netif _ tree:main tags:netwatch-v0.19.1 tags:portmapper-v0.19.1)"
-		#. eval "$(gd flow m e _ iroh.quic-traversal.n0computer-srcs 20260804)"
-		#. ASKING_MAXTRY=66 eval "$(gd flow m h https://github.com/OrcaSlicer/OrcaSlicer.git orcaslicer.gcode-gener.3dprinter-slicing.slic3r-srcs/main _ tree:main tags:v2.4.2)"
-		#. ASKING_MAXTRY=66 eval "$(gd flow m h https://github.com/OrcaSlicer/OrcaSlicer_WIKI.git orcaslicer.gcode-gener.3dprinter-slicing.slic3r-srcs/wiki _ tree:main)"
-		#. eval "$(gd flow m e _ orcaslicer.gcode-gener.3dprinter-slicing.slic3r-srcs 20260803)"
-		#. ASKING_MAXTRY=8 eval "$(gd flow m h https://github.com/6tail/tyme4ts.git tyme.6tail.date.multilang-libs/ts _ tree:master tags:v1.5.2)"
-		#. ASKING_MAXTRY=8 eval "$(gd flow m h https://github.com/6tail/tyme4rs.git tyme.6tail.date.multilang-libs/rs _ tree:master tags:v1.4.3)"
-		#. ASKING_MAXTRY=8 eval "$(gd flow m h https://github.com/6tail/tyme4py.git tyme.6tail.date.multilang-libs/py _ tree:master tags:v1.5.0)"
-		#. ASKING_MAXTRY=8 eval "$(gd flow m h https://github.com/6tail/tyme4go.git tyme.6tail.date.multilang-libs/go _ tree:master tags:v1.5.0)"
-		#. ASKING_MAXTRY=8 eval "$(gd flow m h https://github.com/6tail/tyme4kt.git tyme.6tail.date.multilang-libs/kt _ tree:master tags:v1.5.0)"
-		#. ASKING_MAXTRY=8 eval "$(gd flow m h https://github.com/6tail/tyme4dart.git tyme.6tail.date.multilang-libs/dart _ tree:master tags:v1.5.0)"
-		#. ASKING_MAXTRY=8 eval "$(gd flow m h https://github.com/6tail/tyme4swift.git tyme.6tail.date.multilang-libs/swift _ tree:master tags:v1.5.0)"
-		#. ASKING_MAXTRY=8 eval "$(gd flow m h https://github.com/6tail/tyme4net.git tyme.6tail.date.multilang-libs/dotnet _ tree:master tags:v1.5.0)"
-		#. ASKING_MAXTRY=8 eval "$(gd flow m h https://github.com/6tail/tyme4oh.git tyme.6tail.date.multilang-libs/openharmony _ tree:master tags:v1.5.2)"
-		#. ASKING_MAXTRY=8 eval "$(gd flow m h https://github.com/6tail/tyme4php.git tyme.6tail.date.multilang-libs/php _ tree:master tags:v1.5.0)"
-		#. ASKING_MAXTRY=8 eval "$(gd flow m h https://github.com/6tail/tyme4j.git tyme.6tail.date.multilang-libs/java _ tree:master tags:v1.5.1)"
-		#. ASKING_MAXTRY=8 eval "$(gd flow m h https://github.com/6tail/tyme4cpp.git tyme.6tail.date.multilang-libs/cpp _ tree:master tags:v1.2.0)"
-		#. eval "$(gd flow m e _ tyme.6tail.date.multilang-libs 20260615)"
-		#. ASKING_MAXTRY=888 eval "$(gd flow m h https://github.com/EmulatorJS/EmulatorJS.git emulatorjs.libretro.gameplat-srcs/main _ tree:main tags:v4.2.3)"
-		#. ASKING_MAXTRY=888 eval "$(gd flow m h https://github.com/EmulatorJS/emulatorjs.org.git emulatorjs.libretro.gameplat-srcs/site _ tree:main)"
-		#. ASKING_MAXTRY=888 eval "$(gd flow m h https://github.com/libretro/RetroArch.git emulatorjs.libretro.gameplat-srcs/_frnt _ tree:master tags:v1.22.2)"
-		#. ASKING_MAXTRY=888 eval "$(gd flow m h https://github.com/libretro/libretro-fceumm.git emulatorjs.libretro.gameplat-srcs/_core _ tree:master)"
-		#. eval "$(gd flow m e _ emulatorjs.libretro.gameplat-srcs 20260721)"
-		#. ASKING_MAXTRY=1111 eval "$(gd flow m h https://github.com/pranshuparmar/witr.git witr.whyrunning-tracer.pranshuparmar-srcs/go _ tree:main tags:v0.3.3)"
-		#. ASKING_MAXTRY=1111 eval "$(gd flow m h https://github.com/rewrite-everything-in-rust/witr-rs.git witr.whyrunning-tracer.pranshuparmar-srcs/.rw-rs _ tree:main tags:v0.1.2)"
-		#. eval "$(gd flow m e _ witr.whyrunning-tracer.pranshuparmar-srcs 20260808)"
-		#. ASKING_MAXTRY=999 eval "$(gd flow m a https://github.com/Hmbown/CodeWhale.git codewhale.coding-agent.whale-src 20260807 tree:main tags:v0.9.3)"
-		#. ASKING_MAXTRY=1122 eval "$(gd flow m a https://github.com/crynta/terax-ai.git terax.term.editor.ai-src 20260804 tree:main tags:v0.8.6)"
-		#. ASKING_MAXTRY=11 eval "$(gd flow m a https://github.com/lyogavin/airllm.git airllm.gpumem-less.lyogavin-lib 20260729 tree:main tags:v3.1.0)"
-		#. ASKING_MAXTRY=33 eval "$(gd flow m a https://github.com/huggingface/chat-ui.git huggingchat.agent-wui.llm.huggingface-src 20260805 tree:main tags:v0.10.0)"
-		#. ASKING_MAXTRY=33 eval "$(gd flow m a https://github.com/huggingface/candle.git candle.ml-frame.huggingface-lib 20260805 tree:main tags:0.11.0)"
-		#. ASKING_MAXTRY=33 eval "$(gd flow m a https://github.com/huggingface/tokenizers.git tokenizers.llm-tokenize.huggingface-lib 20260805 tree:main tags:v0.23.1)"
-		#. ASKING_MAXTRY=33 eval "$(gd flow m a https://github.com/safetensors/safetensors.git safetensors.store-distribute.tensors.huggingface-lib 20260616 tree:main tags:v0.8.0)"
-		#. ASKING_MAXTRY=9 eval "$(gd flow m a https://github.com/afshinm/zerobox.git zerobox.sandboxcli-src 20260518 tree:main tags:v0.3.3)"
-		#. ASKING_MAXTRY=666 eval "$(gd flow m h https://github.com/bytecodealliance/wasmtime.git wasmtime.cranelift.wasi-srcs/wasmtime _ tree:main tags:v47.0.3)"
-		#. ASKING_MAXTRY=666 eval "$(gd flow m h https://github.com/tessi/wasmex.git wasmtime.cranelift.wasi-srcs/lib-ex _ tree:main tags:v0.14.0)"
-		#. ASKING_MAXTRY=666 eval "$(gd flow m h https://github.com/bytecodealliance/wasmtime-py.git wasmtime.cranelift.wasi-srcs/lib-py _ tree:main tags:47.0.1)"
-		#. ASKING_MAXTRY=666 eval "$(gd flow m h https://github.com/bytecodealliance/wasmtime-go.git wasmtime.cranelift.wasi-srcs/lib-go _ tree:main tags:47.0.0)"
-		#. eval "$(gd flow m e _ wasmtime.cranelift.wasi-srcs 20260808)"
-		#. ASKING_MAXTRY=667 eval "$(gd flow m h https://github.com/wasmerio/wasmer.git wasmer.webc.wasix-srcs/wasmer _ tree:main tags:v7.2.1)"
-		#. ASKING_MAXTRY=667 eval "$(gd flow m h https://github.com/wasmerio/wasmer-python.git wasmer.webc.wasix-srcs/lib-py _ tree:master tags:1.1.1)"
-		#. ASKING_MAXTRY=667 eval "$(gd flow m h https://github.com/wasmerio/wasmer-ocaml.git wasmer.webc.wasix-srcs/lib-ml _ tree:master tags:v1.2.1+dunefix)"
-		#. ASKING_MAXTRY=667 eval "$(gd flow m h https://github.com/wasmerio/wasmer-go.git wasmer.webc.wasix-srcs/lib-go _ tree:master tags:v1.0.4)"
-		#. eval "$(gd flow m e _ wasmer.webc.wasix-srcs 20260807)"
-		#. ASKING_MAXTRY=66 eval "$(gd flow m h https://github.com/WebAssembly/WASI.git wasi.std.wit-srcs/wasi _ tree:main tags:v0.3.0)"
-		#. ASKING_MAXTRY=66 eval "$(gd flow m h https://github.com/wasix-org/wasix-witx.git wasi.std.wit-srcs/wasix _ tree:main)"
-		#. eval "$(gd flow m e _ wasi.std.wit-srcs 20260806)"
-		#. ASKING_MAXTRY=99 eval "$(gd flow m a https://github.com/Gaurav-Gosain/tuios.git tuios.tui-multiplexer.go-src 20260801 tree:main tags:v0.7.0)"
-		#. ASKING_MAXTRY=99 eval "$(gd flow m a https://github.com/Gaurav-Gosain/golars.git golars.cli-df.polars.go-src 20260425 tree:main tags:v0.1.8)"
-		#. ASKING_MAXTRY=99 eval "$(gd flow m a https://github.com/Gaurav-Gosain/gollama.git gollama.llm-cli.go-src 20241224 tree:main tags:v1.0.3)"
-		#. ASKING_MAXTRY=668 eval "$(gd flow m a https://github.com/medialab/xan.git xan.olap-cli.csv.medialab-src 20260731 tree:master tags:0.60.0)"
-		#. ASKING_MAXTRY=997 eval "$(gd flow m a https://github.com/netbootxyz/netboot.xyz.git netboot.xyz-src 20260806 tree:development tags:3.0.2)"
-		#. ASKING_MAXTRY=777 eval "$(gd flow m a https://github.com/sayanarijit/xplr.git xplr.file-expl.tui-src 20260806 tree:main tags:v1.1.0)"
-		#. ASKING_MAXTRY=898 eval "$(gd flow m a https://github.com/spacedriveapp/spacedrive.git spacedrive.file-expl.spaceui-src 20260729 tree:main tags:0.4.3)"
-		#. ASKING_MAXTRY=898 eval "$(gd flow m a https://github.com/spacedriveapp/spacebot.git spacebot.agent-harness.spaceui-src 20260510 tree:main tags:v0.5.0)"
-		#. ASKING_MAXTRY=699 eval "$(gd flow m a https://github.com/sxyazi/yazi.git yazi.file-expl.tui-src 20260807 tree:main tags:v26.5.6)"
-		#. ASKING_MAXTRY=868 eval "$(gd flow m a https://github.com/earendil-works/pi.git pi.agent-harness.tui-src 20260807 tree:main tags:v0.84.1)"
-		#. ASKING_MAXTRY=999 eval "$(gd flow m a https://github.com/zerx-lab/zap.git zap.terminal-sim.zerxlab-src 20260709 tree:main tags:v2026.07.09.1)"
-		#. ASKING_MAXTRY=999 eval "$(gd flow m a https://github.com/zerx-lab/FluxDown.git fluxdown.dm.zerxlab-src 20260806 tree:main tags:v0.3.2)"
-		#. ASKING_MAXTRY=696 eval "$(gd flow m a https://github.com/xifangczy/cat-catch.git catcatch.sniffer.m3u8.addnweb-src 20260805 tree:master tags:2.7.2)"
-		#. ASKING_MAXTRY=666 eval "$(gd flow m a https://github.com/eight04/ComicCrawler.git comiccrawler.scrap.gui-src 20260520 tree:master tags:v2025.3.24)"
-		#. ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/gleam.git       gleam.beam-typed.lang-srcs/'impl ⭐️' _ tree:main tags:v1.18.1)"
-		#. ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/stdlib.git       gleam.beam-typed.lang-srcs/'std 🎁' _ tree:main tags:v1.0.5)"
-		#. ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/playground.git  gleam.beam-typed.lang-srcs/'play 🥨' _ tree:main)"
-		#. ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/erlang.git     gleam.beam-typed.lang-srcs/'erl-compatable 🐙' _ tree:main tags:v1.2.0)"
-		#. ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/otp.git     gleam.beam-typed.lang-srcs/'otp-coresubtyping 📫' _ tree:main tags:v1.2.0)"
-		#. ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/javascript.git  gleam.beam-typed.lang-srcs/'js-compatable 🌼' _ tree:main tags:v1.0.1)"
-		#. ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/website.git                   gleam.beam-typed.lang-srcs/'.site 🏡' _  tree:main)"
-		#. ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/cookbook.git                  gleam.beam-typed.lang-srcs/'.book 👩🏾‍🍳' _  tree:main)"
-		#. ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/language-tour.git             gleam.beam-typed.lang-srcs/'.tour 👩🏽‍💻' _  tree:main)"
-		#. ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/awesome-gleam.git             gleam.beam-typed.lang-srcs/'.awes 💯' _  tree:main)"
-		#. ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/example-lisp-interpreter.git  gleam.beam-typed.lang-srcs/'.sexp 👾' _  tree:main)"
-		#. ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/tree-sitter-gleam.git   gleam.beam-typed.lang-srcs/'parser-bind 🌳' _ tree:main tags:v1.1.0)"
-		#. ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/crypto.git  gleam.beam-typed.lang-srcs/offilibs/'.hash ⛓️' _ tree:main tags:v1.6.0)"
-		#. ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/regexp.git  gleam.beam-typed.lang-srcs/offilibs/'.regx 📇' _ tree:main tags:v1.1.1)"
-		#. ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/deque.git   gleam.beam-typed.lang-srcs/offilibs/'.dque 🚃' _ tree:main tags:v1.0.0)"
-		#. ASKING_MAXTRY=797 eval "$(gd flow m h https://github.com/gleam-lang/time.git    gleam.beam-typed.lang-srcs/offilibs/'.dque 🕰️' _ tree:main tags:v1.8.0)"
-		#. eval "$(gd flow m e _ gleam.beam-typed.lang-srcs 20260806)"
-		#. ASKING_MAXTRY=667 eval "$(gd flow m a https://github.com/YueMiyuki/Risuko.git risuko.dm-src 20260724 tree:master tags:v0.6.0)"
+		#. ASKING_MAXTRY=11 eval "$(gd flow m i a https://github.com/chad/iroh-drop.git iroh-drop.chad.iroh-src 20260801 tree:main tags:v0.1.3)"
+		#. ASKING_MAXTRY=11 eval "$(gd flow m i a https://github.com/n0-computer/noq.git noq.quic-rs.n0computer-src 20260730 tree:main tags:noq-v1.1.0)"
+		#. ASKING_MAXTRY=11 eval "$(gd flow m i a https://github.com/n0-computer/sendme.git sendme.iroh-filesend.n0computer-src 20260725 tree:main tags:v0.36.0)"
+		#. ASKING_MAXTRY=9 eval "$(gd flow m i h https://github.com/n0-computer/dumbpipe.git dumbpipe.iroh-pipe.n0computer-srcs/cli _ tree:main tags:v0.39.0)"
+		#. ASKING_MAXTRY=9 eval "$(gd flow m i h https://github.com/n0-computer/dumbpipe.dev.git dumbpipe.iroh-pipe.n0computer-srcs/web _ tree:main)"
+		#. eval "$(gd flow m i e _ dumbpipe.iroh-pipe.n0computer-srcs 20260720)"
+		#. ASKING_MAXTRY=999 eval "$(gd flow m i a https://github.com/Hmbown/CodeWhale.git codewhale.coding-agent.whale-src 20260807 tree:main tags:v0.9.3)"
+		#. ASKING_MAXTRY=1122 eval "$(gd flow m i a https://github.com/crynta/terax-ai.git terax.term.editor.ai-src 20260804 tree:main tags:v0.8.6)"
+		#. ASKING_MAXTRY=11 eval "$(gd flow m i a https://github.com/lyogavin/airllm.git airllm.gpumem-less.lyogavin-lib 20260729 tree:main tags:v3.1.0)"
+		#. ASKING_MAXTRY=33 eval "$(gd flow m i a https://github.com/safetensors/safetensors.git safetensors.store-distribute.tensors.huggingface-lib 20260616 tree:main tags:v0.8.0)"
+		#. ASKING_MAXTRY=9 eval "$(gd flow m i a https://github.com/afshinm/zerobox.git zerobox.sandboxcli-src 20260518 tree:main tags:v0.3.3)"
+		#. ASKING_MAXTRY=66 eval "$(gd flow m i h https://github.com/WebAssembly/WASI.git wasi.std.wit-srcs/wasi _ tree:main tags:v0.3.0)"
+		#. ASKING_MAXTRY=66 eval "$(gd flow m i h https://github.com/wasix-org/wasix-witx.git wasi.std.wit-srcs/wasix _ tree:main)"
+		#. eval "$(gd flow m i e _ wasi.std.wit-srcs 20260806)"
+		#. ASKING_MAXTRY=99 eval "$(gd flow m i a https://github.com/Gaurav-Gosain/golars.git golars.cli-df.polars.go-src 20260425 tree:main tags:v0.1.8)"
+		#. ASKING_MAXTRY=668 eval "$(gd flow m i a https://github.com/medialab/xan.git xan.olap-cli.csv.medialab-src 20260731 tree:master tags:0.60.0)"
+		#. ASKING_MAXTRY=777 eval "$(gd flow m i a https://github.com/sayanarijit/xplr.git xplr.file-expl.tui-src 20260806 tree:main tags:v1.1.0)"
+		#. ASKING_MAXTRY=999 eval "$(gd flow m i a https://github.com/zerx-lab/zap.git zap.terminal-sim.zerxlab-src 20260709 tree:main tags:v2026.07.09.1)"
+		#. ASKING_MAXTRY=999 eval "$(gd flow m i a https://github.com/zerx-lab/FluxDown.git fluxdown.dm.zerxlab-src 20260806 tree:main tags:v0.3.2)"
+		#. ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/gleam.git       gleam.beam-typed.lang-srcs/'impl ⭐️' _ tree:main tags:v1.18.1)"
+		#. ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/stdlib.git       gleam.beam-typed.lang-srcs/'std 🎁' _ tree:main tags:v1.0.5)"
+		#. ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/playground.git  gleam.beam-typed.lang-srcs/'play 🥨' _ tree:main)"
+		#. ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/erlang.git     gleam.beam-typed.lang-srcs/'erl-compatable 🐙' _ tree:main tags:v1.2.0)"
+		#. ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/otp.git     gleam.beam-typed.lang-srcs/'otp-coresubtyping 📫' _ tree:main tags:v1.2.0)"
+		#. ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/javascript.git  gleam.beam-typed.lang-srcs/'js-compatable 🌼' _ tree:main tags:v1.0.1)"
+		#. ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/website.git                   gleam.beam-typed.lang-srcs/'.site 🏡' _  tree:main)"
+		#. ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/cookbook.git                  gleam.beam-typed.lang-srcs/'.book 👩🏾‍🍳' _  tree:main)"
+		#. ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/language-tour.git             gleam.beam-typed.lang-srcs/'.tour 👩🏽‍💻' _  tree:main)"
+		#. ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/awesome-gleam.git             gleam.beam-typed.lang-srcs/'.awes 💯' _  tree:main)"
+		#. ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/example-lisp-interpreter.git  gleam.beam-typed.lang-srcs/'.sexp 👾' _  tree:main)"
+		#. ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/tree-sitter-gleam.git   gleam.beam-typed.lang-srcs/'parser-bind 🌳' _ tree:main tags:v1.1.0)"
+		#. ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/crypto.git  gleam.beam-typed.lang-srcs/offilibs/'.hash ⛓️' _ tree:main tags:v1.6.0)"
+		#. ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/regexp.git  gleam.beam-typed.lang-srcs/offilibs/'.regx 📇' _ tree:main tags:v1.1.1)"
+		#. ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/deque.git   gleam.beam-typed.lang-srcs/offilibs/'.dque 🚃' _ tree:main tags:v1.0.0)"
+		#. ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/time.git    gleam.beam-typed.lang-srcs/offilibs/'.dque 🕰️' _ tree:main tags:v1.8.0)"
+		#. eval "$(gd flow m i e _ gleam.beam-typed.lang-srcs 20260806)"
+		#. ASKING_MAXTRY=868 eval "$(gd flow m i a https://github.com/earendil-works/pi.git pi.agent-harness.tui-src 20260807 tree:main tags:v0.84.1)"
 		alias m=mirrors mirrors=mirror_codes && mirror_codes () 
 		(
 			tool_codes '&&' && 
-			{ WORKING_TYPE="$1" && shift ; } && 
 			
-			{ REPO_LINK="$1" && shift ; } && 
-			{ PATH_INTO="$1" && shift ; } && 
-			{ LASTUP_DATE="$1" && shift ; } && 
+			eval "$(_frame head_codes)" && 
 			
-			codes_home () 
+			#: gd flow mirrors init <all|home|ende> <repo-link> <path-into> <lastup-date> [<tree:|tags:> ...]
+			#. gd flow mirrors init all https://github.com/chad/iroh-drop.git iroh-drop.chad.iroh-src 20260801 tree:main tags:v0.1.3
+			codes_init () 
 			(
-				echo din "'${PATH_INTO}'" $'\t' "git-deck cp a --mirror -- ${REPO_LINK}" '&& ' && 
-				echo din "'${PATH_INTO}'/$(basename "${REPO_LINK}")" $'\t' "git-deck bp wts i $*" '&& ' && 
+				{ WORKING_PART="$1" && shift ; } && 
+				
+				{ REPO_LINK="$1" && shift ; } && 
+				{ PATH_INTO="$1" && shift ; } && 
+				{ LASTUP_DATE="$1" && shift ; } && 
+				
+				codes_home () 
+				(
+					echo din "'${PATH_INTO}'" $'\t' "git-deck cp a --mirror -- ${REPO_LINK}" '&& ' && 
+					echo din "'${PATH_INTO}'/$(basename "${REPO_LINK}")" $'\t' "git-deck bp wts i $*" '&& ' && 
+					: ) && 
+				codes_ende () 
+				(
+					echo din . $'\t' "txzb3 '${PATH_INTO}' ${LASTUP_DATE}"' && '"$*" && 
+					: ) && 
+				
+				case "${WORKING_PART}" 
+				in 
+					(home|h) codes_home "$@" && echo : ;; 
+					(ende|e) codes_ende : ;; 
+					(a|all) codes_home "$@" && codes_ende : ;; 
+					(_) 1>&2 echo Unknown working part: "'${WORKING_PART}'", only '`'home/ende/all'`' supported. && return 16 ;;
+				esac && 
 				: ) && 
-			codes_ende () 
+			
+			#: gd flow mirrors daily <working-path>
+			#. gd flow mirrors daily iroh-drop.chad.iroh-src
+			codes_daily () 
 			(
-				echo 'din .' $'\t' "txzb3 '${PATH_INTO}' ${LASTUP_DATE}"' && '"$*" && 
+				{ WORKING_DIR="$1" && shift ; } && 
+				
+				eval "$(tool_codes)" && 
+				find -- "${WORKING_DIR}" -type d -name '*.git' | while read -r -- _d ;
+				do 
+					echo din "'${_d}'" $'\t' 'git-deck bp up &&' '' && :; 
+				done && 
+				echo : && 
+				
+				# echo din "'${WORKING_DIR}'" $'\t' 'find -- . -mindepth 1 -type d -name '"'"'*.git'"'"' | while read -r -- _dir ;' && 
+				# echo do '' && 
+				# echo $'\t' din "'${WORKING_DIR}'"/'"${_dir}"' $'\t' 'git-deck bp up && :;' '' && 
+				# echo done '&& :' && 
+				
 				: ) && 
 			
-			case "${WORKING_TYPE}" 
-			in 
-				(home|h) codes_home "$@" && echo : ;; 
-				(ende|e) codes_ende : ;; 
-				(a|all) codes_home "$@" && codes_ende : ;; 
-				(_) 1>&2 echo Unknown working type: "'${WORKING_TYPE}'", only '`'home/ende/all'`' supported. && return 16 ;;
-			esac && 
-			
+			eval "$(_frame tail_codes)" && 
 			: ) && 
 		
 		
@@ -1530,7 +1598,8 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 		alias s=syncs syncs=sync_codes && sync_codes () 
 		(
 			tool_codes '&&' && 
-			{ WORKING_TYPE="$1" && shift ; } && 
+			
+			eval "$(_frame head_codes)" && 
 			{ WORKING_DIR="$1" && shift ; } && 
 			
 			codes_init () 
@@ -1549,13 +1618,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 				echo din "${WORKING_DIR}" $'\t' 'git-deck sp all-sync .' && 
 				: ) && 
 			
-			case "${WORKING_TYPE}" 
-			in 
-				(i|ini|init) codes_init  "$@" ;; 
-				(d|dy|daily) codes_daily "$@" ;; 
-				(_) 1>&2 echo Unknown working type: "'${WORKING_TYPE}'", only '`'init/daily'`' supported. && return 16 ;;
-			esac && 
-			
+			eval "$(_frame tail_codes)" && 
 			: ) && 
 		
 		: :: && 
