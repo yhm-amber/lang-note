@@ -264,6 +264,15 @@ Libs ()
 			echo "$(dirname "$pwd" | xargs basename)/$(basename "$pwd")" && 
 			: )" ) && 
 		_run_identity () ( "$@" ) && 
+		_assert_path () 
+		(
+			for _p in "$@" ;
+			do 
+				(&>/dev/null cd "${_p}") || 
+				{ 1>&2 echo Error: path "'${_p}'" not found '!!' ; return 69 ; } && 
+				:; 
+			done && 
+			: ) && 
 		
 		_std_exec () 
 		(
@@ -1525,23 +1534,6 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 		#. ASKING_MAXTRY=777 eval "$(gd flow m i a https://github.com/sayanarijit/xplr.git xplr.file-expl.tui-src 20260806 tree:main tags:v1.1.0)"
 		#. ASKING_MAXTRY=999 eval "$(gd flow m i a https://github.com/zerx-lab/zap.git zap.terminal-sim.zerxlab-src 20260709 tree:main tags:v2026.07.09.1)"
 		#. ASKING_MAXTRY=999 eval "$(gd flow m i a https://github.com/zerx-lab/FluxDown.git fluxdown.dm.zerxlab-src 20260806 tree:main tags:v0.3.2)"
-		#. ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/gleam.git       gleam.beam-typed.lang-srcs/'impl ⭐️' _ tree:main tags:v1.18.1)"
-		#. ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/stdlib.git       gleam.beam-typed.lang-srcs/'std 🎁' _ tree:main tags:v1.0.5)"
-		#. ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/playground.git  gleam.beam-typed.lang-srcs/'play 🥨' _ tree:main)"
-		#. ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/erlang.git     gleam.beam-typed.lang-srcs/'erl-compatable 🐙' _ tree:main tags:v1.2.0)"
-		#. ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/otp.git     gleam.beam-typed.lang-srcs/'otp-coresubtyping 📫' _ tree:main tags:v1.2.0)"
-		#. ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/javascript.git  gleam.beam-typed.lang-srcs/'js-compatable 🌼' _ tree:main tags:v1.0.1)"
-		#. ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/website.git                   gleam.beam-typed.lang-srcs/'.site 🏡' _  tree:main)"
-		#. ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/cookbook.git                  gleam.beam-typed.lang-srcs/'.book 👩🏾‍🍳' _  tree:main)"
-		#. ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/language-tour.git             gleam.beam-typed.lang-srcs/'.tour 👩🏽‍💻' _  tree:main)"
-		#. ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/awesome-gleam.git             gleam.beam-typed.lang-srcs/'.awes 💯' _  tree:main)"
-		#. ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/example-lisp-interpreter.git  gleam.beam-typed.lang-srcs/'.sexp 👾' _  tree:main)"
-		#. ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/tree-sitter-gleam.git   gleam.beam-typed.lang-srcs/'parser-bind 🌳' _ tree:main tags:v1.1.0)"
-		#. ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/crypto.git  gleam.beam-typed.lang-srcs/offilibs/'.hash ⛓️' _ tree:main tags:v1.6.0)"
-		#. ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/regexp.git  gleam.beam-typed.lang-srcs/offilibs/'.regx 📇' _ tree:main tags:v1.1.1)"
-		#. ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/deque.git   gleam.beam-typed.lang-srcs/offilibs/'.dque 🚃' _ tree:main tags:v1.0.0)"
-		#. ASKING_MAXTRY=797 eval "$(gd flow m i h https://github.com/gleam-lang/time.git    gleam.beam-typed.lang-srcs/offilibs/'.dque 🕰️' _ tree:main tags:v1.8.0)"
-		#. eval "$(gd flow m i e _ gleam.beam-typed.lang-srcs 20260806)"
 		#. ASKING_MAXTRY=868 eval "$(gd flow m i a https://github.com/earendil-works/pi.git pi.agent-harness.tui-src 20260807 tree:main tags:v0.84.1)"
 		alias m=mirrors mirrors=mirror_codes && mirror_codes () 
 		(
@@ -1551,6 +1543,24 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 			
 			#: gd flow mirrors init <all|home|ende> <repo-link> <path-into> <lastup-date> [<tree:|tags:> ...]
 			#. gd flow mirrors init all https://github.com/chad/iroh-drop.git iroh-drop.chad.iroh-src 20260801 tree:main tags:v0.1.3
+			#. ASKING_MAXTRY=979 eval "$(gd flow m i h https://github.com/gleam-lang/gleam.git       gleam.beam-typed.lang-srcs/'impl ⭐️' _ tree:main tags:v1.18.1)"
+			#. ASKING_MAXTRY=979 eval "$(gd flow m i h https://github.com/gleam-lang/stdlib.git       gleam.beam-typed.lang-srcs/'std 🎁' _ tree:main tags:v1.0.5)"
+			#. ASKING_MAXTRY=979 eval "$(gd flow m i h https://github.com/gleam-lang/playground.git  gleam.beam-typed.lang-srcs/'play 🥨' _ tree:main)"
+			#. ASKING_MAXTRY=979 eval "$(gd flow m i h https://github.com/gleam-lang/erlang.git     gleam.beam-typed.lang-srcs/'erl-compatable 🐙' _ tree:main tags:v1.2.0)"
+			#. ASKING_MAXTRY=979 eval "$(gd flow m i h https://github.com/gleam-lang/otp.git     gleam.beam-typed.lang-srcs/'otp-coresubtyping 📫' _ tree:main tags:v1.2.0)"
+			#. ASKING_MAXTRY=979 eval "$(gd flow m i h https://github.com/gleam-lang/javascript.git  gleam.beam-typed.lang-srcs/'js-compatable 🌼' _ tree:main tags:v1.0.1)"
+			#. ASKING_MAXTRY=979 eval "$(gd flow m i h https://github.com/gleam-lang/website.git                   gleam.beam-typed.lang-srcs/'.site 🏡' _  tree:main)"
+			#. ASKING_MAXTRY=979 eval "$(gd flow m i h https://github.com/gleam-lang/cookbook.git                  gleam.beam-typed.lang-srcs/'.book 👩🏾‍🍳' _  tree:main)"
+			#. ASKING_MAXTRY=979 eval "$(gd flow m i h https://github.com/gleam-lang/language-tour.git             gleam.beam-typed.lang-srcs/'.tour 👩🏽‍💻' _  tree:main)"
+			#. ASKING_MAXTRY=979 eval "$(gd flow m i h https://github.com/gleam-lang/awesome-gleam.git             gleam.beam-typed.lang-srcs/'.awes 💯' _  tree:main)"
+			#. ASKING_MAXTRY=979 eval "$(gd flow m i h https://github.com/gleam-lang/example-lisp-interpreter.git  gleam.beam-typed.lang-srcs/'.sexp 👾' _  tree:main)"
+			#. ASKING_MAXTRY=979 eval "$(gd flow m i h https://github.com/gleam-lang/tree-sitter-gleam.git   gleam.beam-typed.lang-srcs/'parser-bind 🌳' _ tree:main tags:v1.1.0)"
+			#. ASKING_MAXTRY=979 eval "$(gd flow m i h https://github.com/gleam-lang/crypto.git  gleam.beam-typed.lang-srcs/offilibs/'.hash ⛓️' _ tree:main tags:v1.6.0)"
+			#. ASKING_MAXTRY=979 eval "$(gd flow m i h https://github.com/gleam-lang/regexp.git  gleam.beam-typed.lang-srcs/offilibs/'.regx 📇' _ tree:main tags:v1.1.1)"
+			#. ASKING_MAXTRY=979 eval "$(gd flow m i h https://github.com/gleam-lang/deque.git   gleam.beam-typed.lang-srcs/offilibs/'.dque 🚃' _ tree:main tags:v1.0.0)"
+			#. ASKING_MAXTRY=979 eval "$(gd flow m i h https://github.com/gleam-lang/time.git    gleam.beam-typed.lang-srcs/offilibs/'.dque 🕰️' _ tree:main tags:v1.8.0)"
+			#. eval "$(gd flow m i e _ gleam.beam-typed.lang-srcs 20260806)"
+			#. gd flow m i e _ gleam.beam-typed.lang-srcs 20260806
 			codes_init () 
 			(
 				{ WORKING_PART="$1" && shift ; } && 
@@ -1566,10 +1576,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 					: ) && 
 				codes_ende () 
 				(
-					find -- "${PATH_INTO}" -type d -name '*.git' | while read -r -- _d ;
-					do 
-						echo din "'${_d}'" $'\t' 'git-deck sp c &&' '' && :; 
-					done && 
+					codes_daily cl "${PATH_INTO}" '&&' && 
 					echo din . $'\t' "txzb3 '${PATH_INTO}' ${LASTUP_DATE}"' && '"$*" && 
 					: ) && 
 				
@@ -1582,27 +1589,49 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 				esac && 
 				: ) && 
 			
-			#: gd flow mirrors daily <working-path>
-			#. gd flow mirrors daily iroh-drop.chad.iroh-src
 			codes_daily () 
 			(
-				{ WORKING_DIR="$1" && shift ; } && 
-				
-				echo '' && 
-				find -- "${WORKING_DIR}" -type d -name '*.git' | while read -r -- _d ;
-				do 
-					echo din "'${_d}'" $'\t' 'git-deck bp up &&' '' && 
-					echo din "'${_d}'" $'\t' 'git-deck sp c &&' '' && 
+				#: gd flow mirrors daily cl <working-path>
+				#. gd flow mirrors daily cl iroh.quic-traversal.n0computer-srcs
+				cl () 
+				(
+					{ WORKING_DIR="$1" && shift ; } && 
+					{ _cmnd_tools _assert_path "${WORKING_DIR}" || return $? ; } && 
+					
 					echo '' && 
-					:; 
-				done && 
-				echo : && 
+					find -- "${WORKING_DIR}" -type d -name '*.git' | while read -r -- _d ;
+					do 
+						echo din "'${_d}'" $'\t' 'git-deck sp c &&' '' && :; 
+					done && 
+					echo : "$*" && 
+					: ) && 
 				
-				# echo din "'${WORKING_DIR}'" $'\t' 'find -- . -mindepth 1 -type d -name '"'"'*.git'"'"' | while read -r -- _dir ;' && 
-				# echo do '' && 
-				# echo $'\t' din "'${WORKING_DIR}'"/'"${_dir}"' $'\t' 'git-deck bp up && :;' '' && 
-				# echo done '&& :' && 
+				#: gd flow mirrors daily up <working-path>
+				#. gd flow mirrors daily up iroh-drop.chad.iroh-src
+				up () 
+				(
+					{ WORKING_DIR="$1" && shift ; } && 
+					{ _cmnd_tools _assert_path "${WORKING_DIR}" || return $? ; } && 
+					
+					echo '' && 
+					find -- "${WORKING_DIR}" -type d -name '*.git' | while read -r -- _d ;
+					do 
+						echo din "'${_d}'" $'\t' 'git-deck bp up &&' '' && 
+						echo din "'${_d}'" $'\t' 'git-deck sp c &&' '' && 
+						echo '' && 
+						:; 
+					done && 
+					echo : && 
+					
+					# echo din "'${WORKING_DIR}'" $'\t' 'find -- . -mindepth 1 -type d -name '"'"'*.git'"'"' | while read -r -- _dir ;' && 
+					# echo do '' && 
+					# echo $'\t' din "'${WORKING_DIR}'"/'"${_dir}"' $'\t' 'git-deck bp up && :;' '' && 
+					# echo done '&& :' && 
+					
+					: ) && 
 				
+				: :: && 
+				"$@" && 
 				: ) && 
 			
 			eval "$(_frame tail_codes)" && 
