@@ -607,8 +607,8 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 						IS_BARE= sync_play pull_full 'origin' . && 
 						: ) && 
 					(
-						git prune --expire now --dry-run && 
-						git prune --expire now && 
+						echo :: cleaning in "\`$(pwd)\`" :: && 
+						sync_play simple_cleaning now && 
 						: ) && 
 					echo :: done for repo "\`${out_dir}\`". :: && 
 					: ) && 
@@ -1402,6 +1402,16 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 			done && 
 			: ) && 
 		
+		alias c=cl cl=simple_cleaning && simple_cleaning () 
+		(
+			PRUNE_EXPIRE_TIME="${1:-${PRUNE_EXPIRE_TIME:-now}}" && 
+			1>&2 echo : Working for "'$(_cmnd_tools _curr_ellipath)'". && 
+			1>&2 echo cleaning: executing '`'git prune --expire "$PRUNE_EXPIRE_TIME"'`' ... && 
+			git prune --expire now --dry-run && 
+			git prune --expire now && 
+			1>&2 echo cleaning: executed '`'git prune --expire "$PRUNE_EXPIRE_TIME"'`' done. && 
+			: ) && 
+		
 		: :: && 
 		
 		eval "$(subs frames codes_tail)" && 
@@ -1556,6 +1566,10 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 					: ) && 
 				codes_ende () 
 				(
+					find -- "${PATH_INTO}" -type d -name '*.git' | while read -r -- _d ;
+					do 
+						echo din "'${_d}'" $'\t' 'git-deck sp c &&' '' && :; 
+					done && 
 					echo din . $'\t' "txzb3 '${PATH_INTO}' ${LASTUP_DATE}"' && '"$*" && 
 					: ) && 
 				
@@ -1574,10 +1588,13 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 			(
 				{ WORKING_DIR="$1" && shift ; } && 
 				
-				eval "$(tool_codes)" && 
+				echo '' && 
 				find -- "${WORKING_DIR}" -type d -name '*.git' | while read -r -- _d ;
 				do 
-					echo din "'${_d}'" $'\t' 'git-deck bp up &&' '' && :; 
+					echo din "'${_d}'" $'\t' 'git-deck bp up &&' '' && 
+					echo din "'${_d}'" $'\t' 'git-deck sp c &&' '' && 
+					echo '' && 
+					:; 
 				done && 
 				echo : && 
 				
