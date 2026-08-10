@@ -215,9 +215,9 @@ Libs ()
 					: ' && 
 				: ) && 
 			
-			#. chooser_bool SKIP_BARE_UPWEAR no 'bare_play updator' '_cmnd_tools _run_identity' && 
-			#. $(chooser_bool SKIP_BARE_UPWEAR no 'bare_play updator' '_cmnd_tools _run_identity') && 
-			chooser_bool () 
+			#. choose_bool SKIP_BARE_UPWEAR no 'bare_play updator' '_cmnd_tools _run_identity' && 
+			#. $(choose_bool SKIP_BARE_UPWEAR no 'bare_play updator' '_cmnd_tools _run_identity') && 
+			choose_bool () 
 			(
 				: 其能分之 其用择之 && 
 				local BOOL_NAME_EMBEDDED="${1:-${BOOL_NAME_EMBEDDED:-}}" && 
@@ -1010,50 +1010,6 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 			: ) && 
 		
 		
-		#: git-deck sp base-upgrade [<gitdir-path> ...]
-		#: base_upgrade [<gitdir-path> ...]
-		#: IS_BARE=true base_upgrade [<gitdir-path> ...]
-		#: SHOW_MORE_HINTS=n IS_BARE=y base_upgrade [<gitdir-path> ...]
-		alias up=base_upgrade base-upgrade=base_upgrade && base_upgrade () 
-		(
-			_param_tools params_roll "${@:-.}" | IS_BARE="${IS_BARE:-}" _base_upgrade && 
-			: ) && 
-		
-		_base_upgrade () 
-		(
-			while read -r -- gitdir ;
-			do 
-				(
-					SHOW_HINTS="${SHOW_MORE_HINTS:-y}" repo_chk worktree "${gitdir}" || 
-					SHOW_HINTS="${SHOW_MORE_HINTS:-y}" repo_chk gitdir "${gitdir}" && 
-					: ) && 
-				(
-					cd "${gitdir}" && 
-					if test -z "${IS_BARE:-}" ;
-						then local IS_BARE="$(repo_chk bare . echo)" ;
-						else local IS_BARE="${IS_BARE:-}" ;
-					fi && 
-					eval "$(subs kwargs codes_bool IS_BARE '')" && 
-					echo base_up: update from remote for "'${gitdir}'" && 
-					while 
-					! if ! "${__IS_BARE__}" ;
-						then git pull ;
-						# else bare_play update ;
-						else bare_play updator git remote update ;
-					fi ;
-					do 
-						echo base_up: tried: "$((++try_pull_base_upgrade))" for '`'"$(if ! "${__IS_BARE__}" ;
-							then echo "git pull" ;
-							else echo "git remote update" ;
-						fi)"'`' in "'${gitdir}'" && 
-						:; 
-					done && 
-					echo base_up: updated in "'${gitdir}'" && 
-					: ) && 
-				:; 
-			done && 
-			: ) && 
-		
 		alias rmt=remote && remote () 
 		(
 			has () 
@@ -1309,7 +1265,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 			if ! "${IS_BARE}" && : 其令选行 ;
 				then git fetch "$@" -- "${_git_remote}" 'refs/heads/*:refs/heads/*' '^'"${_symbref_head}" ;
 				else $(
-					subs kwargs chooser_bool SKIP_BARE_UPWEAR no '_cmnd_tools _run_identity' 'bare_play updator' && 
+					subs kwargs choose_bool SKIP_BARE_UPWEAR no '_cmnd_tools _run_identity' 'bare_play updator' && 
 					: ) git fetch "$@" -- "${_git_remote}" 'refs/heads/*:refs/heads/*' ;
 			fi || 
 				remote necessity verific "${_git_remote}" pull && 
@@ -1399,6 +1355,51 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 				:; 
 			done && 
 			echo && 
+			: ) && 
+		
+		
+		#: git-deck sp base-upgrade [<gitdir-path> ...]
+		#: base_upgrade [<gitdir-path> ...]
+		#: IS_BARE=true base_upgrade [<gitdir-path> ...]
+		#: SHOW_MORE_HINTS=n IS_BARE=y base_upgrade [<gitdir-path> ...]
+		alias up=base_upgrade base-upgrade=base_upgrade && base_upgrade () 
+		(
+			_param_tools params_roll "${@:-.}" | IS_BARE="${IS_BARE:-}" _base_upgrade && 
+			: ) && 
+		
+		_base_upgrade () 
+		(
+			while read -r -- gitdir ;
+			do 
+				(
+					SHOW_HINTS="${SHOW_MORE_HINTS:-y}" repo_chk worktree "${gitdir}" || 
+					SHOW_HINTS="${SHOW_MORE_HINTS:-y}" repo_chk gitdir "${gitdir}" && 
+					: ) && 
+				(
+					cd "${gitdir}" && 
+					if test -z "${IS_BARE:-}" ;
+						then local IS_BARE="$(repo_chk bare . echo)" ;
+						else local IS_BARE="${IS_BARE:-}" ;
+					fi && 
+					eval "$(subs kwargs codes_bool IS_BARE '')" && 
+					echo base_up: update from remote for "'${gitdir}'" && 
+					while 
+					! if ! "${__IS_BARE__}" ;
+						then git pull ;
+						# else bare_play update ;
+						else bare_play updator git remote update ;
+					fi ;
+					do 
+						echo base_up: tried: "$((++try_pull_base_upgrade))" for '`'"$(if ! "${__IS_BARE__}" ;
+							then echo "git pull" ;
+							else echo "git remote update" ;
+						fi)"'`' in "'${gitdir}'" && 
+						:; 
+					done && 
+					echo base_up: updated in "'${gitdir}'" && 
+					: ) && 
+				:; 
+			done && 
 			: ) && 
 		
 		: :: && 
