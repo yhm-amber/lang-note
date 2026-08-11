@@ -3887,6 +3887,14 @@ ASKING_MAXTRY=33 eval "$(gd flow m i a https://github.com/huggingface/tokenizers
 ASKING_MAXTRY=99 eval "$(gd flow m i a https://github.com/Gaurav-Gosain/gollama.git gollama.llm-cli.go-src 20241224 tree:main tags:v1.0.3)"
 ~~~
 
+(play) no-llm ui
+
+~~~ sh
+ASKING_MAXTRY=97 eval "$(gd flow m i a https://github.com/heyManNice/bro-seek.git bro-seek.heymannice.wui-src 20260625 tree:main)"
+# eval "$(gd flow m d u bro-seek.heymannice.wui-src)"
+# eval "$(gd flow m i e _ bro-seek.heymannice.wui-src XXXXXXXX)"
+~~~
+
 ### (ai) Machine Leaning
 
 Hugging Libs
