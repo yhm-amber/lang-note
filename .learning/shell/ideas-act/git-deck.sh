@@ -269,7 +269,7 @@ Libs ()
 			for _p in "$@" ;
 			do 
 				(&>/dev/null cd "${_p}") || 
-				{ 1>&2 echo Error: path "'${_p}'" not found '!!' ; return 69 ; } && 
+				{ 1>&2 echo Assert path: "'${_p}'" not found .. ; return 69 ; } && 
 				:; 
 			done && 
 			: ) && 
@@ -1532,7 +1532,6 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 		#. ASKING_MAXTRY=99 eval "$(gd flow m i a https://github.com/Gaurav-Gosain/golars.git golars.cli-df.polars.go-src 20260425 tree:main tags:v0.1.8)"
 		#. ASKING_MAXTRY=668 eval "$(gd flow m i a https://github.com/medialab/xan.git xan.olap-cli.csv.medialab-src 20260731 tree:master tags:0.60.0)"
 		#. ASKING_MAXTRY=777 eval "$(gd flow m i a https://github.com/sayanarijit/xplr.git xplr.file-expl.tui-src 20260806 tree:main tags:v1.1.0)"
-		#. ASKING_MAXTRY=999 eval "$(gd flow m i a https://github.com/zerx-lab/zap.git zap.terminal-sim.zerxlab-src 20260709 tree:main tags:v2026.07.09.1)"
 		#. ASKING_MAXTRY=999 eval "$(gd flow m i a https://github.com/zerx-lab/FluxDown.git fluxdown.dm.zerxlab-src 20260806 tree:main tags:v0.3.2)"
 		#. ASKING_MAXTRY=868 eval "$(gd flow m i a https://github.com/earendil-works/pi.git pi.agent-harness.tui-src 20260807 tree:main tags:v0.84.1)"
 		alias m=mirrors mirrors=mirror_codes && mirror_codes () 
@@ -1561,6 +1560,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 			#. ASKING_MAXTRY=979 eval "$(gd flow m i h https://github.com/gleam-lang/time.git    gleam.beam-typed.lang-srcs/offilibs/'.dque 🕰️' _ tree:main tags:v1.8.0)"
 			#. eval "$(gd flow m i e _ gleam.beam-typed.lang-srcs 20260806)"
 			#. gd flow m i e _ gleam.beam-typed.lang-srcs 20260806
+			#. ASKING_MAXTRY=999 eval "$(gd flow m i a https://github.com/zerx-lab/zap.git zap.terminal-sim.zerxlab-src 20260709 tree:main tags:v2026.07.09.1)"
 			codes_init () 
 			(
 				{ WORKING_PART="$1" && shift ; } && 
@@ -1598,14 +1598,23 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 				alias c=cl && cl () 
 				(
 					{ WORKING_DIR="$1" && shift ; } && 
-					{ _cmnd_tools _assert_path "${WORKING_DIR}" || return $? ; } && 
-					
 					echo '' && 
-					find -- "${WORKING_DIR}" -type d -name '*.git' | while read -r -- _d ;
-					do 
-						echo din "'${_d}'" $'\t' 'git-deck sp c &&' '' && :; 
-					done && 
-					echo : "$*" && 
+					if _cmnd_tools _assert_path "${WORKING_DIR}" ;
+					then 
+						find -- "${WORKING_DIR}" -type d -name '*.git' | while read -r -- _d ;
+						do 
+							echo din "'${_d}'" $'\t' 'git-deck sp c &&' '' && :; 
+						done && 
+						echo : "$*" && :; 
+						:;
+					else 
+						echo echo : Path "\''${WORKING_DIR}'\'" not existed ... using emb mode ... '&&' '' && 
+						echo find -- "'${WORKING_DIR}'" -type d -name "'*.git'" '|' 'while read -r -- _dir ;' && 
+						echo do '' && 
+						echo $'\t' din '"${_dir}"' $'\t' 'git-deck sp c && :;' '' && 
+						echo done '&& :' "$*" && 
+						:;
+					fi && 
 					: ) && 
 				
 				#: gd flow mirrors daily up <working-path>
@@ -1618,17 +1627,15 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 					echo '' && 
 					find -- "${WORKING_DIR}" -type d -name '*.git' | while read -r -- _d ;
 					do 
+						echo '' && 
 						echo din "'${_d}'" $'\t' 'git-deck bp up &&' '' && 
 						echo din "'${_d}'" $'\t' 'git-deck sp c &&' '' && 
-						echo '' && 
 						:; 
 					done && 
+					echo '' && 
 					echo : && 
 					
-					# echo din "'${WORKING_DIR}'" $'\t' 'find -- . -mindepth 1 -type d -name '"'"'*.git'"'"' | while read -r -- _dir ;' && 
-					# echo do '' && 
-					# echo $'\t' din "'${WORKING_DIR}'"/'"${_dir}"' $'\t' 'git-deck bp up && :;' '' && 
-					# echo done '&& :' && 
+					
 					
 					: ) && 
 				
