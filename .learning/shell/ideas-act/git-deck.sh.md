@@ -4016,6 +4016,16 @@ comiccrawler
 ASKING_MAXTRY=666 eval "$(gd flow m i a https://github.com/eight04/ComicCrawler.git comiccrawler.scrap.gui-src 20260520 tree:master tags:v2025.3.24)"
 ~~~
 
+### Play for Fun
+
+(win like playings) play Win things into Linux sys ...
+
+~~~ sh
+ASKING_MAXTRY=66 eval "$(gd flow m i a https://github.com/ChenPi11/cmd.git cmd.chenpi.winlikeplays.cli-src 20260810 tree:main tags:0.1.0)"  ##  eval "$(gd flow m d u cmd.chenpi.winlikeplays.cli-src)" && eval "$(gd flow m i e _ cmd.chenpi.winlikeplays.cli-src XXXXXXXX)"
+ASKING_MAXTRY=66 eval "$(gd flow m i a https://github.com/heyManNice/regedit.git regedit.heymannice.winlikeplays.gui-src 20260810 tree:main)"  ##  eval "$(gd flow m d u regedit.heymannice.winlikeplays.gui-src)" && eval "$(gd flow m i e _ regedit.heymannice.winlikeplays.gui-src XXXXXXXX)"
+ASKING_MAXTRY=66 eval "$(gd flow m i a https://github.com/heyManNice/bsod.git bsod.heymannice.winlikeplays.tui-src 20260810 tree:main tags:v1.0.1)"  ##  eval "$(gd flow m d u bsod.heymannice.winlikeplays.tui-src)" && eval "$(gd flow m i e _ bsod.heymannice.winlikeplays.tui-src XXXXXXXX)"
+~~~
+
 ### (emu) EmulatorJS
 
 ~~~ sh
