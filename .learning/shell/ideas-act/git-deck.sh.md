@@ -3990,6 +3990,27 @@ ASKING_MAXTRY=667 eval "$(gd flow m i h https://github.com/wasmerio/wasmer-go.gi
 eval "$(gd flow m i e _ wasmer.webc.wasix-srcs 20260807)"
 ~~~
 
+(net) wisp
+
+~~~ sh
+ASKING_MAXTRY=97 eval "$(gd flow m i h https://github.com/MercuryWorkshop/wisp-protocol.git wisp.sockets-proxying.websocket-srcs/protocol _ tree:v2)"
+ASKING_MAXTRY=97 eval "$(gd flow m i h https://github.com/MercuryWorkshop/wisp-js.git wisp.sockets-proxying.websocket-srcs/.js _ tree:master)"
+ASKING_MAXTRY=97 eval "$(gd flow m i h https://github.com/MercuryWorkshop/wisp-server-python.git wisp.sockets-proxying.websocket-srcs/.py _ tree:main)"
+ASKING_MAXTRY=97 eval "$(gd flow m i h https://github.com/MercuryWorkshop/epoxy-tls.git wisp.sockets-proxying.websocket-srcs/.rs _ tree:multiplexed)"
+ASKING_MAXTRY=97 eval "$(gd flow m i h https://github.com/sylvieisnton/mrrowisp.git wisp.sockets-proxying.websocket-srcs/.go _ tree:main tags:v3.1.7)"
+eval "$(gd flow m i e _ wisp.sockets-proxying.websocket-srcs 20260505)"
+~~~
+
+(llvm -> wasm) emscripten
+
+~~~ sh
+ASKING_MAXTRY=992 eval "$(gd flow m i h https://github.com/emscripten-core/emscripten.git emscripten.llvm-wasm.compiler-srcs/core _ tree:main tags:6.0.6)"
+ASKING_MAXTRY=992 eval "$(gd flow m i h https://github.com/emscripten-core/emsdk.git emscripten.llvm-wasm.compiler-srcs/sdk _ tree:main tags:6.0.6)"
+eval "$(gd flow m i e _ emscripten.llvm-wasm.compiler-srcs 20260812)"
+#..	eval "$(gd flow m d u emscripten.llvm-wasm.compiler-srcs)"
+#..	eval "$(gd flow m i e _ emscripten.llvm-wasm.compiler-srcs XXXXXXXX)"
+~~~
+
 ### (net) Download Manager
 
 FluxDown
