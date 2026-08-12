@@ -4021,6 +4021,16 @@ eval "$(gd flow m i e _ emscripten.llvm-wasm.compiler-srcs 20260812)"
 #..	eval "$(gd flow m i e _ emscripten.llvm-wasm.compiler-srcs XXXXXXXX)"
 ~~~
 
+### (db) UI
+
+(wui) dbx
+
+~~~ sh
+ASKING_MAXTRY=89 eval "$(gd flow m i a https://github.com/t8y2/dbx.git dbx.db-client.wui-src 20260812 tree:main tags:v0.5.82)"
+#..	eval "$(gd flow m d u dbx.db-client.wui-src)"
+#..	eval "$(gd flow m i e _ dbx.db-client.wui-src XXXXXXXX)"
+~~~
+
 ### (net) Download Manager
 
 FluxDown
