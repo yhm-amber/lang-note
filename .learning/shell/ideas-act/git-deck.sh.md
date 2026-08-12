@@ -3891,8 +3891,8 @@ ASKING_MAXTRY=99 eval "$(gd flow m i a https://github.com/Gaurav-Gosain/gollama.
 
 ~~~ sh
 ASKING_MAXTRY=97 eval "$(gd flow m i a https://github.com/heyManNice/bro-seek.git bro-seek.heymannice.wui-src 20260625 tree:main)"
-# eval "$(gd flow m d u bro-seek.heymannice.wui-src)"
-# eval "$(gd flow m i e _ bro-seek.heymannice.wui-src XXXXXXXX)"
+#..	eval "$(gd flow m d u bro-seek.heymannice.wui-src)"
+#..	eval "$(gd flow m i e _ bro-seek.heymannice.wui-src XXXXXXXX)"
 ~~~
 
 ### (ai) Machine Leaning
@@ -3976,8 +3976,8 @@ ASKING_MAXTRY=666 eval "$(gd flow m i h https://github.com/tessi/wasmex.git wasm
 ASKING_MAXTRY=666 eval "$(gd flow m i h https://github.com/bytecodealliance/wasmtime-py.git wasmtime.cranelift.wasi-srcs/lib-py _ tree:main tags:47.0.1)"
 ASKING_MAXTRY=666 eval "$(gd flow m i h https://github.com/bytecodealliance/wasmtime-go.git wasmtime.cranelift.wasi-srcs/lib-go _ tree:main tags:v47.0.0)"
 eval "$(gd flow m i e _ wasmtime.cranelift.wasi-srcs 20260810)"
-#.. eval "$(gd flow m d c wasmtime.cranelift.wasi-srcs)"
-#.. eval "$(gd flow m d u wasmtime.cranelift.wasi-srcs)"
+#..	eval "$(gd flow m d c wasmtime.cranelift.wasi-srcs)"
+#..	eval "$(gd flow m d u wasmtime.cranelift.wasi-srcs)"
 ~~~
 
 wasmer
@@ -4078,7 +4078,13 @@ eval "$(gd flow m i e _ orcaslicer.gcode-gener.3dprinter-slicing.slic3r-srcs 202
 (os) Puter
 
 ~~~ sh
-
+ASKING_MAXTRY=97 eval "$(gd flow m i h https://github.com/HeyPuter/puter.git puter.os-wui.heyputer-srcs/os _ tree:main tags:26.08)"
+ASKING_MAXTRY=97 eval "$(gd flow m i h https://github.com/HeyPuter/puter-cli.git puter.os-wui.heyputer-srcs/conn-cli _ tree:master tags:v2.0.0)"
+ASKING_MAXTRY=97 eval "$(gd flow m i h https://github.com/HeyPuter/puter-fuse.git puter.os-wui.heyputer-srcs/conn-fuse _ tree:trunk tags:v1.0.0)"
+ASKING_MAXTRY=97 eval "$(gd flow m i h https://github.com/HeyPuter/browser.js.git puter.os-wui.heyputer-srcs/app-browser _ tree:main)"
+eval "$(gd flow m i e _ puter.os-wui.heyputer-srcs 20260812)"
+#..	eval "$(gd flow m d u puter.os-wui.heyputer-srcs)"
+#..	eval "$(gd flow m i e _ puter.os-wui.heyputer-srcs XXXXXXXX)"
 ~~~
 
 (wisp) firefox wasm
