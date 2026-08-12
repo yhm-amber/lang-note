@@ -4073,3 +4073,30 @@ ASKING_MAXTRY=66 eval "$(gd flow m i h https://github.com/OrcaSlicer/OrcaSlicer_
 eval "$(gd flow m i e _ orcaslicer.gcode-gener.3dprinter-slicing.slic3r-srcs 20260803)"
 ~~~
 
+### (web) Puter
+
+(os) Puter
+
+~~~ sh
+
+~~~
+
+(wisp) firefox wasm
+
+~~~ sh
+ASKING_MAXTRY=97 eval "$(gd flow m i a https://github.com/HeyPuter/firefox-wasm.git firefox.wui-wisp.heyputer-src 20260722 tree:master tags:v0.0.1)"
+#..	eval "$(gd flow m d u firefox.wui-wisp.heyputer-src)" && eval "$(gd flow m i e _ firefox.wui-wisp.heyputer-src XXXXXXXX)"
+~~~
+
+(wisp) blender wasm
+
+~~~ sh
+ASKING_MAXTRY=97 eval "$(gd flow m i a https://github.com/HeyPuter/blender-wasm.git blender.wui-wisp.heyputer-src 20260701 tree:master tags:1.0.0)"
+#..	eval "$(gd flow m d u blender.wui-wisp.heyputer-src)" && eval "$(gd flow m i e _ blender.wui-wisp.heyputer-src XXXXXXXX)"
+~~~
+
+
+
+
+
+
