@@ -3829,12 +3829,22 @@ ASKING_MAXTRY=99 eval "$(gd flow m i a https://github.com/Gaurav-Gosain/golars.g
 ASKING_MAXTRY=668 eval "$(gd flow m i a https://github.com/medialab/xan.git xan.olap-cli.csv.medialab-src 20260731 tree:master tags:0.60.0)"
 ~~~
 
-### (sys) Witr
+### (sys) Processes
+
+Witr
 
 ~~~ sh
 ASKING_MAXTRY=1111 eval "$(gd flow m i h https://github.com/pranshuparmar/witr.git witr.whyrunning-tracer.pranshuparmar-srcs/go _ tree:main tags:v0.3.3)"
 ASKING_MAXTRY=1111 eval "$(gd flow m i h https://github.com/rewrite-everything-in-rust/witr-rs.git witr.whyrunning-tracer.pranshuparmar-srcs/.rw-rs _ tree:main tags:v0.1.2)"
 eval "$(gd flow m i e _ witr.whyrunning-tracer.pranshuparmar-srcs 20260808)"
+~~~
+
+Rustnet
+
+~~~ sh
+ASKING_MAXTRY=89 eval "$(gd flow m i a https://github.com/domcyrus/rustnet.git rustnet.net-stat.processes-src 20260811 tree:main tags:v1.5.0)"
+#..	eval "$(gd flow m d u rustnet.net-stat.processes-src)"
+#..	eval "$(gd flow m i e _ rustnet.net-stat.processes-src XXXXXXXX)"
 ~~~
 
 ### (ai) Agent
