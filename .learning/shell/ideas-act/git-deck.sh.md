@@ -3972,6 +3972,20 @@ ASKING_MAXTRY=11 eval "$(gd flow m i a https://github.com/n0-computer/pigeons.gi
 ASKING_MAXTRY=11 eval "$(gd flow m i a https://github.com/n0-computer/n0-mainline.git n0mainline.dht-iroh.n0computer-lib 20260803 tree:main tags:v0.6.0)"
 ~~~
 
+### (auth) Passwd
+
+gopass
+
+~~~ sh
+ASKING_MAXTRY=1007 eval "$(gd flow m i h 'https://github.com/gopasspw/gopassbridge.git' gopass.passwd-srcs/browser-ext 20260531 tags:v2.1.1 tree:master)"
+ASKING_MAXTRY=1007 eval "$(gd flow m i h 'https://github.com/gopasspw/gopass.git' gopass.passwd-srcs/cli 20260611 tags:v1.16.1 tree:master)"
+ASKING_MAXTRY=1007 eval "$(gd flow m i h 'https://github.com/gopasspw/git-credential-gopass.git' gopass.passwd-srcs/gitcred 20260622 tags:v1.16.1 tree:master)"
+ASKING_MAXTRY=1007 eval "$(gd flow m i h 'https://github.com/gopasspw/gopass-jsonapi.git' gopass.passwd-srcs/jsonapi 20260605 tags:v1.16.1 tree:master)"
+ASKING_MAXTRY=1007 eval "$(gd flow m i h 'https://github.com/gopasspw/gopasspw.github.io.git' gopass.passwd-srcs/site 20250706 tree:master)"
+eval "$(gd flow m i e _ gopass.passwd-srcs 20260622)"
+#..	eval "$(gd flow m d u gopass.passwd-srcs)"
+~~~
+
 ### (rtm) WASI
 
 wasi
@@ -4025,7 +4039,7 @@ eval "$(gd flow m i e _ emscripten.llvm-wasm.compiler-srcs 20260812)"
 #..	eval "$(gd flow m i e _ emscripten.llvm-wasm.compiler-srcs XXXXXXXX)"
 ~~~
 
-### (db) UI
+### (db) Conn UI
 
 (wui) dbx
 
@@ -4126,7 +4140,7 @@ ASKING_MAXTRY=97 eval "$(gd flow m i a https://github.com/HeyPuter/blender-wasm.
 #..	eval "$(gd flow m d u blender.wui-wisp.heyputer-src)" && eval "$(gd flow m i e _ blender.wui-wisp.heyputer-src XXXXXXXX)"
 ~~~
 
-### (data) books
+### (data) Books
 
 daozang
 
@@ -4136,7 +4150,7 @@ ASKING_MAXTRY=986 eval "$(gd flow m i a https://github.com/yeyangchen2009/daozan
 #..	eval "$(gd flow m i e _ daozang.texts-db.zh-src XXXXXXXX)"
 ~~~
 
-### (os) Linux
+### (os) Kernel
 
 Asterinas
 
