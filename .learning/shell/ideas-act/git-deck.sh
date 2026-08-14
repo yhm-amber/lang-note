@@ -1447,6 +1447,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 			head_codes () 
 			(
 				echo '
+					case "${1}" in (@) : ;; (*) tool_codes '"'&&'"' ;; esac && 
 					{ WORKING_TYPE="$1" && shift ; } && 
 					: ' && 
 				: ) && 
@@ -1458,6 +1459,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 					in 
 						(i|ini|init) codes_init  "$@" ;; 
 						(d|dy|daily) codes_daily "$@" ;; 
+						(@|extract) extract_codes "$@" ;; 
 						(_) 1>&2 echo Unknown working type: "'"'"'${WORKING_TYPE}'"'"'", only '"'"'`'"'"'init/daily'"'"'`'"'"' supported. && return 16 ;;
 					esac && 
 					: ' && 
@@ -1536,8 +1538,6 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 		#. ASKING_MAXTRY=868 eval "$(gd flow m i a https://github.com/earendil-works/pi.git pi.agent-harness.tui-src 20260807 tree:main tags:v0.84.1)"
 		alias m=mirrors mirrors=mirror_codes && mirror_codes () 
 		(
-			tool_codes '&&' && 
-			
 			eval "$(_frame head_codes)" && 
 			
 			#: gd flow mirrors init <all|home|ende> <repo-link> <path-into> <lastup-date> [<tree:|tags:> ...]
@@ -1645,6 +1645,30 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 				"$@" && 
 				: ) && 
 			
+			#: flow m @ <workpath>
+			#. gd flow m @ gopass.passwd-srcs
+			#. eval "$(gd flow m d u gopass.passwd-srcs)"
+			#. gd flow m @ gopass.passwd-srcs
+			extract_codes () 
+			(
+				{ _workonig_dir="$1" && shift ; } && 
+				{ _cmnd_tools _assert_path "$_workonig_dir" || return $? ; } && 
+				echo '' && 
+				{ _dayz_ext="$(
+					{ find -- "$_workonig_dir" -type d -name '*.git' | while read -r -- _d ;
+					do 
+						_url="$(cd "${_d}" && git remote get-url -- origin)" && 
+						_dir="$(dirname "${_d}")" && 
+						_day="$(cd "${_d}" && git show HEAD -s --format='%cd' --date 'format:%Y%m%d')" && 
+						_wts="$(cd "${_d}/.." && find -- . -mindepth 2 -maxdepth 2 -type d -not -path "*/$(basename "${_d}")/*")" && 
+						1>&7 echo gd flow m i h "'${_url}'" "${_dir}" "${_day}" $(echo "$_wts" | while IFS=/ read -r -- a b c ; do echo "${b}:${c}" ; done) && 
+						echo "$_day" 1>&5 && 
+						:; 
+					done ; } 5>&1 | sort -r | head -n 1)" ; } 7>&1 && 
+				echo gd flow m i e _ "${_workonig_dir}" "${_dayz_ext:-00000000}" && 
+				echo '#..'$'\t' gd flow m d u "${_workonig_dir}" && 
+				: ) && 
+			
 			eval "$(_frame tail_codes)" && 
 			: ) && 
 		
@@ -1655,7 +1679,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 		#. ASKING_MAXTRY=8 eval "$(gd flow syncs daily ./.sy/pure-symbols)"
 		alias s=syncs syncs=sync_codes && sync_codes () 
 		(
-			tool_codes '&&' && 
+			# tool_codes '&&' && 
 			
 			eval "$(_frame head_codes)" && 
 			{ WORKING_DIR="$1" && shift ; } && 
