@@ -3870,7 +3870,11 @@ ASKING_MAXTRY=898 eval "$(gd flow m i a https://github.com/spacedriveapp/spacebo
 (wui harness terminal-editor) Terax
 
 ~~~ sh
-ASKING_MAXTRY=1122 eval "$(gd flow m i a https://github.com/crynta/terax-ai.git terax.term.editor.ai-src 20260804 tree:main tags:v0.8.6)"
+ASKING_MAXTRY=1212 eval "$(gd flow m i h https://github.com/crynta/terax-ai.git terax.editor-term.ai.wui-srcs/soft _ tree:main tags:v0.8.6)"
+ASKING_MAXTRY=1212 eval "$(gd flow m i h https://github.com/crynta/Terax-website.git terax.editor-term.ai.wui-srcs/site _ tree:main)"
+eval "$(gd flow m i e _ terax.editor-term.ai.wui-srcs 20260814)"
+#..	eval "$(gd flow m d u terax.editor-term.ai.wui-srcs)"
+#..	eval "$(gd flow m i e _ terax.editor-term.ai.wui-srcs XXXXXXXX)"
 ~~~
 
 (wui harness plg-growing) Pi
@@ -4128,6 +4132,8 @@ daozang
 
 ~~~ sh
 ASKING_MAXTRY=986 eval "$(gd flow m i a https://github.com/yeyangchen2009/daozang.git daozang.texts-db.zh-src 20251107 tree:main)"
+#..	eval "$(gd flow m d u daozang.texts-db.zh-src)"
+#..	eval "$(gd flow m i e _ daozang.texts-db.zh-src XXXXXXXX)"
 ~~~
 
 
