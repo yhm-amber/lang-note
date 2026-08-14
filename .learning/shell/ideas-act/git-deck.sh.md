@@ -3883,6 +3883,13 @@ eval "$(gd flow m i e _ terax.editor-term.ai.wui-srcs 20260814)"
 ASKING_MAXTRY=868 eval "$(gd flow m i a https://github.com/earendil-works/pi.git pi.agent-harness.tui-src 20260807 tree:main tags:v0.84.1)"
 ~~~
 
+(wui harness ai-bot) Agora
+
+~~~ sh
+ASKING_MAXTRY=668 eval "$(gd flow m i a https://github.com/newo-ether/Agora.git agora.ai-agent.android-src 20260814 tree:master tags:v2.0.0 tags:v1.3.7)"
+#..	eval "$(gd flow m d u agora.ai-agent.android-src)"
+~~~
+
 (wui) HuggingChat
 
 ~~~ sh
@@ -3918,10 +3925,19 @@ ASKING_MAXTRY=33 eval "$(gd flow m i a https://github.com/huggingface/candle.git
 ASKING_MAXTRY=33 eval "$(gd flow m i a https://github.com/safetensors/safetensors.git safetensors.store-distribute.tensors.huggingface-lib 20260616 tree:main tags:v0.8.0)"
 ~~~
 
-### (mask) zerobox
+### (shell) Executor
+
+(virt) zerobox
 
 ~~~ sh
 ASKING_MAXTRY=9 eval "$(gd flow m i a https://github.com/afshinm/zerobox.git zerobox.sandboxcli-src 20260518 tree:main tags:v0.3.3)"
+~~~
+
+(remote) conch
+
+~~~ sh
+ASKING_MAXTRY=669 eval "$(gd flow m i a https://github.com/newo-ether/conch.git conch.shell-server.webapi-src 20260812 tree:main tags:v1.0.11)"
+#..	eval "$(gd flow m d u conch.shell-server.webapi-src)"
 ~~~
 
 ### (cal) Tyme
