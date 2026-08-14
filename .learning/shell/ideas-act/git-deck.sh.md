@@ -4136,6 +4136,19 @@ ASKING_MAXTRY=986 eval "$(gd flow m i a https://github.com/yeyangchen2009/daozan
 #..	eval "$(gd flow m i e _ daozang.texts-db.zh-src XXXXXXXX)"
 ~~~
 
+### (os) Linux
+
+Asterinas
+
+~~~ sh
+ASKING_MAXTRY=1776 eval "$(gd flow m i h https://github.com/asterinas/asterinas.git asterinas.os-kernel.linux.rs-srcs/os _ tree:main tags:v0.18.0)"
+ASKING_MAXTRY=1776 eval "$(gd flow m i h https://github.com/asterinas/hyperenclave.git asterinas.os-kernel.linux.rs-srcs/env _ tree:master)"
+ASKING_MAXTRY=1776 eval "$(gd flow m i h https://github.com/asterinas/book.git asterinas.os-kernel.linux.rs-srcs/docs _ tree:main)"
+ASKING_MAXTRY=1776 eval "$(gd flow m i h https://github.com/asterinas/asterinas.github.io.git asterinas.os-kernel.linux.rs-srcs/site _ tree:main)"
+eval "$(gd flow m i e _ asterinas.os-kernel.linux.rs-srcs 20260813)"
+#..	eval "$(gd flow m d u asterinas.os-kernel.linux.rs-srcs)"
+#..	eval "$(gd flow m i e _ asterinas.os-kernel.linux.rs-srcs XXXXXXXX)"
+~~~
 
 
 
