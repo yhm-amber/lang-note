@@ -168,30 +168,38 @@
 	
 	const applyConstraints = () => 
 	{
-		const resolvers = [
+		const pointResolvers = [
 			//: 交点圆/椭圆 intersectionEls
 			{ selector: '[data-intersection-of]', resolve: resolveIntersection },
-			//: 连接线 endpointLines
-			{ selector: 'line[data-endpoints]', resolve: resolveEndpointLine },
 			//: 圆心 centerEls
 			{ selector: 'circle[data-center], ellipse[data-center]', resolve: resolveCircleCenter },
 		];
+		const lineResolvers = [
+			//: 连接线 endpointLines
+			{ selector: 'line[data-endpoints]', resolve: resolveEndpointLine },
+		];
 		
-		const operations = [].concat(...resolvers.map(
-			({ selector, resolve }) =>
-				//: 收集所有相关元素
-				[...document.querySelectorAll(selector)]
-					//: 对每个元素生成一个操作（如果解析成功）
-					.map(el => ({ element: el, attributes: resolve(el) }))
-					.filter(op => op.attributes)
-		));
 		
-		//: 统一应用所有属性
-		operations.forEach(({ element, attributes }) => {
-			Object.entries(attributes).forEach(([key, value]) => {
-				element.setAttribute(key, value);
-			});
-		});
+		const executeResolvers = (resolverList) => 
+		{
+			const operations = [].concat(...resolverList.map(
+				({ selector, resolve }) =>
+					//: 收集所有相关元素
+					[...document.querySelectorAll(selector)]
+						//: 对每个元素生成一个操作（如果解析成功）
+						.map(el => ({ element: el, attributes: resolve(el) }))
+						.filter(op => op.attributes)
+			));
+			//: 统一应用所有属性
+			operations.forEach(
+				({ element, attributes }) => Object.entries(attributes).forEach(
+					([key, value]) => element.setAttribute(key, value)));
+		};
+		
+		//: 先解析并写入点坐标
+		executeResolvers(pointResolvers);
+		//: 再解析并写入线端点
+		executeResolvers(lineResolvers);
 	};
 	
 	// window.addEventListener('DOMContentLoaded', applyConstraints);
