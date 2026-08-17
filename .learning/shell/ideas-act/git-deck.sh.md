@@ -4187,8 +4187,10 @@ ASKING_MAXTRY=1776 eval "$(gd flow m i h https://github.com/asterinas/hyperencla
 ASKING_MAXTRY=1776 eval "$(gd flow m i h https://github.com/asterinas/book.git asterinas.os-kernel.linux.rs-srcs/docs _ tree:main)"
 ASKING_MAXTRY=1776 eval "$(gd flow m i h https://github.com/asterinas/asterinas.github.io.git asterinas.os-kernel.linux.rs-srcs/site _ tree:main)"
 eval "$(gd flow m i e _ asterinas.os-kernel.linux.rs-srcs 20260813)"
+#..	gd flow m @ asterinas.os-kernel.linux.rs-srcs
 #..	eval "$(gd flow m d u asterinas.os-kernel.linux.rs-srcs)"
-#..	eval "$(gd flow m i e _ asterinas.os-kernel.linux.rs-srcs XXXXXXXX)"
+#..	gd flow m @ asterinas.os-kernel.linux.rs-srcs
+#..	eval "$(gd flow m i e _ asterinas.os-kernel.linux.rs-srcs 20260814)"
 ~~~
 
 
