@@ -1297,13 +1297,13 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 		#: git-deck sp all-push [<git-dir> ...]
 		alias all-push=all_push && all_push () 
 		(
-			echo :: pushing origin to all remotes in: "${@:-.}" :: && 
+			echo :: pushing to remotes in: "${@:-.}" :: && 
 			_param_tools params_roll "${@:-.}" | _all_push ${GITPUSH_FLAGS:--v} && 
 			: ) && 
 		
 		_all_push () 
 		(
-			: Push origin to all remotes.
+			: Push to all remotes ...
 			while read -r -- gitdir ;
 			do 
 				(
@@ -1333,13 +1333,13 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 		#: git-deck sp all-pull [<git-dir> ...]
 		alias all-pull=all_pull && all_pull () 
 		(
-			echo :: pulling from origin and all remotes in: "${@:-.}" :: && 
+			echo :: pulling from remotes in: "${@:-.}" :: && 
 			_param_tools params_roll "${@:-.}" | _all_pull ${GITPULL_FLAGS:--v} && 
 			: ) && 
 		
 		_all_pull () 
 		(
-			: Pull from origin and all remotes.
+			: Pull from all remotes ...
 			while read -r -- gitdir ;
 			do 
 				(
@@ -1518,24 +1518,19 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 		
 		
 		#. ASKING_MAXTRY=11 eval "$(gd flow m i a https://github.com/chad/iroh-drop.git iroh-drop.chad.iroh-src 20260801 tree:main tags:v0.1.3)"
-		#. ASKING_MAXTRY=11 eval "$(gd flow m i a https://github.com/n0-computer/noq.git noq.quic-rs.n0computer-src 20260730 tree:main tags:noq-v1.1.0)"
-		#. ASKING_MAXTRY=11 eval "$(gd flow m i a https://github.com/n0-computer/sendme.git sendme.iroh-filesend.n0computer-src 20260725 tree:main tags:v0.36.0)"
 		#. ASKING_MAXTRY=9 eval "$(gd flow m i h https://github.com/n0-computer/dumbpipe.git dumbpipe.iroh-pipe.n0computer-srcs/cli _ tree:main tags:v0.39.0)"
 		#. ASKING_MAXTRY=9 eval "$(gd flow m i h https://github.com/n0-computer/dumbpipe.dev.git dumbpipe.iroh-pipe.n0computer-srcs/web _ tree:main)"
 		#. eval "$(gd flow m i e _ dumbpipe.iroh-pipe.n0computer-srcs 20260720)"
 		#. ASKING_MAXTRY=999 eval "$(gd flow m i a https://github.com/Hmbown/CodeWhale.git codewhale.coding-agent.whale-src 20260807 tree:main tags:v0.9.3)"
 		#. ASKING_MAXTRY=1122 eval "$(gd flow m i a https://github.com/crynta/terax-ai.git terax.term.editor.ai-src 20260804 tree:main tags:v0.8.6)"
-		#. ASKING_MAXTRY=11 eval "$(gd flow m i a https://github.com/lyogavin/airllm.git airllm.gpumem-less.lyogavin-lib 20260729 tree:main tags:v3.1.0)"
 		#. ASKING_MAXTRY=33 eval "$(gd flow m i a https://github.com/safetensors/safetensors.git safetensors.store-distribute.tensors.huggingface-lib 20260616 tree:main tags:v0.8.0)"
-		#. ASKING_MAXTRY=9 eval "$(gd flow m i a https://github.com/afshinm/zerobox.git zerobox.sandboxcli-src 20260518 tree:main tags:v0.3.3)"
 		#. ASKING_MAXTRY=66 eval "$(gd flow m i h https://github.com/WebAssembly/WASI.git wasi.std.wit-srcs/wasi _ tree:main tags:v0.3.0)"
 		#. ASKING_MAXTRY=66 eval "$(gd flow m i h https://github.com/wasix-org/wasix-witx.git wasi.std.wit-srcs/wasix _ tree:main)"
 		#. eval "$(gd flow m i e _ wasi.std.wit-srcs 20260806)"
 		#. ASKING_MAXTRY=99 eval "$(gd flow m i a https://github.com/Gaurav-Gosain/golars.git golars.cli-df.polars.go-src 20260425 tree:main tags:v0.1.8)"
-		#. ASKING_MAXTRY=668 eval "$(gd flow m i a https://github.com/medialab/xan.git xan.olap-cli.csv.medialab-src 20260731 tree:master tags:0.60.0)"
+		#. ASKING_MAXTRY=868 eval "$(gd flow m i a https://github.com/earendil-works/pi.git pi.agent-harness.tui-src 20260807 tree:main tags:v0.84.1)"
 		#. ASKING_MAXTRY=777 eval "$(gd flow m i a https://github.com/sayanarijit/xplr.git xplr.file-expl.tui-src 20260806 tree:main tags:v1.1.0)"
 		#. ASKING_MAXTRY=999 eval "$(gd flow m i a https://github.com/zerx-lab/FluxDown.git fluxdown.dm.zerxlab-src 20260806 tree:main tags:v0.3.2)"
-		#. ASKING_MAXTRY=868 eval "$(gd flow m i a https://github.com/earendil-works/pi.git pi.agent-harness.tui-src 20260807 tree:main tags:v0.84.1)"
 		alias m=mirrors mirrors=mirror_codes && mirror_codes () 
 		(
 			eval "$(_frame head_codes)" && 
