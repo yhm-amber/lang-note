@@ -4120,6 +4120,17 @@ ASKING_MAXTRY=888 eval "$(gd flow m i h https://github.com/libretro/libretro-fce
 eval "$(gd flow m i e _ emulatorjs.libretro.gameplat-srcs 20260808)"
 ~~~
 
+### (pic) SVG
+
+SVG-Edit
+
+~~~ sh
+ASKING_MAXTRY=1004 eval "$(gd flow m i h 'https://github.com/SVG-Edit/svgedit.git' svgedit.svg.canvas-srcs/native _ tags:v.7.3.3 tree:master)"
+ASKING_MAXTRY=1004 eval "$(gd flow m i h 'https://github.com/SVG-Edit/svg-edit-react.git' svgedit.svg.canvas-srcs/.concept-react _ tree:master)"
+eval "$(gd flow m i e _ svgedit.svg.canvas-srcs 20260806)"
+#..	eval "$(gd flow m d u svgedit.svg.canvas-srcs)"
+~~~
+
 ### (slicer) OrcaSlicer
 
 ~~~ sh
