@@ -4144,6 +4144,15 @@ eval "$(gd flow m i e _ trailsense.compass-earth.android-srcs 20260818)"
 #..	eval "$(gd flow m d u trailsense.compass-earth.android-srcs)"
 ~~~
 
+MBCompass
+
+~~~ sh
+ASKING_MAXTRY=1000 eval "$(gd flow m i h https://github.com/CompassMB/MBCompass.git compassmb.compass-earth.android-srcs/app _ tree:main tags:v1.1.17)"
+ASKING_MAXTRY=1000 eval "$(gd flow m i h https://github.com/CompassMB/compassmb.github.io.git compassmb.compass-earth.android-srcs/.website _ tree:main)"
+ASKING_MAXTRY=1000 eval "$(gd flow m i e _ compassmb.compass-earth.android-srcs 20260730)"
+#..	eval "$(gd flow m d u compassmb.compass-earth.android-srcs)"
+~~~
+
 Nullschool Earth
 
 ~~~ sh
