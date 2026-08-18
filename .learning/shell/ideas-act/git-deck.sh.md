@@ -4131,6 +4131,26 @@ eval "$(gd flow m i e _ svgedit.svg.canvas-srcs 20260806)"
 #..	eval "$(gd flow m d u svgedit.svg.canvas-srcs)"
 ~~~
 
+### (sense) Sol
+
+Trail-Sense
+
+~~~ sh
+ASKING_MAXTRY=1002 eval "$(gd flow m i h 'https://github.com/kylecorry31/Trail-Sense.git' trailsense.compass-earth.android-srcs/app _ tags:8.1.1 tree:main)"
+ASKING_MAXTRY=1002 eval "$(gd flow m i h 'https://github.com/kylecorry31/sol.git' trailsense.compass-earth.android-srcs/core _ tags:19.1.3 tree:main)"
+ASKING_MAXTRY=1002 eval "$(gd flow m i h 'https://github.com/kylecorry31/Trail-Sense-Earth-Model.git' trailsense.compass-earth.android-srcs/.model _ tags:dem-0.4.0 tree:main)"
+ASKING_MAXTRY=1002 eval "$(gd flow m i h 'https://github.com/kylecorry31/Trail-Sense-Sample-Plugin.git' trailsense.compass-earth.android-srcs/.plg _ tree:main)"
+eval "$(gd flow m i e _ trailsense.compass-earth.android-srcs 20260818)"
+#..	eval "$(gd flow m d u trailsense.compass-earth.android-srcs)"
+~~~
+
+Nullschool Earth
+
+~~~ sh
+ASKING_MAXTRY=144 eval "$(gd flow m i a https://github.com/cambecc/earth.git earth.weather.nullschool.wui-src 20161003 tree:master)"
+#..	eval "$(gd flow m d u earth.weather.nullschool.wui-src)"
+~~~
+
 ### (slicer) OrcaSlicer
 
 ~~~ sh
