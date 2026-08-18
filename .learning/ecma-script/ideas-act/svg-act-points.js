@@ -1,11 +1,12 @@
 ///:	Produced by AI (deepseek-chat) support.
 
 //..	<script type="text/javascript"><![CDATA[
+//// Produced by AI (deepseek-chat) support.
 (function() {
 	'use strict';
 	// const NS = 'http://www.w3.org/2000/svg';
 	
-	//: ---------- 纯函数：几何计算 ----------
+	//: ---------- 纯函数 - 几何计算 ----------
 	
 	//: 解析 rotate 变换，返回 { angle/radians(弧度), cx, cy } 或 null
 	const parseRotate = (transform) => 
@@ -67,9 +68,6 @@
 		const { pA: p1, pB: p2 } = geomA;
 		const { pA: p3, pB: p4 } = geomB;
 		
-		// const { pA: p1, pB: p2 } = getLineGeometry(lineA);
-		// const { pA: p3, pB: p4 } = getLineGeometry(lineB);
-		
 		const X_1_2 = p1.x - p2.x;
 		const Y_1_2 = p1.y - p2.y;
 		const X_3_4 = p3.x - p4.x;
@@ -87,7 +85,7 @@
 		return { x: px, y: py };
 	};
 	
-	//: ---------- 解析函数：从元素提取约束，返回要设置的属性 ----------
+	//: ---------- 解析函数 - 从元素提取约束，返回要设置的属性 ----------
 	
 	//: 解析 data-intersection-of，返回 {cx, cy} 或 null
 	const resolveIntersection = (el) => 
@@ -136,43 +134,59 @@
 		const p2 = document.getElementById(ids[1]);
 		if (!p1 || !p2) return null;
 		
-		// const x1 = p1.getAttribute('cx') || p1.getAttribute('x') || 0;
-		// const y1 = p1.getAttribute('cy') || p1.getAttribute('y') || 0;
-		// const x2 = p2.getAttribute('cx') || p2.getAttribute('x') || 0;
-		// const y2 = p2.getAttribute('cy') || p2.getAttribute('y') || 0;
-		
 		const { x: x1, y: y1 } = getPointXY(p1);
 		const { x: x2, y: y2 } = getPointXY(p2);
-		
 		return { x1, y1, x2, y2 };
 	};
 	
 	//: 解析 data-center="点id"，返回 {cx, cy} 或 null
 	const resolveCircleCenter = (el) => 
 	{
+		//: 如果同时有 data-radius-point，交给 resolveCircleFromPoints
+		if (el.hasAttribute('data-radius-point')) return null;
+		
 		const pointId = el.getAttribute('data-center');
 		if (!pointId) return null;
 		
 		const point = document.getElementById(pointId);
 		if (!point) return null;
 		
-		// const cx = point.getAttribute('cx') || point.getAttribute('x') || 0;
-		// const cy = point.getAttribute('cy') || point.getAttribute('y') || 0;
-		
 		const { x: cx, y: cy } = getPointXY(point);
-		
 		return { cx, cy };
 	};
 	
-	//: ---------- 主流程：收集操作并统一执行 ----------
+	//: 解析 data-center + data-radius-point，返回 { cx, cy, r } 或 null
+	const resolveCircleRadiusPoint = (el) => 
+	{
+		const centerId = el.getAttribute('data-center');
+		const rimId = el.getAttribute('data-radius-point');
+		if (!centerId || !rimId) return null;
+		
+		const centerPoint = document.getElementById(centerId);
+		const rimPoint = document.getElementById(rimId);
+		if (!centerPoint || !rimPoint) return null;
+		
+		const { x: cx, y: cy } = getPointXY(centerPoint);
+		const { x: rx, y: ry } = getPointXY(rimPoint);
+		
+		const r = Math.hypot(rx - cx, ry - cy);
+		
+		return { cx, cy, r };
+	};
+	
+	//: ---------- 主流程 - 收集操作并统一执行 ----------
 	
 	const applyConstraints = () => 
 	{
 		const pointResolvers = [
 			//: 交点圆/椭圆 intersectionEls
 			{ selector: '[data-intersection-of]', resolve: resolveIntersection },
-			//: 圆心 centerEls
+			//: 普通圆心 centerEls
 			{ selector: 'circle[data-center], ellipse[data-center]', resolve: resolveCircleCenter },
+		];
+		const radiusResolvers = [
+			//: 規心定圆 ...
+			{ selector: 'circle[data-radius-point], ellipse[data-radius-point]', resolve: resolveCircleRadiusPoint },
 		];
 		const lineResolvers = [
 			//: 连接线 endpointLines
@@ -196,15 +210,15 @@
 					([key, value]) => element.setAttribute(key, value)));
 		};
 		
-		//: 先解析并写入点坐标
+		//: 定点
 		executeResolvers(pointResolvers);
-		//: 再解析并写入线端点
+		//: 畫影
 		executeResolvers(lineResolvers);
+		//: 朙眼
+		executeResolvers(radiusResolvers);
 	};
 	
 	// window.addEventListener('DOMContentLoaded', applyConstraints);
-	//: 如果脚本位于 SVG 末尾，也可以直接调用
-	// applyConstraints();
 	
 	if (document.readyState === 'loading') {
 		document.addEventListener('DOMContentLoaded', applyConstraints);
