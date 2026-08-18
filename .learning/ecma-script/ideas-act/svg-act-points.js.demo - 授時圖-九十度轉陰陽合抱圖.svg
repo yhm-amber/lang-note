@@ -482,9 +482,9 @@
  </g>
  <g class="layer" display="none">
   <title>3</title>
-  <ellipse fill="#000000" stroke-width="5" cx="200" cy="360"	rx="3" ry="3" id="點_冬至"/>
-  <ellipse fill="#000000" stroke-width="5" cx="200" cy="200"	rx="3" ry="3" id="點_中點"/>
-  <ellipse fill="#000000" stroke-width="5" cx="200" cy="40"	rx="3" ry="3" id="點_夏至"/>
+  <ellipse fill="#000000" stroke-width="5" cx="200" cy="360" rx="3" ry="3" id="點_冬至"/>
+  <ellipse fill="#000000" stroke-width="5" cx="200" cy="200" rx="3" ry="3" id="點_中點"/>
+  <ellipse fill="#000000" stroke-width="5" cx="200" cy="40" rx="3" ry="3" id="點_夏至"/>
  </g>
  <g class="layer" clip-path="url(#0-clip)">
   <title>影出夏至</title>
@@ -524,7 +524,7 @@
   <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_小暑0" transform="rotate(-82.5 200 40)"/>
   <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_夏至2" transform="rotate(-85 200 40)"/>
   <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_夏至1" transform="rotate(-87.5 200 40)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_夏至0" transform="rotate(-90 200 40)"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="至_夏至0" transform="rotate(-90 200 40)"/>
  </g>
  <g class="layer" clip-path="url(#0-clip)">
   <title>影出冬至</title>
@@ -564,13 +564,13 @@
   <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_小寒0" transform="rotate(-82.5 200 360)"/>
   <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_冬至2" transform="rotate(-85 200 360)"/>
   <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_冬至1" transform="rotate(-87.5 200 360)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_冬至0" transform="rotate(-90 200 360)"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="至_冬至0" transform="rotate(-90 200 360)"/>
  </g>
  <g class="layer">
   <title>曲自影出夏至</title>
   <!-- 定义交点 -->
   <ellipse id="點_大䨮0" data-intersection-of="去_冬至0 芒種大䨮0" rx="0" ry="0" fill="#000000" cx="200" cy="199.99999999999991"/>
-  <ellipse id="點_小䨮2" data-intersection-of="去_大䨮2 小滿小䨮2" rx="3" ry="3" fill="#000000" cx="207.93796948010407" cy="221.8093919029058"/>
+  <ellipse id="點_小䨮2" data-intersection-of="去_大䨮2 小滿小䨮2" rx="2.4" ry="2.4" fill="#000000" cx="207.93796948010407" cy="221.8093919029058"/>
   <ellipse id="點_小䨮1" data-intersection-of="去_大䨮1 小滿小䨮1" rx="0" ry="0" fill="#000000" cx="217.23108265733333" cy="236.95217600652353"/>
   <ellipse id="點_小䨮0" data-intersection-of="去_大䨮0 小滿小䨮0" rx="3" ry="3" fill="#000000" cx="227.2865101921687" cy="247.26162201408218"/>
   <ellipse id="點_立冬2" data-intersection-of="去_小䨮2 立夏立冬2" rx="0" ry="0" fill="#000000" cx="237.70797883264663" cy="253.8525748081182"/>
@@ -601,8 +601,8 @@
   <ellipse id="點_小暑1" data-intersection-of="去_大暑1 小寒小暑1" rx="0" ry="0" fill="#000000" cx="252.24018639189205" cy="56.47126750017591"/>
   <ellipse id="點_小暑0" data-intersection-of="去_大暑0 小寒小暑0" rx="3" ry="3" fill="#000000" cx="240.00000000000003" cy="50.717967697244916"/>
   <ellipse id="點_夏至2" data-intersection-of="去_小暑2 冬至夏至2" rx="0" ry="0" fill="#000000" cx="227.1509653027872" cy="46.01922409323158"/>
-  <ellipse id="點_夏至1" data-intersection-of="去_小暑1 冬至夏至1" rx="0" ry="0" fill="#000000" cx="213.78552226256105" cy="42.43075951804672"/>
-  <ellipse id="點_夏至0" data-intersection-of="去_小暑0 冬至夏至0" rx="3" ry="3" fill="#000000" cx="199.99999999999997" cy="39.99999999999999"/>
+  <ellipse id="點_夏至1" data-intersection-of="去_小暑1 冬至夏至1" rx="1.5" ry="1.5" fill="#000000" cx="213.78552226256105" cy="42.43075951804672"/>
+  <ellipse id="點_夏至0" data-intersection-of="去_小暑0 冬至夏至0" rx="0.6" ry="0.6" fill="#000000" cx="199.99999999999997" cy="39.99999999999999"/>
   <!-- 交点连线 -->
   <line data-endpoints="點_大䨮0 點_小䨮2" stroke="#000000" stroke-width="0.75" x1="200" y1="199.99999999999991" x2="207.93796948010407" y2="221.8093919029058"/>
   <line data-endpoints="點_小䨮2 點_小䨮1" stroke="#000000" stroke-width="0.75" x1="207.93796948010407" y1="221.8093919029058" x2="217.23108265733333" y2="236.95217600652353"/>
@@ -641,8 +641,8 @@
  <g class="layer">
   <title>曲自影出冬至</title>
   <!-- 定义交点 -->
-  <ellipse id="點_芒種0" data-intersection-of="去_夏至0 芒種大䨮0" rx="0" ry="0" fill="#000000" cx="157.12812921102034" cy="40"/>
-  <ellipse id="點_小滿2" data-intersection-of="去_芒種2 小滿小䨮2" rx="3" ry="3" fill="#000000" cx="192.06203051989593" cy="178.19060809709413"/>
+  <ellipse id="點_芒種0" data-intersection-of="去_夏至0 芒種大䨮0" rx="0" ry="0" fill="#000000" cx="200" cy="199.99999999999991"/>
+  <ellipse id="點_小滿2" data-intersection-of="去_芒種2 小滿小䨮2" rx="2.4" ry="2.4" fill="#000000" cx="192.06203051989593" cy="178.19060809709413"/>
   <ellipse id="點_小滿1" data-intersection-of="去_芒種1 小滿小䨮1" rx="0" ry="0" fill="#000000" cx="182.76891734266675" cy="163.04782399347658"/>
   <ellipse id="點_小滿0" data-intersection-of="去_芒種0 小滿小䨮0" rx="3" ry="3" fill="#000000" cx="172.71348980783134" cy="152.73837798591788"/>
   <ellipse id="點_立夏2" data-intersection-of="去_小滿2 立夏立冬2" rx="0" ry="0" fill="#000000" cx="162.29202116735343" cy="146.14742519188204"/>
@@ -673,10 +673,10 @@
   <ellipse id="點_小寒1" data-intersection-of="去_大寒1 小寒小暑1" rx="0" ry="0" fill="#000000" cx="147.75981360810795" cy="343.52873249982406"/>
   <ellipse id="點_小寒0" data-intersection-of="去_大寒0 小寒小暑0" rx="3" ry="3" fill="#000000" cx="160" cy="349.2820323027552"/>
   <ellipse id="點_冬至2" data-intersection-of="去_小寒2 冬至夏至2" rx="0" ry="0" fill="#000000" cx="172.84903469721277" cy="353.98077590676843"/>
-  <ellipse id="點_冬至1" data-intersection-of="去_小寒1 冬至夏至1" rx="0" ry="0" fill="#000000" cx="186.214477737439" cy="357.5692404819533"/>
-  <ellipse id="點_冬至0" data-intersection-of="去_小寒0 冬至夏至0" rx="3" ry="3" fill="#000000" cx="200.00000000000006" cy="360.00000000000006"/>
+  <ellipse id="點_冬至1" data-intersection-of="去_小寒1 冬至夏至1" rx="1.5" ry="1.5" fill="#000000" cx="186.214477737439" cy="357.5692404819533"/>
+  <ellipse id="點_冬至0" data-intersection-of="去_小寒0 冬至夏至0" rx="0.6" ry="0.6" fill="#000000" cx="200.00000000000006" cy="360.00000000000006"/>
   <!-- 交点连线 -->
-  <line data-endpoints="點_芒種0 點_小滿2" stroke="#000000" stroke-width="0.75" x1="157.12812921102034" y1="40" x2="192.06203051989593" y2="178.19060809709413"/>
+  <line data-endpoints="點_芒種0 點_小滿2" stroke="#000000" stroke-width="0.75" x1="200" y1="199.99999999999991" x2="192.06203051989593" y2="178.19060809709413"/>
   <line data-endpoints="點_小滿2 點_小滿1" stroke="#000000" stroke-width="0.75" x1="192.06203051989593" y1="178.19060809709413" x2="182.76891734266675" y2="163.04782399347658"/>
   <line data-endpoints="點_小滿1 點_小滿0" stroke="#000000" stroke-width="0.75" x1="182.76891734266675" y1="163.04782399347658" x2="172.71348980783134" y2="152.73837798591788"/>
   <line data-endpoints="點_小滿0 點_立夏2" stroke="#000000" stroke-width="0.75" x1="172.71348980783134" y1="152.73837798591788" x2="162.29202116735343" y2="146.14742519188204"/>
