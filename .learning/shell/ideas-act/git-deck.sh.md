@@ -4120,7 +4120,14 @@ ASKING_MAXTRY=888 eval "$(gd flow m i h https://github.com/libretro/libretro-fce
 eval "$(gd flow m i e _ emulatorjs.libretro.gameplat-srcs 20260808)"
 ~~~
 
-### (pic) SVG
+### (math) SVG
+
+Graphite Editor
+
+~~~ sh
+ASKING_MAXTRY=1011 eval "$(gd flow m i a https://github.com/GraphiteEditor/Graphite.git graphite.editor-svg.rs.wui-src 20260818 tree:master)"
+#..	eval "$(gd flow m d u graphite.editor-svg.rs.wui-src)"
+~~~
 
 SVG-Edit
 
