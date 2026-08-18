@@ -911,7 +911,7 @@
 			{ selector: 'circle[data-center], ellipse[data-center]', resolve: resolveCircleCenter },
 		];
 		const radiusResolvers = [
-			//: 两个点定义圆
+			//: 規心定圆 ...
 			{ selector: 'circle[data-radius-point], ellipse[data-radius-point]', resolve: resolveCircleRadiusPoint },
 		];
 		const lineResolvers = [
