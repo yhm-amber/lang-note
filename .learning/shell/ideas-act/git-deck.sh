@@ -632,14 +632,22 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 			{
 				1>&2 echo unshallowing:: git fetch --deepen "$AUTO_UNSHALLOW_DEEPEN" "$@" && 
 				while repo_chk shallow . ;
-				do git fetch --deepen "$AUTO_UNSHALLOW_DEEPEN" "$@" && :; done && 
+				do 
+					git fetch --deepen "$AUTO_UNSHALLOW_DEEPEN" "$@" && 
+					sync_play simple_cleaning now && 
+					:; 
+				done && 
 				:; 
 			} && 
 			{
 				if repo_chk shallow . ;
 				then 
 					1>&2 echo unshallowing:: git fetch --unshallow "$@" && 
-					while ! ( git fetch --unshallow "$@" && : ) ;
+					while 
+					! ( 
+						sync_play simple_cleaning now && 
+						git fetch --unshallow "$@" && 
+						: ) ;
 					do 1>&2 echo tried: "$((++try_unshallow))" for unshallow && :; done && 
 					:; 
 				else 
@@ -1414,11 +1422,11 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 		alias c=cl cl=simple_cleaning && simple_cleaning () 
 		(
 			PRUNE_EXPIRE_TIME="${1:-${PRUNE_EXPIRE_TIME:-now}}" && 
-			1>&2 echo : Working for "'$(_cmnd_tools _curr_ellipath)'". && 
-			1>&2 echo cleaning: executing '`'git prune --expire "$PRUNE_EXPIRE_TIME"'`' ... && 
+			1>&2 echo cleaning: Working for "'$(_cmnd_tools _curr_ellipath)'". && 
+			1>&2 echo cleaning: Executing '`'git prune --expire "$PRUNE_EXPIRE_TIME"'`' ... && 
 			git prune --expire now --dry-run && 
 			git prune --expire now && 
-			1>&2 echo cleaning: executed '`'git prune --expire "$PRUNE_EXPIRE_TIME"'`' done. && 
+			1>&2 echo cleaning: Executed '`'git prune --expire "$PRUNE_EXPIRE_TIME"'`' done. && 
 			: ) && 
 		
 		: :: && 
