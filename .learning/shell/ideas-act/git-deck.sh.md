@@ -4099,6 +4099,15 @@ eval "$(gd flow m i e _ emscripten.llvm-wasm.compiler-srcs 20260812)"
 #..	eval "$(gd flow m i e _ emscripten.llvm-wasm.compiler-srcs XXXXXXXX)"
 ~~~
 
+### (wui) PWA
+
+(app man) firefoxpwa
+
+~~~ sh
+ASKING_MAXTRY=107 eval "$(gd flow m i a https://github.com/filips123/PWAsForFirefox.git firefoxpwa.pwa-man.wui-src 20260816 tags:v2.19.0 tree:main)"
+#..	eval "$(gd flow m d u firefoxpwa.pwa-man.wui-src)"
+~~~
+
 ### (db) Conn UI
 
 (wui) dbx
