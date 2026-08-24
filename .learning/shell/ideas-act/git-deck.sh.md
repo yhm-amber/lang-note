@@ -4037,6 +4037,15 @@ eval "$(gd flow m i e _ gopass.passwd-srcs 20260622)"
 #..	eval "$(gd flow m d u gopass.passwd-srcs)"
 ~~~
 
+### (util) Rust
+
+(bottlecheck) hotpath
+
+~~~ sh
+ASKING_MAXTRY=109 eval "$(gd flow m i a https://github.com/pawurb/hotpath-rs.git hotpath.rs-bottlenecks.profiler-src 20260825 tags:v0.24.0 tree:main)"
+#..	eval "$(gd flow m d u hotpath.rs-bottlenecks.profiler-src)"
+~~~
+
 ### (rtm) WASI
 
 wasi
