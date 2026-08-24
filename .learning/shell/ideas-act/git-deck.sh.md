@@ -3940,6 +3940,14 @@ ASKING_MAXTRY=669 eval "$(gd flow m i a https://github.com/newo-ether/conch.git 
 #..	eval "$(gd flow m d u conch.shell-server.webapi-src)"
 ~~~
 
+### (tui) trmux
+
+(tmux-alt) rmux
+
+~~~ sh
+ASKING_MAXTRY=1010 eval "$(gd flow m i a https://github.com/Helvesec/rmux.git rmux.term-multiplexer.ratatui-src 20260808 tags:v0.10.0 tree:main)"
+~~~
+
 ### (cal) Tyme
 
 ~~~ sh
