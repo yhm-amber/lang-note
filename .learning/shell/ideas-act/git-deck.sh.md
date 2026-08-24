@@ -3883,6 +3883,12 @@ eval "$(gd flow m i e _ terax.editor-term.ai.wui-srcs 20260814)"
 ASKING_MAXTRY=1020 eval "$(gd flow m i a https://github.com/vercel-labs/skills.git skills.npx.vercel-src 20260819 tags:v1.5.23 tree:main)"
 ~~~
 
+(lang skill) zerolang
+
+~~~ sh
+ASKING_MAXTRY=1030 eval "$(gd flow m i a https://github.com/vercel-labs/zerolang.git zero.agentic-lang.skills-src 20260628 tags:v0.3.4 tags:v0.1.3 tree:main)"
+~~~
+
 (wui harness plg-growing) Pi
 
 ~~~ sh
