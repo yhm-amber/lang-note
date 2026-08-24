@@ -3978,6 +3978,14 @@ ASKING_MAXTRY=8 eval "$(gd flow m i h https://github.com/6tail/tyme4cpp.git tyme
 eval "$(gd flow m i e _ tyme.6tail.date.multilang-libs 20260615)"
 ~~~
 
+### (dns) Engine
+
+oxidns
+
+~~~ sh
+ASKING_MAXTRY=106 eval "$(gd flow m i a https://github.com/SvenShi/oxidns.git oxidns.dns-engine.net-src 20260818 tags:v1.5.2 tree:main)"
+~~~
+
 ### (net) Iroh
 
 iroh
