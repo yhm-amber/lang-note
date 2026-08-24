@@ -3877,6 +3877,12 @@ eval "$(gd flow m i e _ terax.editor-term.ai.wui-srcs 20260814)"
 #..	eval "$(gd flow m i e _ terax.editor-term.ai.wui-srcs XXXXXXXX)"
 ~~~
 
+(skill man) skills (npx)
+
+~~~ sh
+ASKING_MAXTRY=1020 eval "$(gd flow m i a https://github.com/vercel-labs/skills.git skills.npx.vercel-src 20260819 tags:v1.5.23 tree:main)"
+~~~
+
 (wui harness plg-growing) Pi
 
 ~~~ sh
