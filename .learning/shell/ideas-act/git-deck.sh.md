@@ -4241,9 +4241,9 @@ ASKING_MAXTRY=986 eval "$(gd flow m i a https://github.com/yeyangchen2009/daozan
 #..	eval "$(gd flow m i e _ daozang.texts-db.zh-src XXXXXXXX)"
 ~~~
 
-### (os) Kernel
+### (os) System
 
-Asterinas
+(Kernel) Asterinas
 
 ~~~ sh
 ASKING_MAXTRY=1776 eval "$(gd flow m i h https://github.com/asterinas/asterinas.git asterinas.os-kernel.linux.rs-srcs/os _ tree:main tags:v0.18.0)"
@@ -4256,6 +4256,19 @@ eval "$(gd flow m i e _ asterinas.os-kernel.linux.rs-srcs 20260813)"
 #..	gd flow m @ asterinas.os-kernel.linux.rs-srcs
 #..	eval "$(gd flow m i e _ asterinas.os-kernel.linux.rs-srcs 20260814)"
 ~~~
+
+(android root) SukiSU-Ultra
+
+~~~ sh
+ASKING_MAXTRY=107 eval "$(gd flow m i h https://github.com/SukiSU-Ultra/SukiSU-Ultra.git sukisu.androot.ultra-srcs/repo _ tags:v4.1.3 tree:main)"
+ASKING_MAXTRY=107 eval "$(gd flow m i h https://github.com/SukiSU-Ultra/SukiSU-Ultra.git sukisu.androot.ultra-srcs/site _ tree:main)"
+eval "$(gd flow m i e _ sukisu.androot.ultra-srcs 20260815)"
+#..	eval "$(gd flow m d u sukisu.androot.ultra-srcs)"
+~~~
+
+
+
+
 
 
 
