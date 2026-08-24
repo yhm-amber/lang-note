@@ -3952,6 +3952,13 @@ ASKING_MAXTRY=669 eval "$(gd flow m i a https://github.com/newo-ether/conch.git 
 #..	eval "$(gd flow m d u conch.shell-server.webapi-src)"
 ~~~
 
+(lang) brush
+
+~~~ sh
+ASKING_MAXTRY=108 eval "$(gd flow m i a https://github.com/reubeno/brush.git brush.bash.shell-src 20260825 tags:brush-parser-v0.4.0 tags:brush-shell-v0.4.0 tags:brush-v0.4.0 tags:brush-core-v0.5.0 tree:tuish2 tree:main)"
+#..	eval "$(gd flow m d u brush.bash.shell-src)"
+~~~
+
 ### (tui) trmux
 
 (tmux-alt) rmux
