@@ -1423,10 +1423,10 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 		(
 			PRUNE_EXPIRE_TIME="${1:-${PRUNE_EXPIRE_TIME:-now}}" && 
 			1>&2 echo cleaning: Working for "'$(_cmnd_tools _curr_ellipath)'". && 
-			1>&2 echo cleaning: Executing '`'git prune --expire "$PRUNE_EXPIRE_TIME"'`' ... && 
+			1>&2 echo cleaning: Executing '`'git prune --expire "$PRUNE_EXPIRE_TIME"'`' at "“$(date --iso-8601=seconds)”" ... && 
 			git prune --expire now --dry-run && 
 			git prune --expire now && 
-			1>&2 echo cleaning: Executed '`'git prune --expire "$PRUNE_EXPIRE_TIME"'`' done. && 
+			1>&2 echo cleaning: Executed '`'git prune --expire "$PRUNE_EXPIRE_TIME"'`' at "“$(date --iso-8601=seconds)”" done. && 
 			: ) && 
 		
 		: :: && 
