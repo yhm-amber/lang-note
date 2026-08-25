@@ -4227,6 +4227,14 @@ ASKING_MAXTRY=144 eval "$(gd flow m i a https://github.com/cambecc/earth.git ear
 #..	eval "$(gd flow m d u earth.weather.nullschool.wui-src)"
 ~~~
 
+### (doc) PDF
+
+(wui editor) Stirling-PDF
+
+~~~ sh
+ASKING_MAXTRY=210 eval "$(gd flow m i a https://github.com/Stirling-Tools/Stirling-PDF.git stirlingpdf.pdf.wui-src 20260825 tags:v2.14.3 tree:main)"
+~~~
+
 ### (slicer) OrcaSlicer
 
 ~~~ sh
