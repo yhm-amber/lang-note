@@ -4119,18 +4119,25 @@ ASKING_MAXTRY=89 eval "$(gd flow m i a https://github.com/t8y2/dbx.git dbx.db-cl
 #..	eval "$(gd flow m i e _ dbx.db-client.wui-src XXXXXXXX)"
 ~~~
 
-### (net) Download Manager
+### (net) File Trans Manager
 
-FluxDown
+(dm wui) FluxDown
 
 ~~~ sh
 ASKING_MAXTRY=999 eval "$(gd flow m i a https://github.com/zerx-lab/FluxDown.git fluxdown.dm.zerxlab-src 20260806 tree:main tags:v0.3.2)"
 ~~~
 
-Risuko
+(dm wui) Risuko
 
 ~~~ sh
 ASKING_MAXTRY=676 eval "$(gd flow m i a https://github.com/YueMiyuki/Risuko.git risuko.dm-src 20260724 tree:master tags:v0.6.0)"
+~~~
+
+(sy tui) lazyrsync
+
+~~~ sh
+ASKING_MAXTRY=116 eval "$(gd flow m i a https://github.com/westpoint-io/lazyrsync.git lazyrsync.rsync.tui-src 20260811 tags:v0.3.0 tree:main)"
+#..	eval "$(gd flow m d u lazyrsync.rsync.tui-src)"
 ~~~
 
 ### (net) Sniffer
