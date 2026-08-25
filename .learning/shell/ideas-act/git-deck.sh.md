@@ -4198,6 +4198,14 @@ eval "$(gd flow m i e _ svgedit.svg.canvas-srcs 20260806)"
 #..	eval "$(gd flow m d u svgedit.svg.canvas-srcs)"
 ~~~
 
+### (media) Pic Algo
+
+(lossless PNG compression optimizer) oxipng
+
+~~~ sh
+ASKING_MAXTRY=217 eval "$(gd flow m i a https://github.com/oxipng/oxipng.git oxipng.comp.cli-src 20260815 tags:v10.2.0 tree:master)"
+~~~
+
 ### (sense) Sol
 
 Trail-Sense
