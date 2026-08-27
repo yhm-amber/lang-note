@@ -143,7 +143,7 @@ Libs ()
 			in 
 				(i|in|inside|inner)      _help_ctrl='i'  ;; 
 				(o|out|outside|outter)   _help_ctrl=''   ;; 
-				(_) 1>&2 echo '[ERROR]: subs: frames: EVAL_PLACE: only support `inside` or `outside`.' ; return 7 ;; 
+				(*) 1>&2 echo '[ERROR]: subs: frames: EVAL_PLACE: only support `inside` or `outside`.' ; return 7 ;; 
 			esac && 
 			
 			: 亓可别名 去别承体 && 
@@ -210,7 +210,7 @@ Libs ()
 					in 
 						(Y|YES|T|TRUE|O|ON|OK) local __'"$NAME_EMBEDDED"'__=true ;; 
 						(N|NO|F|FALSE|X|OFF|NOT) local __'"$NAME_EMBEDDED"'__=false ;; 
-						(_) 1>&2 echo unknown kwargs '"$NAME_EMBEDDED"': "'"'"'${'"$NAME_EMBEDDED"'}'"'"'": only support true/false. ; return 13 ;; 
+						(*) 1>&2 echo Err: unknown kwargs '"$NAME_EMBEDDED"': "'"'"'${'"$NAME_EMBEDDED"'}'"'"'": only support true/false. ; return 13 ;; 
 					esac && 
 					: ' && 
 				: ) && 
@@ -551,6 +551,75 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 			done && 
 			: ) && 
 		
+		
+		#: clone_play pick_pluck <entry-type> [<entry> ...]
+		#. clone_play pick_pluck 
+		#. gd cp pick_pluck tree feature/dev main ...
+		#. gd cp pick_pluck tags v1.0.1 v1.0.2 ...
+		pick_pluck__helper__ () 
+		(
+			echo && 
+			echo '独取所需 指需而取亓内 謂之擢' && 
+			echo && 
+			: ) && 
+		alias p=pick_pluck pp=pick_pluck pick=pick_pluck && pick_pluck () 
+		(
+			case "${1}" 
+			in 
+				(tree|head|heads|h)    _name='tree'   __type_mark__=heads  __called__='branch'  && shift ;;
+				(tags|tag|label|t|l)   _name='tags'   __type_mark__=tags   __called__='tag'     && shift ;;
+				(*) 1>&2 echo pick_pluck: Error: unsupport sub command "'${1}'" '!!' only "'tree/tags'" supported. ; return 12 ;;
+			esac && 
+			
+			for entry in "$@" ;
+			do 
+				echo :: Fetching the "'${entry}'" as a "${__called__}" from "'origin'" in shallow '(depth 1)' mode ... && 
+				shallow_haul fetch -- 'origin' "refs/${__type_mark__}/${entry}" && 
+				:; 
+			done && 
+			
+			echo :: pick_pluck: Done for "${_name}": "$@" && 
+			: ) && 
+		
+		shallow_haul__helper__ () 
+		(
+			echo && 
+			echo && 
+			: ) && 
+		alias s=shallow_haul sh=shallow_haul shallow=shallow_haul && shallow_haul () 
+		(
+			case "${1}" 
+			in 
+				(clone)  __sub_cmd__='clone' && shift ;;
+				(fetch)  __sub_cmd__='fetch' && shift ;;
+				(*) 1>&2 echo shallow_haul: Error: unsupported sub command "'${1}'". ; return 117 ;;
+			esac && 
+			
+			1>&2 echo :: executing: '`'git "${__sub_cmd__}" --progress --depth 1 "$@"'`' && 
+			eval "$(_cmnd_tools _retry_asking init_codes)" && : 其尝适询 && 
+			while ! ( git "${__sub_cmd__}" --progress --depth 1 "$@" 2>&1 && : ) ;
+			do 
+				1>&2 echo tried: "$((++try_shallowget))" for shallow '(depth 1)' "${__sub_cmd__}" && 
+				1>&2 eval "$(FD_TTY=9 _cmnd_tools _retry_asking body_codes)" && : 其尝适询 && 
+				:; 
+			done | 
+				tee >(cat 1>&2) | 
+				#::	will only out 3 lines (which has "'")
+				#;;	 after keep waiting until EOF
+				ELLIPSIS_SHOW=x LINES_MAX=3 _ctrl_tools _wait_outs "'" | 
+				#::	Just a head -n 1 alternative
+				#;;	 but with no SIGPIPE to avoid pipe-broken.
+				ELLIPSIS_SHOW=x LINES_MAX=1 _ctrl_tools _wait_outs 'Cloning into' | 
+				_param_tools flatten_line params_roll | 
+				tail -n 1 | 
+				cut -d "'" -f 2 | 
+				cat - && 
+			# while ! git clone --progress --depth 1 --no-single-branch "$@" ;
+			# do 1>&2 echo tried: "$((++try_shallowget))" for shallow '(depth 1)' clone && :; done && 
+			: 使其询必曰问之 && 
+			: ) 9</dev/tty && 
+		
+		
 		#: git-deck cp auto-clone [<git-clone-options>] -- <remote-link> [<aim-path>]
 		#. ASKING_MAXTRY=999 git-deck cp a https://github.com/denoland/deno.git --mirror
 		#. ASKING_MAXTRY=999 git-deck cp a https://github.com/osquery/osquery.git --mirror
@@ -581,50 +650,31 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 			: ) && 
 		alias a=auto_clone ac=auto_clone auto-clone=auto_clone && auto_clone () 
 		(
-			echo :: git cloning in shallow '(depth 1)' mode :: && 
-			eval "$(_cmnd_tools _retry_asking init_codes)" && : 其尝适询 && 
-			while ! ( git clone --progress --depth 1 --no-single-branch "$@" 2>&1 && : ) ;
+			echo :: git cloning in shallow '(depth 1)' mode then unshallow it after the success :: && 
+			shallow_haul clone --no-single-branch "$@" | while read -r -- out_dir ;
 			do 
-				1>&2 echo tried: "$((++try_clone))" for clone && 
-				1>&2 eval "$(FD_TTY=9 _cmnd_tools _retry_asking body_codes)" && : 其尝适询 && 
-				:; 
-			done | 
-				tee >(cat 1>&2) | 
-				#::	will only out 3 lines (which has "'")
-				#;;	 after keep waiting until EOF
-				ELLIPSIS_SHOW=x LINES_MAX=3 _ctrl_tools _wait_outs "'" | 
-				#::	Just a head -n 1 alternative
-				#;;	 but with no SIGPIPE to avoid pipe-broken.
-				ELLIPSIS_SHOW=x LINES_MAX=1 _ctrl_tools _wait_outs 'Cloning into' | 
-				_param_tools flatten_line params_roll | 
-				tail -n 1 | 
-				cut -d "'" -f 2 | 
-				while read -r -- out_dir ;
-				do 
+			(
+				echo :: change workdir to "\`${out_dir}\`" from "\`$(pwd)\`" to unshallow fetch :: && 
+				cd "${out_dir}" && 
 				(
-					echo :: change workdir to "\`${out_dir}\`" from "\`$(pwd)\`" to unshallow fetch :: && 
-					cd "${out_dir}" && 
-					(
-						echo :: unshallowing in "\`$(pwd)\`" :: && 
-						repo_chk shallow . && 
-						while ! ( auto_unshallow --all && : ) ;
-						do 1>&2 echo tried: "$((++try_unshallow))" for auto unshallow. && :; done && 
-						: ) && 
-					(
-						echo :: updating in "\`$(pwd)\`" :: && 
-						# SHOW_MORE_HINTS=y sync_play base_upgrade . && 
-						IS_BARE= sync_play pull_full 'origin' . && 
-						: ) && 
-					(
-						echo :: cleaning in "\`$(pwd)\`" :: && 
-						sync_play simple_cleaning now && 
-						: ) && 
-					echo :: done for repo "\`${out_dir}\`". :: && 
+					echo :: unshallowing in "\`$(pwd)\`" :: && 
+					repo_chk shallow . && 
+					while ! ( auto_unshallow --all && : ) ;
+					do 1>&2 echo tried: "$((++try_unshallow))" for auto unshallow. && :; done && 
 					: ) && 
-				break ; done && 
-			echo && 
-			: 使其询必曰问之 && 
-			: ) 9</dev/tty && 
+				(
+					echo :: updating in "\`$(pwd)\`" :: && 
+					# SHOW_MORE_HINTS=y sync_play base_upgrade . && 
+					IS_BARE= sync_play pull_full 'origin' . && 
+					: ) && 
+				(
+					echo :: cleaning in "\`$(pwd)\`" :: && 
+					sync_play simple_cleaning now && 
+					: ) && 
+				echo :: done for repo "\`${out_dir}\`". :: && 
+				: ) && 
+			break ; done && 
+			: ) && 
 		
 		alias u=auto_unshallow au=auto_unshallow && auto_unshallow () 
 		(
@@ -796,13 +846,16 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 		#. (cd deno.git && git-deck bp wts x tree:main tags:v2.9.2)
 		#. (cd osquery.git && git-deck bp wts i tree:master tags:5.23.1)
 		#. (cd osquery.git && git-deck bp wts x tree:master tags:5.23.1)
+		#. (cd dbx.db-clients.wui-src/dbx.git && git-deck bp wts i tree:gpui tree:dev/test-vapor tags:v0.5.95)
+		#. (cd dbx.db-clients.wui-src/dbx.git && git-deck bp wts u tree:gpui tree:dev/test-vapor tags:v0.5.95)
 		alias wts=worktrees && worktrees () 
 		(
 			case "$1" 
 			in 
-				(i|in|init)  __cmd_sub__=add  && shift ;;
-				(x|rm|drop)  __cmd_sub__=rm   && shift ;;
-				(_) 1>&2 echo Unknown sub cmd in worktrees: "'$1'" && return 16 ;;
+				(i|in|init)  __cmd_sub__=add   && shift ;;
+				(x|rm|drop)  __cmd_sub__=rm    && shift ;;
+				(u|up|uppe)  __cmd_sub__=uppe  && shift ;;
+				(*) 1>&2 echo Unknown sub cmd in worktrees: "'$1'" && return 16 ;;
 			esac && 
 			
 			_param_tools params_roll "$@" | while IFS=: read -r -- _type _name ;
@@ -875,16 +928,17 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 		(
 			case "$1" 
 			in 
-				(add|a|create|c|load|+)   __cmd_a__=add     __n_ctrl__=     && shift ;;
-				(rm|remove|del|d|drop|x)  __cmd_a__=remove  __n_ctrl__=' '  && shift ;;
-				(_) 1>&2 echo Unknown sub cmd a: "'$1'" && return 16 ;;
+				(add|a|create|c|load|+)    __name__=add  __cmd_a__=add     && shift ;;
+				(rm|remove|del|d|drop|x)   __name__=del  __cmd_a__=remove  && shift ;;
+				(u|up|upgrade|uppe|++)     __name__=upp  __cmd_a__=add     && shift ;;
+				(*) 1>&2 echo worktree: Unknown sub cmd a: "'$1'" && return 16 ;;
 			esac && 
 			
 			case "$1" 
 			in 
-				(tags)  __cmd_b__=tag     __dir__=tags  __called__=tags      && shift ;;
-				(tree)  __cmd_b__=branch  __dir__=tree  __called__=branches  && shift ;;
-				(_) 1>&2 echo Unknown sub cmd b: "'$1'" && return 16 ;;
+				(tags)    __called__=tag     __entrytype__=tags  __refstype__=tags   && shift ;;
+				(tree)    __called__=branch  __entrytype__=tree  __refstype__=heads  && shift ;;
+				(*) 1>&2 echo worktree: Unknown sub cmd b: "'$1'" && return 16 ;;
 			esac && 
 			
 			case "${CHOOSE_MODE:-${CHOOSER:-Only}}" 
@@ -892,19 +946,32 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 				(Only|O|o|only)  __chooser_name__=Only && __chooser () ( IN="${_name_input}" awk -- 'BEGIN { a = ENVIRON["IN"] } $0 == a' && : )  ;;
 				(All|A|a|all)    __chooser_name__=All  && __chooser () ( cat - && : )  ;;
 				(as|AS)          __chooser_name__=AS   && __chooser () ( awk -- "/${CHOOSE_AS:-}/" && : )  ;;
-				(_) 1>&2 echo Unknown select for CHOOSER: "${CHOOSER}" '-- Must be Only/All/AS.' && return 17 ;;
+				(*) 1>&2 echo worktree: Unknown select for CHOOSER: "${CHOOSER}" '-- Must be Only/All/AS.' && return 17 ;;
 			esac && 
 			
 			# __choose_max="${CHOOSE_MAX:-12}" && 
 			
 			return $( 
-			shopt -u -q -- extglob ;
+			{ shopt -u -q -- extglob || 1>&2 echo Fail: cmd: '`shopt -u -q -- extglob`' ; } && 
+			: 此乃使下 $_entry_mark ${__n_ctrl__:-${_entry_mark}} 之如同原样 && 
 			{
 				_name_input="$1" && shift && 
 				{
-					git "${__cmd_b__}" --format='%(refname:short)' --no-column --contains "$_name_input" || 
-					echo $? 1>&6 ;
-					:; 
+					1>&2 echo worktree: Working for: "${__name__}" "${__called__}" "${_name_input}" && 
+					case "$__name__" 
+					in 
+					(upp) 
+						: 此处退出码最终一定是零 但可能不返回东西 && 
+						while ! git ls-remote -- origin "refs/${__refstype__}"/"${_name_input}" > >(
+							awk -v FS="refs/${__refstype__}/" -- '{ print $2 }') ;
+						do :; done && 
+						: ;;
+					(*) 
+						: 此处可能退出码非零 && 
+						git "${__called__}" --format='%(refname:short)' --no-column --contains "$_name_input" && 
+						: ;;
+					esac || 
+						{ _ret=$? ; echo $_ret 1>&6 ; return $_ret ; } ;
 				} | 
 					FD_TEE=2 _ctrl_tools _wait_tee awk -- '
 						{ print "-",$0 } 
@@ -922,11 +989,30 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 						' | 
 					# tee >( | ELLIPSIS_SHOW=x LINES_MAX="$__choose_max" _ctrl_tools _wait_outs 1>&2) | 
 					{
-						while read -r -- _name ;
+						while read -r -- _entry_mark ;
 						do 
-							echo :: executing: worktree "${__cmd_a__}" "../${__dir__}/$_name" ${__n_ctrl__:-${_name}} "$@" :: && 
-							git worktree "${__cmd_a__}" ../"${__dir__}"/$_name ${__n_ctrl__:-${_name}} "$@" && 
-							{ ls -d -- ../"${__dir__}"/* || ls ../"${__dir__}" || ls -d -- ../* ; } && 
+							{ test -n "$_entry_mark" || { 1>&2 echo No entry to work for inputed "'${_name_input}'". ; return 19 ; } ; } && 
+							
+							case "$__name__" 
+							in 
+							(add) 
+								: && 
+								unset -v -- __n_ctrl__ && 
+								: ;;
+							(del) 
+								: && 
+								__n_ctrl__=' ' && 
+								: ;;
+							(upp) 
+								updator clone_play pick_pluck "${__entrytype__}" "${_entry_mark}" && 
+								unset -v -- __n_ctrl__ && 
+								: ;;
+							esac && 
+							
+							echo :: executing: worktree "${__cmd_a__}" "../${__entrytype__}/$_entry_mark" ${__n_ctrl__:-${_entry_mark}} "$@" :: && 
+							git worktree "${__cmd_a__}" ../"${__entrytype__}"/$_entry_mark ${__n_ctrl__:-${_entry_mark}} "$@" && 
+							
+							{ ls -d -- ../"${__entrytype__}"/* || ls ../"${__entrytype__}" || ls -d -- ../* ; } && 
 							:; 
 						done || 
 						echo $? 1>&6 ;
@@ -965,7 +1051,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 				(a|add|+)      __cmd_sub__=add     && shift ;;
 				(rn|rename|r)  __cmd_sub__=rename  && shift ;;
 				(rm|remove|x)  __cmd_sub__=remove  && shift ;;
-				(_) 1>&2 echo Unknown sub cmd: "'$1'" && return 16 ;;
+				(*) 1>&2 echo remotes: Unknown sub cmd: "'$1'" && return 16 ;;
 			esac && 
 			
 			_dir_path="${1:-.}" && shift && 
@@ -1123,7 +1209,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 					in 
 						(pull)   __sub_mark__=pull  && shift ;; 
 						(push)   __sub_mark__=push  && shift ;; 
-						(_) 1>&2 echo Unknown sub cmd in necessity check: "'$1'" '(only support pull|push).' && return 16 ;;
+						(*) 1>&2 echo necessity: check: Unknown sub cmd "'$1'" '(only support pull|push).' && return 16 ;;
 					esac && 
 					
 					_esc_codes () 
@@ -1298,7 +1384,6 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 				eval "$(FD_TTY=9 _cmnd_tools _retry_asking body_codes)" && 
 				:; 
 			done && 
-			echo && 
 			: 使其询必曰问之 && 
 			: ) 9</dev/tty && 
 		
@@ -1335,7 +1420,6 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 					: ) && 
 				:; 
 			done && 
-			echo && 
 			: ) && 
 		
 		#: git-deck sp all-pull [<git-dir> ...]
@@ -1371,7 +1455,6 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 					: ) && 
 				:; 
 			done && 
-			echo && 
 			: ) && 
 		
 		
@@ -1468,7 +1551,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 						(i|ini|init) codes_init  "$@" ;; 
 						(d|dy|daily) codes_daily "$@" ;; 
 						(@|extract) extract_codes "$@" ;; 
-						(_) 1>&2 echo Unknown working type: "'"'"'${WORKING_TYPE}'"'"'", only '"'"'`'"'"'init/daily'"'"'`'"'"' supported. && return 16 ;;
+						(*) 1>&2 echo flow: Unknown working type: "'"'"'${WORKING_TYPE}'"'"'", only '"'"'`'"'"'init/daily'"'"'`'"'"' supported. && return 16 ;;
 					esac && 
 					: ' && 
 				: ) && 
@@ -1588,7 +1671,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 					(home|h) codes_home "$@" && echo : ;; 
 					(ende|e) codes_ende : ;; 
 					(a|all) codes_home "$@" && codes_ende : ;; 
-					(_) 1>&2 echo Unknown working part: "'${WORKING_PART}'", only '`'home/ende/all'`' supported. && return 16 ;;
+					(*) 1>&2 echo mirrors: Unknown working part: "'${WORKING_PART}'", only '`'home/ende/all'`' supported. && return 16 ;;
 				esac && 
 				: ) && 
 			
