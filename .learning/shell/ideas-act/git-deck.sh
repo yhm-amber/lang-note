@@ -215,6 +215,7 @@ Libs ()
 					: ' && 
 				: ) && 
 			
+			#. choose_bool REPLIES_BARE_STAT y '1>&2' ''
 			#. choose_bool SKIP_BARE_UPWEAR no 'bare_play updator' '_cmnd_tools _run_identity' && 
 			#. $(choose_bool SKIP_BARE_UPWEAR no 'bare_play updator' '_cmnd_tools _run_identity') && 
 			choose_bool () 
@@ -545,57 +546,100 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 			cd "${WORKING_PATH:-.}" && 
 			while IFS=: read -r -- landing_path remote_link ;
 			do 
-				echo :: executing: '`'git-decks cp auto-clone ${OPTS_CLONE} -- "'${remote_link}'" ${landing_path}'`' at "'$(pwd)'" :: && 
+				echo :: clone_play: executing '`'auto_clone ${OPTS_CLONE} -- "'${remote_link}'" ${landing_path}'`' at "'$(pwd)'" :: && 
 				auto_clone ${OPTS_CLONE} -- "${remote_link}" ${landing_path} && 
 				:; 
 			done && 
 			: ) && 
 		
 		
-		#: clone_play pick_pluck <entry-type> [<entry> ...]
-		#. clone_play pick_pluck 
-		#. gd cp pick_pluck tree feature/dev main ...
-		#. gd cp pick_pluck tags v1.0.1 v1.0.2 ...
-		pick_pluck__helper__ () 
+		#. collects up tree:main tree:dev/fix-1101 tags:v1.0.1 tags:v0.1.0
+		#. collects down https://github.com/t8y2/dbx.git --mirror < <(echo tree:main tree:gpui tags:v0.5.98)
+		alias cols=collects && collects () 
+		(
+			eval "$(subs frames codes_head)" && 
+			
+			alias fet=up up=upwards && upwards () 
+			(
+				echo :: collects: upwards Working for: "$@" ... && 
+				_param_tools params_roll "$@" | while IFS=: read -r -- _type _name ;
+				do 
+					echo :: clone_play: executing '`'"pickup ${_type} ${_name}"'`' at "'$(_cmnd_tools _curr_ellipath)'" :: && 
+					bare_play wears . upper pickup "${_type}" "${_name}" && 
+					:; 
+				done && 
+				: ) && 
+			
+			alias clo=down down=downwards && downwards () 
+			(
+				: 取之 入之 && 
+				cd "$(shallow_take clone --single-branch "$@")" && 
+				echo :: collects: downwards Working in dir "'$(_cmnd_tools _curr_ellipath)'" && 
+				
+				: 天轉 地換
+				set -- $(cat -) && 
+				
+				: 得之 使可 && 
+				if "$(REPLIES_BARE_STAT=y upwards "$@")" ;
+					then bare_play wts i "$@" ;
+					else echo Done. ;
+				fi && 
+				: ) && 
+			
+			: :: && 
+			
+			eval "$(subs frames codes_tail)" && 
+			
+			: :: && 
+			"$@" && 
+			: ) && 
+		
+		#: clone_play pickup <entry-type> [<entry> ...]
+		#. bare_play wearwarps . updator clone_play pickup ...
+		#. gd cp pickup tree feature/test dev main ...
+		#. gd cp pickup tags v1.0.1 v1.0.2 ...
+		pickup__helper__ () 
 		(
 			echo && 
 			echo '独取所需 指需而取亓内 謂之擢' && 
 			echo && 
 			: ) && 
-		alias p=pick_pluck pp=pick_pluck pick=pick_pluck && pick_pluck () 
+		alias p=pickup pu=pickup pluck=pickup && pickup () 
 		(
 			case "${1}" 
 			in 
 				(tree|head|heads|h)    _name='tree'   __type_mark__=heads  __called__='branch'  && shift ;;
 				(tags|tag|label|t|l)   _name='tags'   __type_mark__=tags   __called__='tag'     && shift ;;
-				(*) 1>&2 echo pick_pluck: Error: unsupport sub command "'${1}'" '!!' only "'tree/tags'" supported. ; return 12 ;;
+				(*) 1>&2 echo pickup: Error: unsupport sub command "'${1}'" '!!' only "'tree/tags'" supported. ; return 12 ;;
 			esac && 
 			
 			for entry in "$@" ;
 			do 
 				echo :: Fetching the "'${entry}'" as a "${__called__}" from "'origin'" in shallow '(depth 1)' mode ... && 
-				shallow_haul fetch -- 'origin' "refs/${__type_mark__}/${entry}" && 
+				shallow_take fetch -- 'origin' "refs/${__type_mark__}/${entry}" && 
 				:; 
 			done && 
 			
-			echo :: pick_pluck: Done for "${_name}": "$@" && 
+			echo :: pickup: Done for "${_name}": "$@" && 
 			: ) && 
 		
-		shallow_haul__helper__ () 
+		#. gd cp shallow_take clone ...
+		#. gd cp shallow_take fetch ...
+		shallow_take__helper__ () 
 		(
 			echo && 
 			echo && 
 			: ) && 
-		alias s=shallow_haul sh=shallow_haul shallow=shallow_haul && shallow_haul () 
+		alias s=shallow_take sh=shallow_take shallow=shallow_take && shallow_take () 
 		(
 			case "${1}" 
 			in 
 				(clone)  __sub_cmd__='clone' && shift ;;
 				(fetch)  __sub_cmd__='fetch' && shift ;;
-				(*) 1>&2 echo shallow_haul: Error: unsupported sub command "'${1}'". ; return 117 ;;
+				(*) 1>&2 echo shallow_take: Error: unsupported sub command "'${1}'". ; return 117 ;;
 			esac && 
 			
-			1>&2 echo :: executing: '`'git "${__sub_cmd__}" --progress --depth 1 "$@"'`' && 
+			1>&2 echo :: clone_play: executing '`'git "${__sub_cmd__}" --progress --depth 1 "$@"'`' && 
 			eval "$(_cmnd_tools _retry_asking init_codes)" && : 其尝适询 && 
 			while ! ( git "${__sub_cmd__}" --progress --depth 1 "$@" 2>&1 && : ) ;
 			do 
@@ -651,22 +695,21 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 		alias a=auto_clone ac=auto_clone auto-clone=auto_clone && auto_clone () 
 		(
 			echo :: git cloning in shallow '(depth 1)' mode then unshallow it after the success :: && 
-			shallow_haul clone --no-single-branch "$@" | while read -r -- out_dir ;
+			shallow_take clone --no-single-branch "$@" | while read -r -- out_dir ;
 			do 
 			(
 				echo :: change workdir to "\`${out_dir}\`" from "\`$(pwd)\`" to unshallow fetch :: && 
 				cd "${out_dir}" && 
 				(
-					echo :: unshallowing in "\`$(pwd)\`" :: && 
+					echo :: unshallowing in "\`$(_cmnd_tools _curr_ellipath)\`" :: && 
 					repo_chk shallow . && 
 					while ! ( auto_unshallow --all && : ) ;
 					do 1>&2 echo tried: "$((++try_unshallow))" for auto unshallow. && :; done && 
 					: ) && 
-				(
-					echo :: updating in "\`$(pwd)\`" :: && 
-					# SHOW_MORE_HINTS=y sync_play base_upgrade . && 
-					IS_BARE= sync_play pull_full 'origin' . && 
-					: ) && 
+				# (
+				# 	echo :: updating in "\`$(_cmnd_tools _curr_ellipath)\`" :: && 
+				# 	IS_BARE= sync_play pull_full 'origin' . && 
+				# 	: ) && 
 				(
 					echo :: cleaning in "\`$(pwd)\`" :: && 
 					sync_play simple_cleaning now && 
@@ -725,13 +768,33 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 		: ) && 
 	alias bp=bare_play bare-play=bare_play && bare_play () 
 	(
-		repo_chk bare . || return 4 ;
+		eval "$(subs frames codes_head)" && 
+		
+		#. bp wears . upper clone_play shallow_take fetch -- origin refs/heads/dev
+		#. bp wears . upper clone_play pickup tree feature/test dev main ...
+		alias wears=wearwarps && wearwarps () 
+		(
+			readonly _wd="${1}" && shift && 
+			readonly _cloak="${1}" && shift && 
+			
+			readonly IS_BARE="$(repo_chk bare "${_wd}" echo)" && 
+			eval '
+				if "${IS_BARE}" ;
+					then ${_cloak} "$@" ;
+					else "$@" ;
+				fi' "$(subs kwargs choose_bool REPLIES_BARE_STAT n '1>&2' '')" && 
+			
+			if "$(subs kwargs as_bool REPLIES_BARE_STAT n)" ;
+				then echo "${IS_BARE}" ;
+				else :;
+			fi && 
+			: ) && 
+		
 		
 		: "Bare dir in a special named dir like 'name.comments-src' then:" && 
 		: "- path of worktree dir from branch like 'name.comments-src/tree/<branch-name>'" && 
 		: "- path of worktree dir from tag like 'name.comments-src/tags/<tag-name>'" && 
 		
-		eval "$(subs frames codes_head)" && 
 		
 		#. git-deck bare-play up
 		#. git-deck bare-play up origin
@@ -812,7 +875,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 			_find_in ../tree -maxdepth 1 -mindepth 1 -type d | 
 				while read -r -- treepath ;
 				do 
-					echo :: executing: '`checkout --detach`' in "'${treepath}'" :: && 
+					echo :: bare_play: updator: executing '`checkout --detach`' in "'${treepath}'" :: && 
 					(
 						cd "${treepath}" && 
 						git checkout --detach && 
@@ -821,16 +884,16 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 					:; 
 				done && 
 			
-			echo :: executing inputed: '`'"$*"'`' :: && 
+			echo :: bare_play: updator: executing inputed: '`'"$*"'`' :: && 
 			while ! ( SKIP_BARE_UPWEAR=y _cmnd_tools _run_identity "$@" && : ) ;
 			do 1>&2 echo tried: "$((++try_update))" for '`'"$*"'`' && :; done && 
-			1>&2 echo upper: updated in "'$(_cmnd_tools _curr_ellipath)'" by executing: '`'"$*"'`' && 
+			1>&2 echo bare_play: updator: updated in "'$(_cmnd_tools _curr_ellipath)'" by executing '`'"$*"'`' && 
 			
 			_find_in ../tree -maxdepth 1 -mindepth 1 -type d | 
 				while read -r -- treepath ; 
 				do 
 					_branch="$(basename "${treepath}")" && 
-					echo :: executing: '`checkout '"$_branch"'`' in "'${treepath}'" :: && 
+					echo :: bare_play: updator: executing '`checkout '"$_branch"'`' in "'${treepath}'" :: && 
 					(
 						cd -- "${treepath}" && 
 						git checkout "$_branch" && 
@@ -854,13 +917,13 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 			in 
 				(i|in|init)  __cmd_sub__=add   && shift ;;
 				(x|rm|drop)  __cmd_sub__=rm    && shift ;;
-				(u|up|uppe)  __cmd_sub__=uppe  && shift ;;
+				# (u|up|uppe)  __cmd_sub__=uppe  && shift ;;
 				(*) 1>&2 echo Unknown sub cmd in worktrees: "'$1'" && return 16 ;;
 			esac && 
 			
 			_param_tools params_roll "$@" | while IFS=: read -r -- _type _name ;
 			do 
-				echo :: executing: '`'"CHOOSE_MODE='${CHOOSE_MODE:-Only}' git-decks bp worktree ${__cmd_sub__} $_type $_name"'`' at "'$(pwd)'" :: && 
+				echo :: bare_play: executing '`'"CHOOSE_MODE='${CHOOSE_MODE:-Only}' git-decks bp worktree ${__cmd_sub__} $_type $_name"'`' at "'$(pwd)'" :: && 
 				CHOOSE_MODE="${CHOOSE_MODE:-Only}" worktree "${__cmd_sub__}" "$_type" "$_name" && 
 				:; 
 			done && 
@@ -930,7 +993,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 			in 
 				(add|a|create|c|load|+)    __name__=add  __cmd_a__=add     && shift ;;
 				(rm|remove|del|d|drop|x)   __name__=del  __cmd_a__=remove  && shift ;;
-				(u|up|upgrade|uppe|++)     __name__=upp  __cmd_a__=add     && shift ;;
+				# (u|up|upgrade|uppe|++)     __name__=upp  __cmd_a__=add     && shift ;;
 				(*) 1>&2 echo worktree: Unknown sub cmd a: "'$1'" && return 16 ;;
 			esac && 
 			
@@ -949,8 +1012,6 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 				(*) 1>&2 echo worktree: Unknown select for CHOOSER: "${CHOOSER}" '-- Must be Only/All/AS.' && return 17 ;;
 			esac && 
 			
-			# __choose_max="${CHOOSE_MAX:-12}" && 
-			
 			return $( 
 			{ shopt -u -q -- extglob || 1>&2 echo Fail: cmd: '`shopt -u -q -- extglob`' ; } && 
 			: 此乃使下 $_entry_mark ${__n_ctrl__:-${_entry_mark}} 之如同原样 && 
@@ -960,12 +1021,12 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 					1>&2 echo worktree: Working for: "${__name__}" "${__called__}" "${_name_input}" && 
 					case "$__name__" 
 					in 
-					(upp) 
-						: 此处退出码最终一定是零 但可能不返回东西 && 
-						while ! git ls-remote -- origin "refs/${__refstype__}"/"${_name_input}" > >(
-							awk -v FS="refs/${__refstype__}/" -- '{ print $2 }') ;
-						do :; done && 
-						: ;;
+					# (upp) 
+					# 	: 此处退出码最终一定是零 但可能不返回东西 && 
+					# 	while ! git ls-remote -- origin "refs/${__refstype__}"/"${_name_input}" > >(
+					# 		awk -v FS="refs/${__refstype__}/" -- '{ print $2 }') ;
+					# 	do :; done && 
+					# 	: ;;
 					(*) 
 						: 此处可能退出码非零 && 
 						git "${__called__}" --format='%(refname:short)' --no-column --contains "$_name_input" && 
@@ -1003,13 +1064,13 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 								: && 
 								__n_ctrl__=' ' && 
 								: ;;
-							(upp) 
-								updator clone_play pick_pluck "${__entrytype__}" "${_entry_mark}" && 
-								unset -v -- __n_ctrl__ && 
-								: ;;
+							# (upp) 
+							# 	updator clone_play pickup "${__entrytype__}" "${_entry_mark}" && 
+							# 	unset -v -- __n_ctrl__ && 
+							# 	: ;;
 							esac && 
 							
-							echo :: executing: worktree "${__cmd_a__}" "../${__entrytype__}/$_entry_mark" ${__n_ctrl__:-${_entry_mark}} "$@" :: && 
+							echo :: bare_play: executing: worktree "${__cmd_a__}" "../${__entrytype__}/$_entry_mark" ${__n_ctrl__:-${_entry_mark}} "$@" :: && 
 							git worktree "${__cmd_a__}" ../"${__entrytype__}"/$_entry_mark ${__n_ctrl__:-${_entry_mark}} "$@" && 
 							
 							{ ls -d -- ../"${__entrytype__}"/* || ls ../"${__entrytype__}" || ls -d -- ../* ; } && 
@@ -1025,6 +1086,10 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 		: :: && 
 		
 		eval "$(subs frames codes_tail)" && 
+		
+		: :: && 
+		case "$1" in (wears|wearwarps) "$@" ; return $? ;; esac && 
+		{ repo_chk bare . || return 4 ; } && 
 		
 		: :: && 
 		"$@" && 
@@ -1061,7 +1126,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 			
 			_param_tools params_roll "$@" | while IFS=: read -r -- a b ;
 			do 
-				echo :: executing: '`'"git remote ${__cmd_sub__} $OPTS_REMOTE -- ${a} ${b}"'`' at "'$(pwd)'" :: && 
+				echo :: sync_play: executing '`'"git remote ${__cmd_sub__} $OPTS_REMOTE -- ${a} ${b}"'`' at "'$(pwd)'" :: && 
 				git remote "${__cmd_sub__}" $OPTS_REMOTE -- ${a} ${b} && 
 				:; 
 			done && 
@@ -1486,7 +1551,6 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 					while 
 					! if ! "${__IS_BARE__}" ;
 						then git pull ;
-						# else bare_play update ;
 						else bare_play updator git remote update ;
 					fi ;
 					do 
@@ -1501,6 +1565,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 				:; 
 			done && 
 			: ) && 
+		
 		
 		alias c=cl cl=simple_cleaning && simple_cleaning () 
 		(
