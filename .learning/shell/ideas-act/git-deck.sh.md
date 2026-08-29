@@ -4113,10 +4113,7 @@ ASKING_MAXTRY=107 eval "$(gd flow m i a https://github.com/filips123/PWAsForFire
 (wui) dbx
 
 ~~~ sh
-ASKING_MAXTRY=89 eval "$(gd flow m i a https://github.com/t8y2/dbx.git dbx.db-client.wui-src 20260812 tree:main tags:v0.5.82)"
-#.	eval "$(gd flow m d u dbx.db-client.wui-src)" && gd bp wts x tags:v0.5.82 && gd bp wts i tags:v0.5.83 && eval "$(gd flow m i e _ dbx.db-client.wui-src 20260812)"
-#..	eval "$(gd flow m d u dbx.db-client.wui-src)"
-#..	eval "$(gd flow m i e _ dbx.db-client.wui-src XXXXXXXX)"
+ASKING_MAXTRY=888 eval "$(gd flow c i a https://github.com/t8y2/dbx.git dbx.db-clients.wui-src 20260829 tree:main tree:gpui tags:v0.5.98)"
 ~~~
 
 ### (net) File Trans Manager
