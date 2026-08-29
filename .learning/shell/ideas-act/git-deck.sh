@@ -1856,7 +1856,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 			eval "$(_frame head_codes)" && 
 			
 			#. flow colls i a https://github.com/t8y2/dbx.git dbx.db-clients.wui-src 20260829 tree:main tree:gpui tags:v0.5.98
-			#. eval "$(gd flow colls i a https://github.com/t8y2/dbx.git dbx.db-clients.wui-src 20260829 tree:main tree:gpui tags:v0.5.98)"
+			#. ASKING_MAXTRY=888 eval "$(gd flow colls i a https://github.com/t8y2/dbx.git dbx.db-clients.wui-src 20260829 tree:main tree:gpui tags:v0.5.98)"
 			codes_init () 
 			(
 				{ WORKING_PART="$1" && shift ; } && 
