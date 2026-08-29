@@ -4182,8 +4182,8 @@ eval "$(gd flow m i e _ emulatorjs.libretro.gameplat-srcs 20260808)"
 Graphite Editor
 
 ~~~ sh
-ASKING_MAXTRY=1011 eval "$(gd flow m i a https://github.com/GraphiteEditor/Graphite.git graphite.editor-svg.rs.wui-src 20260818 tree:master)"
-#..	eval "$(gd flow m d u graphite.editor-svg.rs.wui-src)"
+ASKING_MAXTRY=1011 eval "$(gd flow c i a https://github.com/GraphiteEditor/Graphite.git graphite.editor-svg.rs.wui-src 20260829 tree:master tree:wasm-native tree:rhai tree:gpu-invert)"
+#..	(wip)eval "$(gd flow c d u graphite.editor-svg.rs.wui-src)"
 ~~~
 
 SVG-Edit
