@@ -553,28 +553,73 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 			: ) && 
 		
 		
-		#. collects up tree:main tree:dev/fix-1101 tags:v1.0.1 tags:v0.1.0
-		#. collects down https://github.com/t8y2/dbx.git --mirror < <(echo tree:main tree:gpui tags:v0.5.98)
-		alias cols=collects && collects () 
+		#. coll up tree:main tree:dev/fix-1101 tags:v1.0.1 tags:v0.1.0
+		#. coll down https://github.com/t8y2/dbx.git --mirror < <(echo tree:main tree:gpui tags:v0.5.98)
+		collect__helper__ () 
+		(
+			echo && 
+			echo && 
+			: ) && 
+		alias coll=collect && collect () 
 		(
 			eval "$(subs frames codes_head)" && 
 			
-			alias fet=up up=upwards && upwards () 
+			#: clone_play collect pick_type <entry-type> [<entry> ...]
+			#. bare_play wearwarps . updator clone_play collect pick_type ...
+			#. gd cp collect pick_type tree feature/test dev main ...
+			#. gd cp collect pick_type tags v1.0.1 v1.0.2 ...
+			pick_type__helper__ () 
 			(
-				echo :: collects: upwards Working for: "$@" ... && 
+				echo && 
+				echo '独取所需 指需而取亓内 謂之擢' && 
+				echo && 
+				: ) && 
+			alias pt=pick_type pluck-type=pluck_type pick-type=pick_type pluck_type=pick_type && pick_type () 
+			(
+				case "${1}" 
+				in 
+					(tree|head|heads|h)    _name='tree'   __type_mark__=heads  __called__='branch'  && shift ;;
+					(tags|tag|label|t|l)   _name='tags'   __type_mark__=tags   __called__='tag'     && shift ;;
+					(*) 1>&2 echo pick_type: Error: unsupport sub command "'${1}'" '!!' only "'tree/tags'" supported. ; return 12 ;;
+				esac && 
+				
+				for entry in "$@" ;
+				do 
+					echo :: Fetching the "'${entry}'" as a "${__called__}" from "'origin'" in shallow '(depth 1)' mode ... && 
+					shallow_take fetch -- 'origin' "refs/${__type_mark__}/${entry}" && 
+					:; 
+				done && 
+				
+				echo :: pick_type: Done for "${_name}": "$@" && 
+				: ) && 
+			
+			alias pm=pick_multi pluck-multi=pluck_multi pick-multi=pick_multi pluck_multi=pick_multi && pick_multi () 
+			(
 				_param_tools params_roll "$@" | while IFS=: read -r -- _type _name ;
 				do 
-					echo :: clone_play: executing '`'"pickup ${_type} ${_name}"'`' at "'$(_cmnd_tools _curr_ellipath)'" :: && 
-					bare_play wears . upper pickup "${_type}" "${_name}" && 
+					1>&2 echo :: clone_play: executing '`'"pick_type ${_type} ${_name}"'`' at "'$(_cmnd_tools _curr_ellipath)'" :: && 
+					pick_type "${_type}" "${_name}" && 
 					:; 
 				done && 
 				: ) && 
 			
+			alias single-touch=single_touch && single_touch () 
+			(
+				shallow_take clone --single-branch "$@" && 
+				: ) && 
+			
+			alias fet=up up=upwards && upwards () 
+			(
+				1>&2 echo :: collect: upwards Working for: "$@" ... && 
+				REPLIES_BARE_STAT="$REPLIES_BARE_STAT" bare_play wears . upper pick_multi "$@" && 
+				: ) && 
+			
+			#: steps --- single touch ~> cd & upwards ~> wts - if needed
 			alias clo=down down=downwards && downwards () 
 			(
 				: 取之 入之 && 
-				cd "$(shallow_take clone --single-branch "$@")" && 
-				echo :: collects: downwards Working in dir "'$(_cmnd_tools _curr_ellipath)'" && 
+				cd "$(single_touch "$@")" && 
+				echo :: collect: downwards Working in dir "'$(_cmnd_tools _curr_ellipath)'" && 
 				
 				: 天轉 地換
 				set -- $(cat -) && 
@@ -582,7 +627,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 				: 得之 使可 && 
 				if "$(REPLIES_BARE_STAT=y upwards "$@")" ;
 					then bare_play wts i "$@" ;
-					else echo Done. ;
+					else echo clo Done. ;
 				fi && 
 				: ) && 
 			
@@ -594,34 +639,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 			"$@" && 
 			: ) && 
 		
-		#: clone_play pickup <entry-type> [<entry> ...]
-		#. bare_play wearwarps . updator clone_play pickup ...
-		#. gd cp pickup tree feature/test dev main ...
-		#. gd cp pickup tags v1.0.1 v1.0.2 ...
-		pickup__helper__ () 
-		(
-			echo && 
-			echo '独取所需 指需而取亓内 謂之擢' && 
-			echo && 
-			: ) && 
-		alias p=pickup pu=pickup pluck=pickup && pickup () 
-		(
-			case "${1}" 
-			in 
-				(tree|head|heads|h)    _name='tree'   __type_mark__=heads  __called__='branch'  && shift ;;
-				(tags|tag|label|t|l)   _name='tags'   __type_mark__=tags   __called__='tag'     && shift ;;
-				(*) 1>&2 echo pickup: Error: unsupport sub command "'${1}'" '!!' only "'tree/tags'" supported. ; return 12 ;;
-			esac && 
-			
-			for entry in "$@" ;
-			do 
-				echo :: Fetching the "'${entry}'" as a "${__called__}" from "'origin'" in shallow '(depth 1)' mode ... && 
-				shallow_take fetch -- 'origin' "refs/${__type_mark__}/${entry}" && 
-				:; 
-			done && 
-			
-			echo :: pickup: Done for "${_name}": "$@" && 
-			: ) && 
+		
 		
 		#. gd cp shallow_take clone ...
 		#. gd cp shallow_take fetch ...
@@ -771,7 +789,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 		eval "$(subs frames codes_head)" && 
 		
 		#. bp wears . upper clone_play shallow_take fetch -- origin refs/heads/dev
-		#. bp wears . upper clone_play pickup tree feature/test dev main ...
+		#. bp wears . upper clone_play collect pick_type tree feature/test dev main ...
 		alias wears=wearwarps && wearwarps () 
 		(
 			readonly _wd="${1}" && shift && 
@@ -918,7 +936,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 				(i|in|init)  __cmd_sub__=add   && shift ;;
 				(x|rm|drop)  __cmd_sub__=rm    && shift ;;
 				# (u|up|uppe)  __cmd_sub__=uppe  && shift ;;
-				(*) 1>&2 echo Unknown sub cmd in worktrees: "'$1'" && return 16 ;;
+				(*) 1>&2 echo Unknown sub cmd in worktrees: "'$1'" ; return 16 ;;
 			esac && 
 			
 			_param_tools params_roll "$@" | while IFS=: read -r -- _type _name ;
@@ -994,14 +1012,14 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 				(add|a|create|c|load|+)    __name__=add  __cmd_a__=add     && shift ;;
 				(rm|remove|del|d|drop|x)   __name__=del  __cmd_a__=remove  && shift ;;
 				# (u|up|upgrade|uppe|++)     __name__=upp  __cmd_a__=add     && shift ;;
-				(*) 1>&2 echo worktree: Unknown sub cmd a: "'$1'" && return 16 ;;
+				(*) 1>&2 echo worktree: Unknown sub cmd a: "'$1'" ; return 16 ;;
 			esac && 
 			
 			case "$1" 
 			in 
 				(tags)    __called__=tag     __entrytype__=tags  __refstype__=tags   && shift ;;
 				(tree)    __called__=branch  __entrytype__=tree  __refstype__=heads  && shift ;;
-				(*) 1>&2 echo worktree: Unknown sub cmd b: "'$1'" && return 16 ;;
+				(*) 1>&2 echo worktree: Unknown sub cmd b: "'$1'" ; return 16 ;;
 			esac && 
 			
 			case "${CHOOSE_MODE:-${CHOOSER:-Only}}" 
@@ -1009,7 +1027,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 				(Only|O|o|only)  __chooser_name__=Only && __chooser () ( IN="${_name_input}" awk -- 'BEGIN { a = ENVIRON["IN"] } $0 == a' && : )  ;;
 				(All|A|a|all)    __chooser_name__=All  && __chooser () ( cat - && : )  ;;
 				(as|AS)          __chooser_name__=AS   && __chooser () ( awk -- "/${CHOOSE_AS:-}/" && : )  ;;
-				(*) 1>&2 echo worktree: Unknown select for CHOOSER: "${CHOOSER}" '-- Must be Only/All/AS.' && return 17 ;;
+				(*) 1>&2 echo worktree: Unknown select for CHOOSER: "${CHOOSER}" '-- Must be Only/All/AS.' ; return 17 ;;
 			esac && 
 			
 			return $( 
@@ -1065,7 +1083,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 								__n_ctrl__=' ' && 
 								: ;;
 							# (upp) 
-							# 	updator clone_play pickup "${__entrytype__}" "${_entry_mark}" && 
+							# 	updator clone_play collect pick_type "${__entrytype__}" "${_entry_mark}" && 
 							# 	unset -v -- __n_ctrl__ && 
 							# 	: ;;
 							esac && 
@@ -1116,7 +1134,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 				(a|add|+)      __cmd_sub__=add     && shift ;;
 				(rn|rename|r)  __cmd_sub__=rename  && shift ;;
 				(rm|remove|x)  __cmd_sub__=remove  && shift ;;
-				(*) 1>&2 echo remotes: Unknown sub cmd: "'$1'" && return 16 ;;
+				(*) 1>&2 echo remotes: Unknown sub cmd: "'$1'" ; return 16 ;;
 			esac && 
 			
 			_dir_path="${1:-.}" && shift && 
@@ -1274,7 +1292,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 					in 
 						(pull)   __sub_mark__=pull  && shift ;; 
 						(push)   __sub_mark__=push  && shift ;; 
-						(*) 1>&2 echo necessity: check: Unknown sub cmd "'$1'" '(only support pull|push).' && return 16 ;;
+						(*) 1>&2 echo necessity: check: Unknown sub cmd "'$1'" '(only support pull|push).' ; return 16 ;;
 					esac && 
 					
 					_esc_codes () 
@@ -1616,7 +1634,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 						(i|ini|init) codes_init  "$@" ;; 
 						(d|dy|daily) codes_daily "$@" ;; 
 						(@|extract) extract_codes "$@" ;; 
-						(*) 1>&2 echo flow: Unknown working type: "'"'"'${WORKING_TYPE}'"'"'", only '"'"'`'"'"'init/daily'"'"'`'"'"' supported. && return 16 ;;
+						(*) 1>&2 echo flow: Unknown working type: "'"'"'${WORKING_TYPE}'"'"'", only '"'"'`'"'"'init/daily'"'"'`'"'"' supported. ; return 16 ;;
 					esac && 
 					: ' && 
 				: ) && 
@@ -1672,6 +1690,17 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 				: '"$*" && 
 			: ) && 
 		
+		alias X=XXs XXs=XX_codes && XX_codes () 
+		(
+			: "That's a template of flow codes function."
+			
+			eval "$(_frame head_codes)" && #: head of frame .
+			#: bodies of frame ..
+			codes_init () ( : ... defines for: gd flow XXs init ... : ) && 
+			codes_daily () ( : ... defines for: gd flow XXs daily ... : ) && 
+			eval "$(_frame tail_codes)" && #: tail of frame .
+			: ) && 
+		
 		
 		#. ASKING_MAXTRY=11 eval "$(gd flow m i a https://github.com/chad/iroh-drop.git iroh-drop.chad.iroh-src 20260801 tree:main tags:v0.1.3)"
 		#. ASKING_MAXTRY=9 eval "$(gd flow m i h https://github.com/n0-computer/dumbpipe.git dumbpipe.iroh-pipe.n0computer-srcs/cli _ tree:main tags:v0.39.0)"
@@ -1722,12 +1751,12 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 				
 				codes_home () 
 				(
-					echo din "'${PATH_INTO}'" $'\t' "git-deck cp a --mirror -- ${REPO_LINK}" '&& ' && 
-					echo din "'${PATH_INTO}'/$(basename "${REPO_LINK}")" $'\t' "git-deck bp wts i $*" '&& ' && 
+					echo din "'${PATH_INTO}'" $'\t' "git-deck cp a --mirror -- ${REPO_LINK}" '&&' '' && 
+					echo din "'${PATH_INTO}'/$(basename "${REPO_LINK}")" $'\t' "git-deck bp wts i $*" '&&' '' && 
 					: ) && 
 				codes_ende () 
 				(
-					codes_daily cl "${PATH_INTO}" '&&' && 
+					codes_daily cl "${PATH_INTO}" '&&' '' && 
 					echo din . $'\t' "txzb3 '${PATH_INTO}' ${LASTUP_DATE}"' && '"$*" && 
 					: ) && 
 				
@@ -1736,7 +1765,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 					(home|h) codes_home "$@" && echo : ;; 
 					(ende|e) codes_ende : ;; 
 					(a|all) codes_home "$@" && codes_ende : ;; 
-					(*) 1>&2 echo mirrors: Unknown working part: "'${WORKING_PART}'", only '`'home/ende/all'`' supported. && return 16 ;;
+					(*) 1>&2 echo mirrors: Unknown working part: "'${WORKING_PART}'", only '`'home/ende/all'`' supported. ; return 18 ;;
 				esac && 
 				: ) && 
 			
@@ -1754,7 +1783,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 					then 
 						find -- "${WORKING_DIR}" -type d -name '*.git' | while read -r -- _d ;
 						do 
-							echo din "'${_d}'" $'\t' 'git-deck sp c &&' '' && :; 
+							echo din "'${_d}'" $'\t' 'git-deck sp c' '&&' '' && :; 
 						done && 
 						echo : "$*" && :; 
 						:;
@@ -1763,7 +1792,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 						echo find -- "'${WORKING_DIR}'" -type d -name "'*.git'" '|' 'while read -r -- _dir ;' && 
 						echo do '' && 
 						echo $'\t' din '"${_dir}"' $'\t' 'git-deck sp c && :;' '' && 
-						echo done '&& :' "$*" && 
+						echo done '&&' : "$*" && 
 						:;
 					fi && 
 					: ) && 
@@ -1785,8 +1814,6 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 					done && 
 					echo '' && 
 					echo : && 
-					
-					
 					
 					: ) && 
 				
@@ -1824,14 +1851,48 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 			: ) && 
 		
 		
+		alias c=collects colls=coll_codes coll_codes=collect_codes collects=collect_codes && collect_codes () 
+		(
+			eval "$(_frame head_codes)" && 
+			
+			#. flow colls i a https://github.com/t8y2/dbx.git dbx.db-clients.wui-src 20260829 tree:main tree:gpui tags:v0.5.98
+			#. eval "$(gd flow colls i a https://github.com/t8y2/dbx.git dbx.db-clients.wui-src 20260829 tree:main tree:gpui tags:v0.5.98)"
+			codes_init () 
+			(
+				{ WORKING_PART="$1" && shift ; } && 
+				
+				{ REPO_LINK="$1" && shift ; } && 
+				{ PATH_INTO="$1" && shift ; } && 
+				{ LASTUP_DATE="$1" && shift ; } && 
+				
+				codes_home () 
+				(
+					echo din "${PATH_INTO}" $'\t' "git-deck cp coll down ${REPO_LINK} --mirror < <(echo $*)" '&&' '' && 
+					: ) && 
+				
+				codes_ende () 
+				(
+					mirror_codes init ende _ "$PATH_INTO" "$LASTUP_DATE" && 
+					: ) && 
+				
+				case "${WORKING_PART}" 
+				in 
+					(home|h) codes_home "$@" && echo : ;; 
+					(ende|e) codes_ende : ;; 
+					(a|all) codes_home "$@" && codes_ende : ;; 
+					(*) 1>&2 echo collects: Unknown working part: "'${WORKING_PART}'", only '`'home/ende/all'`' supported. ; return 18 ;;
+				esac && 
+				: ) && 
+			eval "$(_frame tail_codes)" && 
+			: ) && 
+		
+		
 		#. gd flow syncs init /mnt/repos/.syncing/pure-symbols https://github.com/pure-symbols/mabynogion.spells.git gh:https://github.com/pure-symbols/mabynogion.spells.git cb:https://codeberg.org/pure-symbols/mabynogion.spells.git dr:https://git.disroot.org/pure.symbols/mabynogion.spells.git
 		#. gd flow syncs daily /mnt/repos/.syncing/pure-symbols
 		#. ASKING_MAXTRY=8 eval "$(gd flow syncs init ./.sy/pure-symbols https://github.com/pure-symbols/mabynogion.spells.git gh:https://github.com/pure-symbols/mabynogion.spells.git cb:https://codeberg.org/pure-symbols/mabynogion.spells.git dr:https://git.disroot.org/pure.symbols/mabynogion.spells.git)"
 		#. ASKING_MAXTRY=8 eval "$(gd flow syncs daily ./.sy/pure-symbols)"
 		alias s=syncs syncs=sync_codes && sync_codes () 
 		(
-			# tool_codes '&&' && 
-			
 			eval "$(_frame head_codes)" && 
 			{ WORKING_DIR="$1" && shift ; } && 
 			
@@ -1839,12 +1900,12 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 			(
 				{ CLONE_LINK="$1" && shift ; } && 
 				echo : clone repo '&& ' && 
-				echo din "${WORKING_DIR}" $'\t' "git-deck cp a --bare -- ${CLONE_LINK}"' && ' && 
+				echo din "${WORKING_DIR}" $'\t' "git-deck cp a --bare -- ${CLONE_LINK}" '&&' '' && 
 				echo : add remotes '&& ' && 
 				echo din "${WORKING_DIR}" $'\t' "git-deck sp rmts a $(basename "${CLONE_LINK}")"' \' && 
 				for rmt_pair in "$@" ;
 				do echo $'\t' "$rmt_pair" '\' && :; done && 
-				echo $'\t' '&& :' && 
+				echo $'\t' '&&' : && 
 				: ) && 
 			codes_daily () 
 			(
