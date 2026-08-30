@@ -587,21 +587,45 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 				do 
 					echo :: Fetching the "'${entry}'" as a "${__called__}" from "'origin'" in shallow '(depth 1)' mode ... && 
 					shallow_take fetch -- 'origin' "refs/${__type_mark__}/${entry}" && 
+					sync_play simple_cleaning now && 
 					:; 
 				done && 
 				
 				echo :: pick_type: Done for "${_name}": "$@" && 
 				: ) && 
 			
-			alias pm=pick_multi pluck-multi=pluck_multi pick-multi=pick_multi pluck_multi=pick_multi && pick_multi () 
+			_rollwear_once () 
 			(
-				_param_tools params_roll "$@" | while IFS=: read -r -- _type _name ;
-				do 
-					1>&2 echo :: clone_play: executing '`'"pick_type ${_type} ${_name}"'`' at "'$(_cmnd_tools _curr_ellipath)'" :: && 
-					pick_type "${_type}" "${_name}" && 
-					:; 
-				done && 
+				{ _cloth="${1}" && shift ; } && 
+				_param_tools params_roll "$@" | 
+					while IFS=: read -r -- _type _name ;
+					do 
+						${_cloth} && 
+						:; 
+					done && 
 				: ) && 
+			
+			_Once_picktype () 
+			{
+				1>&2 echo :: clone_play: executing '`'"coll pick_type ${_type} ${_name}"'`' at "'$(_cmnd_tools _curr_ellipath)'" :: && 
+				pick_type "${_type}" "${_name}" && 
+				:;
+			} && 
+			_Once_treepick () 
+			{
+				if "$(REPLIES_BARE_STAT=y bare_play wears . upper pick_type "${_type}" "${_name}")" ;
+					then bare_play wt a "${_type}" "${_name}" && :;
+					else :;
+				fi && 
+				echo tree pick :: "${_type}" "${_name}" :: once done. && 
+				:;
+			} && 
+			
+			alias pm=pick_multi pluck-multi=pluck_multi pick-multi=pick_multi pluck_multi=pick_multi && 
+			pick_multi () ( _rollwear_once _Once_picktype "$@" && : ) && 
+			
+			alias pe=pt_each pt-each=pt_each pt_each=pick_trees pick-trees=pick_trees pluck_trees=pick_trees && 
+			pick_trees () ( _rollwear_once _Once_treepick "$@" && : ) && 
 			
 			alias single-touch=single_touch && single_touch () 
 			(
@@ -614,8 +638,33 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 				REPLIES_BARE_STAT="$REPLIES_BARE_STAT" bare_play wears . upper pick_multi "$@" && 
 				: ) && 
 			
+			alias upt=upworktrees upwts=upworktrees && upworktrees () 
+			(
+				case "${1}" 
+				in 
+				(step|part) 
+					shift && 
+					echo upt :: "$@" :: Uping in 'choosed (step|part) mode' ... && 
+					if "$(REPLIES_BARE_STAT=y upwards "$@")" ; 
+					then bare_play wts i "$@" ; else : ; fi && 
+					: ;;
+				(once|each) 
+					shift && 
+					echo upt :: "$@" :: Uping in 'choosed (once|each) mode' ... && 
+					pick_trees "$@" && 
+					: ;;
+				(*)
+					echo upt :: "$@" :: Uping in 'default (once|each) mode' ... && 
+					pick_trees "$@" && 
+					: ;;
+				esac && 
+				echo upt :: "$@" :: Done .. && 
+				
+				: )
+			
 			#: steps --- single touch ~> cd & upwards ~> wts - if needed
-			alias clo=down down=downwards && downwards () 
+			#. coll down https://github.com/t8y2/dbx.git --mirror < <(echo each tree:main tree:gpui tags:v0.5.98)
+			alias all=down down=downwards && downwards () 
 			(
 				: 取之 入之 && 
 				cd "$(single_touch "$@")" && 
@@ -624,11 +673,8 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 				: 天轉 地換
 				set -- $(cat -) && 
 				
-				: 得之 使可 && 
-				if "$(REPLIES_BARE_STAT=y upwards "$@")" ;
-					then bare_play wts i "$@" ;
-					else echo clo Done. ;
-				fi && 
+				: 予神 建甲 && 
+				upworktrees "$@" && 
 				: ) && 
 			
 			: :: && 
@@ -659,7 +705,10 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 			
 			1>&2 echo :: clone_play: executing '`'git "${__sub_cmd__}" --progress --depth 1 "$@"'`' && 
 			eval "$(_cmnd_tools _retry_asking init_codes)" && : 其尝适询 && 
-			while ! ( git "${__sub_cmd__}" --progress --depth 1 "$@" 2>&1 && : ) ;
+			while ! ( 
+				git "${__sub_cmd__}" --progress --depth 1 "$@" 2>&1 && 
+				case "${__sub_cmd__}" in (fetch) sync_play simple_cleaning now && : ;; esac && 
+				: ) ;
 			do 
 				1>&2 echo tried: "$((++try_shallowget))" for shallow '(depth 1)' "${__sub_cmd__}" && 
 				1>&2 eval "$(FD_TTY=9 _cmnd_tools _retry_asking body_codes)" && : 其尝适询 && 
@@ -1702,6 +1751,72 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 			: ) && 
 		
 		
+		alias u=utils utils=util_codes && util_codes () 
+		(
+			#: bp_clean <working-dir>
+			bp_clean () 
+			(
+				{ WORKING_DIR="$1" && shift ; } && 
+				echo '' && 
+				if _cmnd_tools _assert_path "${WORKING_DIR}" ;
+				then 
+					find -- "${WORKING_DIR}" -type d -name '*.git' | while read -r -- _d ;
+					do 
+						echo din "'${_d}'" $'\t' 'git-deck sp c' '&&' '' && :; 
+					done && 
+					echo : "$*" && :; 
+					:;
+				else 
+					echo echo : Path "\''${WORKING_DIR}'\'" not existed ... using emb mode ... '&&' '' && 
+					echo find -- "'${WORKING_DIR}'" -type d -name "'*.git'" '|' 'while read -r -- _dir ;' && 
+					echo do '' && 
+					echo $'\t' din '"${_dir}"' $'\t' 'git-deck sp c && :;' '' && 
+					echo done '&&' : "$*" && 
+					:;
+				fi && 
+				: ) && 
+			
+			#: bp_upgrade <working-dir>
+			bp_upgrade () 
+			(
+				{ WORKING_DIR="$1" && shift ; } && 
+				{ _cmnd_tools _assert_path "${WORKING_DIR}" || return $? ; } && 
+				
+				echo '' && 
+				find -- "${WORKING_DIR}" -type d -name '*.git' | while read -r -- _d ;
+				do 
+					echo '' && 
+					echo din "'${_d}'" $'\t' 'git-deck bp up &&' '' && 
+					echo din "'${_d}'" $'\t' 'git-deck sp c &&' '' && 
+					:; 
+				done && 
+				echo '' && 
+				echo : && 
+				
+				: ) && 
+			
+			#: bp_collupt <repo-dir> [<wts-entry> ...]
+			bp_collupt () 
+			(
+				{ REPO_PATH="$1" && shift ; } && 
+				{ _cmnd_tools _assert_path "${REPO_PATH}" || return $? ; } && 
+				
+				echo '' && 
+				for wts_entry in "$@" ;
+				do 
+					echo '' && 
+					echo din "'${_d}'" $'\t' git-deck cp coll upt "'step' '${wts_entry}'" '&&' '' && 
+					echo din "'${_d}'" $'\t' git-deck sp c '&&' '' && 
+					:; 
+				done && 
+				echo '' && 
+				echo : && 
+				
+				: ) && 
+			
+			: :: && 
+			"$@" && 
+			: )
 		#. ASKING_MAXTRY=11 eval "$(gd flow m i a https://github.com/chad/iroh-drop.git iroh-drop.chad.iroh-src 20260801 tree:main tags:v0.1.3)"
 		#. ASKING_MAXTRY=9 eval "$(gd flow m i h https://github.com/n0-computer/dumbpipe.git dumbpipe.iroh-pipe.n0computer-srcs/cli _ tree:main tags:v0.39.0)"
 		#. ASKING_MAXTRY=9 eval "$(gd flow m i h https://github.com/n0-computer/dumbpipe.dev.git dumbpipe.iroh-pipe.n0computer-srcs/web _ tree:main)"
@@ -1775,47 +1890,11 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 				
 				#: gd flow mirrors daily cl <working-path>
 				#. gd flow mirrors daily cl iroh.quic-traversal.n0computer-srcs
-				alias c=cl && cl () 
-				(
-					{ WORKING_DIR="$1" && shift ; } && 
-					echo '' && 
-					if _cmnd_tools _assert_path "${WORKING_DIR}" ;
-					then 
-						find -- "${WORKING_DIR}" -type d -name '*.git' | while read -r -- _d ;
-						do 
-							echo din "'${_d}'" $'\t' 'git-deck sp c' '&&' '' && :; 
-						done && 
-						echo : "$*" && :; 
-						:;
-					else 
-						echo echo : Path "\''${WORKING_DIR}'\'" not existed ... using emb mode ... '&&' '' && 
-						echo find -- "'${WORKING_DIR}'" -type d -name "'*.git'" '|' 'while read -r -- _dir ;' && 
-						echo do '' && 
-						echo $'\t' din '"${_dir}"' $'\t' 'git-deck sp c && :;' '' && 
-						echo done '&&' : "$*" && 
-						:;
-					fi && 
-					: ) && 
+				alias c=cl && cl () ( util_codes bp_clean "$@" && : ) && 
 				
 				#: gd flow mirrors daily up <working-path>
 				#. gd flow mirrors daily up iroh-drop.chad.iroh-src
-				alias u=up && up () 
-				(
-					{ WORKING_DIR="$1" && shift ; } && 
-					{ _cmnd_tools _assert_path "${WORKING_DIR}" || return $? ; } && 
-					
-					echo '' && 
-					find -- "${WORKING_DIR}" -type d -name '*.git' | while read -r -- _d ;
-					do 
-						echo '' && 
-						echo din "'${_d}'" $'\t' 'git-deck bp up &&' '' && 
-						echo din "'${_d}'" $'\t' 'git-deck sp c &&' '' && 
-						:; 
-					done && 
-					echo '' && 
-					echo : && 
-					
-					: ) && 
+				alias u=up && up () ( util_codes bp_upgrade "$@" && : ) && 
 				
 				eval "$(subs frames codes_tail)" && 
 				
@@ -1855,8 +1934,8 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 		(
 			eval "$(_frame head_codes)" && 
 			
-			#. flow colls i a https://github.com/t8y2/dbx.git dbx.db-clients.wui-src 20260829 tree:main tree:gpui tags:v0.5.98
-			#. ASKING_MAXTRY=888 eval "$(gd flow colls i a https://github.com/t8y2/dbx.git dbx.db-clients.wui-src 20260829 tree:main tree:gpui tags:v0.5.98)"
+			#. flow c i a https://github.com/t8y2/dbx.git dbx.db-clients.wui-src 20260829 tree:main tree:gpui tags:v0.5.98
+			#. ASKING_MAXTRY=888 eval "$(gd flow c i a https://github.com/t8y2/dbx.git dbx.db-clients.wui-src 20260829 tree:main tree:gpui tags:v0.5.98)"
 			codes_init () 
 			(
 				{ WORKING_PART="$1" && shift ; } && 
@@ -1872,7 +1951,8 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 				
 				codes_ende () 
 				(
-					mirror_codes init ende _ "$PATH_INTO" "$LASTUP_DATE" && 
+					codes_daily cl "${PATH_INTO}" '&&' '' && 
+					echo din . $'\t' "txzb3 '${PATH_INTO}' ${LASTUP_DATE}-collect"' && '"$*" && 
 					: ) && 
 				
 				case "${WORKING_PART}" 
@@ -1882,6 +1962,15 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 					(a|all) codes_home "$@" && codes_ende : ;; 
 					(*) 1>&2 echo collects: Unknown working part: "'${WORKING_PART}'", only '`'home/ende/all'`' supported. ; return 18 ;;
 				esac && 
+				: ) && 
+			codes_daily () 
+			(
+				eval "$(subs frames codes_head)" && 
+				alias c=cl && cl () ( util_codes bp_clean "$@" && : ) && 
+				alias u=up && up () ( util_codes bp_collupt "$@" && : ) && 
+				eval "$(subs frames codes_tail)" && 
+				: :: && 
+				"$@" && 
 				: ) && 
 			eval "$(_frame tail_codes)" && 
 			: ) && 
