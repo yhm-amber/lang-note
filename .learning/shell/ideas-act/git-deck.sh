@@ -1814,6 +1814,27 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 				
 				: ) && 
 			
+			bp_extract () 
+			(
+				{ _workonig_dir="$1" && shift ; } && 
+				{ _flow_name="$1" && shift ; } && 
+				{ _cmnd_tools _assert_path "$_workonig_dir" || return $? ; } && 
+				echo '' && 
+				{ _dayz_ext="$(
+					{ find -- "$_workonig_dir" -type d -name '*.git' | while read -r -- _d ;
+					do 
+						_url="$(cd "${_d}" && git remote get-url -- origin)" && 
+						_dir="$(dirname "${_d}")" && 
+						_day="$(cd "${_d}" && git show HEAD -s --format='%cd' --date 'format:%Y%m%d')" && 
+						_wts="$(cd "${_d}/.." && find -- . -mindepth 2 -maxdepth 2 -type d -not -path "*/$(basename "${_d}")/*")" && 
+						1>&7 echo gd flow "'${_flow_name}'" i h "'${_url}'" "${_dir}" "${_day}" $(echo "$_wts" | while IFS=/ read -r -- a b c ; do echo "${b}:${c}" ; done) && 
+						echo "$_day" 1>&5 && 
+						:; 
+					done ; } 5>&1 | sort -r | head -n 1)" ; } 7>&1 && 
+				echo gd flow "'${_flow_name}'" i e _ "${_workonig_dir}" "${_dayz_ext:-00000000}" && 
+				echo '#..'$'\t' gd flow "'${_flow_name}'" d u "${_workonig_dir}" && 
+				: ) && 
+			
 			: :: && 
 			"$@" && 
 			: )
@@ -1909,21 +1930,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 			extract_codes () 
 			(
 				{ _workonig_dir="$1" && shift ; } && 
-				{ _cmnd_tools _assert_path "$_workonig_dir" || return $? ; } && 
-				echo '' && 
-				{ _dayz_ext="$(
-					{ find -- "$_workonig_dir" -type d -name '*.git' | while read -r -- _d ;
-					do 
-						_url="$(cd "${_d}" && git remote get-url -- origin)" && 
-						_dir="$(dirname "${_d}")" && 
-						_day="$(cd "${_d}" && git show HEAD -s --format='%cd' --date 'format:%Y%m%d')" && 
-						_wts="$(cd "${_d}/.." && find -- . -mindepth 2 -maxdepth 2 -type d -not -path "*/$(basename "${_d}")/*")" && 
-						1>&7 echo gd flow m i h "'${_url}'" "${_dir}" "${_day}" $(echo "$_wts" | while IFS=/ read -r -- a b c ; do echo "${b}:${c}" ; done) && 
-						echo "$_day" 1>&5 && 
-						:; 
-					done ; } 5>&1 | sort -r | head -n 1)" ; } 7>&1 && 
-				echo gd flow m i e _ "${_workonig_dir}" "${_dayz_ext:-00000000}" && 
-				echo '#..'$'\t' gd flow m d u "${_workonig_dir}" && 
+				util_codes bp_extract "${_workonig_dir}" m && 
 				: ) && 
 			
 			eval "$(_frame tail_codes)" && 
@@ -1963,6 +1970,7 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 					(*) 1>&2 echo collects: Unknown working part: "'${WORKING_PART}'", only '`'home/ende/all'`' supported. ; return 18 ;;
 				esac && 
 				: ) && 
+			
 			codes_daily () 
 			(
 				eval "$(subs frames codes_head)" && 
@@ -1972,6 +1980,15 @@ alias gd=git_decks git-deck=git_decks git-decks=git_decks && git_decks ()
 				: :: && 
 				"$@" && 
 				: ) && 
+			
+			#: flow c @ <workpath>
+			#. gd flow c @ graphite.editor-svg.rs.wui-src
+			extract_codes () 
+			(
+				{ _workonig_dir="$1" && shift ; } && 
+				util_codes bp_extract "${_workonig_dir}" c && 
+				: ) && 
+			
 			eval "$(_frame tail_codes)" && 
 			: ) && 
 		
