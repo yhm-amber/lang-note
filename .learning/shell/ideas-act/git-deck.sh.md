@@ -4203,12 +4203,21 @@ eval "$(gd flow m i e _ svgedit.svg.canvas-srcs 20260806)"
 ASKING_MAXTRY=217 eval "$(gd flow m i a https://github.com/oxipng/oxipng.git oxipng.comp.cli-src 20260815 tags:v10.2.0 tree:master)"
 ~~~
 
-### (tar) Compress Optim
+### (tar) Compress
 
-(zip/gz) advancecomp
+(zip/gz optim) advancecomp
 
 ~~~ sh
 ASKING_MAXTRY=217 eval "$(gd flow m i a https://github.com/amadvance/advancecomp.git advancecomp.comp.cli-src 20250716 tags:v2.6 tree:master)"
+~~~
+
+(hash) b3sum
+
+~~~ sh
+ASKING_MAXTRY=777 eval "$(gd flow m i h https://github.com/BLAKE3-team/BLAKE3.git b3sum.blake3.rs-srcs/cli 20260820 tags:1.8.7 tree:master)"
+ASKING_MAXTRY=777 eval "$(gd flow c i h https://github.com/BLAKE3-team/BLAKE3-IETF.git b3sum.blake3.rs-srcs/ietf _ tree:main)"
+ASKING_MAXTRY=777 eval "$(gd flow c i h https://github.com/BLAKE3-team/BLAKE3-specs.git b3sum.blake3.rs-srcs/specs _ tree:master)"
+eval "$(gd flow m i e _ b3sum.blake3.rs-srcs 20260820)"
 ~~~
 
 ### (sense) Sol
