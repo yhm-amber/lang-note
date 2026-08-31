@@ -4113,7 +4113,7 @@ ASKING_MAXTRY=107 eval "$(gd flow m i a https://github.com/filips123/PWAsForFire
 (wui) dbx
 
 ~~~ sh
-ASKING_MAXTRY=888 eval "$(gd flow c i a https://github.com/t8y2/dbx.git dbx.db-clients.wui-src 20260830 tree:main tree:gpui tags:v0.5.98)"
+ASKING_MAXTRY=888 eval "$(gd flow c i a https://github.com/t8y2/dbx.git dbx.db-clients.wui-src 20260831 tree:main tree:gpui tags:v0.5.98)"
 ~~~
 
 ### (net) File Trans Manager
@@ -4182,7 +4182,7 @@ eval "$(gd flow m i e _ emulatorjs.libretro.gameplat-srcs 20260808)"
 Graphite Editor
 
 ~~~ sh
-ASKING_MAXTRY=1011 eval "$(gd flow c i a https://github.com/GraphiteEditor/Graphite.git graphite.editor-svg.rs.wui-src 20260829 tree:master tree:wasm-native tree:rhai tree:gpu-invert)"
+ASKING_MAXTRY=1011 eval "$(gd flow c i a https://github.com/GraphiteEditor/Graphite.git graphite.editor-svg.rs.wui-src 20260831 tree:master tree:wasm-native tree:rhai tree:gpu-invert)"
 #..	(wip)eval "$(gd flow c d u graphite.editor-svg.rs.wui-src)"
 ~~~
 
@@ -4245,7 +4245,7 @@ ASKING_MAXTRY=144 eval "$(gd flow m i a https://github.com/cambecc/earth.git ear
 (wui editor) Stirling-PDF
 
 ~~~ sh
-ASKING_MAXTRY=210 eval "$(gd flow m i a https://github.com/Stirling-Tools/Stirling-PDF.git stirlingpdf.pdf.wui-src 20260828 tags:v2.14.3 tree:main)"
+ASKING_MAXTRY=210 eval "$(gd flow m i a https://github.com/Stirling-Tools/Stirling-PDF.git stirlingpdf.pdf.wui-src 20260831 tags:v2.14.3 tree:main)"
 ~~~
 
 ### (slicer) OrcaSlicer
