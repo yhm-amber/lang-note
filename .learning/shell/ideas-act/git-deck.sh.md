@@ -4113,7 +4113,7 @@ ASKING_MAXTRY=107 eval "$(gd flow m i a https://github.com/filips123/PWAsForFire
 (wui) dbx
 
 ~~~ sh
-ASKING_MAXTRY=888 eval "$(gd flow c i a https://github.com/t8y2/dbx.git dbx.db-clients.wui-src 20260831 tree:main tree:gpui tags:v0.5.98)"
+ASKING_MAXTRY=889 eval "$(gd flow c i a https://github.com/t8y2/dbx.git dbx.db-clients.wui-src 20260831 tree:main tree:gpui tags:v0.5.99)"
 ~~~
 
 ### (net) File Trans Manager
