@@ -393,339 +393,347 @@
  </defs>
  <g class="layer">
   <title>基圓</title>
-  <use href="#基圓" xlink:href="#基圓" fill="none" stroke="#000000"/>
+  <use href="#基圓" xlink:href="#基圓" fill="none" stroke="#000000" class="龍骨"/>
+  <use href="#基圓" xlink:href="#基圓" fill="#FFFFFF" stroke="none" class="色面"/>
  </g>
  <g class="layer" display="inline">
   <title>節氣輻</title>
-  <line fill="none" stroke="#000000" x1="200" y1="40" x2="200" y2="360" id="春分秋分0" transform="rotate(90 200 200)"/>
-  <line fill="none" stroke="#000000" x1="200" y1="40" x2="200" y2="360" id="小寒小暑0" transform="rotate(15 200 200)"/>
-  <line fill="none" stroke="#000000" x1="200" y1="40" x2="200" y2="360" id="大寒大暑0" transform="rotate(30 200 200)"/>
-  <line fill="none" stroke="#000000" x1="200" y1="40" x2="200" y2="360" id="立春立秋0" transform="rotate(45 200 200)"/>
-  <line fill="none" stroke="#000000" x1="200" y1="40" x2="200" y2="360" id="雨水處暑0" transform="rotate(60 200 200)"/>
-  <line fill="none" stroke="#000000" x1="200" y1="40" x2="200" y2="360" id="驚蟄白露0" transform="rotate(75 200 200)"/>
-  <line fill="none" stroke="#000000" x1="200" y1="40" x2="200" y2="360" id="淸朙寒露0" transform="rotate(105 200 200)"/>
-  <line fill="none" stroke="#000000" x1="200" y1="40" x2="200" y2="360" id="穀雨霜降0" transform="rotate(120 200 200)"/>
-  <line fill="none" stroke="#000000" x1="200" y1="40" x2="200" y2="360" id="立夏立冬0" transform="rotate(135 200 200)"/>
-  <line fill="none" stroke="#000000" x1="200" y1="40" x2="200" y2="360" id="小滿小䨮0" transform="rotate(150 200 200)"/>
-  <line fill="none" stroke="#000000" x1="200" y1="40" x2="200" y2="360" id="芒種大䨮0" transform="rotate(165 200 200)"/>
-  <line fill="none" stroke="#000000" x1="200" y1="40" x2="200" y2="360" id="冬至夏至0" transform="rotate(180 200 200)"/>
+  <line fill="none" stroke="#000000" x1="200" y1="40" x2="200" y2="360" id="春分秋分0" transform="rotate(90 200 200)" class="龍骨"/>
+  <line fill="none" stroke="#000000" x1="200" y1="40" x2="200" y2="360" id="小寒小暑0" transform="rotate(15 200 200)" class="龍骨"/>
+  <line fill="none" stroke="#000000" x1="200" y1="40" x2="200" y2="360" id="大寒大暑0" transform="rotate(30 200 200)" class="龍骨"/>
+  <line fill="none" stroke="#000000" x1="200" y1="40" x2="200" y2="360" id="立春立秋0" transform="rotate(45 200 200)" class="龍骨"/>
+  <line fill="none" stroke="#000000" x1="200" y1="40" x2="200" y2="360" id="雨水處暑0" transform="rotate(60 200 200)" class="龍骨"/>
+  <line fill="none" stroke="#000000" x1="200" y1="40" x2="200" y2="360" id="驚蟄白露0" transform="rotate(75 200 200)" class="龍骨"/>
+  <line fill="none" stroke="#000000" x1="200" y1="40" x2="200" y2="360" id="淸朙寒露0" transform="rotate(105 200 200)" class="龍骨"/>
+  <line fill="none" stroke="#000000" x1="200" y1="40" x2="200" y2="360" id="穀雨霜降0" transform="rotate(120 200 200)" class="龍骨"/>
+  <line fill="none" stroke="#000000" x1="200" y1="40" x2="200" y2="360" id="立夏立冬0" transform="rotate(135 200 200)" class="龍骨"/>
+  <line fill="none" stroke="#000000" x1="200" y1="40" x2="200" y2="360" id="小滿小䨮0" transform="rotate(150 200 200)" class="龍骨"/>
+  <line fill="none" stroke="#000000" x1="200" y1="40" x2="200" y2="360" id="芒種大䨮0" transform="rotate(165 200 200)" class="龍骨"/>
+  <line fill="none" stroke="#000000" x1="200" y1="40" x2="200" y2="360" id="冬至夏至0" transform="rotate(180 200 200)" class="龍骨"/>
  </g>
  <g class="layer" display="inline">
   <title>字</title>
-  <use id="svg_177" href="#svg_176" transform="rotate(75 371.953 153.748) matrix(0.166667 0 0 0.166667 364.005 138)"/>
-  <use id="svg_184" href="#svg_183" transform="rotate(90 377.731 198.863) matrix(0.166667 0 0 0.166667 369.558 184.13)"/>
-  <use id="svg_191" href="#svg_190" transform="rotate(105 372.474 246.656) matrix(0.166667 0 0 0.166667 364.491 231.481)"/>
-  <use id="svg_197" href="#svg_196" transform="rotate(120 355.757 289.262) matrix(0.166667 0 0 0.166667 347.359 274.094)"/>
-  <use id="svg_206" href="#svg_205" transform="rotate(135 327.06 326.909) matrix(0.166667 0 0 0.166667 318.75 312.083)"/>
-  <use id="svg_213" href="#svg_212" transform="rotate(150 290.233 356.086) matrix(0.184545 0 0 0.184545 280.93 338.36)"/>
-  <use id="svg_220" href="#svg_219" transform="rotate(165 246.265 373.784) matrix(0.177545 0 0 0.177545 237.414 357.204)"/>
-  <use id="svg_227" href="#svg_226" transform="rotate(-165 153.223 373.311) matrix(0.182211 0 0 0.182211 144.005 355.857)"/>
-  <use id="svg_234" href="#svg_233" transform="rotate(-150 110.316 355.446) matrix(0.178888 0 0 0.178888 101.428 338.793)"/>
-  <use id="svg_242" href="#svg_241" transform="rotate(-135 73.3436 326.775) matrix(0.17955 0 0 0.17955 64.5785 309.827)"/>
-  <use id="svg_250" href="#svg_249" transform="rotate(-120 45.0141 291.096) matrix(0.166667 0 0 0.166667 37.0833 275.417)"/>
-  <use id="svg_258" href="#svg_257" transform="rotate(-105 25.927 247.101) matrix(0.166667 0 0 0.166667 17.5 232.5)"/>
-  <use id="svg_266" href="#svg_265" transform="rotate(-90 20.766 201.064) matrix(0.169346 0 0 0.169346 12.1554 186.375)"/>
-  <use id="svg_274" href="#svg_273" transform="rotate(-75 26.1598 153.21) matrix(0.166667 0 0 0.166667 17.5 138.75)"/>
-  <use id="svg_282" href="#svg_281" transform="rotate(-60 43.9306 109.431) matrix(0.166667 0 0 0.166667 35.4167 94.5833)"/>
-  <use id="svg_290" href="#svg_289" transform="rotate(-45 72.4379 73.5213) matrix(0.166667 0 0 0.166667 63.75 57.9167)"/>
-  <use id="svg_298" href="#svg_297" transform="rotate(-30 109.779 43.8548) matrix(0.178887 0 0 0.178887 100.765 27.1398)"/>
-  <use id="svg_304" href="#svg_303" transform="rotate(-15 152.858 26.658) matrix(0.173827 0 0 0.173827 144.031 10.4848)"/>
-  <use id="svg_310" href="#svg_309" transform="rotate(180 199.893 379.974) matrix(0.166667 0 0 0.166667 191.583 365.25)"/>
-  <use id="svg_316" href="#svg_315" transform="matrix(0.166667 0 0 0.166667 191.5 5.5)"/>
-  <use id="svg_324" href="#svg_323" transform="rotate(15 246.143 27.4985) matrix(0.172475 0 0 0.172475 237.433 10.5495)"/>
-  <use id="svg_330" href="#svg_329" transform="rotate(30 289.299 45.1706) matrix(0.166667 0 0 0.166667 281 30)"/>
-  <use id="svg_338" href="#svg_337" transform="rotate(45 325.801 73.751) matrix(0.166667 0 0 0.166667 317.75 58.75)"/>
-  <use id="svg_346" href="#svg_345" transform="rotate(60 355.166 110.441) matrix(0.166667 0 0 0.166667 346.75 95.25)"/>
+  <use id="立春" href="#svg_241" transform="rotate(-135 73.3436 326.775) matrix(0.17955 0 0 0.17955 64.5785 309.827)" class="名喚"/>
+  <use id="雨水" href="#svg_249" transform="rotate(-120 45.0141 291.096) matrix(0.166667 0 0 0.166667 37.0833 275.417)" class="名喚"/>
+  <use id="驚蟄" href="#svg_257" transform="rotate(-105 25.927 247.101) matrix(0.166667 0 0 0.166667 17.5 232.5)" class="名喚"/>
+  <use id="春分" href="#svg_265" transform="rotate(-90 20.766 201.064) matrix(0.169346 0 0 0.169346 12.1554 186.375)" class="名喚"/>
+  <use id="淸朙" href="#svg_273" transform="rotate(-75 26.1598 153.21) matrix(0.166667 0 0 0.166667 17.5 138.75)" class="名喚"/>
+  <use id="穀雨" href="#svg_281" transform="rotate(-60 43.9306 109.431) matrix(0.166667 0 0 0.166667 35.4167 94.5833)" class="名喚"/>
+  <use id="立夏" href="#svg_289" transform="rotate(-45 72.4379 73.5213) matrix(0.166667 0 0 0.166667 63.75 57.9167)" class="名喚"/>
+  <use id="小滿" href="#svg_297" transform="rotate(-30 109.779 43.8548) matrix(0.178887 0 0 0.178887 100.765 27.1398)" class="名喚"/>
+  <use id="芒種" href="#svg_303" transform="rotate(-15 152.858 26.658) matrix(0.173827 0 0 0.173827 144.031 10.4848)" class="名喚"/>
+  <use id="夏至" href="#svg_315" transform="matrix(0.166667 0 0 0.166667 191.5 5.5)" class="名喚"/>
+  <use id="小暑" href="#svg_323" transform="rotate(15 246.143 27.4985) matrix(0.172475 0 0 0.172475 237.433 10.5495)" class="名喚"/>
+  <use id="大暑" href="#svg_329" transform="rotate(30 289.299 45.1706) matrix(0.166667 0 0 0.166667 281 30)" class="名喚"/>
+  <use id="立秋" href="#svg_337" transform="rotate(45 325.801 73.751) matrix(0.166667 0 0 0.166667 317.75 58.75)" class="名喚"/>
+  <use id="處暑" href="#svg_345" transform="rotate(60 355.166 110.441) matrix(0.166667 0 0 0.166667 346.75 95.25)" class="名喚"/>
+  <use id="白露" href="#svg_176" transform="rotate(75 371.953 153.748) matrix(0.166667 0 0 0.166667 364.005 138)" class="名喚"/>
+  <use id="秋分" href="#svg_183" transform="rotate(90 377.731 198.863) matrix(0.166667 0 0 0.166667 369.558 184.13)" class="名喚"/>
+  <use id="寒露" href="#svg_190" transform="rotate(105 372.474 246.656) matrix(0.166667 0 0 0.166667 364.491 231.481)" class="名喚"/>
+  <use id="霜降" href="#svg_196" transform="rotate(120 355.757 289.262) matrix(0.166667 0 0 0.166667 347.359 274.094)" class="名喚"/>
+  <use id="立冬" href="#svg_205" transform="rotate(135 327.06 326.909) matrix(0.166667 0 0 0.166667 318.75 312.083)" class="名喚"/>
+  <use id="小䨮" href="#svg_212" transform="rotate(150 290.233 356.086) matrix(0.184545 0 0 0.184545 280.93 338.36)" class="名喚"/>
+  <use id="大䨮" href="#svg_219" transform="rotate(165 246.265 373.784) matrix(0.177545 0 0 0.177545 237.414 357.204)" class="名喚"/>
+  <use id="冬至" href="#svg_309" transform="rotate(180 199.893 379.974) matrix(0.166667 0 0 0.166667 191.583 365.25)" class="名喚"/>
+  <use id="小寒" href="#svg_226" transform="rotate(-165 153.223 373.311) matrix(0.182211 0 0 0.182211 144.005 355.857)" class="名喚"/>
+  <use id="大寒" href="#svg_233" transform="rotate(-150 110.316 355.446) matrix(0.178888 0 0 0.178888 101.428 338.793)" class="名喚"/>
  </g>
  <g class="layer" display="none">
   <title>輔</title>
-  <circle fill="none" stroke="#000000" cx="200" cy="200" r="165" opacity="0.25"/>
-  <circle fill="none" stroke="#000000" cx="200" cy="200" r="192" opacity="0.25"/>
-  <line fill="none" stroke="#000000" x1="200" y1="25" x2="200" y2="375" transform="rotate(90 200 200)" id="svg_79" opacity="0.75"/>
-  <line fill="none" stroke="#000000" x1="200" y1="25" x2="200" y2="375" transform="rotate(15 200 200)" id="svg_80" opacity="0.75"/>
-  <line fill="none" stroke="#000000" x1="200" y1="25" x2="200" y2="375" transform="rotate(30 200 200)" id="svg_81" opacity="0.75"/>
-  <line fill="none" stroke="#000000" x1="200" y1="25" x2="200" y2="375" transform="rotate(45 200 200)" id="svg_82" opacity="0.75"/>
-  <line fill="none" stroke="#000000" x1="200" y1="25" x2="200" y2="375" transform="rotate(60 200 200)" id="svg_83" opacity="0.75"/>
-  <line fill="none" stroke="#000000" x1="200" y1="25" x2="200" y2="375" transform="rotate(75 200 200)" id="svg_84" opacity="0.75"/>
-  <line fill="none" stroke="#000000" x1="200" y1="25" x2="200" y2="375" transform="rotate(105 200 200)" id="svg_85" opacity="0.75"/>
-  <line fill="none" stroke="#000000" x1="200" y1="25" x2="200" y2="375" transform="rotate(120 200 200)" id="svg_86" opacity="0.75"/>
-  <line fill="none" stroke="#000000" x1="200" y1="25" x2="200" y2="375" transform="rotate(135 200 200)" id="svg_87" opacity="0.75"/>
-  <line fill="none" stroke="#000000" x1="200" y1="25" x2="200" y2="375" transform="rotate(150 200 200)" id="svg_88" opacity="0.75"/>
-  <line fill="none" stroke="#000000" x1="200" y1="25" x2="200" y2="375" transform="rotate(165 200 200)" id="svg_89" opacity="0.75"/>
-  <line fill="none" stroke="#000000" x1="200" y1="25" x2="200" y2="375" transform="rotate(180 200 200)" id="svg_90" opacity="0.75"/>
+  <circle fill="none" stroke="#000000" cx="200" cy="200" r="165" opacity="0.25" class="輔綫"/>
+  <circle fill="none" stroke="#000000" cx="200" cy="200" r="192" opacity="0.25" class="輔綫"/>
+  <line fill="none" stroke="#000000" x1="200" y1="25" x2="200" y2="375" transform="rotate(90 200 200)" id="svg_79" opacity="0.75" class="輔綫"/>
+  <line fill="none" stroke="#000000" x1="200" y1="25" x2="200" y2="375" transform="rotate(15 200 200)" id="svg_80" opacity="0.75" class="輔綫"/>
+  <line fill="none" stroke="#000000" x1="200" y1="25" x2="200" y2="375" transform="rotate(30 200 200)" id="svg_81" opacity="0.75" class="輔綫"/>
+  <line fill="none" stroke="#000000" x1="200" y1="25" x2="200" y2="375" transform="rotate(45 200 200)" id="svg_82" opacity="0.75" class="輔綫"/>
+  <line fill="none" stroke="#000000" x1="200" y1="25" x2="200" y2="375" transform="rotate(60 200 200)" id="svg_83" opacity="0.75" class="輔綫"/>
+  <line fill="none" stroke="#000000" x1="200" y1="25" x2="200" y2="375" transform="rotate(75 200 200)" id="svg_84" opacity="0.75" class="輔綫"/>
+  <line fill="none" stroke="#000000" x1="200" y1="25" x2="200" y2="375" transform="rotate(105 200 200)" id="svg_85" opacity="0.75" class="輔綫"/>
+  <line fill="none" stroke="#000000" x1="200" y1="25" x2="200" y2="375" transform="rotate(120 200 200)" id="svg_86" opacity="0.75" class="輔綫"/>
+  <line fill="none" stroke="#000000" x1="200" y1="25" x2="200" y2="375" transform="rotate(135 200 200)" id="svg_87" opacity="0.75" class="輔綫"/>
+  <line fill="none" stroke="#000000" x1="200" y1="25" x2="200" y2="375" transform="rotate(150 200 200)" id="svg_88" opacity="0.75" class="輔綫"/>
+  <line fill="none" stroke="#000000" x1="200" y1="25" x2="200" y2="375" transform="rotate(165 200 200)" id="svg_89" opacity="0.75" class="輔綫"/>
+  <line fill="none" stroke="#000000" x1="200" y1="25" x2="200" y2="375" transform="rotate(180 200 200)" id="svg_90" opacity="0.75" class="輔綫"/>
  </g>
  <g class="layer" display="inline">
   <title>物候輻</title>
-  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="冬至夏至1" transform="rotate(5 200 200)" stroke-width="0.35"/>
-  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="冬至夏至2" transform="rotate(10 200 200)" stroke-width="0.35"/>
-  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="小寒小暑1" transform="rotate(20 200 200)" stroke-width="0.35"/>
-  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="小寒小暑2" transform="rotate(25 200 200)" stroke-width="0.35"/>
-  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="大寒大暑1" transform="rotate(35 200 200)" stroke-width="0.35"/>
-  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="大寒大暑2" transform="rotate(40 200 200)" stroke-width="0.35"/>
-  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="立春立秋1" transform="rotate(50 200 200)" stroke-width="0.35"/>
-  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="立春立秋2" transform="rotate(55 200 200)" stroke-width="0.35"/>
-  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="雨水處暑1" transform="rotate(65 200 200)" stroke-width="0.35"/>
-  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="雨水處暑2" transform="rotate(70 200 200)" stroke-width="0.35"/>
-  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="驚蟄白露1" transform="rotate(80 200 200)" stroke-width="0.35"/>
-  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="驚蟄白露2" transform="rotate(85 200 200)" stroke-width="0.35"/>
-  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="春分秋分1" transform="rotate(95 200 200)" stroke-width="0.35"/>
-  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="春分秋分2" transform="rotate(100 200 200)" stroke-width="0.35"/>
-  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="淸朙寒露1" transform="rotate(110 200 200)" stroke-width="0.35"/>
-  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="淸朙寒露2" transform="rotate(115 200 200)" stroke-width="0.35"/>
-  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="穀雨霜降1" transform="rotate(125 200 200)" stroke-width="0.35"/>
-  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="穀雨霜降2" transform="rotate(130 200 200)" stroke-width="0.35"/>
-  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="立夏立冬1" transform="rotate(140 200 200)" stroke-width="0.35"/>
-  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="立夏立冬2" transform="rotate(145 200 200)" stroke-width="0.35"/>
-  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="小滿小䨮1" transform="rotate(155 200 200)" stroke-width="0.35"/>
-  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="小滿小䨮2" transform="rotate(160 200 200)" stroke-width="0.35"/>
-  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="芒種大䨮1" transform="rotate(170 200 200)" stroke-width="0.35"/>
-  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="芒種大䨮2" transform="rotate(175 200 200)" stroke-width="0.35"/>
+  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="冬至夏至1" transform="rotate(5 200 200)" stroke-width="0.35" class="龍骨"/>
+  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="冬至夏至2" transform="rotate(10 200 200)" stroke-width="0.35" class="龍骨"/>
+  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="小寒小暑1" transform="rotate(20 200 200)" stroke-width="0.35" class="龍骨"/>
+  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="小寒小暑2" transform="rotate(25 200 200)" stroke-width="0.35" class="龍骨"/>
+  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="大寒大暑1" transform="rotate(35 200 200)" stroke-width="0.35" class="龍骨"/>
+  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="大寒大暑2" transform="rotate(40 200 200)" stroke-width="0.35" class="龍骨"/>
+  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="立春立秋1" transform="rotate(50 200 200)" stroke-width="0.35" class="龍骨"/>
+  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="立春立秋2" transform="rotate(55 200 200)" stroke-width="0.35" class="龍骨"/>
+  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="雨水處暑1" transform="rotate(65 200 200)" stroke-width="0.35" class="龍骨"/>
+  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="雨水處暑2" transform="rotate(70 200 200)" stroke-width="0.35" class="龍骨"/>
+  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="驚蟄白露1" transform="rotate(80 200 200)" stroke-width="0.35" class="龍骨"/>
+  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="驚蟄白露2" transform="rotate(85 200 200)" stroke-width="0.35" class="龍骨"/>
+  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="春分秋分1" transform="rotate(95 200 200)" stroke-width="0.35" class="龍骨"/>
+  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="春分秋分2" transform="rotate(100 200 200)" stroke-width="0.35" class="龍骨"/>
+  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="淸朙寒露1" transform="rotate(110 200 200)" stroke-width="0.35" class="龍骨"/>
+  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="淸朙寒露2" transform="rotate(115 200 200)" stroke-width="0.35" class="龍骨"/>
+  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="穀雨霜降1" transform="rotate(125 200 200)" stroke-width="0.35" class="龍骨"/>
+  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="穀雨霜降2" transform="rotate(130 200 200)" stroke-width="0.35" class="龍骨"/>
+  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="立夏立冬1" transform="rotate(140 200 200)" stroke-width="0.35" class="龍骨"/>
+  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="立夏立冬2" transform="rotate(145 200 200)" stroke-width="0.35" class="龍骨"/>
+  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="小滿小䨮1" transform="rotate(155 200 200)" stroke-width="0.35" class="龍骨"/>
+  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="小滿小䨮2" transform="rotate(160 200 200)" stroke-width="0.35" class="龍骨"/>
+  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="芒種大䨮1" transform="rotate(170 200 200)" stroke-width="0.35" class="龍骨"/>
+  <line fill="none" stroke="#000000" opacity="0.75" x1="200" y1="40" x2="200" y2="360" id="芒種大䨮2" transform="rotate(175 200 200)" stroke-width="0.35" class="龍骨"/>
  </g>
  <g class="layer" display="none">
   <title>三點</title>
-  <circle fill="#000000" stroke-width="5" cx="200" cy="360" r="3" id="點_冬至"/>
-  <circle fill="#000000" stroke-width="5" cx="200" cy="200" r="3" id="點_中點"/>
-  <circle fill="#000000" stroke-width="5" cx="200" cy="40" r="3" id="點_夏至"/>
+  <circle fill="#000000" stroke-width="5" cx="200" cy="360" r="3" id="點_冬至" class="弼點"/>
+  <circle fill="#000000" stroke-width="5" cx="200" cy="200" r="3" id="點_中點" class="弼點"/>
+  <circle fill="#000000" stroke-width="5" cx="200" cy="40" r="3" id="點_夏至" class="弼點"/>
  </g>
  <g class="layer" clip-path="url(#影出裁剪)">
   <title>影出夏至</title>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_冬至0"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_大䨮2" transform="rotate(-2.5 200 40)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_大䨮1" transform="rotate(-5 200 40)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_大䨮0" transform="rotate(-7.5 200 40)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_小䨮2" transform="rotate(-10 200 40)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_小䨮1" transform="rotate(-12.5 200 40)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_小䨮0" transform="rotate(-15 200 40)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_立冬2" transform="rotate(-17.5 200 40)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_立冬1" transform="rotate(-20 200 40)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_立冬0" transform="rotate(-22.5 200 40)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_霜降2" transform="rotate(-25 200 40)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_霜降1" transform="rotate(-27.5 200 40)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_霜降0" transform="rotate(-30 200 40)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_寒露2" transform="rotate(-32.5 200 40)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_寒露1" transform="rotate(-35 200 40)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_寒露0" transform="rotate(-37.5 200 40)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_秋分2" transform="rotate(-40 200 40)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_秋分1" transform="rotate(-42.5 200 40)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_秋分0" transform="rotate(-45 200 40)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_白露2" transform="rotate(-47.5 200 40)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_白露1" transform="rotate(-50 200 40)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_白露0" transform="rotate(-52.5 200 40)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_處暑2" transform="rotate(-55 200 40)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_處暑1" transform="rotate(-57.5 200 40)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_處暑0" transform="rotate(-60 200 40)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_立秋2" transform="rotate(-62.5 200 40)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_立秋1" transform="rotate(-65 200 40)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_立秋0" transform="rotate(-67.5 200 40)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_大暑2" transform="rotate(-70 200 40)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_大暑1" transform="rotate(-72.5 200 40)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_大暑0" transform="rotate(-75 200 40)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_小暑2" transform="rotate(-77.5 200 40)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_小暑1" transform="rotate(-80 200 40)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_小暑0" transform="rotate(-82.5 200 40)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_夏至2" transform="rotate(-85 200 40)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_夏至1" transform="rotate(-87.5 200 40)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="至_夏至0" transform="rotate(-90 200 40)"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_冬至0" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_大䨮2" transform="rotate(-2.5 200 40)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_大䨮1" transform="rotate(-5 200 40)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_大䨮0" transform="rotate(-7.5 200 40)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_小䨮2" transform="rotate(-10 200 40)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_小䨮1" transform="rotate(-12.5 200 40)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_小䨮0" transform="rotate(-15 200 40)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_立冬2" transform="rotate(-17.5 200 40)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_立冬1" transform="rotate(-20 200 40)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_立冬0" transform="rotate(-22.5 200 40)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_霜降2" transform="rotate(-25 200 40)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_霜降1" transform="rotate(-27.5 200 40)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_霜降0" transform="rotate(-30 200 40)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_寒露2" transform="rotate(-32.5 200 40)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_寒露1" transform="rotate(-35 200 40)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_寒露0" transform="rotate(-37.5 200 40)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_秋分2" transform="rotate(-40 200 40)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_秋分1" transform="rotate(-42.5 200 40)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_秋分0" transform="rotate(-45 200 40)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_白露2" transform="rotate(-47.5 200 40)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_白露1" transform="rotate(-50 200 40)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_白露0" transform="rotate(-52.5 200 40)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_處暑2" transform="rotate(-55 200 40)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_處暑1" transform="rotate(-57.5 200 40)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_處暑0" transform="rotate(-60 200 40)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_立秋2" transform="rotate(-62.5 200 40)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_立秋1" transform="rotate(-65 200 40)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_立秋0" transform="rotate(-67.5 200 40)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_大暑2" transform="rotate(-70 200 40)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_大暑1" transform="rotate(-72.5 200 40)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_大暑0" transform="rotate(-75 200 40)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_小暑2" transform="rotate(-77.5 200 40)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_小暑1" transform="rotate(-80 200 40)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_小暑0" transform="rotate(-82.5 200 40)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_夏至2" transform="rotate(-85 200 40)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="去_夏至1" transform="rotate(-87.5 200 40)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="360" x2="200" y2="-280" id="至_夏至0" transform="rotate(-90 200 40)" class="龍骨"/>
  </g>
  <g class="layer" clip-path="url(#影出裁剪)">
   <title>影出冬至</title>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_夏至0"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_芒種2" transform="rotate(-2.5 200 360)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_芒種1" transform="rotate(-5 200 360)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_芒種0" transform="rotate(-7.5 200 360)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_小滿2" transform="rotate(-10 200 360)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_小滿1" transform="rotate(-12.5 200 360)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_小滿0" transform="rotate(-15 200 360)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_立夏2" transform="rotate(-17.5 200 360)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_立夏1" transform="rotate(-20 200 360)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_立夏0" transform="rotate(-22.5 200 360)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_穀雨2" transform="rotate(-25 200 360)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_穀雨1" transform="rotate(-27.5 200 360)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_穀雨0" transform="rotate(-30 200 360)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_淸朙2" transform="rotate(-32.5 200 360)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_淸朙1" transform="rotate(-35 200 360)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_淸朙0" transform="rotate(-37.5 200 360)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_春分2" transform="rotate(-40 200 360)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_春分1" transform="rotate(-42.5 200 360)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_春分0" transform="rotate(-45 200 360)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_驚蟄2" transform="rotate(-47.5 200 360)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_驚蟄1" transform="rotate(-50 200 360)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_驚蟄0" transform="rotate(-52.5 200 360)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_雨水2" transform="rotate(-55 200 360)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_雨水1" transform="rotate(-57.5 200 360)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_雨水0" transform="rotate(-60 200 360)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_立春2" transform="rotate(-62.5 200 360)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_立春1" transform="rotate(-65 200 360)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_立春0" transform="rotate(-67.5 200 360)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_大寒2" transform="rotate(-70 200 360)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_大寒1" transform="rotate(-72.5 200 360)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_大寒0" transform="rotate(-75 200 360)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_小寒2" transform="rotate(-77.5 200 360)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_小寒1" transform="rotate(-80 200 360)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_小寒0" transform="rotate(-82.5 200 360)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_冬至2" transform="rotate(-85 200 360)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_冬至1" transform="rotate(-87.5 200 360)"/>
-  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="至_冬至0" transform="rotate(-90 200 360)"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_夏至0" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_芒種2" transform="rotate(-2.5 200 360)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_芒種1" transform="rotate(-5 200 360)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_芒種0" transform="rotate(-7.5 200 360)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_小滿2" transform="rotate(-10 200 360)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_小滿1" transform="rotate(-12.5 200 360)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_小滿0" transform="rotate(-15 200 360)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_立夏2" transform="rotate(-17.5 200 360)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_立夏1" transform="rotate(-20 200 360)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_立夏0" transform="rotate(-22.5 200 360)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_穀雨2" transform="rotate(-25 200 360)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_穀雨1" transform="rotate(-27.5 200 360)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_穀雨0" transform="rotate(-30 200 360)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_淸朙2" transform="rotate(-32.5 200 360)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_淸朙1" transform="rotate(-35 200 360)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_淸朙0" transform="rotate(-37.5 200 360)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_春分2" transform="rotate(-40 200 360)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_春分1" transform="rotate(-42.5 200 360)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_春分0" transform="rotate(-45 200 360)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_驚蟄2" transform="rotate(-47.5 200 360)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_驚蟄1" transform="rotate(-50 200 360)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_驚蟄0" transform="rotate(-52.5 200 360)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_雨水2" transform="rotate(-55 200 360)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_雨水1" transform="rotate(-57.5 200 360)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_雨水0" transform="rotate(-60 200 360)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_立春2" transform="rotate(-62.5 200 360)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_立春1" transform="rotate(-65 200 360)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_立春0" transform="rotate(-67.5 200 360)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_大寒2" transform="rotate(-70 200 360)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_大寒1" transform="rotate(-72.5 200 360)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_大寒0" transform="rotate(-75 200 360)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_小寒2" transform="rotate(-77.5 200 360)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_小寒1" transform="rotate(-80 200 360)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_小寒0" transform="rotate(-82.5 200 360)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_冬至2" transform="rotate(-85 200 360)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="去_冬至1" transform="rotate(-87.5 200 360)" class="龍骨"/>
+  <line fill="none" stroke="#000000" stroke-width="0.25" x1="200" y1="680" x2="200" y2="40" id="至_冬至0" transform="rotate(-90 200 360)" class="龍骨"/>
  </g>
  <g class="layer">
   <title>曲自影出夏至</title>
   <!-- 定义交点 -->
-  <circle id="點_大䨮0" data-intersection-of="去_冬至0 芒種大䨮0" r="0" fill="#000000" cx="200" cy="199.99999999999991"/>
-  <circle id="點_小䨮2" data-intersection-of="去_大䨮2 小滿小䨮2" r="2.4" fill="#000000" cx="207.93796948010407" cy="221.8093919029058"/>
-  <circle id="點_小䨮1" data-intersection-of="去_大䨮1 小滿小䨮1" r="0" fill="#000000" cx="217.23108265733333" cy="236.95217600652353"/>
-  <circle id="點_小䨮0" data-intersection-of="去_大䨮0 小滿小䨮0" r="3" fill="#000000" cx="227.2865101921687" cy="247.26162201408218"/>
-  <circle id="點_立冬2" data-intersection-of="去_小䨮2 立夏立冬2" r="0" fill="#000000" cx="237.70797883264663" cy="253.8525748081182"/>
-  <circle id="點_立冬1" data-intersection-of="去_小䨮1 立夏立冬1" r="0" fill="#000000" cx="248.2079462623737" cy="257.4519931497724"/>
-  <circle id="點_立冬0" data-intersection-of="去_小䨮0 立夏立冬0" r="3" fill="#000000" cx="258.5640646055101" cy="258.56406460551017"/>
-  <circle id="點_霜降2" data-intersection-of="去_立冬2 穀雨霜降2" r="0" fill="#000000" cx="268.5960691265439" cy="257.55893630429415"/>
-  <circle id="點_霜降1" data-intersection-of="去_立冬1 穀雨霜降1" r="0" fill="#000000" cx="278.15286175299286" cy="254.72322293210686"/>
-  <circle id="點_霜降0" data-intersection-of="去_立冬0 穀雨霜降0" r="3" fill="#000000" cx="287.10501243818953" cy="250.2901023789544"/>
-  <circle id="點_寒露2" data-intersection-of="去_霜降2 淸朙寒露2" r="0" fill="#000000" cx="295.34028740753683" cy="244.45790614883308"/>
-  <circle id="點_寒露1" data-intersection-of="去_霜降1 淸朙寒露1" r="0" fill="#000000" cx="302.76093634842795" cy="237.4019220761516"/>
-  <circle id="點_寒露0" data-intersection-of="去_霜降0 淸朙寒露0" r="3" fill="#000000" cx="309.28203230275506" cy="229.28203230275514"/>
-  <circle id="點_秋分2" data-intersection-of="去_寒露2 春分秋分2" r="0" fill="#000000" cx="314.8304538489612" cy="220.24770722057002"/>
-  <circle id="點_秋分1" data-intersection-of="去_寒露1 春分秋分1" r="0" fill="#000000" cx="319.34426206747355" cy="210.44126998777094"/>
-  <circle id="點_秋分0" data-intersection-of="去_寒露0 春分秋分0" r="3" fill="#000000" cx="322.77231807663367" cy="200"/>
-  <circle id="點_白露2" data-intersection-of="去_秋分2 驚蟄白露2" r="0" fill="#000000" cx="325.0740422578523" cy="189.05743920107557"/>
-  <circle id="點_白露1" data-intersection-of="去_秋分1 驚蟄白露1" r="0" fill="#000000" cx="326.21925017088944" cy="177.74414071008067"/>
-  <circle id="點_白露0" data-intersection-of="去_秋分0 驚蟄白露0" r="3" fill="#000000" cx="326.1880215351701" cy="166.1880215351701"/>
-  <circle id="點_處暑2" data-intersection-of="去_白露2 雨水處暑2" r="0" fill="#000000" cx="324.97057252674296" cy="154.5144314410599"/>
-  <circle id="點_處暑1" data-intersection-of="去_白露1 雨水處暑1" r="0" fill="#000000" cx="322.5671108990365" cy="142.84601754984627"/>
-  <circle id="點_處暑0" data-intersection-of="去_白露0 雨水處暑0" r="3" fill="#000000" cx="318.9876597875265" cy="131.30244259142796"/>
-  <circle id="點_立秋2" data-intersection-of="去_處暑2 立春立秋2" r="0" fill="#000000" cx="314.25184053936914" cy="120"/>
-  <circle id="點_立秋1" data-intersection-of="去_處暑1 立春立秋1" r="0" fill="#000000" cx="308.3886081600494" cy="109.05115886908385"/>
-  <circle id="點_立秋0" data-intersection-of="去_處暑0 立春立秋0" r="3" fill="#000000" cx="301.43593539448983" cy="98.5640646055102"/>
-  <circle id="點_大暑2" data-intersection-of="去_立秋2 大寒大暑2" r="0" fill="#000000" cx="293.4404433190973" cy="88.64201598087014"/>
-  <circle id="點_大暑1" data-intersection-of="去_立秋1 大寒大暑1" r="0" fill="#000000" cx="284.4569777824226" cy="79.38293552457023"/>
-  <circle id="點_大暑0" data-intersection-of="去_立秋0 大寒大暑0" r="3" fill="#000000" cx="274.54813220625084" cy="70.87884740941162"/>
-  <circle id="點_小暑2" data-intersection-of="去_大暑2 小寒小暑2" r="0" fill="#000000" cx="263.78371821939226" cy="63.21537486268165"/>
-  <circle id="點_小暑1" data-intersection-of="去_大暑1 小寒小暑1" r="0" fill="#000000" cx="252.24018639189205" cy="56.47126750017591"/>
-  <circle id="點_小暑0" data-intersection-of="去_大暑0 小寒小暑0" r="3" fill="#000000" cx="240.00000000000003" cy="50.717967697244916"/>
-  <circle id="點_夏至2" data-intersection-of="去_小暑2 冬至夏至2" r="0" fill="#000000" cx="227.1509653027872" cy="46.01922409323158"/>
-  <circle id="點_夏至1" data-intersection-of="去_小暑1 冬至夏至1" r="1.5" fill="#000000" cx="213.78552226256105" cy="42.43075951804672"/>
-  <circle id="點_夏至0" data-intersection-of="去_小暑0 冬至夏至0" r="0.6" fill="#000000" cx="199.99999999999997" cy="39.99999999999999"/>
+  <circle id="點_大䨮0" data-intersection-of="去_冬至0 芒種大䨮0" r="0" fill="#000000" cx="200" cy="199.99999999999991" class="龍骨"/>
+  <circle id="點_小䨮2" data-intersection-of="去_大䨮2 小滿小䨮2" r="2.4" fill="#000000" cx="207.93796948010407" cy="221.8093919029058" class="龍骨"/>
+  <circle id="點_小䨮1" data-intersection-of="去_大䨮1 小滿小䨮1" r="0" fill="#000000" cx="217.23108265733333" cy="236.95217600652353" class="龍骨"/>
+  <circle id="點_小䨮0" data-intersection-of="去_大䨮0 小滿小䨮0" r="3" fill="#000000" cx="227.2865101921687" cy="247.26162201408218" class="龍骨"/>
+  <circle id="點_立冬2" data-intersection-of="去_小䨮2 立夏立冬2" r="0" fill="#000000" cx="237.70797883264663" cy="253.8525748081182" class="龍骨"/>
+  <circle id="點_立冬1" data-intersection-of="去_小䨮1 立夏立冬1" r="0" fill="#000000" cx="248.2079462623737" cy="257.4519931497724" class="龍骨"/>
+  <circle id="點_立冬0" data-intersection-of="去_小䨮0 立夏立冬0" r="3" fill="#000000" cx="258.5640646055101" cy="258.56406460551017" class="龍骨"/>
+  <circle id="點_霜降2" data-intersection-of="去_立冬2 穀雨霜降2" r="0" fill="#000000" cx="268.5960691265439" cy="257.55893630429415" class="龍骨"/>
+  <circle id="點_霜降1" data-intersection-of="去_立冬1 穀雨霜降1" r="0" fill="#000000" cx="278.15286175299286" cy="254.72322293210686" class="龍骨"/>
+  <circle id="點_霜降0" data-intersection-of="去_立冬0 穀雨霜降0" r="3" fill="#000000" cx="287.10501243818953" cy="250.2901023789544" class="龍骨"/>
+  <circle id="點_寒露2" data-intersection-of="去_霜降2 淸朙寒露2" r="0" fill="#000000" cx="295.34028740753683" cy="244.45790614883308" class="龍骨"/>
+  <circle id="點_寒露1" data-intersection-of="去_霜降1 淸朙寒露1" r="0" fill="#000000" cx="302.76093634842795" cy="237.4019220761516" class="龍骨"/>
+  <circle id="點_寒露0" data-intersection-of="去_霜降0 淸朙寒露0" r="3" fill="#000000" cx="309.28203230275506" cy="229.28203230275514" class="龍骨"/>
+  <circle id="點_秋分2" data-intersection-of="去_寒露2 春分秋分2" r="0" fill="#000000" cx="314.8304538489612" cy="220.24770722057002" class="龍骨"/>
+  <circle id="點_秋分1" data-intersection-of="去_寒露1 春分秋分1" r="0" fill="#000000" cx="319.34426206747355" cy="210.44126998777094" class="龍骨"/>
+  <circle id="點_秋分0" data-intersection-of="去_寒露0 春分秋分0" r="3" fill="#000000" cx="322.77231807663367" cy="200" class="龍骨"/>
+  <circle id="點_白露2" data-intersection-of="去_秋分2 驚蟄白露2" r="0" fill="#000000" cx="325.0740422578523" cy="189.05743920107557" class="龍骨"/>
+  <circle id="點_白露1" data-intersection-of="去_秋分1 驚蟄白露1" r="0" fill="#000000" cx="326.21925017088944" cy="177.74414071008067" class="龍骨"/>
+  <circle id="點_白露0" data-intersection-of="去_秋分0 驚蟄白露0" r="3" fill="#000000" cx="326.1880215351701" cy="166.1880215351701" class="龍骨"/>
+  <circle id="點_處暑2" data-intersection-of="去_白露2 雨水處暑2" r="0" fill="#000000" cx="324.97057252674296" cy="154.5144314410599" class="龍骨"/>
+  <circle id="點_處暑1" data-intersection-of="去_白露1 雨水處暑1" r="0" fill="#000000" cx="322.5671108990365" cy="142.84601754984627" class="龍骨"/>
+  <circle id="點_處暑0" data-intersection-of="去_白露0 雨水處暑0" r="3" fill="#000000" cx="318.9876597875265" cy="131.30244259142796" class="龍骨"/>
+  <circle id="點_立秋2" data-intersection-of="去_處暑2 立春立秋2" r="0" fill="#000000" cx="314.25184053936914" cy="120" class="龍骨"/>
+  <circle id="點_立秋1" data-intersection-of="去_處暑1 立春立秋1" r="0" fill="#000000" cx="308.3886081600494" cy="109.05115886908385" class="龍骨"/>
+  <circle id="點_立秋0" data-intersection-of="去_處暑0 立春立秋0" r="3" fill="#000000" cx="301.43593539448983" cy="98.5640646055102" class="龍骨"/>
+  <circle id="點_大暑2" data-intersection-of="去_立秋2 大寒大暑2" r="0" fill="#000000" cx="293.4404433190973" cy="88.64201598087014" class="龍骨"/>
+  <circle id="點_大暑1" data-intersection-of="去_立秋1 大寒大暑1" r="0" fill="#000000" cx="284.4569777824226" cy="79.38293552457023" class="龍骨"/>
+  <circle id="點_大暑0" data-intersection-of="去_立秋0 大寒大暑0" r="3" fill="#000000" cx="274.54813220625084" cy="70.87884740941162" class="龍骨"/>
+  <circle id="點_小暑2" data-intersection-of="去_大暑2 小寒小暑2" r="0" fill="#000000" cx="263.78371821939226" cy="63.21537486268165" class="龍骨"/>
+  <circle id="點_小暑1" data-intersection-of="去_大暑1 小寒小暑1" r="0" fill="#000000" cx="252.24018639189205" cy="56.47126750017591" class="龍骨"/>
+  <circle id="點_小暑0" data-intersection-of="去_大暑0 小寒小暑0" r="3" fill="#000000" cx="240.00000000000003" cy="50.717967697244916" class="龍骨"/>
+  <circle id="點_夏至2" data-intersection-of="去_小暑2 冬至夏至2" r="0" fill="#000000" cx="227.1509653027872" cy="46.01922409323158" class="龍骨"/>
+  <circle id="點_夏至1" data-intersection-of="去_小暑1 冬至夏至1" r="1.5" fill="#000000" cx="213.78552226256105" cy="42.43075951804672" class="龍骨"/>
+  <circle id="點_夏至0" data-intersection-of="去_小暑0 冬至夏至0" r="0.6" fill="#000000" cx="199.99999999999997" cy="39.99999999999999" class="龍骨"/>
   <!-- 交点连线 -->
-  <line data-endpoints="點_大䨮0 點_小䨮2" stroke="#000000" stroke-width="0.75" x1="200" y1="199.99999999999991" x2="207.93796948010407" y2="221.8093919029058"/>
-  <line data-endpoints="點_小䨮2 點_小䨮1" stroke="#000000" stroke-width="0.75" x1="207.93796948010407" y1="221.8093919029058" x2="217.23108265733333" y2="236.95217600652353"/>
-  <line data-endpoints="點_小䨮1 點_小䨮0" stroke="#000000" stroke-width="0.75" x1="217.23108265733333" y1="236.95217600652353" x2="227.2865101921687" y2="247.26162201408218"/>
-  <line data-endpoints="點_小䨮0 點_立冬2" stroke="#000000" stroke-width="0.75" x1="227.2865101921687" y1="247.26162201408218" x2="237.70797883264663" y2="253.8525748081182"/>
-  <line data-endpoints="點_立冬2 點_立冬1" stroke="#000000" stroke-width="0.75" x1="237.70797883264663" y1="253.8525748081182" x2="248.2079462623737" y2="257.4519931497724"/>
-  <line data-endpoints="點_立冬1 點_立冬0" stroke="#000000" stroke-width="0.75" x1="248.2079462623737" y1="257.4519931497724" x2="258.5640646055101" y2="258.56406460551017"/>
-  <line data-endpoints="點_立冬0 點_霜降2" stroke="#000000" stroke-width="0.75" x1="258.5640646055101" y1="258.56406460551017" x2="268.5960691265439" y2="257.55893630429415"/>
-  <line data-endpoints="點_霜降2 點_霜降1" stroke="#000000" stroke-width="0.75" x1="268.5960691265439" y1="257.55893630429415" x2="278.15286175299286" y2="254.72322293210686"/>
-  <line data-endpoints="點_霜降1 點_霜降0" stroke="#000000" stroke-width="0.75" x1="278.15286175299286" y1="254.72322293210686" x2="287.10501243818953" y2="250.2901023789544"/>
-  <line data-endpoints="點_霜降0 點_寒露2" stroke="#000000" stroke-width="0.75" x1="287.10501243818953" y1="250.2901023789544" x2="295.34028740753683" y2="244.45790614883308"/>
-  <line data-endpoints="點_寒露2 點_寒露1" stroke="#000000" stroke-width="0.75" x1="295.34028740753683" y1="244.45790614883308" x2="302.76093634842795" y2="237.4019220761516"/>
-  <line data-endpoints="點_寒露1 點_寒露0" stroke="#000000" stroke-width="0.75" x1="302.76093634842795" y1="237.4019220761516" x2="309.28203230275506" y2="229.28203230275514"/>
-  <line data-endpoints="點_寒露0 點_秋分2" stroke="#000000" stroke-width="0.75" x1="309.28203230275506" y1="229.28203230275514" x2="314.8304538489612" y2="220.24770722057002"/>
-  <line data-endpoints="點_秋分2 點_秋分1" stroke="#000000" stroke-width="0.75" x1="314.8304538489612" y1="220.24770722057002" x2="319.34426206747355" y2="210.44126998777094"/>
-  <line data-endpoints="點_秋分1 點_秋分0" stroke="#000000" stroke-width="0.75" x1="319.34426206747355" y1="210.44126998777094" x2="322.77231807663367" y2="200"/>
-  <line data-endpoints="點_秋分0 點_白露2" stroke="#000000" stroke-width="0.75" x1="322.77231807663367" y1="200" x2="325.0740422578523" y2="189.05743920107557"/>
-  <line data-endpoints="點_白露2 點_白露1" stroke="#000000" stroke-width="0.75" x1="325.0740422578523" y1="189.05743920107557" x2="326.21925017088944" y2="177.74414071008067"/>
-  <line data-endpoints="點_白露1 點_白露0" stroke="#000000" stroke-width="0.75" x1="326.21925017088944" y1="177.74414071008067" x2="326.1880215351701" y2="166.1880215351701"/>
-  <line data-endpoints="點_白露0 點_處暑2" stroke="#000000" stroke-width="0.75" x1="326.1880215351701" y1="166.1880215351701" x2="324.97057252674296" y2="154.5144314410599"/>
-  <line data-endpoints="點_處暑2 點_處暑1" stroke="#000000" stroke-width="0.75" x1="324.97057252674296" y1="154.5144314410599" x2="322.5671108990365" y2="142.84601754984627"/>
-  <line data-endpoints="點_處暑1 點_處暑0" stroke="#000000" stroke-width="0.75" x1="322.5671108990365" y1="142.84601754984627" x2="318.9876597875265" y2="131.30244259142796"/>
-  <line data-endpoints="點_處暑0 點_立秋2" stroke="#000000" stroke-width="0.75" x1="318.9876597875265" y1="131.30244259142796" x2="314.25184053936914" y2="120"/>
-  <line data-endpoints="點_立秋2 點_立秋1" stroke="#000000" stroke-width="0.75" x1="314.25184053936914" y1="120" x2="308.3886081600494" y2="109.05115886908385"/>
-  <line data-endpoints="點_立秋1 點_立秋0" stroke="#000000" stroke-width="0.75" x1="308.3886081600494" y1="109.05115886908385" x2="301.43593539448983" y2="98.5640646055102"/>
-  <line data-endpoints="點_立秋0 點_大暑2" stroke="#000000" stroke-width="0.75" x1="301.43593539448983" y1="98.5640646055102" x2="293.4404433190973" y2="88.64201598087014"/>
-  <line data-endpoints="點_大暑2 點_大暑1" stroke="#000000" stroke-width="0.75" x1="293.4404433190973" y1="88.64201598087014" x2="284.4569777824226" y2="79.38293552457023"/>
-  <line data-endpoints="點_大暑1 點_大暑0" stroke="#000000" stroke-width="0.75" x1="284.4569777824226" y1="79.38293552457023" x2="274.54813220625084" y2="70.87884740941162"/>
-  <line data-endpoints="點_大暑0 點_小暑2" stroke="#000000" stroke-width="0.75" x1="274.54813220625084" y1="70.87884740941162" x2="263.78371821939226" y2="63.21537486268165"/>
-  <line data-endpoints="點_小暑2 點_小暑1" stroke="#000000" stroke-width="0.75" x1="263.78371821939226" y1="63.21537486268165" x2="252.24018639189205" y2="56.47126750017591"/>
-  <line data-endpoints="點_小暑1 點_小暑0" stroke="#000000" stroke-width="0.75" x1="252.24018639189205" y1="56.47126750017591" x2="240.00000000000003" y2="50.717967697244916"/>
-  <line data-endpoints="點_小暑0 點_夏至2" stroke="#000000" stroke-width="0.75" x1="240.00000000000003" y1="50.717967697244916" x2="227.1509653027872" y2="46.01922409323158"/>
-  <line data-endpoints="點_夏至2 點_夏至1" stroke="#000000" stroke-width="0.75" x1="227.1509653027872" y1="46.01922409323158" x2="213.78552226256105" y2="42.43075951804672"/>
-  <line data-endpoints="點_夏至1 點_夏至0" stroke="#000000" stroke-width="0.75" x1="213.78552226256105" y1="42.43075951804672" x2="199.99999999999997" y2="39.99999999999999"/>
+  <line data-endpoints="點_大䨮0 點_小䨮2" stroke="#000000" stroke-width="0.75" x1="200" y1="199.99999999999991" x2="207.93796948010407" y2="221.8093919029058" class="龍骨"/>
+  <line data-endpoints="點_小䨮2 點_小䨮1" stroke="#000000" stroke-width="0.75" x1="207.93796948010407" y1="221.8093919029058" x2="217.23108265733333" y2="236.95217600652353" class="龍骨"/>
+  <line data-endpoints="點_小䨮1 點_小䨮0" stroke="#000000" stroke-width="0.75" x1="217.23108265733333" y1="236.95217600652353" x2="227.2865101921687" y2="247.26162201408218" class="龍骨"/>
+  <line data-endpoints="點_小䨮0 點_立冬2" stroke="#000000" stroke-width="0.75" x1="227.2865101921687" y1="247.26162201408218" x2="237.70797883264663" y2="253.8525748081182" class="龍骨"/>
+  <line data-endpoints="點_立冬2 點_立冬1" stroke="#000000" stroke-width="0.75" x1="237.70797883264663" y1="253.8525748081182" x2="248.2079462623737" y2="257.4519931497724" class="龍骨"/>
+  <line data-endpoints="點_立冬1 點_立冬0" stroke="#000000" stroke-width="0.75" x1="248.2079462623737" y1="257.4519931497724" x2="258.5640646055101" y2="258.56406460551017" class="龍骨"/>
+  <line data-endpoints="點_立冬0 點_霜降2" stroke="#000000" stroke-width="0.75" x1="258.5640646055101" y1="258.56406460551017" x2="268.5960691265439" y2="257.55893630429415" class="龍骨"/>
+  <line data-endpoints="點_霜降2 點_霜降1" stroke="#000000" stroke-width="0.75" x1="268.5960691265439" y1="257.55893630429415" x2="278.15286175299286" y2="254.72322293210686" class="龍骨"/>
+  <line data-endpoints="點_霜降1 點_霜降0" stroke="#000000" stroke-width="0.75" x1="278.15286175299286" y1="254.72322293210686" x2="287.10501243818953" y2="250.2901023789544" class="龍骨"/>
+  <line data-endpoints="點_霜降0 點_寒露2" stroke="#000000" stroke-width="0.75" x1="287.10501243818953" y1="250.2901023789544" x2="295.34028740753683" y2="244.45790614883308" class="龍骨"/>
+  <line data-endpoints="點_寒露2 點_寒露1" stroke="#000000" stroke-width="0.75" x1="295.34028740753683" y1="244.45790614883308" x2="302.76093634842795" y2="237.4019220761516" class="龍骨"/>
+  <line data-endpoints="點_寒露1 點_寒露0" stroke="#000000" stroke-width="0.75" x1="302.76093634842795" y1="237.4019220761516" x2="309.28203230275506" y2="229.28203230275514" class="龍骨"/>
+  <line data-endpoints="點_寒露0 點_秋分2" stroke="#000000" stroke-width="0.75" x1="309.28203230275506" y1="229.28203230275514" x2="314.8304538489612" y2="220.24770722057002" class="龍骨"/>
+  <line data-endpoints="點_秋分2 點_秋分1" stroke="#000000" stroke-width="0.75" x1="314.8304538489612" y1="220.24770722057002" x2="319.34426206747355" y2="210.44126998777094" class="龍骨"/>
+  <line data-endpoints="點_秋分1 點_秋分0" stroke="#000000" stroke-width="0.75" x1="319.34426206747355" y1="210.44126998777094" x2="322.77231807663367" y2="200" class="龍骨"/>
+  <line data-endpoints="點_秋分0 點_白露2" stroke="#000000" stroke-width="0.75" x1="322.77231807663367" y1="200" x2="325.0740422578523" y2="189.05743920107557" class="龍骨"/>
+  <line data-endpoints="點_白露2 點_白露1" stroke="#000000" stroke-width="0.75" x1="325.0740422578523" y1="189.05743920107557" x2="326.21925017088944" y2="177.74414071008067" class="龍骨"/>
+  <line data-endpoints="點_白露1 點_白露0" stroke="#000000" stroke-width="0.75" x1="326.21925017088944" y1="177.74414071008067" x2="326.1880215351701" y2="166.1880215351701" class="龍骨"/>
+  <line data-endpoints="點_白露0 點_處暑2" stroke="#000000" stroke-width="0.75" x1="326.1880215351701" y1="166.1880215351701" x2="324.97057252674296" y2="154.5144314410599" class="龍骨"/>
+  <line data-endpoints="點_處暑2 點_處暑1" stroke="#000000" stroke-width="0.75" x1="324.97057252674296" y1="154.5144314410599" x2="322.5671108990365" y2="142.84601754984627" class="龍骨"/>
+  <line data-endpoints="點_處暑1 點_處暑0" stroke="#000000" stroke-width="0.75" x1="322.5671108990365" y1="142.84601754984627" x2="318.9876597875265" y2="131.30244259142796" class="龍骨"/>
+  <line data-endpoints="點_處暑0 點_立秋2" stroke="#000000" stroke-width="0.75" x1="318.9876597875265" y1="131.30244259142796" x2="314.25184053936914" y2="120" class="龍骨"/>
+  <line data-endpoints="點_立秋2 點_立秋1" stroke="#000000" stroke-width="0.75" x1="314.25184053936914" y1="120" x2="308.3886081600494" y2="109.05115886908385" class="龍骨"/>
+  <line data-endpoints="點_立秋1 點_立秋0" stroke="#000000" stroke-width="0.75" x1="308.3886081600494" y1="109.05115886908385" x2="301.43593539448983" y2="98.5640646055102" class="龍骨"/>
+  <line data-endpoints="點_立秋0 點_大暑2" stroke="#000000" stroke-width="0.75" x1="301.43593539448983" y1="98.5640646055102" x2="293.4404433190973" y2="88.64201598087014" class="龍骨"/>
+  <line data-endpoints="點_大暑2 點_大暑1" stroke="#000000" stroke-width="0.75" x1="293.4404433190973" y1="88.64201598087014" x2="284.4569777824226" y2="79.38293552457023" class="龍骨"/>
+  <line data-endpoints="點_大暑1 點_大暑0" stroke="#000000" stroke-width="0.75" x1="284.4569777824226" y1="79.38293552457023" x2="274.54813220625084" y2="70.87884740941162" class="龍骨"/>
+  <line data-endpoints="點_大暑0 點_小暑2" stroke="#000000" stroke-width="0.75" x1="274.54813220625084" y1="70.87884740941162" x2="263.78371821939226" y2="63.21537486268165" class="龍骨"/>
+  <line data-endpoints="點_小暑2 點_小暑1" stroke="#000000" stroke-width="0.75" x1="263.78371821939226" y1="63.21537486268165" x2="252.24018639189205" y2="56.47126750017591" class="龍骨"/>
+  <line data-endpoints="點_小暑1 點_小暑0" stroke="#000000" stroke-width="0.75" x1="252.24018639189205" y1="56.47126750017591" x2="240.00000000000003" y2="50.717967697244916" class="龍骨"/>
+  <line data-endpoints="點_小暑0 點_夏至2" stroke="#000000" stroke-width="0.75" x1="240.00000000000003" y1="50.717967697244916" x2="227.1509653027872" y2="46.01922409323158" class="龍骨"/>
+  <line data-endpoints="點_夏至2 點_夏至1" stroke="#000000" stroke-width="0.75" x1="227.1509653027872" y1="46.01922409323158" x2="213.78552226256105" y2="42.43075951804672" class="龍骨"/>
+  <line data-endpoints="點_夏至1 點_夏至0" stroke="#000000" stroke-width="0.75" x1="213.78552226256105" y1="42.43075951804672" x2="199.99999999999997" y2="39.99999999999999" class="龍骨"/>
  </g>
  <g class="layer">
   <title>曲自影出冬至</title>
   <!-- 定义交点 -->
-  <circle id="點_芒種0" data-intersection-of="去_夏至0 芒種大䨮0" r="0" fill="#000000" cx="200" cy="199.99999999999991"/>
-  <circle id="點_小滿2" data-intersection-of="去_芒種2 小滿小䨮2" r="2.4" fill="#000000" cx="192.06203051989593" cy="178.19060809709413"/>
-  <circle id="點_小滿1" data-intersection-of="去_芒種1 小滿小䨮1" r="0" fill="#000000" cx="182.76891734266675" cy="163.04782399347658"/>
-  <circle id="點_小滿0" data-intersection-of="去_芒種0 小滿小䨮0" r="3" fill="#000000" cx="172.71348980783134" cy="152.73837798591788"/>
-  <circle id="點_立夏2" data-intersection-of="去_小滿2 立夏立冬2" r="0" fill="#000000" cx="162.29202116735343" cy="146.14742519188204"/>
-  <circle id="點_立夏1" data-intersection-of="去_小滿1 立夏立冬1" r="0" fill="#000000" cx="151.7920537376263" cy="142.54800685022755"/>
-  <circle id="點_立夏0" data-intersection-of="去_小滿0 立夏立冬0" r="3" fill="#000000" cx="141.43593539448986" cy="141.4359353944899"/>
-  <circle id="點_穀雨2" data-intersection-of="去_立夏2 穀雨霜降2" r="0" fill="#000000" cx="131.40393087345612" cy="142.44106369570582"/>
-  <circle id="點_穀雨1" data-intersection-of="去_立夏1 穀雨霜降1" r="0" fill="#000000" cx="121.84713824700705" cy="145.27677706789308"/>
-  <circle id="點_穀雨0" data-intersection-of="去_立夏0 穀雨霜降0" r="3" fill="#000000" cx="112.8949875618104" cy="149.70989762104554"/>
-  <circle id="點_淸朙2" data-intersection-of="去_穀雨2 淸朙寒露2" r="0" fill="#000000" cx="104.65971259246321" cy="155.54209385116704"/>
-  <circle id="點_淸朙1" data-intersection-of="去_穀雨1 淸朙寒露1" r="0" fill="#000000" cx="97.23906365157211" cy="162.59807792384842"/>
-  <circle id="點_淸朙0" data-intersection-of="去_穀雨0 淸朙寒露0" r="3" fill="#000000" cx="90.71796769724494" cy="170.71796769724492"/>
-  <circle id="點_春分2" data-intersection-of="去_淸朙2 春分秋分2" r="0" fill="#000000" cx="85.16954615103873" cy="179.7522927794299"/>
-  <circle id="點_春分1" data-intersection-of="去_淸朙1 春分秋分1" r="0" fill="#000000" cx="80.65573793252646" cy="189.55873001222912"/>
-  <circle id="點_春分0" data-intersection-of="去_淸朙0 春分秋分0" r="3" fill="#000000" cx="77.22768192336635" cy="200.00000000000003"/>
-  <circle id="點_驚蟄2" data-intersection-of="去_春分2 驚蟄白露2" r="0" fill="#000000" cx="74.92595774214767" cy="210.94256079892443"/>
-  <circle id="點_驚蟄1" data-intersection-of="去_春分1 驚蟄白露1" r="0" fill="#000000" cx="73.7807498291106" cy="222.25585928991936"/>
-  <circle id="點_驚蟄0" data-intersection-of="去_春分0 驚蟄白露0" r="3" fill="#000000" cx="73.81197846482999" cy="233.81197846482996"/>
-  <circle id="點_雨水2" data-intersection-of="去_驚蟄2 雨水處暑2" r="0" fill="#000000" cx="75.02942747325706" cy="245.4855685589401"/>
-  <circle id="點_雨水1" data-intersection-of="去_驚蟄1 雨水處暑1" r="0" fill="#000000" cx="77.43288910096354" cy="257.1539824501537"/>
-  <circle id="點_雨水0" data-intersection-of="去_驚蟄0 雨水處暑0" r="3" fill="#000000" cx="81.01234021247353" cy="268.69755740857204"/>
-  <circle id="點_立春2" data-intersection-of="去_雨水2 立春立秋2" r="0" fill="#000000" cx="85.74815946063084" cy="280"/>
-  <circle id="點_立春1" data-intersection-of="去_雨水1 立春立秋1" r="0" fill="#000000" cx="91.61139183995061" cy="290.94884113091615"/>
-  <circle id="點_立春0" data-intersection-of="去_雨水0 立春立秋0" r="3" fill="#000000" cx="98.5640646055102" cy="301.43593539448983"/>
-  <circle id="點_大寒2" data-intersection-of="去_立春2 大寒大暑2" r="0" fill="#000000" cx="106.5595566809027" cy="311.35798401912984"/>
-  <circle id="點_大寒1" data-intersection-of="去_立春1 大寒大暑1" r="0" fill="#000000" cx="115.54302221757749" cy="320.61706447542986"/>
-  <circle id="點_大寒0" data-intersection-of="去_立春0 大寒大暑0" r="3" fill="#000000" cx="125.45186779374906" cy="329.1211525905883"/>
-  <circle id="點_小寒2" data-intersection-of="去_大寒2 小寒小暑2" r="0" fill="#000000" cx="136.2162817806077" cy="336.7846251373183"/>
-  <circle id="點_小寒1" data-intersection-of="去_大寒1 小寒小暑1" r="0" fill="#000000" cx="147.75981360810795" cy="343.52873249982406"/>
-  <circle id="點_小寒0" data-intersection-of="去_大寒0 小寒小暑0" r="3" fill="#000000" cx="160" cy="349.2820323027552"/>
-  <circle id="點_冬至2" data-intersection-of="去_小寒2 冬至夏至2" r="0" fill="#000000" cx="172.84903469721277" cy="353.98077590676843"/>
-  <circle id="點_冬至1" data-intersection-of="去_小寒1 冬至夏至1" r="1.5" fill="#000000" cx="186.214477737439" cy="357.5692404819533"/>
-  <circle id="點_冬至0" data-intersection-of="去_小寒0 冬至夏至0" r="0.6" fill="#000000" cx="200.00000000000006" cy="360.00000000000006"/>
+  <circle id="點_芒種0" data-intersection-of="去_夏至0 芒種大䨮0" r="0" fill="#000000" cx="200" cy="199.99999999999991" class="龍骨"/>
+  <circle id="點_小滿2" data-intersection-of="去_芒種2 小滿小䨮2" r="2.4" fill="#000000" cx="192.06203051989593" cy="178.19060809709413" class="龍骨"/>
+  <circle id="點_小滿1" data-intersection-of="去_芒種1 小滿小䨮1" r="0" fill="#000000" cx="182.76891734266675" cy="163.04782399347658" class="龍骨"/>
+  <circle id="點_小滿0" data-intersection-of="去_芒種0 小滿小䨮0" r="3" fill="#000000" cx="172.71348980783134" cy="152.73837798591788" class="龍骨"/>
+  <circle id="點_立夏2" data-intersection-of="去_小滿2 立夏立冬2" r="0" fill="#000000" cx="162.29202116735343" cy="146.14742519188204" class="龍骨"/>
+  <circle id="點_立夏1" data-intersection-of="去_小滿1 立夏立冬1" r="0" fill="#000000" cx="151.7920537376263" cy="142.54800685022755" class="龍骨"/>
+  <circle id="點_立夏0" data-intersection-of="去_小滿0 立夏立冬0" r="3" fill="#000000" cx="141.43593539448986" cy="141.4359353944899" class="龍骨"/>
+  <circle id="點_穀雨2" data-intersection-of="去_立夏2 穀雨霜降2" r="0" fill="#000000" cx="131.40393087345612" cy="142.44106369570582" class="龍骨"/>
+  <circle id="點_穀雨1" data-intersection-of="去_立夏1 穀雨霜降1" r="0" fill="#000000" cx="121.84713824700705" cy="145.27677706789308" class="龍骨"/>
+  <circle id="點_穀雨0" data-intersection-of="去_立夏0 穀雨霜降0" r="3" fill="#000000" cx="112.8949875618104" cy="149.70989762104554" class="龍骨"/>
+  <circle id="點_淸朙2" data-intersection-of="去_穀雨2 淸朙寒露2" r="0" fill="#000000" cx="104.65971259246321" cy="155.54209385116704" class="龍骨"/>
+  <circle id="點_淸朙1" data-intersection-of="去_穀雨1 淸朙寒露1" r="0" fill="#000000" cx="97.23906365157211" cy="162.59807792384842" class="龍骨"/>
+  <circle id="點_淸朙0" data-intersection-of="去_穀雨0 淸朙寒露0" r="3" fill="#000000" cx="90.71796769724494" cy="170.71796769724492" class="龍骨"/>
+  <circle id="點_春分2" data-intersection-of="去_淸朙2 春分秋分2" r="0" fill="#000000" cx="85.16954615103873" cy="179.7522927794299" class="龍骨"/>
+  <circle id="點_春分1" data-intersection-of="去_淸朙1 春分秋分1" r="0" fill="#000000" cx="80.65573793252646" cy="189.55873001222912" class="龍骨"/>
+  <circle id="點_春分0" data-intersection-of="去_淸朙0 春分秋分0" r="3" fill="#000000" cx="77.22768192336635" cy="200.00000000000003" class="龍骨"/>
+  <circle id="點_驚蟄2" data-intersection-of="去_春分2 驚蟄白露2" r="0" fill="#000000" cx="74.92595774214767" cy="210.94256079892443" class="龍骨"/>
+  <circle id="點_驚蟄1" data-intersection-of="去_春分1 驚蟄白露1" r="0" fill="#000000" cx="73.7807498291106" cy="222.25585928991936" class="龍骨"/>
+  <circle id="點_驚蟄0" data-intersection-of="去_春分0 驚蟄白露0" r="3" fill="#000000" cx="73.81197846482999" cy="233.81197846482996" class="龍骨"/>
+  <circle id="點_雨水2" data-intersection-of="去_驚蟄2 雨水處暑2" r="0" fill="#000000" cx="75.02942747325706" cy="245.4855685589401" class="龍骨"/>
+  <circle id="點_雨水1" data-intersection-of="去_驚蟄1 雨水處暑1" r="0" fill="#000000" cx="77.43288910096354" cy="257.1539824501537" class="龍骨"/>
+  <circle id="點_雨水0" data-intersection-of="去_驚蟄0 雨水處暑0" r="3" fill="#000000" cx="81.01234021247353" cy="268.69755740857204" class="龍骨"/>
+  <circle id="點_立春2" data-intersection-of="去_雨水2 立春立秋2" r="0" fill="#000000" cx="85.74815946063084" cy="280" class="龍骨"/>
+  <circle id="點_立春1" data-intersection-of="去_雨水1 立春立秋1" r="0" fill="#000000" cx="91.61139183995061" cy="290.94884113091615" class="龍骨"/>
+  <circle id="點_立春0" data-intersection-of="去_雨水0 立春立秋0" r="3" fill="#000000" cx="98.5640646055102" cy="301.43593539448983" class="龍骨"/>
+  <circle id="點_大寒2" data-intersection-of="去_立春2 大寒大暑2" r="0" fill="#000000" cx="106.5595566809027" cy="311.35798401912984" class="龍骨"/>
+  <circle id="點_大寒1" data-intersection-of="去_立春1 大寒大暑1" r="0" fill="#000000" cx="115.54302221757749" cy="320.61706447542986" class="龍骨"/>
+  <circle id="點_大寒0" data-intersection-of="去_立春0 大寒大暑0" r="3" fill="#000000" cx="125.45186779374906" cy="329.1211525905883" class="龍骨"/>
+  <circle id="點_小寒2" data-intersection-of="去_大寒2 小寒小暑2" r="0" fill="#000000" cx="136.2162817806077" cy="336.7846251373183" class="龍骨"/>
+  <circle id="點_小寒1" data-intersection-of="去_大寒1 小寒小暑1" r="0" fill="#000000" cx="147.75981360810795" cy="343.52873249982406" class="龍骨"/>
+  <circle id="點_小寒0" data-intersection-of="去_大寒0 小寒小暑0" r="3" fill="#000000" cx="160" cy="349.2820323027552" class="龍骨"/>
+  <circle id="點_冬至2" data-intersection-of="去_小寒2 冬至夏至2" r="0" fill="#000000" cx="172.84903469721277" cy="353.98077590676843" class="龍骨"/>
+  <circle id="點_冬至1" data-intersection-of="去_小寒1 冬至夏至1" r="1.5" fill="#000000" cx="186.214477737439" cy="357.5692404819533" class="龍骨"/>
+  <circle id="點_冬至0" data-intersection-of="去_小寒0 冬至夏至0" r="0.6" fill="#000000" cx="200.00000000000006" cy="360.00000000000006" class="龍骨"/>
   <!-- 交点连线 -->
-  <line data-endpoints="點_芒種0 點_小滿2" stroke="#000000" stroke-width="0.75" x1="200" y1="199.99999999999991" x2="192.06203051989593" y2="178.19060809709413"/>
-  <line data-endpoints="點_小滿2 點_小滿1" stroke="#000000" stroke-width="0.75" x1="192.06203051989593" y1="178.19060809709413" x2="182.76891734266675" y2="163.04782399347658"/>
-  <line data-endpoints="點_小滿1 點_小滿0" stroke="#000000" stroke-width="0.75" x1="182.76891734266675" y1="163.04782399347658" x2="172.71348980783134" y2="152.73837798591788"/>
-  <line data-endpoints="點_小滿0 點_立夏2" stroke="#000000" stroke-width="0.75" x1="172.71348980783134" y1="152.73837798591788" x2="162.29202116735343" y2="146.14742519188204"/>
-  <line data-endpoints="點_立夏2 點_立夏1" stroke="#000000" stroke-width="0.75" x1="162.29202116735343" y1="146.14742519188204" x2="151.7920537376263" y2="142.54800685022755"/>
-  <line data-endpoints="點_立夏1 點_立夏0" stroke="#000000" stroke-width="0.75" x1="151.7920537376263" y1="142.54800685022755" x2="141.43593539448986" y2="141.4359353944899"/>
-  <line data-endpoints="點_立夏0 點_穀雨2" stroke="#000000" stroke-width="0.75" x1="141.43593539448986" y1="141.4359353944899" x2="131.40393087345612" y2="142.44106369570582"/>
-  <line data-endpoints="點_穀雨2 點_穀雨1" stroke="#000000" stroke-width="0.75" x1="131.40393087345612" y1="142.44106369570582" x2="121.84713824700705" y2="145.27677706789308"/>
-  <line data-endpoints="點_穀雨1 點_穀雨0" stroke="#000000" stroke-width="0.75" x1="121.84713824700705" y1="145.27677706789308" x2="112.8949875618104" y2="149.70989762104554"/>
-  <line data-endpoints="點_穀雨0 點_淸朙2" stroke="#000000" stroke-width="0.75" x1="112.8949875618104" y1="149.70989762104554" x2="104.65971259246321" y2="155.54209385116704"/>
-  <line data-endpoints="點_淸朙2 點_淸朙1" stroke="#000000" stroke-width="0.75" x1="104.65971259246321" y1="155.54209385116704" x2="97.23906365157211" y2="162.59807792384842"/>
-  <line data-endpoints="點_淸朙1 點_淸朙0" stroke="#000000" stroke-width="0.75" x1="97.23906365157211" y1="162.59807792384842" x2="90.71796769724494" y2="170.71796769724492"/>
-  <line data-endpoints="點_淸朙0 點_春分2" stroke="#000000" stroke-width="0.75" x1="90.71796769724494" y1="170.71796769724492" x2="85.16954615103873" y2="179.7522927794299"/>
-  <line data-endpoints="點_春分2 點_春分1" stroke="#000000" stroke-width="0.75" x1="85.16954615103873" y1="179.7522927794299" x2="80.65573793252646" y2="189.55873001222912"/>
-  <line data-endpoints="點_春分1 點_春分0" stroke="#000000" stroke-width="0.75" x1="80.65573793252646" y1="189.55873001222912" x2="77.22768192336635" y2="200.00000000000003"/>
-  <line data-endpoints="點_春分0 點_驚蟄2" stroke="#000000" stroke-width="0.75" x1="77.22768192336635" y1="200.00000000000003" x2="74.92595774214767" y2="210.94256079892443"/>
-  <line data-endpoints="點_驚蟄2 點_驚蟄1" stroke="#000000" stroke-width="0.75" x1="74.92595774214767" y1="210.94256079892443" x2="73.7807498291106" y2="222.25585928991936"/>
-  <line data-endpoints="點_驚蟄1 點_驚蟄0" stroke="#000000" stroke-width="0.75" x1="73.7807498291106" y1="222.25585928991936" x2="73.81197846482999" y2="233.81197846482996"/>
-  <line data-endpoints="點_驚蟄0 點_雨水2" stroke="#000000" stroke-width="0.75" x1="73.81197846482999" y1="233.81197846482996" x2="75.02942747325706" y2="245.4855685589401"/>
-  <line data-endpoints="點_雨水2 點_雨水1" stroke="#000000" stroke-width="0.75" x1="75.02942747325706" y1="245.4855685589401" x2="77.43288910096354" y2="257.1539824501537"/>
-  <line data-endpoints="點_雨水1 點_雨水0" stroke="#000000" stroke-width="0.75" x1="77.43288910096354" y1="257.1539824501537" x2="81.01234021247353" y2="268.69755740857204"/>
-  <line data-endpoints="點_雨水0 點_立春2" stroke="#000000" stroke-width="0.75" x1="81.01234021247353" y1="268.69755740857204" x2="85.74815946063084" y2="280"/>
-  <line data-endpoints="點_立春2 點_立春1" stroke="#000000" stroke-width="0.75" x1="85.74815946063084" y1="280" x2="91.61139183995061" y2="290.94884113091615"/>
-  <line data-endpoints="點_立春1 點_立春0" stroke="#000000" stroke-width="0.75" x1="91.61139183995061" y1="290.94884113091615" x2="98.5640646055102" y2="301.43593539448983"/>
-  <line data-endpoints="點_立春0 點_大寒2" stroke="#000000" stroke-width="0.75" x1="98.5640646055102" y1="301.43593539448983" x2="106.5595566809027" y2="311.35798401912984"/>
-  <line data-endpoints="點_大寒2 點_大寒1" stroke="#000000" stroke-width="0.75" x1="106.5595566809027" y1="311.35798401912984" x2="115.54302221757749" y2="320.61706447542986"/>
-  <line data-endpoints="點_大寒1 點_大寒0" stroke="#000000" stroke-width="0.75" x1="115.54302221757749" y1="320.61706447542986" x2="125.45186779374906" y2="329.1211525905883"/>
-  <line data-endpoints="點_大寒0 點_小寒2" stroke="#000000" stroke-width="0.75" x1="125.45186779374906" y1="329.1211525905883" x2="136.2162817806077" y2="336.7846251373183"/>
-  <line data-endpoints="點_小寒2 點_小寒1" stroke="#000000" stroke-width="0.75" x1="136.2162817806077" y1="336.7846251373183" x2="147.75981360810795" y2="343.52873249982406"/>
-  <line data-endpoints="點_小寒1 點_小寒0" stroke="#000000" stroke-width="0.75" x1="147.75981360810795" y1="343.52873249982406" x2="160" y2="349.2820323027552"/>
-  <line data-endpoints="點_小寒0 點_冬至2" stroke="#000000" stroke-width="0.75" x1="160" y1="349.2820323027552" x2="172.84903469721277" y2="353.98077590676843"/>
-  <line data-endpoints="點_冬至2 點_冬至1" stroke="#000000" stroke-width="0.75" x1="172.84903469721277" y1="353.98077590676843" x2="186.214477737439" y2="357.5692404819533"/>
-  <line data-endpoints="點_冬至1 點_冬至0" stroke="#000000" stroke-width="0.75" x1="186.214477737439" y1="357.5692404819533" x2="200.00000000000006" y2="360.00000000000006"/>
+  <line data-endpoints="點_芒種0 點_小滿2" stroke="#000000" stroke-width="0.75" x1="200" y1="199.99999999999991" x2="192.06203051989593" y2="178.19060809709413" class="龍骨"/>
+  <line data-endpoints="點_小滿2 點_小滿1" stroke="#000000" stroke-width="0.75" x1="192.06203051989593" y1="178.19060809709413" x2="182.76891734266675" y2="163.04782399347658" class="龍骨"/>
+  <line data-endpoints="點_小滿1 點_小滿0" stroke="#000000" stroke-width="0.75" x1="182.76891734266675" y1="163.04782399347658" x2="172.71348980783134" y2="152.73837798591788" class="龍骨"/>
+  <line data-endpoints="點_小滿0 點_立夏2" stroke="#000000" stroke-width="0.75" x1="172.71348980783134" y1="152.73837798591788" x2="162.29202116735343" y2="146.14742519188204" class="龍骨"/>
+  <line data-endpoints="點_立夏2 點_立夏1" stroke="#000000" stroke-width="0.75" x1="162.29202116735343" y1="146.14742519188204" x2="151.7920537376263" y2="142.54800685022755" class="龍骨"/>
+  <line data-endpoints="點_立夏1 點_立夏0" stroke="#000000" stroke-width="0.75" x1="151.7920537376263" y1="142.54800685022755" x2="141.43593539448986" y2="141.4359353944899" class="龍骨"/>
+  <line data-endpoints="點_立夏0 點_穀雨2" stroke="#000000" stroke-width="0.75" x1="141.43593539448986" y1="141.4359353944899" x2="131.40393087345612" y2="142.44106369570582" class="龍骨"/>
+  <line data-endpoints="點_穀雨2 點_穀雨1" stroke="#000000" stroke-width="0.75" x1="131.40393087345612" y1="142.44106369570582" x2="121.84713824700705" y2="145.27677706789308" class="龍骨"/>
+  <line data-endpoints="點_穀雨1 點_穀雨0" stroke="#000000" stroke-width="0.75" x1="121.84713824700705" y1="145.27677706789308" x2="112.8949875618104" y2="149.70989762104554" class="龍骨"/>
+  <line data-endpoints="點_穀雨0 點_淸朙2" stroke="#000000" stroke-width="0.75" x1="112.8949875618104" y1="149.70989762104554" x2="104.65971259246321" y2="155.54209385116704" class="龍骨"/>
+  <line data-endpoints="點_淸朙2 點_淸朙1" stroke="#000000" stroke-width="0.75" x1="104.65971259246321" y1="155.54209385116704" x2="97.23906365157211" y2="162.59807792384842" class="龍骨"/>
+  <line data-endpoints="點_淸朙1 點_淸朙0" stroke="#000000" stroke-width="0.75" x1="97.23906365157211" y1="162.59807792384842" x2="90.71796769724494" y2="170.71796769724492" class="龍骨"/>
+  <line data-endpoints="點_淸朙0 點_春分2" stroke="#000000" stroke-width="0.75" x1="90.71796769724494" y1="170.71796769724492" x2="85.16954615103873" y2="179.7522927794299" class="龍骨"/>
+  <line data-endpoints="點_春分2 點_春分1" stroke="#000000" stroke-width="0.75" x1="85.16954615103873" y1="179.7522927794299" x2="80.65573793252646" y2="189.55873001222912" class="龍骨"/>
+  <line data-endpoints="點_春分1 點_春分0" stroke="#000000" stroke-width="0.75" x1="80.65573793252646" y1="189.55873001222912" x2="77.22768192336635" y2="200.00000000000003" class="龍骨"/>
+  <line data-endpoints="點_春分0 點_驚蟄2" stroke="#000000" stroke-width="0.75" x1="77.22768192336635" y1="200.00000000000003" x2="74.92595774214767" y2="210.94256079892443" class="龍骨"/>
+  <line data-endpoints="點_驚蟄2 點_驚蟄1" stroke="#000000" stroke-width="0.75" x1="74.92595774214767" y1="210.94256079892443" x2="73.7807498291106" y2="222.25585928991936" class="龍骨"/>
+  <line data-endpoints="點_驚蟄1 點_驚蟄0" stroke="#000000" stroke-width="0.75" x1="73.7807498291106" y1="222.25585928991936" x2="73.81197846482999" y2="233.81197846482996" class="龍骨"/>
+  <line data-endpoints="點_驚蟄0 點_雨水2" stroke="#000000" stroke-width="0.75" x1="73.81197846482999" y1="233.81197846482996" x2="75.02942747325706" y2="245.4855685589401" class="龍骨"/>
+  <line data-endpoints="點_雨水2 點_雨水1" stroke="#000000" stroke-width="0.75" x1="75.02942747325706" y1="245.4855685589401" x2="77.43288910096354" y2="257.1539824501537" class="龍骨"/>
+  <line data-endpoints="點_雨水1 點_雨水0" stroke="#000000" stroke-width="0.75" x1="77.43288910096354" y1="257.1539824501537" x2="81.01234021247353" y2="268.69755740857204" class="龍骨"/>
+  <line data-endpoints="點_雨水0 點_立春2" stroke="#000000" stroke-width="0.75" x1="81.01234021247353" y1="268.69755740857204" x2="85.74815946063084" y2="280" class="龍骨"/>
+  <line data-endpoints="點_立春2 點_立春1" stroke="#000000" stroke-width="0.75" x1="85.74815946063084" y1="280" x2="91.61139183995061" y2="290.94884113091615" class="龍骨"/>
+  <line data-endpoints="點_立春1 點_立春0" stroke="#000000" stroke-width="0.75" x1="91.61139183995061" y1="290.94884113091615" x2="98.5640646055102" y2="301.43593539448983" class="龍骨"/>
+  <line data-endpoints="點_立春0 點_大寒2" stroke="#000000" stroke-width="0.75" x1="98.5640646055102" y1="301.43593539448983" x2="106.5595566809027" y2="311.35798401912984" class="龍骨"/>
+  <line data-endpoints="點_大寒2 點_大寒1" stroke="#000000" stroke-width="0.75" x1="106.5595566809027" y1="311.35798401912984" x2="115.54302221757749" y2="320.61706447542986" class="龍骨"/>
+  <line data-endpoints="點_大寒1 點_大寒0" stroke="#000000" stroke-width="0.75" x1="115.54302221757749" y1="320.61706447542986" x2="125.45186779374906" y2="329.1211525905883" class="龍骨"/>
+  <line data-endpoints="點_大寒0 點_小寒2" stroke="#000000" stroke-width="0.75" x1="125.45186779374906" y1="329.1211525905883" x2="136.2162817806077" y2="336.7846251373183" class="龍骨"/>
+  <line data-endpoints="點_小寒2 點_小寒1" stroke="#000000" stroke-width="0.75" x1="136.2162817806077" y1="336.7846251373183" x2="147.75981360810795" y2="343.52873249982406" class="龍骨"/>
+  <line data-endpoints="點_小寒1 點_小寒0" stroke="#000000" stroke-width="0.75" x1="147.75981360810795" y1="343.52873249982406" x2="160" y2="349.2820323027552" class="龍骨"/>
+  <line data-endpoints="點_小寒0 點_冬至2" stroke="#000000" stroke-width="0.75" x1="160" y1="349.2820323027552" x2="172.84903469721277" y2="353.98077590676843" class="龍骨"/>
+  <line data-endpoints="點_冬至2 點_冬至1" stroke="#000000" stroke-width="0.75" x1="172.84903469721277" y1="353.98077590676843" x2="186.214477737439" y2="357.5692404819533" class="龍骨"/>
+  <line data-endpoints="點_冬至1 點_冬至0" stroke="#000000" stroke-width="0.75" x1="186.214477737439" y1="357.5692404819533" x2="200.00000000000006" y2="360.00000000000006" class="龍骨"/>
  </g>
  <g class="layer">
   <title>秋分眼自影出夏至</title>
   <!-- 定义交点 -->
-  <circle id="眼規_立冬1" data-intersection-of="去_立冬1 春分秋分0" r="0" fill="#000000" cx="258.23523748259237" cy="200.00000000000003"/>
-  <circle id="眼心_立冬0" data-intersection-of="去_立冬0 春分秋分0" r="0" fill="#000000" cx="266.2741699796953" cy="200"/>
+  <circle id="眼規_立冬1" data-intersection-of="去_立冬1 春分秋分0" r="0" fill="#000000" cx="258.23523748259237" cy="200.00000000000003" class="龍骨"/>
+  <circle id="眼心_立冬0" data-intersection-of="去_立冬0 春分秋分0" r="0" fill="#000000" cx="266.2741699796953" cy="200" class="龍骨"/>
   <!-- 交点画眼 -->
-  <circle id="秋分眼" data-radius-point="眼規_立冬1" data-center="眼心_立冬0" fill="none" stroke="#000000" stroke-width="0.6" cx="266.2741699796953" cy="200" r="8.038932497102905"/>
+  <circle id="秋分眼" data-radius-point="眼規_立冬1" data-center="眼心_立冬0" fill="none" stroke="#000000" stroke-width="0.6" cx="266.2741699796953" cy="200" r="8.038932497102905" class="龍骨"/>
+  <circle id="秋分眼" data-radius-point="眼規_立冬1" data-center="眼心_立冬0" fill="white" style="mix-blend-mode: difference;" stroke="none" stroke-width="0.6" cx="266.2741699796953" cy="200" r="8.038932497102905" class="色面"/>
  </g>
  <g class="layer">
   <title>春分眼自影出冬至</title>
   <!-- 定义交点 -->
-  <circle id="眼規_立夏1" data-intersection-of="去_立夏1 春分秋分0" r="0" fill="#000000" cx="141.76476251740763" cy="200.00000000000003"/>
-  <circle id="眼心_立夏0" data-intersection-of="去_立夏0 春分秋分0" r="0" fill="#000000" cx="133.72583002030478" cy="200"/>
+  <circle id="眼規_立夏1" data-intersection-of="去_立夏1 春分秋分0" r="0" fill="#000000" cx="141.76476251740763" cy="200.00000000000003" class="龍骨"/>
+  <circle id="眼心_立夏0" data-intersection-of="去_立夏0 春分秋分0" r="0" fill="#000000" cx="133.72583002030478" cy="200" class="龍骨"/>
   <!-- 交点画眼 -->
-  <circle id="春分眼" data-radius-point="眼規_立夏1" data-center="眼心_立夏0" fill="none" stroke="#000000" stroke-width="0.6" cx="133.72583002030478" cy="200" r="8.038932497102849"/>
+  <circle id="春分眼" data-radius-point="眼規_立夏1" data-center="眼心_立夏0" fill="none" stroke="#000000" stroke-width="0.6" cx="133.72583002030478" cy="200" r="8.038932497102849" class="龍骨"/>
+  <circle id="春分眼" data-radius-point="眼規_立夏1" data-center="眼心_立夏0" fill="white" style="mix-blend-mode: difference;" stroke="none" stroke-width="0.6" cx="133.72583002030478" cy="200" r="8.038932497102849" class="色面"/>
+ </g>
+ <g class="layer">
+  <title>色面雙抱返</title>
+  <use href="#基圓" xlink:href="#基圓" fill="white" style="mix-blend-mode: difference;" stroke="none" class="色面"/>
+  <path data-path-spell="始 點_中點 連 點_芒種0 連 點_小滿2 連 點_小滿1 連 點_小滿0 連 點_立夏2 連 點_立夏1 連 點_立夏0 連 點_穀雨2 連 點_穀雨1 連 點_穀雨0 連 點_淸朙2 連 點_淸朙1 連 點_淸朙0 連 點_春分2 連 點_春分1 連 點_春分0 連 點_驚蟄2 連 點_驚蟄1 連 點_驚蟄0 連 點_雨水2 連 點_雨水1 連 點_雨水0 連 點_立春2 連 點_立春1 連 點_立春0 連 點_大寒2 連 點_大寒1 連 點_大寒0 連 點_小寒2 連 點_小寒1 連 點_小寒0 連 點_冬至2 連 點_冬至1 連 點_冬至0 連 點_冬至 迴 點_夏至 連 點_夏至0 連 點_夏至1 連 點_夏至2 連 點_小暑0 連 點_小暑1 連 點_小暑2 連 點_大暑0 連 點_大暑1 連 點_大暑2 連 點_立秋0 連 點_立秋1 連 點_立秋2 連 點_處暑0 連 點_處暑1 連 點_處暑2 連 點_白露0 連 點_白露1 連 點_白露2 連 點_秋分0 連 點_秋分1 連 點_秋分2 連 點_寒露0 連 點_寒露1 連 點_寒露2 連 點_霜降0 連 點_霜降1 連 點_霜降2 連 點_立冬0 連 點_立冬1 連 點_立冬2 連 點_小䨮0 連 點_小䨮1 連 點_小䨮2 連 點_大䨮0 連 點_中點 止" fill="white" style="mix-blend-mode: difference;" stroke="none" class="色面" d="M 200,200 L 200,199.99999999999991 L 192.06203051989593,178.19060809709413 L 182.76891734266675,163.04782399347658 L 172.71348980783134,152.73837798591788 L 162.29202116735343,146.14742519188204 L 151.7920537376263,142.54800685022755 L 141.43593539448986,141.4359353944899 L 131.40393087345612,142.44106369570582 L 121.84713824700705,145.27677706789308 L 112.8949875618104,149.70989762104554 L 104.65971259246321,155.54209385116704 L 97.23906365157211,162.59807792384842 L 90.71796769724494,170.71796769724492 L 85.16954615103873,179.7522927794299 L 80.65573793252646,189.55873001222912 L 77.22768192336635,200.00000000000003 L 74.92595774214767,210.94256079892443 L 73.7807498291106,222.25585928991936 L 73.81197846482999,233.81197846482996 L 75.02942747325706,245.4855685589401 L 77.43288910096354,257.1539824501537 L 81.01234021247353,268.69755740857204 L 85.74815946063084,280 L 91.61139183995061,290.94884113091615 L 98.5640646055102,301.43593539448983 L 106.5595566809027,311.35798401912984 L 115.54302221757749,320.61706447542986 L 125.45186779374906,329.1211525905883 L 136.2162817806077,336.7846251373183 L 147.75981360810795,343.52873249982406 L 160,349.2820323027552 L 172.84903469721277,353.98077590676843 L 186.214477737439,357.5692404819533 L 200.00000000000006,360.00000000000006 L 200,360 A 1,1 720 1,1 200,40 L 199.99999999999997,39.99999999999999 L 213.78552226256105,42.43075951804672 L 227.1509653027872,46.01922409323158 L 240.00000000000003,50.717967697244916 L 252.24018639189205,56.47126750017591 L 263.78371821939226,63.21537486268165 L 274.54813220625084,70.87884740941162 L 284.4569777824226,79.38293552457023 L 293.4404433190973,88.64201598087014 L 301.43593539448983,98.5640646055102 L 308.3886081600494,109.05115886908385 L 314.25184053936914,120 L 318.9876597875265,131.30244259142796 L 322.5671108990365,142.84601754984627 L 324.97057252674296,154.5144314410599 L 326.1880215351701,166.1880215351701 L 326.21925017088944,177.74414071008067 L 325.0740422578523,189.05743920107557 L 322.77231807663367,200 L 319.34426206747355,210.44126998777094 L 314.8304538489612,220.24770722057002 L 309.28203230275506,229.28203230275514 L 302.76093634842795,237.4019220761516 L 295.34028740753683,244.45790614883308 L 287.10501243818953,250.2901023789544 L 278.15286175299286,254.72322293210686 L 268.5960691265439,257.55893630429415 L 258.5640646055101,258.56406460551017 L 248.2079462623737,257.4519931497724 L 237.70797883264663,253.8525748081182 L 227.2865101921687,247.26162201408218 L 217.23108265733333,236.95217600652353 L 207.93796948010407,221.8093919029058 L 200,199.99999999999991 L 200,200 Z"/>
  </g>
  <script type="text/javascript"><![CDATA[
 //// Produced by AI (deepseek-chat) support.
@@ -735,7 +743,7 @@
 	
 	//: ---------- 纯函数 - 几何计算 ----------
 	
-	//: 解析 rotate 变换，返回 { angle/radians(弧度), cx, cy } 或 null
+	//: 解析 rotate 变换 ; 返回 { angle/radians(弧度), cx, cy } 或 null
 	const parseRotate = (transform) => 
 	{
 		if (!transform) return null;
@@ -765,7 +773,7 @@
 		return { x: X, y: Y };
 	};
 	
-	//: 从 SVG line 元素获取实际线段端点（考虑 transform）
+	//: 从 SVG line 元素获取实际线段端点 ; 考虑 transform
 	const getLineGeometry = (line) => 
 	{
 		const x1 = line.getAttribute('x1');
@@ -785,7 +793,7 @@
 		return { pA, pB };
 	};
 	
-	//: 计算两条无限直线的交点，返回 {x,y} 或 null
+	//: 计算两条无限直线的交点 ; 返回 {x,y} 或 null
 	const intersectLines = (lineA, lineB) => 
 	{
 		const geomA = getLineGeometry(lineA);
@@ -814,7 +822,7 @@
 	
 	//: ---------- 解析函数 - 从元素提取约束，返回要设置的属性 ----------
 	
-	//: 解析 data-intersection-of，返回 {cx, cy} 或 null
+	//: 解析 data-intersection-of ; 返回 {cx, cy} 或 null
 	const resolveIntersection = (el) => 
 	{
 		const tag = el.tagName.toLowerCase();
@@ -840,7 +848,7 @@
 		return { cx: point.x, cy: point.y };
 	};
 	
-	//: 从点元素中提取坐标，优先使用 cx/cy（圆/椭圆），否则回退到 x/y
+	//: 从点元素中提取坐标 ; 优先使用 cx/cy (圆|椭圆) ; 否则回退到 x/y
 	const getPointXY = (el) => 
 	{
 		const x = +(el.getAttribute('cx') ?? el.getAttribute('x') ?? 0);
@@ -848,7 +856,13 @@
 		return { x, y };
 	};
 	
-	//: 解析 data-endpoints="点id1 点id2"，返回 {x1,y1,x2,y2} 或 null
+	//: 从点元素中提取原始坐标字符串 ; 用于 path 的 d 构建
+	const getPointRawXY = (el) => {
+		const { x: x, y: y } = getPointXY(el);
+		return `${x},${y}`;
+	};
+	
+	//: 解析 data-endpoints="point-id-1 point-id-2" ; 返回 {x1,y1,x2,y2} 或 null
 	const resolveEndpointLine = (line) => 
 	{
 		const attr = line.getAttribute('data-endpoints');
@@ -866,10 +880,10 @@
 		return { x1, y1, x2, y2 };
 	};
 	
-	//: 解析 data-center="点id"，返回 {cx, cy} 或 null
+	//: 解析 data-center="point-id" ; 返回 {cx, cy} 或 null
 	const resolveCircleCenter = (el) => 
 	{
-		//: 如果同时有 data-radius-point，交给 resolveCircleFromPoints
+		//: 如果同时有 data-radius-point ，交给 resolveCircleFromPoints
 		if (el.hasAttribute('data-radius-point')) return null;
 		
 		const pointId = el.getAttribute('data-center');
@@ -882,7 +896,7 @@
 		return { cx, cy };
 	};
 	
-	//: 解析 data-center + data-radius-point，返回 { cx, cy, r } 或 null
+	//: 解析 data-center + data-radius-point ; 返回 { cx, cy, r } 或 null
 	const resolveCircleRadiusPoint = (el) => 
 	{
 		const centerId = el.getAttribute('data-center');
@@ -901,23 +915,85 @@
 		return { cx, cy, r };
 	};
 	
+	//: 解析 data-path-spell ; 返回 { d } 或 null
+	const resolvePathSpell = (el) => 
+	{
+		const spell = el.getAttribute('data-path-spell');
+		if (!spell) return null;
+		const tokens = spell.trim().split(/[\s,]+/).map(tok => tok.trim()).filter(Boolean);
+		const SPELL_DICTS = 
+		[
+			{ keys: ['始','開','初'], d: 'M', expectPoint: true },
+			{ keys: ['連'], d: 'L', expectPoint: true },
+			{ keys: ['迴'], d: 'A 1,1 720 1,1', expectPoint: true },
+			{ keys: ['返'], d: 'A 1,1 360 1,0', expectPoint: true },
+			{ keys: ['還'], d: 'A 1,1 720 0,1', expectPoint: true },
+			{ keys: ['退'], d: 'A 1,1 360 0,0', expectPoint: true },
+			{ keys: ['終','畢','止'], d: 'Z', expectPoint: false },
+		];
+		const CONTROL_MAP = new Map
+		(
+			SPELL_DICTS.flatMap( 
+				({ keys, d, expectPoint }) =>
+					keys.map(key => [key, { d, expectPoint }]) )
+		);
+		const parsed = tokens.reduce(
+			(acc, token) => 
+			{
+				if (acc === null) /* 输入失败 - 输出失败 */ return null;
+				
+				if (acc.expectPoint) 
+				{
+					const point = document.getElementById(token);
+					if (!point) /* 点不存在 - 整体失败 */ return null;
+					return { d: [...acc.d, getPointRawXY(point)], expectPoint: false };
+				}
+				
+				// switch (token) 
+				// {
+				// 	case '始': return { d: [...acc.d, 'M'], expectPoint: true };
+				// 	case '連': return { d: [...acc.d, 'L'], expectPoint: true };
+				// 	case '迴': return { d: [...acc.d, 'A 1,1 720 1,1'], expectPoint: true };
+				// 	case '返': return { d: [...acc.d, 'A 1,1 360 1,0'], expectPoint: true };
+				// 	case '還': return { d: [...acc.d, 'A 1,1 720 0,1'], expectPoint: true };
+				// 	case '退': return { d: [...acc.d, 'A 1,1 360 0,0'], expectPoint: true };
+				// 	case '止': return { d: [...acc.d, 'Z'], expectPoint: false };
+				// 	default: /* 未知指令 - 跳过 */ return acc;
+				// }
+				
+				const as = CONTROL_MAP.get(token);
+				if (as) {
+					return { d: [...acc.d, as.d], expectPoint: as.expectPoint };
+				} else {
+					/* 未知标记 - 跳过 */ return acc;
+				}
+			},
+			{ d: [], expectPoint: false },
+		);
+		if (!parsed) /* 若 reduce 中途返回 null - 则函数返回 null */ return null;
+		return { d: parsed.d.map(tok => tok.trim()).join(' ') };
+	};
+	
 	//: ---------- 主流程 - 收集操作并统一执行 ----------
 	
 	const applyConstraints = () => 
 	{
 		const pointResolvers = [
-			//: 交点圆/椭圆 intersectionEls
+			//: 交点圆 intersectionEls
 			{ selector: '[data-intersection-of]', resolve: resolveIntersection },
 			//: 普通圆心 centerEls
 			{ selector: 'circle[data-center], ellipse[data-center]', resolve: resolveCircleCenter },
+		];
+		const lineResolvers = [
+			//: 连接线 endpointLines
+			{ selector: 'line[data-endpoints]', resolve: resolveEndpointLine },
 		];
 		const radiusResolvers = [
 			//: 規心定圆 ...
 			{ selector: 'circle[data-radius-point], ellipse[data-radius-point]', resolve: resolveCircleRadiusPoint },
 		];
-		const lineResolvers = [
-			//: 连接线 endpointLines
-			{ selector: 'line[data-endpoints]', resolve: resolveEndpointLine },
+		const pathResolvers = [
+			{ selector: 'path[data-path-spell]', resolve: resolvePathSpell },
 		];
 		
 		
@@ -943,14 +1019,51 @@
 		executeResolvers(lineResolvers);
 		//: 朙眼
 		executeResolvers(radiusResolvers);
+		//: 見面
+		executeResolvers(pathResolvers);
 	};
+	
+	
+	//: ---------- 可选 - 键盘交互 ----------
+	
+	const initKeyboardInteraction = () => 
+	{
+		const boneElements = [...document.querySelectorAll('.龍骨')];
+		const faceElements = [...document.querySelectorAll('.色面')];
+		/* 状态 -- 0: 都显示, 1: 隐藏龍骨, 2: 隐藏色面 */
+		let state = 0;
+		const applyState = () => 
+		{
+			const showBones = state !== 1;
+			const showFace = state !== 2;
+			boneElements.forEach(el => { el.style.display = showBones ? '' : 'none' });
+			faceElements.forEach(el => { el.style.display = showFace ? '' : 'none' });
+		};
+		const handleKeyDown = (event) => 
+		{
+			if (event.code === 'Space' || event.key === ' ') {
+				/* 阻止空格滚动页面 */ event.preventDefault();
+				state = (state + 1) % 3;
+				applyState();
+			} else {
+			}
+		};
+		document.addEventListener('keydown', handleKeyDown);
+	};
+	
+	
+	//: ---------- 应用 - 转换与交互 ----------
 	
 	// window.addEventListener('DOMContentLoaded', applyConstraints);
 	
 	if (document.readyState === 'loading') {
-		document.addEventListener('DOMContentLoaded', applyConstraints);
+		document.addEventListener('DOMContentLoaded', () => {
+			applyConstraints();
+			initKeyboardInteraction();
+		});
 	} else {
 		applyConstraints();
+		initKeyboardInteraction();
 	}
 })();
 ]]></script>
