@@ -8,7 +8,7 @@
 	
 	//: ---------- 纯函数 - 几何计算 ----------
 	
-	//: 解析 rotate 变换，返回 { angle/radians(弧度), cx, cy } 或 null
+	//: 解析 rotate 变换 ; 返回 { angle/radians(弧度), cx, cy } 或 null
 	const parseRotate = (transform) => 
 	{
 		if (!transform) return null;
@@ -38,7 +38,7 @@
 		return { x: X, y: Y };
 	};
 	
-	//: 从 SVG line 元素获取实际线段端点（考虑 transform）
+	//: 从 SVG line 元素获取实际线段端点 ; 考虑 transform
 	const getLineGeometry = (line) => 
 	{
 		const x1 = line.getAttribute('x1');
@@ -58,7 +58,7 @@
 		return { pA, pB };
 	};
 	
-	//: 计算两条无限直线的交点，返回 {x,y} 或 null
+	//: 计算两条无限直线的交点 ; 返回 {x,y} 或 null
 	const intersectLines = (lineA, lineB) => 
 	{
 		const geomA = getLineGeometry(lineA);
@@ -87,7 +87,7 @@
 	
 	//: ---------- 解析函数 - 从元素提取约束，返回要设置的属性 ----------
 	
-	//: 解析 data-intersection-of，返回 {cx, cy} 或 null
+	//: 解析 data-intersection-of ; 返回 {cx, cy} 或 null
 	const resolveIntersection = (el) => 
 	{
 		const tag = el.tagName.toLowerCase();
@@ -113,7 +113,7 @@
 		return { cx: point.x, cy: point.y };
 	};
 	
-	//: 从点元素中提取坐标，优先使用 cx/cy（圆/椭圆），否则回退到 x/y
+	//: 从点元素中提取坐标 ; 优先使用 cx/cy (圆|椭圆) ; 否则回退到 x/y
 	const getPointXY = (el) => 
 	{
 		const x = +(el.getAttribute('cx') ?? el.getAttribute('x') ?? 0);
@@ -121,7 +121,13 @@
 		return { x, y };
 	};
 	
-	//: 解析 data-endpoints="点id1 点id2"，返回 {x1,y1,x2,y2} 或 null
+	//: 从点元素中提取原始坐标字符串 ; 用于 path 的 d 构建
+	const getPointRawXY = (el) => {
+		const { x: x, y: y } = getPointXY(el);
+		return `${x},${y}`;
+	};
+	
+	//: 解析 data-endpoints="point-id-1 point-id-2" ; 返回 {x1,y1,x2,y2} 或 null
 	const resolveEndpointLine = (line) => 
 	{
 		const attr = line.getAttribute('data-endpoints');
@@ -139,10 +145,10 @@
 		return { x1, y1, x2, y2 };
 	};
 	
-	//: 解析 data-center="点id"，返回 {cx, cy} 或 null
+	//: 解析 data-center="point-id" ; 返回 {cx, cy} 或 null
 	const resolveCircleCenter = (el) => 
 	{
-		//: 如果同时有 data-radius-point，交给 resolveCircleFromPoints
+		//: 如果同时有 data-radius-point ，交给 resolveCircleFromPoints
 		if (el.hasAttribute('data-radius-point')) return null;
 		
 		const pointId = el.getAttribute('data-center');
@@ -155,7 +161,7 @@
 		return { cx, cy };
 	};
 	
-	//: 解析 data-center + data-radius-point，返回 { cx, cy, r } 或 null
+	//: 解析 data-center + data-radius-point ; 返回 { cx, cy, r } 或 null
 	const resolveCircleRadiusPoint = (el) => 
 	{
 		const centerId = el.getAttribute('data-center');
@@ -174,23 +180,85 @@
 		return { cx, cy, r };
 	};
 	
+	//: 解析 data-path-spell ; 返回 { d } 或 null
+	const resolvePathSpell = (el) => 
+	{
+		const spell = el.getAttribute('data-path-spell');
+		if (!spell) return null;
+		const tokens = spell.trim().split(/[\s,]+/).map(tok => tok.trim()).filter(Boolean);
+		const SPELL_DICTS = 
+		[
+			{ keys: ['始','開','初'], d: 'M', expectPoint: true },
+			{ keys: ['連'], d: 'L', expectPoint: true },
+			{ keys: ['迴'], d: 'A 1,1 720 1,1', expectPoint: true },
+			{ keys: ['返'], d: 'A 1,1 360 1,0', expectPoint: true },
+			{ keys: ['還'], d: 'A 1,1 720 0,1', expectPoint: true },
+			{ keys: ['退'], d: 'A 1,1 360 0,0', expectPoint: true },
+			{ keys: ['終','畢','止'], d: 'Z', expectPoint: false },
+		];
+		const CONTROL_MAP = new Map
+		(
+			SPELL_DICTS.flatMap( 
+				({ keys, d, expectPoint }) =>
+					keys.map(key => [key, { d, expectPoint }]) )
+		);
+		const parsed = tokens.reduce(
+			(acc, token) => 
+			{
+				if (acc === null) /* 输入失败 - 输出失败 */ return null;
+				
+				if (acc.expectPoint) 
+				{
+					const point = document.getElementById(token);
+					if (!point) /* 点不存在 - 整体失败 */ return null;
+					return { d: [...acc.d, getPointRawXY(point)], expectPoint: false };
+				}
+				
+				// switch (token) 
+				// {
+				// 	case '始': return { d: [...acc.d, 'M'], expectPoint: true };
+				// 	case '連': return { d: [...acc.d, 'L'], expectPoint: true };
+				// 	case '迴': return { d: [...acc.d, 'A 1,1 720 1,1'], expectPoint: true };
+				// 	case '返': return { d: [...acc.d, 'A 1,1 360 1,0'], expectPoint: true };
+				// 	case '還': return { d: [...acc.d, 'A 1,1 720 0,1'], expectPoint: true };
+				// 	case '退': return { d: [...acc.d, 'A 1,1 360 0,0'], expectPoint: true };
+				// 	case '止': return { d: [...acc.d, 'Z'], expectPoint: false };
+				// 	default: /* 未知指令 - 跳过 */ return acc;
+				// }
+				
+				const as = CONTROL_MAP.get(token);
+				if (as) {
+					return { d: [...acc.d, as.d], expectPoint: as.expectPoint };
+				} else {
+					/* 未知标记 - 跳过 */ return acc;
+				}
+			},
+			{ d: [], expectPoint: false },
+		);
+		if (!parsed) /* 若 reduce 中途返回 null - 则函数返回 null */ return null;
+		return { d: parsed.d.map(tok => tok.trim()).join(' ') };
+	};
+	
 	//: ---------- 主流程 - 收集操作并统一执行 ----------
 	
 	const applyConstraints = () => 
 	{
 		const pointResolvers = [
-			//: 交点圆/椭圆 intersectionEls
+			//: 交点圆 intersectionEls
 			{ selector: '[data-intersection-of]', resolve: resolveIntersection },
 			//: 普通圆心 centerEls
 			{ selector: 'circle[data-center], ellipse[data-center]', resolve: resolveCircleCenter },
+		];
+		const lineResolvers = [
+			//: 连接线 endpointLines
+			{ selector: 'line[data-endpoints]', resolve: resolveEndpointLine },
 		];
 		const radiusResolvers = [
 			//: 規心定圆 ...
 			{ selector: 'circle[data-radius-point], ellipse[data-radius-point]', resolve: resolveCircleRadiusPoint },
 		];
-		const lineResolvers = [
-			//: 连接线 endpointLines
-			{ selector: 'line[data-endpoints]', resolve: resolveEndpointLine },
+		const pathResolvers = [
+			{ selector: 'path[data-path-spell]', resolve: resolvePathSpell },
 		];
 		
 		
@@ -216,14 +284,51 @@
 		executeResolvers(lineResolvers);
 		//: 朙眼
 		executeResolvers(radiusResolvers);
+		//: 見面
+		executeResolvers(pathResolvers);
 	};
+	
+	
+	//: ---------- 可选 - 键盘交互 ----------
+	
+	const initKeyboardInteraction = () => 
+	{
+		const boneElements = [...document.querySelectorAll('.龍骨')];
+		const faceElements = [...document.querySelectorAll('.色面')];
+		/* 状态 -- 0: 都显示, 1: 隐藏龍骨, 2: 隐藏色面 */
+		let state = 0;
+		const applyState = () => 
+		{
+			const showBones = state !== 1;
+			const showFace = state !== 2;
+			boneElements.forEach(el => { el.style.display = showBones ? '' : 'none' });
+			faceElements.forEach(el => { el.style.display = showFace ? '' : 'none' });
+		};
+		const handleKeyDown = (event) => 
+		{
+			if (event.code === 'Space' || event.key === ' ') {
+				/* 阻止空格滚动页面 */ event.preventDefault();
+				state = (state + 1) % 3;
+				applyState();
+			} else {
+			}
+		};
+		document.addEventListener('keydown', handleKeyDown);
+	};
+	
+	
+	//: ---------- 应用 - 转换与交互 ----------
 	
 	// window.addEventListener('DOMContentLoaded', applyConstraints);
 	
 	if (document.readyState === 'loading') {
-		document.addEventListener('DOMContentLoaded', applyConstraints);
+		document.addEventListener('DOMContentLoaded', () => {
+			applyConstraints();
+			initKeyboardInteraction();
+		});
 	} else {
 		applyConstraints();
+		initKeyboardInteraction();
 	}
 })();
 //..	]]></script>
