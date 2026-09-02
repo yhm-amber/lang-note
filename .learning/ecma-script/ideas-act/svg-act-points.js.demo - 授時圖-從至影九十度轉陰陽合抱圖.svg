@@ -1035,10 +1035,10 @@
 		let state = 0;
 		const applyState = () => 
 		{
-			const showBones = state !== 1;
 			const showFace = state !== 2;
-			boneElements.forEach(el => { el.style.display = showBones ? '' : 'none' });
+			const showBones = state !== 1;
 			faceElements.forEach(el => { el.style.display = showFace ? '' : 'none' });
+			boneElements.forEach(el => { el.style.display = showBones ? '' : 'none' });
 		};
 		const handleKeyDown = (event) => 
 		{
