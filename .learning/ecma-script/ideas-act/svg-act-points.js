@@ -1,7 +1,7 @@
-///:	Produced by AI (deepseek-chat) support.
+///:	Produced with AI (deepseek-chat) support.
 
 //..	<script type="text/javascript"><![CDATA[
-//// Produced by AI (deepseek-chat) support.
+//// Produced with AI (deepseek-chat) support.
 (function() {
 	'use strict';
 	// const NS = 'http://www.w3.org/2000/svg';
