@@ -227,11 +227,9 @@
 				// }
 				
 				const as = CONTROL_MAP.get(token);
-				if (as) {
-					return { d: [...acc.d, as.d], expectPoint: as.expectPoint };
-				} else {
-					/* 未知标记 - 跳过 */ return acc;
-				}
+				return as ? 
+					{ d: [...acc.d, as.d], expectPoint: as.expectPoint } : 
+					/* 未知标记 - 跳过 */ acc ;
 			},
 			{ d: [], expectPoint: false },
 		);
