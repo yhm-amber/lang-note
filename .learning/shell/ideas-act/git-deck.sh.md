@@ -3877,6 +3877,15 @@ eval "$(gd flow m i e _ terax.editor-term.ai.wui-srcs 20260814)"
 #..	eval "$(gd flow m i e _ terax.editor-term.ai.wui-srcs XXXXXXXX)"
 ~~~
 
+(tui harness cost-effective) MothX
+
+~~~ sh
+ASKING_MAXTRY=766 eval "$(gd flow m i h https://github.com/startvibecoding/mothx.git mothx.ai-harness.tui-srcs/coretui _ tags:v1.2.98 tree:main)"
+ASKING_MAXTRY=766 eval "$(gd flow m i h https://github.com/startvibecoding/MothXWork.git mothx.ai-harness.tui-srcs/gui _ tree:master)"
+ASKING_MAXTRY=766 eval "$(gd flow m i h https://github.com/startvibecoding/mothx-vscode.git mothx.ai-harness.tui-srcs/vsix _ tags:v0.2.2 tree:main)"
+eval "$(gd flow m i e _ mothx.ai-harness.tui-srcs 20260903)"
+~~~
+
 (skill man) skills (npx)
 
 ~~~ sh
