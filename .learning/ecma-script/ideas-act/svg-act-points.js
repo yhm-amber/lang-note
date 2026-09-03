@@ -263,7 +263,7 @@
 		const executeResolvers = (resolverList) => 
 		{
 			const operations = [].concat(...resolverList.map(
-				({ selector, resolve }) =>
+				({ selector, resolve }) => 
 					//: 收集所有相关元素
 					[...document.querySelectorAll(selector)]
 						//: 对每个元素生成一个操作（如果解析成功）
@@ -287,14 +287,15 @@
 	};
 	
 	
-	//: ---------- 可选 - 键盘交互 ----------
+	//: ---------- 交互 - 键盘或点击 ----------
 	
-	const initKeyboardInteraction = () => 
+	const initInteraction = () => 
 	{
 		const boneElements = [...document.querySelectorAll('.龍骨')];
 		const faceElements = [...document.querySelectorAll('.色面')];
 		/* 状态 -- 0: 都显示, 1: 隐藏龍骨, 2: 隐藏色面 */
 		let state = 0;
+		/* 状态应用之操作 */
 		const applyState = () => 
 		{
 			const showFace = state !== 2;
@@ -302,16 +303,29 @@
 			faceElements.forEach(el => { el.style.display = showFace ? '' : 'none' });
 			boneElements.forEach(el => { el.style.display = showBones ? '' : 'none' });
 		};
-		const handleKeyDown = (event) => 
+		/* 切换状态并应用 */
+		const advanceState = () => 
 		{
-			if (event.code === 'Space' || event.key === ' ') {
-				/* 阻止空格滚动页面 */ event.preventDefault();
-				state = (state + 1) % 3;
-				applyState();
-			} else {
-			}
+			state = (state + 1) % 3;
+			applyState();
 		};
-		document.addEventListener('keydown', handleKeyDown);
+		const handlers = 
+		{
+			keydown: (stateApplier) => (event) => 
+			{
+				if (event.code === 'Space' || event.key === ' ') {
+					/* 阻止空格滚动页面 */ event.preventDefault();
+					stateApplier();
+				} else {
+				}
+			},
+			click: (stateApplier) => (_event) => 
+			{
+				stateApplier();
+			},
+		}
+		document.addEventListener('keydown', handlers.keydown(advanceState));
+		document.getElementById('觸用').addEventListener('click', handlers.click(advanceState));
 	};
 	
 	
@@ -322,11 +336,11 @@
 	if (document.readyState === 'loading') {
 		document.addEventListener('DOMContentLoaded', () => {
 			applyConstraints();
-			initKeyboardInteraction();
+			initInteraction();
 		});
 	} else {
 		applyConstraints();
-		initKeyboardInteraction();
+		initInteraction();
 	}
 })();
 //..	]]></script>
