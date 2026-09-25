@@ -753,7 +753,7 @@
  </g>
  <use id="觸用" pointer-events="all" style="cursor: pointer;" fill="none" stroke="none" class="透者為先" href="#基圓" xlink:href="#基圓"/>
  <script type="text/javascript"><![CDATA[
-//// Produced with AI (deepseek-chat) support.
+//// Produced with AI (web-chat: deepseek-4.0-pro) support.
 (function() {
 	'use strict';
 	// const NS = 'http://www.w3.org/2000/svg';
