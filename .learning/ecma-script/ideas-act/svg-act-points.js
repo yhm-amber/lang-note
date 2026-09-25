@@ -1,4 +1,4 @@
-///:	Produced with AI (deepseek-chat) support.
+///:	Produced with AI (web-chat: deepseek-4.0-pro) support.
 
 //..	<script type="text/javascript"><![CDATA[
 //// Produced with AI (deepseek-chat) support.
